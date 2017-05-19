@@ -58,6 +58,12 @@ public class AuthController {
 
 
         StudentInfo studentInfo = studentDao.selectStudent(authenticationRequest.getUsername());
+
+        if(studentInfo==null){
+
+            return new ResultData(false,"没有该用户信息，请确认信息后登录");
+        }
+
         StudentDetail studentDetail = studentDao.queryForStudentPhone(authenticationRequest.getUsername());
 
         String image;
@@ -146,6 +152,10 @@ public class AuthController {
         final String token = authService.teacherLogin(authenticationRequest.getUsername(), authenticationRequest.getPassword());
 
         TeacherInfo teacherInfo = teacherDao.queryByName(authenticationRequest.getUsername());
+        if(teacherInfo==null){
+
+            return new ResultData(false,"没有该用户信息，请确认信息后登录");
+        }
         TeacherDetail teacherDetail = teacherDao.queryForPhone(authenticationRequest.getUsername());
 
         String image;
@@ -250,6 +260,12 @@ public class AuthController {
         // Return the token
         String username = authenticationRequest.getUsername();
         String role = adminDao.queryByName(username).getRole();
+
+        if(role==null){
+
+            return new ResultData(false,"没有该用户信息，请确认信息后登录");
+        }
+
         return new ResultData(true, new JwtAuthenticationResponse(token, username, role, null));
 
     }
