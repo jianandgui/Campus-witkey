@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="weike.dao.StudentDao">
+
+    <!--根据用户名查询学生信息-->
+    <select id="selectStudent" resultType="weike.entity.persistence.Studentinfo" parameterType="String">
+
+
+    </select>
+
+    <!--添加一个学生信息-->
+    <insert id="addStudent" parameterType="weike.entity.persistence.Studentinfo" >
+
+
+
+    </insert>
+
+    <!--修改学生信息-->
+    <update id="updateStudentinfo" parameterType="weike.entity.persistence.Studentinfo">
+
+
+    </update>
+
+
+    <!--根据输入的skills关键词在数据库中进行模糊匹配-->
+    <select id="queryStudent" parameterType="String" resultType="weike.entity.persistence.Studentinfo">
+
+
+    </select>
+</mapper>

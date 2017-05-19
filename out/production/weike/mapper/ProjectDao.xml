@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="weike.dao.ProjectDao">
+
+    <!--查询数据库中所有的项目-->
+    <select id="queryAll" resultType="weike.entity.persistence.Projectinfo">
+
+
+    </select>
+
+    <!--当有人参加报名项目或者项目截至日期到了，就要对项目状态进行变更，这一步直接对数据库做修改，仅仅是statu字段-->
+    <update id="updateProjectStatus" parameterType="weike.entity.persistence.Studentinfo">
+
+
+    </update>
+
+    <!--新添加一个项目-->
+    <insert id="addProject" parameterType="weike.entity.persistence.Projectinfo">
+
+
+    </insert>
+</mapper>

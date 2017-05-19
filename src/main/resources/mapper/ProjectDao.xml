@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="weike.dao.ProjectDao">
+
+    <!--新添加一个项目-->
+    <insert id="addProject" parameterType="weike.entity.persistence.ProjectInfo">
+
+    INSERT INTO ProjectInfo
+
+    (projectName,
+    projectKind,
+    projectConnector,
+    qq,
+    email,
+    numNeed,
+    projectNeed,
+    projectStart,
+    projectEnd,
+    projectProfile)
+    VALUES
+    (#{projectName},
+    #{projectKind},
+    #{projectConnector},
+    #{qq},
+    #{email},
+    #{numNeed},
+    #{projectNeed},
+    #{projectStart},
+    #{projectEnd},
+    #{projectProfile})
+
+    </insert>
+
+
+
+    <!--根据项目名字删除一个项目（管理员权限或发布项目本人）-->
+    <delete id="deleteByName" parameterType="String">
+
+      DELETE FROM ProjectInfo where projectName=#{projectName}
+        
+    </delete>
+    
+    <!--根据名字显示一个项目的详细情况-->
+    <select id="queryProjectDetail" parameterType="String" resultType="weike.entity.persistence.ProjectInfo">
+
+        SELECT projectName,
+        projectKind,
+        projectConnector,
+        qq,
+        email,
+        numNeed,
+        projectNeed,
+        projectStart,
+        projectEnd,
+        projectProfile
+        FROM ProjectInfo where projectName=#{projectName}
+
+    </select>
+
+
+
+
+</mapper>

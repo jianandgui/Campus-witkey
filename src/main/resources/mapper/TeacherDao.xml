@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="weike.dao.TeacherDao">
+
+    <!--添加注册老师信息-->
+    <insert id="teacherRegister" parameterType="weike.entity.persistence.TeacherInfo">
+
+        INSERT INTO
+        TeacherRegisterInfo
+        (username,
+        password,
+        email,
+        role,
+        lastPasswordResetDate)
+        VALUES
+        (#{username},
+        #{password},
+        #{email},
+        #{role},
+        #{lastPasswordResetDate})
+
+    </insert>
+
+    <!--添加个人详细信息-->
+<insert id="teacherAddPersonal" parameterType="weike.entity.persistence.TeacherDetail">
+
+    INSERT INTO TeacherDetailInfo
+        (username,
+        image,
+        sex,
+        university,
+        academy,
+        rank,
+        qq)
+        VALUES
+        (#{username},
+        #{image},
+        #{sex},
+        #{university},
+        #{academy},
+        #{rank},
+        #{qq})
+
+</insert>
+
+    <select id="queryForPhone" resultType="weike.entity.persistence.TeacherDetail" parameterType="String">
+
+        SELECT * FROM TeacherDetailInfo
+        WHERE
+        username=#{username}
+    </select>
+
+    <select id="queryByName" parameterType="String" resultType="weike.entity.persistence.TeacherInfo">
+
+        SELECT * FROM TeacherRegisterInfo
+        WHERE
+        username=#{username}
+    </select>
+
+
+    <select id="queryEamil" resultType="weike.entity.persistence.TeacherInfo" parameterType="String">
+
+        SELECT * FROM
+        TeacherRegisterInfo
+        WHERE
+        email=#{email}
+    </select>
+
+    <update id="updatePassword" parameterType="String">
+
+        UPDATE TeacherRegisterInfo
+        SET password=#{password}
+        WHERE
+        username=#{username}
+    </update>
+
+</mapper>

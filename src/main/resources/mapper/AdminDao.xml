@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="weike.dao.AdminDao">
+
+    <select id="queryByName" parameterType="String" resultType="weike.entity.persistence.AdminInfo">
+
+        SELECT * FROM AdminInfo
+         WHERE
+         username=#{username}
+
+    </select>
+
+    <insert id="addAdmin" parameterType="weike.entity.persistence.AdminInfo">
+
+        INSERT INTO
+        AdminInfo (username,password,role,email,lastPasswordResetDate)
+        VALUES (#{username},#{password},#{role},#{email},#{lastPasswordResetDate})
+    </insert>
+</mapper>

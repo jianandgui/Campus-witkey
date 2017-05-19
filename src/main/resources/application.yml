@@ -1,0 +1,36 @@
+spring:
+  datasource:
+    password: 1111
+    username: root
+    driver-class-name: com.mysql.jdbc.Driver
+    url: jdbc:mysql://127.0.0.1:3306/weike?verifyServerCertificate=false&useSSL=true&useUnicode=true&characterEncoding=utf8
+  mail:
+      host: smtp.qq.com
+      username: 879604213@qq.com
+      password: elqokecmeqqbbeba
+      properties:
+       mail:
+        smtp:
+         auth: true
+         starttls:
+          enable: true
+          required: true
+
+
+server:
+  port: 8080
+
+mybatis:
+    type-aliases-package: weike.entity
+    mapper-locations: classpath:mapper/*.xml
+
+
+event:
+  service:
+    pageCount: 10      #每页展示项目个数
+
+jwt:
+  header: Authorization
+  secret: mySecret
+  expiration: 604800
+  tokenHead: "Bearer "
