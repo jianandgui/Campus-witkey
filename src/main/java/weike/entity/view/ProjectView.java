@@ -27,4 +27,47 @@ public class ProjectView {
         this.qq = qq;
         this.email = email;
     }
+
+    public ProjectView() {
+    }
+
+    public String getProjectName() {
+        return projectName;
+    }
+
+    public void setProjectName(String projectName) {
+        this.projectName = projectName;
+    }
+
+    public String getProjectProfile() {
+        return projectProfile;
+    }
+
+    public void setProjectProfile(String projectProfile) {
+        this.projectProfile = projectProfile;
+    }
+
+    public String getProjectConnector() {
+        return projectConnector;
+    }
+
+    public void setProjectConnector(String projectConnector) {
+        this.projectConnector = projectConnector;
+    }
+
+    public long getQq() {
+        return qq;
+    }
+
+    public void setQq(long qq) {
+        this.qq = qq;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
 }

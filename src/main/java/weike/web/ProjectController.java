@@ -6,8 +6,13 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+import weike.entity.persistence.ProjectInfo;
+import weike.entity.view.ProjectDetail;
+import weike.entity.view.ProjectView;
 import weike.entity.view.ResultData;
 import weike.service.ProjectService;
+
+import java.util.List;
 
 /**
  * Created by muyi on 17-4-8.
@@ -26,6 +31,32 @@ public class ProjectController {
 
     }
 
+    @GetMapping("/projectName")
+    public ResultData queryForProjectByName(@RequestParam String projectName){
+
+        ProjectDetail projectDetail=projectService.showProject(projectName);
+
+        return new ResultData(projectDetail);
+    }
+
+
+    //根据关键词搜索项目
+    @GetMapping("/projectsByWords")
+    public ResultData queryByKeyWords(@RequestParam String keyWords){
+
+        List<ProjectView> projectViews=projectService.queryByKeyWords(keyWords);
+
+
+        if(!projectViews.isEmpty()){
+
+
+            return new ResultData(projectViews);
+
+
+      }
+      return new ResultData("很遗憾，没有为您找到合适的项目");
+
+    }
 
 
 

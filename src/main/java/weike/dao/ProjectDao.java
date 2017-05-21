@@ -4,6 +4,7 @@ import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Repository;
 import weike.entity.persistence.ProjectInfo;
+import weike.entity.view.ProjectDetail;
 import weike.entity.view.ProjectView;
 
 import java.util.List;
@@ -23,12 +24,12 @@ public interface ProjectDao {
 
 
     //根据名字显示一个项目的详细情况
-    public ProjectInfo queryProjectDetail(String name);
+    public ProjectDetail queryProjectDetail(String name);
 
     //根据项目名字删除一个项目（管理员权限或本人权限）
     public int deleteByName(int projectName);
 
     //根据关键词检索项目
-    public List<ProjectView> queryByKeywords(@Param("offset") int offset, @Param("limit") int limit,@Param("keywords") String keywords);
+    public List<ProjectView> queryByKeywords(String keywords);
 
 }

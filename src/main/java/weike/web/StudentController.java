@@ -9,6 +9,7 @@ import weike.dao.StudentDao;
 import weike.entity.persistence.ProjectInfo;
 import weike.entity.persistence.StudentDetail;
 import weike.entity.persistence.StudentInfo;
+import weike.entity.view.ProjectDetail;
 import weike.entity.view.ProjectInfoForSkills;
 import weike.entity.view.ResultData;
 import weike.entity.view.StudentDetailForLevel;
@@ -94,7 +95,7 @@ public class StudentController {
         String username = jwtTokenUtil.getUsernameFromToken(authToken);
         StudentDetail studentDetail=studentDao.queryForStudentPhone(username);
 
-        ProjectInfo projectInfo =projectDao.queryProjectDetail(projectName);
+        ProjectDetail projectInfo =projectDao.queryProjectDetail(projectName);
         String email= projectInfo.getEmail();
 
         mailService.sendMail(email,"申请项目",username);

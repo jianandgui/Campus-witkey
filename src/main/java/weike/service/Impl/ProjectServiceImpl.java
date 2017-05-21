@@ -5,6 +5,7 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import weike.dao.ProjectDao;
 import weike.entity.persistence.ProjectInfo;
+import weike.entity.view.ProjectDetail;
 import weike.entity.view.ProjectView;
 import weike.service.ProjectService;
 
@@ -34,12 +35,16 @@ public class ProjectServiceImpl implements ProjectService {
 
     //查询一个项目的详细信息
     @Override
-    public ProjectInfo showProject(String projectName) {
+    public ProjectDetail showProject(String projectName) {
 
         return projectDao.queryProjectDetail(projectName);
     }
 
+    @Override
+    public List<ProjectView> queryByKeyWords(String keyWords) {
 
+        return projectDao.queryByKeywords(keyWords);
+    }
 
 
 }

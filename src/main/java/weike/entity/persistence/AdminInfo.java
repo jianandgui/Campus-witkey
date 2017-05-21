@@ -1,8 +1,10 @@
 package weike.entity.persistence;
 
+
 /**
  * Created by muyi on 17-4-12.
  */
+
 public class AdminInfo {
 
     private int id;
@@ -76,5 +78,6 @@ public class AdminInfo {
 
     public AdminInfo() {
     }
+
 
 }

@@ -1,6 +1,7 @@
 package weike.service;
 
 import weike.entity.persistence.ProjectInfo;
+import weike.entity.view.ProjectDetail;
 import weike.entity.view.ProjectView;
 
 import java.util.List;
@@ -19,8 +20,10 @@ public interface ProjectService {
 
 
     //显示一个项目的详情
-    public ProjectInfo showProject(String projectName);
+    public ProjectDetail showProject(String projectName);
 
 
+    //根据关键词搜索
+    public List<ProjectView> queryByKeyWords(String keyWords);
 
 }

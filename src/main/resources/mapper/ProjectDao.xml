@@ -44,9 +44,10 @@
     </delete>
     
     <!--根据名字显示一个项目的详细情况-->
-    <select id="queryProjectDetail" parameterType="String" resultType="weike.entity.persistence.ProjectInfo">
+    <select id="queryProjectDetail" parameterType="String" resultType="weike.entity.view.ProjectDetail">
 
-        SELECT projectName,
+        SELECT
+        projectName,
         projectKind,
         projectConnector,
         qq,
@@ -60,7 +61,25 @@
 
     </select>
 
+    <select id="queryAll" resultType="weike.entity.view.ProjectView">
+        SELECT
+        projectName,
+        projectProfile,
+        projectConnector,
+        qq,
+        email
+        FROM ProjectInfo
+        LIMIT #{offset},#{limit};
 
+    </select>
+
+    <select id="queryByKeywords" resultType="weike.entity.view.ProjectView">
+        SELECT *
+        FROM
+        ProjectInfo
+        WHERE projectProfile LIKE "%"#{keywords}"%"
+
+    </select>
 
 
 </mapper>

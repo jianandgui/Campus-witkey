@@ -27,7 +27,7 @@ mybatis:
 
 event:
   service:
-    pageCount: 10      #每页展示项目个数
+    pageCount: 3      #每页展示项目个数
 
 jwt:
   header: Authorization
