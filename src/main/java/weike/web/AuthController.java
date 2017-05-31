@@ -86,24 +86,22 @@ public class AuthController {
     }
 
     //学生获取验证码
-    @RequestMapping(value = "/student/GetVerifyCodeForRegister", method = RequestMethod.POST)
-    public ResultData studentGetveriyCode(@RequestBody StudentInfo studentinfo) throws AuthenticationException {
+    @RequestMapping(value = "/student/GetVerifyCodeForRegister", method = RequestMethod.GET)
+    public ResultData studentGetveriyCode(@RequestParam String username,@RequestParam String email) throws AuthenticationException {
 
-        if (studentinfo.getUsername().equals("") || studentinfo.getUsername() == null) {
-            return new ResultData(false, RegisterEnum.NULL_USERNAME.getMessage());
-        }
 
-        if (studentDao.selectStudent(studentinfo.getUsername()) != null) {
+
+        if (studentDao.selectStudent(username) != null) {
 
             return new ResultData(false, RegisterEnum.REPETE_USERNAME.getMessage());
         }
-        if (studentDao.queryEmail(studentinfo.getEmail()) != null) {
+        if (studentDao.queryEmail(email) != null) {
 
             return new ResultData(false, RegisterEnum.REPEATE_EMAIL.getMessage());
         }
 
 
-        return new ResultData<StudentInfo>(true, mailService.sendSimpleMail(studentinfo.getEmail(), "注册验证码"));
+        return new ResultData<StudentInfo>(true, mailService.sendSimpleMail(email, "注册验证码"));
     }
 
     //学生保存信息（在前端验证码通过之后）
@@ -117,16 +115,16 @@ public class AuthController {
     }
 
     //学生修改密码获取验证码
-    @PostMapping("/student/getVerifyCodeForFindPassword")
-    public ResultData studentGetVerifyForUpdate(@RequestBody UpdatePasswordForVerifyCode updatePasswordForVerifyCode) {
+    @GetMapping("/student/getVerifyCodeForFindPassword")
+    public ResultData studentGetVerifyForUpdate(@RequestParam String username,@RequestParam String email) {
 
-        StudentInfo studentinfo = studentDao.selectStudent(updatePasswordForVerifyCode.getUsername());
+        StudentInfo studentinfo = studentDao.selectStudent(username);
 
         if (studentinfo == null) {
 
             return new ResultData(false, "没有该用户的信息");
         }
-        if (!updatePasswordForVerifyCode.getEmail().equals(studentinfo.getEmail())) {
+        if (!email.equals(studentinfo.getEmail())) {
 
             return new ResultData(false, "非本人邮箱");
         }
@@ -176,43 +174,37 @@ public class AuthController {
     }
 
     //教师注册（生成验证码）
-    @RequestMapping(value = "/teacher/GetVerifyCodeForRegister", method = RequestMethod.POST)
-    public ResultData teacherGetverifyCode(@RequestBody TeacherInfo teacherinfo) throws AuthenticationException {
+    @RequestMapping(value = "/teacher/GetVerifyCodeForRegister", method = RequestMethod.GET)
+    public ResultData teacherGetverifyCode(@RequestParam String username,@RequestParam String email) throws AuthenticationException {
 
-        if (teacherinfo.getUsername().equals("") || teacherinfo.getUsername() == null) {
 
-            return new ResultData(false, RegisterEnum.NULL_USERNAME.getMessage());
-        }
-        if (teacherinfo.getPassword() == null || teacherinfo.getPassword().equals("")) {
 
-            return new ResultData(false, RegisterEnum.NULL_PASSWORD.getMessage());
-        }
-        if (teacherDao.queryByName(teacherinfo.getUsername()) != null) {
+        if (teacherDao.queryByName(username) != null) {
 
             return new ResultData(false, RegisterEnum.REPETE_USERNAME.getMessage());
         }
-        if (teacherDao.queryEamil(teacherinfo.getEmail()) != null) {
+        if (teacherDao.queryEamil(email) != null) {
 
             return new ResultData(false, RegisterEnum.REPEATE_EMAIL.getMessage());
         }
 
 
-        return new ResultData(true, mailService.sendSimpleMail(teacherinfo.getEmail(), "注册验证码"));
+        return new ResultData(true, mailService.sendSimpleMail(email, "注册验证码"));
     }
 
 
     //教师召回密码 生成验证码
 
-    @PostMapping("/teacher/getVerifyCodeForFindPassword")
-    public ResultData teacherGetVerifyForUpdatePassword(@RequestBody UpdatePasswordForVerifyCode updatePasswordForVerifyCode) {
+    @GetMapping("/teacher/getVerifyCodeForFindPassword")
+    public ResultData teacherGetVerifyForUpdatePassword(@RequestParam String username,@RequestParam String email) {
 
-        TeacherInfo teacherinfo = teacherDao.queryByName(updatePasswordForVerifyCode.getUsername());
+        TeacherInfo teacherinfo = teacherDao.queryByName(username);
 
         if (teacherinfo == null) {
 
             return new ResultData(false, "没有该用户的信息");
         }
-        if (!updatePasswordForVerifyCode.getEmail().equals(teacherinfo.getEmail())) {
+        if (!email.equals(teacherinfo.getEmail())) {
 
             return new ResultData(false, "非本人邮箱");
         }
