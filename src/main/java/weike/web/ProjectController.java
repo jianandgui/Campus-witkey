@@ -2,10 +2,7 @@ package weike.web;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import weike.entity.persistence.ProjectInfo;
 import weike.entity.view.ProjectDetail;
 import weike.entity.view.ProjectView;
@@ -17,6 +14,7 @@ import java.util.List;
 /**
  * Created by muyi on 17-4-8.
  */
+@CrossOrigin(origins = "http://182.150.37.74", maxAge = 3600)
 @RestController
 @RequestMapping("/weike")
 public class ProjectController {
