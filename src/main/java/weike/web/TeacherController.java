@@ -19,7 +19,7 @@ import javax.servlet.http.HttpServletRequest;
 /**
  * Created by muyi on 17-4-7.
  */
-@CrossOrigin(origins = "http://182.150.37.74", maxAge = 3600)
+@CrossOrigin(maxAge = 3600)
 @RestController
 @RequestMapping("/WeiKe")
 public class TeacherController {

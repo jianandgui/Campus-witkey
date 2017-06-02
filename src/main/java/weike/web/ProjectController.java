@@ -14,7 +14,7 @@ import java.util.List;
 /**
  * Created by muyi on 17-4-8.
  */
-@CrossOrigin(origins = "http://182.150.37.74", maxAge = 3600)
+@CrossOrigin(maxAge = 3600)
 @RestController
 @RequestMapping("/weike")
 public class ProjectController {
