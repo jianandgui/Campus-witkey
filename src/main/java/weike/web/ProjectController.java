@@ -52,7 +52,7 @@ public class ProjectController {
 
 
       }
-      return new ResultData("很遗憾，没有为您找到合适的项目");
+      return new ResultData(false,"很遗憾，没有为您找到合适的项目");
 
     }
 

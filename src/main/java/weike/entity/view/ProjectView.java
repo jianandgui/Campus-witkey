@@ -9,7 +9,7 @@ public class ProjectView {
     //项目名字
     private String projectName;
 
-    //项目详情
+    //项目概述
     private String projectProfile;
 
     //项目发起人
