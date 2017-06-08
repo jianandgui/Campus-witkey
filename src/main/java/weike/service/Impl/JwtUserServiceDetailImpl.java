@@ -32,26 +32,16 @@ public class JwtUserServiceDetailImpl implements UserDetailsService {
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-
         AdminInfo adminInfo = adminDao.queryByName(username);
-
         StudentInfo studentinfo = studentDao.selectStudent(username);
-
         TeacherInfo teacherinfo = teacherDao.queryByName(username);
-
         if (adminInfo != null && adminInfo.getRole().equalsIgnoreCase("ROLE_ADMIN")) {
-
             return JWTuserFactory.createAdmin(adminInfo);
-
         } else if (studentinfo != null && studentinfo.getRole().equalsIgnoreCase("ROLE_STUDENT")) {
-
             return JWTuserFactory.createStudent(studentinfo);
-
         } else if (teacherinfo != null && teacherinfo.getRole().equalsIgnoreCase("ROLE_TEACHER")) {
-
             return JWTuserFactory.createTeacher(teacherinfo);
         } else {
-
             return null;
         }
     }

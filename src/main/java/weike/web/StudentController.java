@@ -65,21 +65,16 @@ public class StudentController {
         StudentDetail studentDetail = studentDao.queryForStudentPhone(username);
 
         if(studentDetail!=null) {
-
             if(projectDao.queryProjectDetail(projectInfoForSkills.getProjectName())==null) {
                 projectInfoForSkills.setProjectConnector(username);
                 projectInfoForSkills.setEmail(studentinfo.getEmail());
                 projectInfoForSkills.setQq(studentDetail.getQq());
-
                 int num = studentService.issueProject(projectInfoForSkills);
-
                 if (num != 1) {
-
                     return new ResultData(false, "发布项目失败");
                 }
                 return new ResultData(studentService.queryForReCommod(projectInfoForSkills.getProjectNeed()));
             }
-
             return new ResultData(false,"请不要重复发布项目");
         }
         else {
@@ -95,14 +90,9 @@ public class StudentController {
         final String authToken = authHeader.substring(tokenHead.length());
         String username = jwtTokenUtil.getUsernameFromToken(authToken);
         StudentDetail studentDetail=studentDao.queryForStudentPhone(username);
-
         ProjectDetail projectInfo =projectDao.queryProjectDetail(projectName);
         String email= projectInfo.getEmail();
-
         mailService.sendMail(email,"申请项目",username);
-
-
-
         return new ResultData(true,"邮件发送成功");
     }
 
@@ -113,20 +103,13 @@ public class StudentController {
         final String authToken = authHeader.substring(tokenHead.length());
         String username = jwtTokenUtil.getUsernameFromToken(authToken);
         if(studentDao.queryForStudentPhone(username)==null) {
-
             studentDetailForLevel.setUsername(username);
-
             int num=studentService.addPersonal(studentDetailForLevel);
-
             if (num ==1) {
-
                 return new ResultData(true, "信息添加成功");
             }
-
-
             return new ResultData(false, "信息添加失败");
         }
-
         else
             return new ResultData(false,"请勿重复添加");
     }

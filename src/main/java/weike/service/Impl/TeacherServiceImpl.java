@@ -32,15 +32,12 @@ public class TeacherServiceImpl implements TeacherService {
 
     @Override
     public int teacherAddPersonal(TeacherDetail teacherDetail) {
-
         return teacherDao.teacherAddPersonal(teacherDetail);
     }
 
     //老师发布项目
     @Override
     public int issueProject(ProjectInfoForSkills projectInfoForSkills) {
-
-
         ProjectInfo projectInfo =ProjectInfoForSkillsToProjectInfoOfTeacher(projectInfoForSkills);
         return projectDao.addProject(projectInfo);
     }
@@ -59,8 +56,6 @@ public class TeacherServiceImpl implements TeacherService {
         projectInfo.setProjectStart(projectInfoForSkills.getProjectStart());
         projectInfo.setProjectEnd(projectInfoForSkills.getProjectEnd());
         projectInfo.setProjectProfile(projectInfoForSkills.getProjectProfile());
-
-
         return projectInfo;
     }
 
@@ -71,42 +66,26 @@ public class TeacherServiceImpl implements TeacherService {
 
     @Override
     public List<ProjectRecommod> queryStudentForReCommod(List<String> skills) {
-
         List<ProjectRecommod> list;
-
         list =new ArrayList<ProjectRecommod>();
-
         for (String skill: skills){
-
             list.addAll(studentDao.queryAllRecommod(skill));
 
         }
-
         //对List去重处理
         List<ProjectRecommod> list1=new ArrayList<ProjectRecommod>();
-
         int num=0;
-
         for(ProjectRecommod projectRecommod:list){
-
             String username=projectRecommod.getUsername();
-
             for(ProjectRecommod projectRecommod1:list1) {
-
                 if(username.equals(projectRecommod1.getUsername())) {
                     num++;
                 }
-
             }
             if(num==0) {
                 list1.add(projectRecommod);
-
             }
         }
-
-
-
-
         return list1;
     }
 

@@ -70,11 +70,8 @@ public class StudentServiceImpl implements StudentService{
 
     @Override
     public int addPersonal(StudentDetailForLevel studentDetailForLevel) {
-
         StudentDetail studentDetail;
-
         studentDetail=StudentDetailForLevelToStudentDetail(studentDetailForLevel);
-
         return studentDao.studentAddPersonal(studentDetail);
 
 
@@ -84,7 +81,6 @@ public class StudentServiceImpl implements StudentService{
 
     //进行两个类的转化（不得已的办法后续有好方法再采用）
     public StudentDetail StudentDetailForLevelToStudentDetail(StudentDetailForLevel studentDetailForLevel){
-
         int rate=studentDetailForLevel.getSkills().toArray().length;
         if(rate==1||rate==0){
             studentDetailForLevel.setLevel("D");
@@ -114,49 +110,32 @@ public class StudentServiceImpl implements StudentService{
         studentDetail.setSkills(studentDetailForLevel.getSkills().toString());
         studentDetail.setExperience(studentDetailForLevel.getExperience());
         studentDetail.setSelfFeel(studentDetailForLevel.getSelfFeel());
-
         return studentDetail;
 
     }
 
     @Override
     public List<ProjectRecommod> queryForReCommod(List<String> skills) {
-
         List<ProjectRecommod> list;
-
         list =new ArrayList<ProjectRecommod>();
-
         for (String skill: skills){
-
             list.addAll(studentDao.queryAllRecommod(skill));
 
         }
-
         //对List去重处理
         List<ProjectRecommod> list1=new ArrayList<ProjectRecommod>();
-
         int num=0;
-
         for(ProjectRecommod projectRecommod:list){
-
             String username=projectRecommod.getUsername();
-
             for(ProjectRecommod projectRecommod1:list1) {
-
                 if(username.equals(projectRecommod1.getUsername())) {
                     num++;
                 }
-
             }
             if(num==0) {
                 list1.add(projectRecommod);
-
             }
         }
-
-
-
-
         return list1;
     }
 

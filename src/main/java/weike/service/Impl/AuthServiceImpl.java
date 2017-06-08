@@ -62,19 +62,15 @@ public class AuthServiceImpl implements AuthService{
         studentinfo.setPassword(encoder.encode(rawPassword));
         studentinfo.setLastPasswordResetDate(new Date().getTime());
         studentinfo.setRole("ROLE_STUDENT");
-
-
         return studentDao.studntRegister(studentinfo);
     }
 
     @Override
     public String studentLogin(String username, String password) {
-
         UsernamePasswordAuthenticationToken upToken = new UsernamePasswordAuthenticationToken(username, password);
         // Perform the security
         final Authentication authentication = authenticationManager.authenticate(upToken);
         SecurityContextHolder.getContext().setAuthentication(authentication);
-
         // Reload password post-security so we can generate token
         final UserDetails userDetails = JWTuserFactory.createStudent(studentDao.selectStudent(username));
         final String token = jwtTokenUtil.generateToken(userDetails);
@@ -83,7 +79,6 @@ public class AuthServiceImpl implements AuthService{
 
     @Override
     public int teacherRegister(TeacherInfo teacherinfo) {
-
         final String username = teacherinfo.getUsername();
         if(teacherDao.queryByName(username)!=null) {
             return 0;
@@ -93,7 +88,6 @@ public class AuthServiceImpl implements AuthService{
         teacherinfo.setPassword(encoder.encode(rawPassword));
         teacherinfo.setLastPasswordResetDate(new Date().getTime());
         teacherinfo.setRole("ROLE_TEACHER");
-
         return teacherDao.teacherRegister(teacherinfo);
     }
 
@@ -106,9 +100,7 @@ public class AuthServiceImpl implements AuthService{
     public String teacherLogin(String username, String password) {
         UsernamePasswordAuthenticationToken upToken = new UsernamePasswordAuthenticationToken(username, password);
         final Authentication authentication = authenticationManager.authenticate(upToken);
-
         SecurityContextHolder.getContext().setAuthentication(authentication);
-
         // Reload password post-security so we can generate token
         final UserDetails userDetails = JWTuserFactory.createTeacher(teacherDao.queryByName(username));
         final String token = jwtTokenUtil.generateToken(userDetails);
@@ -120,7 +112,6 @@ public class AuthServiceImpl implements AuthService{
         // Perform the security
         final Authentication authentication = authenticationManager.authenticate(upToken);
         SecurityContextHolder.getContext().setAuthentication(authentication);
-
         // Reload password post-security so we can generate token
         final UserDetails userDetails = JWTuserFactory.createAdmin(adminDao.queryByName(userName));
         final String token = jwtTokenUtil.generateToken(userDetails);
@@ -130,10 +121,8 @@ public class AuthServiceImpl implements AuthService{
 
     @Override
     public int studentUpdatePassword(String username, String password) {
-
         BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
         final String rawPassword = password;
-
         return studentDao.updatePassword(username,encoder.encode(rawPassword));
     }
 

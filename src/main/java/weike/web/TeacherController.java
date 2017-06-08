@@ -88,21 +88,14 @@ public class TeacherController {
         final String authToken = authHeader.substring(tokenHead.length());
         String username = jwtTokenUtil.getUsernameFromToken(authToken);
         if(teacherDao.queryForPhone(username)==null){
-
             teacherDetail.setUsername(username);
-
             int num=teacherDao.teacherAddPersonal(teacherDetail);
-
             if (num == 1) {
-
                 return new ResultData(true, "信息添加成功");
             }
-
-
             return new ResultData(false, "信息添加失败");
         }
-
-            return new ResultData(false,"请勿重复添加");
+        return new ResultData(false,"请勿重复添加");
 
         }
 

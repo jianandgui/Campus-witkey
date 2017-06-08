@@ -56,14 +56,9 @@ public class MailServiceImpl implements MailService {
         message.setText(verifyCode);
 
         try {
-
             sender.send(message);
-
-
         } catch (Exception e) {
-
         }
-
         return verifyCode;
     }
 
@@ -75,12 +70,8 @@ public class MailServiceImpl implements MailService {
         message.setSubject(subject);
         message.setText(forMatInfo(content));
         try {
-
             sender.send(message);
-
-
         } catch (Exception e) {
-
         }
 
     }
@@ -88,8 +79,7 @@ public class MailServiceImpl implements MailService {
     //处理发送邮件信息
 
     public String forMatInfo(String content){
-
-       return content="尊敬的老师你好，我是"+content+"我想报名参加您的项目";
+        return content="尊敬的老师你好，我是"+content+"我想报名参加您的项目";
     }
 
 

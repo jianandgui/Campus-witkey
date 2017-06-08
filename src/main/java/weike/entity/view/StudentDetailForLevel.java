@@ -10,7 +10,6 @@ public class StudentDetailForLevel {
 
 
     //专门用来处理ArrayList和数据库存储的问题
-
     private String username;
 
     private String image;

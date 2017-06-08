@@ -24,16 +24,13 @@ public class ProjectController {
     //显示所有项目
     @GetMapping("/projects")
     public ResultData queryAll(@RequestParam("offset") int offset, @RequestParam("limit") int limit){
-
         return new ResultData(projectService.showProjectAll(offset,limit));
 
     }
 
     @GetMapping("/projectName")
     public ResultData queryForProjectByName(@RequestParam String projectName){
-
         ProjectDetail projectDetail=projectService.showProject(projectName);
-
         return new ResultData(projectDetail);
     }
 
@@ -41,17 +38,10 @@ public class ProjectController {
     //根据关键词搜索项目
     @GetMapping("/projectsByWords")
     public ResultData queryByKeyWords(@RequestParam String keyWords){
-
         List<ProjectView> projectViews=projectService.queryByKeyWords(keyWords);
-
-
         if(!projectViews.isEmpty()){
-
-
             return new ResultData(projectViews);
-
-
-      }
+        }
       return new ResultData(false,"很遗憾，没有为您找到合适的项目");
 
     }
