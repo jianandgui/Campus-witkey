@@ -2,10 +2,10 @@
 <!DOCTYPE mapper
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="weike.dao.StudentDao">
+<mapper namespace="cn.edu.swpu.cins.weike.dao.StudentDao">
 
     <!--根据用户名查询学生信息 用于注册-->
-    <select id="selectStudent" resultType="weike.entity.persistence.StudentInfo" parameterType="String">
+    <select id="selectStudent" resultType="cn.edu.swpu.cins.weike.entity.persistence.StudentInfo" parameterType="String">
 
         SELECT * FROM
         StudentRegisterInfo
@@ -13,7 +13,7 @@
         username=#{username}
     </select>
 
-    <select id="queryEmail" parameterType="String" resultType="weike.entity.persistence.StudentInfo">
+    <select id="queryEmail" parameterType="String" resultType="cn.edu.swpu.cins.weike.entity.persistence.StudentInfo">
 
         SELECT * FROM
         StudentRegisterInfo
@@ -22,7 +22,7 @@
     </select>
 
     <!--添加一个学生信息-->
-    <insert id="studentAddPersonal" parameterType="weike.entity.persistence.StudentDetail" >
+    <insert id="studentAddPersonal" parameterType="cn.edu.swpu.cins.weike.entity.persistence.StudentDetail" >
 
     INSERT INTO StudentDetailInfo
     (username,
@@ -54,7 +54,7 @@
     #{level})
     </insert>
 
-<insert id="studntRegister" parameterType="weike.entity.persistence.StudentInfo">
+<insert id="studntRegister" parameterType="cn.edu.swpu.cins.weike.entity.persistence.StudentInfo">
 INSERT INTO StudentRegisterInfo
     (username,
     password,
@@ -72,7 +72,7 @@ INSERT INTO StudentRegisterInfo
 </insert>
 
 
-<select id="queryForStudentPhone" parameterType="String" resultType="weike.entity.persistence.StudentDetail">
+<select id="queryForStudentPhone" parameterType="String" resultType="cn.edu.swpu.cins.weike.entity.persistence.StudentDetail">
 
     SELECT * FROM StudentDetailInfo
     WHERE
@@ -87,8 +87,8 @@ INSERT INTO StudentRegisterInfo
     username=#{username}
 </update>
 
-    <resultMap id="studentResultMap" type="weike.entity.view.ProjectRecommend">
-        <result typeHandler="weike.typehandler.StringArrayTypeHandler" column="skills" javaType="list"
+    <resultMap id="studentResultMap" type="cn.edu.swpu.cins.weike.entity.view.ProjectRecommend">
+        <result typeHandler="cn.edu.swpu.cins.weike.typehandler.StringArrayTypeHandler" column="skills" javaType="list"
                 jdbcType="VARCHAR"
                 property="skills"/>
     </resultMap>

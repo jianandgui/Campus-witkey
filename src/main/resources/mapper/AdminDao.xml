@@ -2,9 +2,9 @@
 <!DOCTYPE mapper
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="weike.dao.AdminDao">
+<mapper namespace="cn.edu.swpu.cins.weike.dao.AdminDao">
 
-    <select id="queryByName" parameterType="String" resultType="weike.entity.persistence.AdminInfo">
+    <select id="queryByName" parameterType="String" resultType="cn.edu.swpu.cins.weike.entity.persistence.AdminInfo">
 
         SELECT * FROM AdminInfo
          WHERE
@@ -12,10 +12,11 @@
 
     </select>
 
-    <insert id="addAdmin" parameterType="weike.entity.persistence.AdminInfo">
+    <insert id="addAdmin" parameterType="cn.edu.swpu.cins.weike.entity.persistence.AdminInfo">
 
         INSERT INTO
         AdminInfo (username,password,role,email,lastPasswordResetDate)
-        VALUES (#{username},#{password},#{role},#{email},#{lastPasswordResetDate})
+        VALUES
+        (#{username},#{password},#{role},#{email},#{lastPasswordResetDate})
     </insert>
 </mapper>
