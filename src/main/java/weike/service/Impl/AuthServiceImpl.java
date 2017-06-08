@@ -105,8 +105,8 @@ public class AuthServiceImpl implements AuthService{
     @Override
     public String teacherLogin(String username, String password) {
         UsernamePasswordAuthenticationToken upToken = new UsernamePasswordAuthenticationToken(username, password);
-        // Perform the security
         final Authentication authentication = authenticationManager.authenticate(upToken);
+
         SecurityContextHolder.getContext().setAuthentication(authentication);
 
         // Reload password post-security so we can generate token
@@ -145,7 +145,7 @@ public class AuthServiceImpl implements AuthService{
         return teacherDao.updatePassword(username,encoder.encode(rawPassword));
     }
 
-    public static final char[] chars = "1234567890QWERTYUIOPASDFGHJKLZXCVBNM".toCharArray();
+    public static final char[] chars = "1234567890QWERTYUIOPASDFGHJKLZXCVBNMqwertyuioplkjhgfdsazxcvbnm".toCharArray();
     public static Random random = new Random();
     public static String getRandomString() {
         StringBuffer buffer = new StringBuffer();
