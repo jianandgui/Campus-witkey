@@ -48,7 +48,7 @@
     #{entryUniversity},
     #{leaveUniversity},
     #{qq},
-    #{skills},
+    #{skills , javaType = List , jdbcType = VARCHAR,typeHandler=weike.typehandler.StringArrayTypeHandler},
     #{experience},
     #{selfFeel},
     #{level})
@@ -87,7 +87,13 @@ INSERT INTO StudentRegisterInfo
     username=#{username}
 </update>
 
-<select id="queryAllRecommod" parameterType="String" resultType="weike.entity.view.ProjectRecommod">
+    <resultMap id="studentResultMap" type="weike.entity.view.ProjectRecommend">
+        <result typeHandler="weike.typehandler.StringArrayTypeHandler" column="skills" javaType="list"
+                jdbcType="VARCHAR"
+                property="skills"/>
+    </resultMap>
+
+<select id="queryAllRecommod" parameterType="String" resultMap="studentResultMap">
 
     SELECT
     username,

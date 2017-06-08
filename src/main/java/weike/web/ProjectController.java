@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import weike.entity.persistence.ProjectInfo;
+import weike.entity.view.PersonalData;
 import weike.entity.view.ProjectDetail;
 import weike.entity.view.ProjectView;
 import weike.entity.view.ResultData;

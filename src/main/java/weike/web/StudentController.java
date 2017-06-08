@@ -10,9 +10,7 @@ import weike.entity.persistence.ProjectInfo;
 import weike.entity.persistence.StudentDetail;
 import weike.entity.persistence.StudentInfo;
 import weike.entity.view.ProjectDetail;
-import weike.entity.view.ProjectInfoForSkills;
 import weike.entity.view.ResultData;
-import weike.entity.view.StudentDetailForLevel;
 import weike.service.MailService;
 import weike.service.ProjectService;
 import weike.service.StudentService;
@@ -55,7 +53,7 @@ public class StudentController {
 
     //学生发布项目(增加推荐人选功能)
     @PostMapping("/student/addProject")
-    public ResultData pulishproject(@RequestBody ProjectInfoForSkills projectInfoForSkills, HttpServletRequest request){
+    public ResultData pulishproject(@RequestBody ProjectInfo projectInfo, HttpServletRequest request){
 
 
         String authHeader = request.getHeader(this.tokenHeader);
@@ -65,15 +63,15 @@ public class StudentController {
         StudentDetail studentDetail = studentDao.queryForStudentPhone(username);
 
         if(studentDetail!=null) {
-            if(projectDao.queryProjectDetail(projectInfoForSkills.getProjectName())==null) {
-                projectInfoForSkills.setProjectConnector(username);
-                projectInfoForSkills.setEmail(studentinfo.getEmail());
-                projectInfoForSkills.setQq(studentDetail.getQq());
-                int num = studentService.issueProject(projectInfoForSkills);
+            if(projectDao.queryProjectDetail(projectInfo.getProjectName())==null) {
+                projectInfo.setProjectConnector(username);
+                projectInfo.setEmail(studentinfo.getEmail());
+                projectInfo.setQq(studentDetail.getQq());
+                int num = studentService.issueProject(projectInfo);
                 if (num != 1) {
                     return new ResultData(false, "发布项目失败");
                 }
-                return new ResultData(studentService.queryForReCommod(projectInfoForSkills.getProjectNeed()));
+                return new ResultData(studentService.queryForReCommod(projectInfo.getProjectNeed()));
             }
             return new ResultData(false,"请不要重复发布项目");
         }
@@ -98,13 +96,13 @@ public class StudentController {
 
 
     @PostMapping("student/addPersonalDeail")
-    public ResultData addPersonalDetail(@RequestBody StudentDetailForLevel studentDetailForLevel, HttpServletRequest request){
+    public ResultData addPersonalDetail(@RequestBody StudentDetail studentDetail, HttpServletRequest request){
         String authHeader = request.getHeader(this.tokenHeader);
         final String authToken = authHeader.substring(tokenHead.length());
         String username = jwtTokenUtil.getUsernameFromToken(authToken);
         if(studentDao.queryForStudentPhone(username)==null) {
-            studentDetailForLevel.setUsername(username);
-            int num=studentService.addPersonal(studentDetailForLevel);
+            studentDetail.setUsername(username);
+            int num=studentService.addPersonal(studentDetail);
             if (num ==1) {
                 return new ResultData(true, "信息添加成功");
             }

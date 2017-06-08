@@ -22,15 +22,12 @@ public class JwtAuthenticationResponse implements Serializable {
         this.role = role;
         this.image = image;
     }
-
     public String getToken() {
         return token;
     }
-
     public String getUsername() {
         return username;
     }
-
     public String getRole() {
         return role;
     }

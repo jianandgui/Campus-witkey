@@ -12,13 +12,13 @@ import java.util.Date;
 /**
  * Created by muyi on 17-4-18.
  */
-public final class JWTuserFactory {
+public final class JwtUserFactory {
 
-    private JWTuserFactory() {
+    private JwtUserFactory() {
     }
 
-    public static JWTuser createStudent(StudentInfo studentinfo) {
-        return new JWTuser(
+    public static JwtUser createStudent(StudentInfo studentinfo) {
+        return new JwtUser(
                 studentinfo.getId(),
                 studentinfo.getUsername(),
                 studentinfo.getPassword(),
@@ -28,8 +28,8 @@ public final class JWTuserFactory {
         );
     }
 
-    public static JWTuser createTeacher(TeacherInfo teacherinfo) {
-        return new JWTuser(
+    public static JwtUser createTeacher(TeacherInfo teacherinfo) {
+        return new JwtUser(
                 teacherinfo.getId(),
                 teacherinfo.getUsername(),
                 teacherinfo.getPassword(),
@@ -39,8 +39,8 @@ public final class JWTuserFactory {
         );
     }
 
-    public static JWTuser createAdmin(AdminInfo adminInfo) {
-        return new JWTuser(
+    public static JwtUser createAdmin(AdminInfo adminInfo) {
+        return new JwtUser(
                 adminInfo.getId(),
                 adminInfo.getUsername(),
                 adminInfo.getPassword(),
@@ -50,10 +50,7 @@ public final class JWTuserFactory {
         );
     }
 
-
-
     private static GrantedAuthority ToGrantedAuthorities(String authorities) {
-
         return new SimpleGrantedAuthority(authorities);
 
     }

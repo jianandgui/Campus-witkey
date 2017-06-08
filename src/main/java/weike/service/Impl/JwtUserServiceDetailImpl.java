@@ -11,7 +11,7 @@ import weike.dao.TeacherDao;
 import weike.entity.persistence.AdminInfo;
 import weike.entity.persistence.StudentInfo;
 import weike.entity.persistence.TeacherInfo;
-import weike.entity.view.JWTuserFactory;
+import weike.entity.view.JwtUserFactory;
 
 /**
  * Created by muyi on 17-4-18.
@@ -36,11 +36,11 @@ public class JwtUserServiceDetailImpl implements UserDetailsService {
         StudentInfo studentinfo = studentDao.selectStudent(username);
         TeacherInfo teacherinfo = teacherDao.queryByName(username);
         if (adminInfo != null && adminInfo.getRole().equalsIgnoreCase("ROLE_ADMIN")) {
-            return JWTuserFactory.createAdmin(adminInfo);
+            return JwtUserFactory.createAdmin(adminInfo);
         } else if (studentinfo != null && studentinfo.getRole().equalsIgnoreCase("ROLE_STUDENT")) {
-            return JWTuserFactory.createStudent(studentinfo);
+            return JwtUserFactory.createStudent(studentinfo);
         } else if (teacherinfo != null && teacherinfo.getRole().equalsIgnoreCase("ROLE_TEACHER")) {
-            return JWTuserFactory.createTeacher(teacherinfo);
+            return JwtUserFactory.createTeacher(teacherinfo);
         } else {
             return null;
         }

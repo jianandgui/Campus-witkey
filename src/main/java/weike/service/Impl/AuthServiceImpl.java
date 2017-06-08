@@ -16,7 +16,8 @@ import weike.dao.TeacherDao;
 import weike.entity.persistence.AdminInfo;
 import weike.entity.persistence.StudentInfo;
 import weike.entity.persistence.TeacherInfo;
-import weike.entity.view.JWTuserFactory;
+import weike.entity.view.JwtUserFactory;
+import weike.entity.view.PersonalData;
 import weike.service.AuthService;
 
 import java.util.Date;
@@ -28,31 +29,21 @@ import java.util.Random;
 @Service
 public class AuthServiceImpl implements AuthService{
 
-
     @Autowired
     private StudentDao studentDao;
-
     @Autowired
     private TeacherDao teacherDao;
-
     @Autowired
     private AuthenticationManager authenticationManager;
-
     @Autowired
     private UserDetailsService userDetailsService;
-
     @Autowired
     private JwtTokenUtil jwtTokenUtil;
-
     @Autowired
     private AdminDao adminDao;
 
-
-
-
     @Override
     public int studentRegister(StudentInfo studentinfo) {
-
         final String username = studentinfo.getUsername();
         if(studentDao.selectStudent(username)!=null) {
             return 0;
@@ -72,7 +63,7 @@ public class AuthServiceImpl implements AuthService{
         final Authentication authentication = authenticationManager.authenticate(upToken);
         SecurityContextHolder.getContext().setAuthentication(authentication);
         // Reload password post-security so we can generate token
-        final UserDetails userDetails = JWTuserFactory.createStudent(studentDao.selectStudent(username));
+        final UserDetails userDetails = JwtUserFactory.createStudent(studentDao.selectStudent(username));
         final String token = jwtTokenUtil.generateToken(userDetails);
         return token;
     }
@@ -91,18 +82,13 @@ public class AuthServiceImpl implements AuthService{
         return teacherDao.teacherRegister(teacherinfo);
     }
 
-
-
-
-
-
     @Override
     public String teacherLogin(String username, String password) {
         UsernamePasswordAuthenticationToken upToken = new UsernamePasswordAuthenticationToken(username, password);
         final Authentication authentication = authenticationManager.authenticate(upToken);
         SecurityContextHolder.getContext().setAuthentication(authentication);
         // Reload password post-security so we can generate token
-        final UserDetails userDetails = JWTuserFactory.createTeacher(teacherDao.queryByName(username));
+        final UserDetails userDetails = JwtUserFactory.createTeacher(teacherDao.queryByName(username));
         final String token = jwtTokenUtil.generateToken(userDetails);
         return token;
     }
@@ -113,7 +99,7 @@ public class AuthServiceImpl implements AuthService{
         final Authentication authentication = authenticationManager.authenticate(upToken);
         SecurityContextHolder.getContext().setAuthentication(authentication);
         // Reload password post-security so we can generate token
-        final UserDetails userDetails = JWTuserFactory.createAdmin(adminDao.queryByName(userName));
+        final UserDetails userDetails = JwtUserFactory.createAdmin(adminDao.queryByName(userName));
         final String token = jwtTokenUtil.generateToken(userDetails);
         return token;
 
@@ -128,7 +114,6 @@ public class AuthServiceImpl implements AuthService{
 
     @Override
     public int teacherUpdatepassword(String username, String password) {
-
         BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
         final String rawPassword = password;
         return teacherDao.updatePassword(username,encoder.encode(rawPassword));
@@ -148,8 +133,6 @@ public class AuthServiceImpl implements AuthService{
 
     @Override
     public String getVerifyCodeForLogin() {
-
-
         return getRandomString();
     }
 

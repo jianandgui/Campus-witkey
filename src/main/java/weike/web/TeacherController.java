@@ -9,7 +9,6 @@ import weike.dao.TeacherDao;
 import weike.entity.persistence.ProjectInfo;
 import weike.entity.persistence.TeacherDetail;
 import weike.entity.persistence.TeacherInfo;
-import weike.entity.view.ProjectInfoForSkills;
 import weike.entity.view.ResultData;
 import weike.service.ProjectService;
 import weike.service.TeacherService;
@@ -48,24 +47,24 @@ public class TeacherController {
 
     //老师发布项目
     @PostMapping("/teacher/addProject")
-    public ResultData publishProject(@RequestBody ProjectInfoForSkills projectInfoForSkills, HttpServletRequest request) {
+    public ResultData publishProject(@RequestBody ProjectInfo projectInfo, HttpServletRequest request) {
 
         String authHeader = request.getHeader(this.tokenHeader);
         final String authToken = authHeader.substring(tokenHead.length());
         String username = jwtTokenUtil.getUsernameFromToken(authToken);
         TeacherInfo teacherinfo = teacherDao.queryByName(username);
         TeacherDetail teacherDetail = teacherDao.queryForPhone(username);
-        if (projectDao.queryProjectDetail(projectInfoForSkills.getProjectName())==null) {
+        if (projectDao.queryProjectDetail(projectInfo.getProjectName())==null) {
 
             if (teacherDetail != null) {
-                projectInfoForSkills.setProjectConnector(username);
-                projectInfoForSkills.setEmail(teacherinfo.getEmail());
-                projectInfoForSkills.setQq(teacherDetail.getQq());
-                if (teacherService.issueProject(projectInfoForSkills) != 1) {
+                projectInfo.setProjectConnector(username);
+                projectInfo.setEmail(teacherinfo.getEmail());
+                projectInfo.setQq(teacherDetail.getQq());
+                if (teacherService.issueProject(projectInfo) != 1) {
 
                     return new ResultData(false, "发布项目失败");
                 }
-                return new ResultData(teacherService.queryStudentForReCommod(projectInfoForSkills.getProjectNeed()));
+                return new ResultData(teacherService.queryStudentForReCommod(projectInfo.getProjectNeed()));
             }
 
             return new ResultData(false, "请填写个人信息");

@@ -5,7 +5,7 @@ import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Repository;
 import weike.entity.persistence.TeacherDetail;
 import weike.entity.persistence.TeacherInfo;
-import weike.entity.view.ProjectRecommod;
+import weike.entity.view.ProjectRecommend;
 
 import java.util.List;
 
@@ -38,7 +38,7 @@ public interface TeacherDao {
     public int updatePassword(@Param("username") String username, @Param("password") String password);
 
     //查询符合条件的学生
-    public List<ProjectRecommod> queryAllRecommod(String skills);
+    public List<ProjectRecommend> queryAllRecommod(String skills);
 
 }
 

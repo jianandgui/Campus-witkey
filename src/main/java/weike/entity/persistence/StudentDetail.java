@@ -32,7 +32,7 @@ public class StudentDetail {
     private long qq;
 
     //拥有技能
-    private String skills;
+    private List<String> skills;
     //项目经验
     private String experience;
     //自我评价
@@ -92,11 +92,11 @@ public class StudentDetail {
         this.qq = qq;
     }
 
-    public String getSkills() {
+    public List<String> getSkills() {
         return skills;
     }
 
-    public void setSkills(String skills) {
+    public void setSkills(List<String> skills) {
         this.skills = skills;
     }
 
@@ -164,8 +164,7 @@ public class StudentDetail {
         this.selfFeel = selfFeel;
     }
 
-    public StudentDetail(int id, String username, String image, String sex, String eduBackgroud, String university, String majorAndGrade, long entryUniversity, long leaveUniversity, long qq, String skills, String experience, String selfFeel, String level) {
-
+    public StudentDetail(int id, String username, String image, String sex, String eduBackgroud, String university, String majorAndGrade, long entryUniversity, long leaveUniversity, long qq, List<String> skills, String experience, String selfFeel, String level) {
         this.id = id;
         this.username = username;
         this.image = image;

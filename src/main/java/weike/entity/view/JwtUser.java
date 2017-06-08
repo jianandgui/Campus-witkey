@@ -10,40 +10,31 @@ import java.util.Date;
 /**
  * Created by muyi on 17-4-12.
  */
-public class JWTuser implements UserDetails {
+public class JwtUser implements UserDetails {
 
     //只为安全服务的类  用来获取用户验证等信息
     private int id;
-
     private String username;
-
     private String password;
-
     private String email;
-
     private Collection<? extends GrantedAuthority> authorities;
-
     private final Date lastPasswordResetDate;
 
     @JsonIgnore
     public int getId() {
         return id;
     }
-
     public void setId(int id) {
         this.id = id;
     }
-
     public void setAuthorities(Collection<? extends GrantedAuthority> authorities) {
         this.authorities = authorities;
     }
-
     @JsonIgnore
     public Date getLastPasswordResetDate() {
         return lastPasswordResetDate;
     }
-
-    public JWTuser(int id,String username, String password, String email,Collection<? extends GrantedAuthority> authorities, Date lastPasswordResetDate) {
+    public JwtUser(int id, String username, String password, String email, Collection<? extends GrantedAuthority> authorities, Date lastPasswordResetDate) {
         this.id=id;
         this.username = username;
         this.password = password;
@@ -52,19 +43,15 @@ public class JWTuser implements UserDetails {
         this.lastPasswordResetDate = lastPasswordResetDate;
 
     }
-
     public void setUsername(String username) {
         this.username = username;
     }
-
     public void setPassword(String password) {
         this.password = password;
     }
-
     public String getEmail() {
         return email;
     }
-
     public void setEmail(String email) {
         this.email = email;
     }
