@@ -14,7 +14,7 @@ import java.util.List;
  */
 @CrossOrigin(maxAge = 3600)
 @RestController
-@RequestMapping("/cn/edu/swpu/cins/weike")
+@RequestMapping("/weike")
 public class ProjectController {
 
     @Autowired
@@ -41,11 +41,5 @@ public class ProjectController {
             return new ResultData(projectViews);
         }
       return new ResultData(false,"很遗憾，没有为您找到合适的项目");
-
     }
-
-
-
-
-
 }

@@ -48,7 +48,7 @@
     #{entryUniversity},
     #{leaveUniversity},
     #{qq},
-    #{skills , javaType = List , jdbcType = VARCHAR,typeHandler=weike.typehandler.StringArrayTypeHandler},
+    #{skills , javaType = List , jdbcType = VARCHAR,typeHandler=cn.edu.swpu.cins.weike.typehandler.StringArrayTypeHandler},
     #{experience},
     #{selfFeel},
     #{level})

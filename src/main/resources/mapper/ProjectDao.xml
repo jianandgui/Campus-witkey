@@ -27,7 +27,7 @@
     #{qq},
     #{email},
     #{numNeed},
-    #{projectNeed , javaType = List , jdbcType = VARCHAR,typeHandler=weike.typehandler.StringArrayTypeHandler},
+    #{projectNeed , javaType = List , jdbcType = VARCHAR,typeHandler=cn.edu.swpu.cins.weike.typehandler.StringArrayTypeHandler},
     #{projectStart},
     #{projectEnd},
     #{projectProfile})

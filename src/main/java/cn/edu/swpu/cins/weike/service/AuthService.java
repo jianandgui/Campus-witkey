@@ -29,7 +29,7 @@ public interface AuthService {
     public int studentUpdatePassword(String username,String password) throws AuthException;
 
     //老师召回密码
-    public int teacherUpdatepassword(String username,String password) throws AuthException;
+    public int teacherUpdatePassword(String username,String password) throws AuthException;
 
 //    //管理员注册
     public AdminInfo adminRegister(AdminInfo adminInfo) throws AuthException;
