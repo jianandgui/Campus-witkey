@@ -3,6 +3,7 @@ package cn.edu.swpu.cins.weike.service.Impl;
 import cn.edu.swpu.cins.weike.service.MailService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.mail.MailException;
 import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.stereotype.Service;
@@ -15,10 +16,8 @@ import java.util.Random;
 @Service
 public class MailServiceImpl implements MailService {
 
-
     @Autowired
     private JavaMailSender sender;
-
     @Value("${spring.mail.username}")
     private String from;
 
@@ -31,10 +30,10 @@ public class MailServiceImpl implements MailService {
      */
 
 //    private String to = "yangquan95@163.com";
-
     //    获取4位随机数(验证码)
     public static final char[] chars = "1234567890QWERTYUIOPASDFGHJKLZXCVBNM".toCharArray();
     public static Random random = new Random();
+
     public static String getRandomString() {
         StringBuffer buffer = new StringBuffer();
         int index;   //获取随机chars下标
@@ -47,40 +46,39 @@ public class MailServiceImpl implements MailService {
 
 
     @Override
-    public String sendSimpleMail(String to, String subject) {
-        SimpleMailMessage message = new SimpleMailMessage();
-        String verifyCode=getRandomString();
-        message.setFrom(from);
-        message.setTo(to);
-        message.setSubject(subject);
-        message.setText(verifyCode);
-
+    public String sendSimpleMail(String to, String subject) throws Exception {
         try {
+            SimpleMailMessage message = new SimpleMailMessage();
+            String verifyCode = getRandomString();
+            message.setFrom(from);
+            message.setTo(to);
+            message.setSubject(subject);
+            message.setText(verifyCode);
             sender.send(message);
+            return verifyCode;
         } catch (Exception e) {
+            throw new Exception("邮件发送失败");
         }
-        return verifyCode;
     }
 
     @Override
-    public void sendMail(String to, String subject,String content) {
-        SimpleMailMessage message = new SimpleMailMessage();
-        message.setFrom(from);
-        message.setTo(to);
-        message.setSubject(subject);
-        message.setText(forMatInfo(content));
+    public void sendMail(String to, String subject, String content) throws Exception {
         try {
+            SimpleMailMessage message = new SimpleMailMessage();
+            message.setFrom(from);
+            message.setTo(to);
+            message.setSubject(subject);
+            message.setText(forMatInfo(content));
             sender.send(message);
         } catch (Exception e) {
+            throw new Exception("邮件发送失败");
         }
-
     }
 
     //处理发送邮件信息
 
-    public String forMatInfo(String content){
-        return content="尊敬的老师你好，我是"+content+"我想报名参加您的项目";
+    public String forMatInfo(String content) {
+        return content = "尊敬的老师你好，我是" + content + "我想报名参加您的项目";
     }
-
 
 }

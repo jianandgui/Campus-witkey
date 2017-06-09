@@ -42,10 +42,6 @@ public class StudentDetail {
     private String level;
 
 
-
-
-
-
     public StudentDetail() {
     }
 
@@ -81,7 +77,6 @@ public class StudentDetail {
     public void setSex(String sex) {
         this.sex = sex;
     }
-
 
 
     public long getQq() {

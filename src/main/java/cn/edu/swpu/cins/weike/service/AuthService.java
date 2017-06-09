@@ -14,24 +14,24 @@ public interface AuthService {
     public int studentRegister(StudentInfo studentinfo) throws AuthException;
 
     //学生登陆
-    public String studentLogin(String userName,String password) throws AuthException;
+    public String studentLogin(String userName, String password) throws AuthException;
 
     //老师注册
     public int teacherRegister(TeacherInfo teacherinfo) throws AuthException;
 
     //老师登陆
-    public String teacherLogin(String username,String password) throws AuthException;
+    public String teacherLogin(String username, String password) throws AuthException;
 
     //管理员登录
-    public String adminLogin(String username,String password) throws AuthException;
+    public String adminLogin(String username, String password) throws AuthException;
 
     //学生找回密码
-    public int studentUpdatePassword(String username,String password) throws AuthException;
+    public int studentUpdatePassword(String username, String password) throws AuthException;
 
     //老师召回密码
-    public int teacherUpdatePassword(String username,String password) throws AuthException;
+    public int teacherUpdatePassword(String username, String password) throws AuthException;
 
-//    //管理员注册
+    //    //管理员注册
     public AdminInfo adminRegister(AdminInfo adminInfo) throws AuthException;
 
     public String getVerifyCodeForLogin() throws AuthException;

@@ -24,11 +24,6 @@ public class TeacherDetail {
     private long qq;
 
 
-
-
-
-
-
     public String getImage() {
         return image;
     }

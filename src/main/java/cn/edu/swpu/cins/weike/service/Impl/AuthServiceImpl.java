@@ -28,7 +28,7 @@ import java.util.Random;
  * Created by muyi on 17-4-18.
  */
 @Service
-public class AuthServiceImpl implements AuthService{
+public class AuthServiceImpl implements AuthService {
 
     @Autowired
     private StudentDao studentDao;
@@ -44,10 +44,10 @@ public class AuthServiceImpl implements AuthService{
     private AdminDao adminDao;
 
     @Override
-    public int studentRegister(StudentInfo studentinfo) throws AuthException{
-        try{
+    public int studentRegister(StudentInfo studentinfo) throws AuthException {
+        try {
             final String username = studentinfo.getUsername();
-            if(studentDao.selectStudent(username)!=null) {
+            if (studentDao.selectStudent(username) != null) {
                 return 0;
             }
             BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
@@ -56,15 +56,14 @@ public class AuthServiceImpl implements AuthService{
             studentinfo.setLastPasswordResetDate(new Date().getTime());
             studentinfo.setRole("ROLE_STUDENT");
             return studentDao.studntRegister(studentinfo);
-        }catch (Exception e){
+        } catch (Exception e) {
 
             throw new AuthException("数据库异常！");
         }
-
     }
 
     @Override
-    public String studentLogin(String username, String password) throws AuthException{
+    public String studentLogin(String username, String password) throws AuthException {
         try {
 
             UsernamePasswordAuthenticationToken upToken = new UsernamePasswordAuthenticationToken(username, password);
@@ -75,20 +74,18 @@ public class AuthServiceImpl implements AuthService{
             final UserDetails userDetails = JwtUserFactory.createStudent(studentDao.selectStudent(username));
             final String token = jwtTokenUtil.generateToken(userDetails);
             return token;
-        }catch (Exception e){
+        } catch (Exception e) {
 
             throw new AuthException("获取token异常");
-
         }
-
     }
 
     @Override
-    public int teacherRegister(TeacherInfo teacherinfo) throws AuthException{
+    public int teacherRegister(TeacherInfo teacherinfo) throws AuthException {
         try {
             final String username = teacherinfo.getUsername();
 
-            if(teacherDao.queryByName(username)!=null) {
+            if (teacherDao.queryByName(username) != null) {
                 return 0;
             }
             BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
@@ -97,14 +94,13 @@ public class AuthServiceImpl implements AuthService{
             teacherinfo.setLastPasswordResetDate(new Date().getTime());
             teacherinfo.setRole("ROLE_TEACHER");
             return teacherDao.teacherRegister(teacherinfo);
-        }catch (Exception e){
+        } catch (Exception e) {
             throw new AuthException("数据库异常");
         }
-
     }
 
     @Override
-    public String teacherLogin(String username, String password) throws AuthException{
+    public String teacherLogin(String username, String password) throws AuthException {
 
         try {
             UsernamePasswordAuthenticationToken upToken = new UsernamePasswordAuthenticationToken(username, password);
@@ -114,17 +110,13 @@ public class AuthServiceImpl implements AuthService{
             final UserDetails userDetails = JwtUserFactory.createTeacher(teacherDao.queryByName(username));
             final String token = jwtTokenUtil.generateToken(userDetails);
             return token;
-        }catch (Exception e){
-
+        } catch (Exception e) {
             throw new AuthException("获取token失败");
         }
-
-
-
     }
 
-    public String adminLogin(String userName, String password) throws AuthException{
-        try{
+    public String adminLogin(String userName, String password) throws AuthException {
+        try {
             UsernamePasswordAuthenticationToken upToken = new UsernamePasswordAuthenticationToken(userName, password);
             // Perform the security
             final Authentication authentication = authenticationManager.authenticate(upToken);
@@ -133,36 +125,33 @@ public class AuthServiceImpl implements AuthService{
             final UserDetails userDetails = JwtUserFactory.createAdmin(adminDao.queryByName(userName));
             final String token = jwtTokenUtil.generateToken(userDetails);
             return token;
-        }catch (Exception e){
+        } catch (Exception e) {
 
             throw new AuthException("获取token失败");
         }
-
     }
 
     @Override
-    public int studentUpdatePassword(String username, String password) throws AuthException{
-        try{
-            return studentDao.updatePassword(username,UpdatePwd.updatePwd(password));
-        }catch (Exception e){
+    public int studentUpdatePassword(String username, String password) throws AuthException {
+        try {
+            return studentDao.updatePassword(username, UpdatePwd.updatePwd(password));
+        } catch (Exception e) {
             throw new AuthException("更新密码异常");
         }
-
     }
 
     @Override
-    public int teacherUpdatePassword(String username, String password) throws AuthException{
-        try{
-            return teacherDao.updatePassword(username,UpdatePwd.updatePwd(password));
-        }catch (Exception e){
+    public int teacherUpdatePassword(String username, String password) throws AuthException {
+        try {
+            return teacherDao.updatePassword(username, UpdatePwd.updatePwd(password));
+        } catch (Exception e) {
             throw new AuthException("更新密码异常");
-
         }
-
     }
 
     public static final char[] chars = "1234567890QWERTYUIOPASDFGHJKLZXCVBNMqwertyuioplkjhgfdsazxcvbnm".toCharArray();
     public static Random random = new Random();
+
     public static String getRandomString() {
         StringBuffer buffer = new StringBuffer();
         int index;   //获取随机chars下标
@@ -175,20 +164,19 @@ public class AuthServiceImpl implements AuthService{
 
     @Override
     public String getVerifyCodeForLogin() throws AuthException {
-        try{
+        try {
             return getRandomString();
-        }catch (Exception e){
+        } catch (Exception e) {
 
             throw new AuthException("获取验证码异常");
         }
-
     }
 
     @Override
-    public AdminInfo adminRegister(AdminInfo adminInfo) throws AuthException{
-        try{
+    public AdminInfo adminRegister(AdminInfo adminInfo) throws AuthException {
+        try {
             final String username = adminInfo.getUsername();
-            if(adminDao.queryByName(username)!=null) {
+            if (adminDao.queryByName(username) != null) {
                 return null;
             }
             BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
@@ -197,9 +185,8 @@ public class AuthServiceImpl implements AuthService{
             adminInfo.setLastPasswordResetDate(new Date().getTime());
             adminInfo.setRole("ROLE_ADMIN");
             return adminDao.addAdmin(adminInfo) == 0 ? null : adminInfo;
-        }catch (Exception e){
+        } catch (Exception e) {
             throw new AuthException("数据库异常");
         }
-
     }
 }

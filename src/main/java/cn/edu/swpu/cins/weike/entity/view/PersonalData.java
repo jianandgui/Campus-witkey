@@ -37,7 +37,4 @@ public class PersonalData {
     private String experience;
 
 
-
-
-
 }

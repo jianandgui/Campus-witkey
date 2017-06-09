@@ -17,7 +17,6 @@ import java.util.List;
 public interface TeacherDao {
 
 
-
     //增加一个老师信息（注册）
     public int teacherRegister(TeacherInfo teacherinfo);
 

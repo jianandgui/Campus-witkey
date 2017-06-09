@@ -5,7 +5,8 @@
 <mapper namespace="cn.edu.swpu.cins.weike.dao.StudentDao">
 
     <!--根据用户名查询学生信息 用于注册-->
-    <select id="selectStudent" resultType="cn.edu.swpu.cins.weike.entity.persistence.StudentInfo" parameterType="String">
+    <select id="selectStudent" resultType="cn.edu.swpu.cins.weike.entity.persistence.StudentInfo"
+            parameterType="String">
 
         SELECT * FROM
         StudentRegisterInfo
@@ -22,7 +23,7 @@
     </select>
 
     <!--添加一个学生信息-->
-    <insert id="studentAddPersonal" parameterType="cn.edu.swpu.cins.weike.entity.persistence.StudentDetail" >
+    <insert id="studentAddPersonal" parameterType="cn.edu.swpu.cins.weike.entity.persistence.StudentDetail">
 
     INSERT INTO StudentDetailInfo
     (username,
@@ -54,7 +55,7 @@
     #{level})
     </insert>
 
-<insert id="studntRegister" parameterType="cn.edu.swpu.cins.weike.entity.persistence.StudentInfo">
+    <insert id="studntRegister" parameterType="cn.edu.swpu.cins.weike.entity.persistence.StudentInfo">
 INSERT INTO StudentRegisterInfo
     (username,
     password,
@@ -72,14 +73,15 @@ INSERT INTO StudentRegisterInfo
 </insert>
 
 
-<select id="queryForStudentPhone" parameterType="String" resultType="cn.edu.swpu.cins.weike.entity.persistence.StudentDetail">
+    <select id="queryForStudentPhone" parameterType="String"
+            resultType="cn.edu.swpu.cins.weike.entity.persistence.StudentDetail">
 
     SELECT * FROM StudentDetailInfo
     WHERE
     username=#{username}
 </select>
 
-<update id="updatePassword" parameterType="String">
+    <update id="updatePassword" parameterType="String">
 
     UPDATE StudentRegisterInfo
     SET password=#{password}
@@ -93,7 +95,7 @@ INSERT INTO StudentRegisterInfo
                 property="skills"/>
     </resultMap>
 
-<select id="queryAllRecommod" parameterType="String" resultMap="studentResultMap">
+    <select id="queryAllRecommod" parameterType="String" resultMap="studentResultMap">
 
     SELECT
     username,
@@ -110,7 +112,6 @@ INSERT INTO StudentRegisterInfo
     skills like "%"#{skills}"%"
 
 </select>
-
 
 
 </mapper>

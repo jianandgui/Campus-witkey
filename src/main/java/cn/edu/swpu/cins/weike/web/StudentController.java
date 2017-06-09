@@ -28,22 +28,16 @@ public class StudentController {
 
     @Autowired
     private StudentService studentService;
-
     @Autowired
     private StudentDao studentDao;
-
     @Autowired
     private ProjectService projectService;
-
     @Value("${jwt.header}")
     private String tokenHeader;
-
     @Value("${jwt.tokenHead}")
     private String tokenHead;
-
     @Autowired
     private JwtTokenUtil jwtTokenUtil;
-
     @Autowired
     private ProjectDao projectDao;
 
@@ -53,64 +47,74 @@ public class StudentController {
 
     //学生发布项目(增加推荐人选功能)
     @PostMapping("/student/addProject")
-    public ResultData pulishproject(@RequestBody ProjectInfo projectInfo, HttpServletRequest request){
+    public ResultData pulishproject(@RequestBody ProjectInfo projectInfo, HttpServletRequest request) {
 
-
-        String authHeader = request.getHeader(this.tokenHeader);
-        final String authToken = authHeader.substring(tokenHead.length());
-        String username = jwtTokenUtil.getUsernameFromToken(authToken);
-        StudentInfo studentinfo = studentDao.selectStudent(username);
-        StudentDetail studentDetail = studentDao.queryForStudentPhone(username);
-
-        if(studentDetail!=null) {
-            if(projectDao.queryProjectDetail(projectInfo.getProjectName())==null) {
-                projectInfo.setProjectConnector(username);
-                projectInfo.setEmail(studentinfo.getEmail());
-                projectInfo.setQq(studentDetail.getQq());
-                int num = studentService.issueProject(projectInfo);
-                if (num != 1) {
-                    return new ResultData(false, "发布项目失败");
+        try {
+            String authHeader = request.getHeader(this.tokenHeader);
+            final String authToken = authHeader.substring(tokenHead.length());
+            String username = jwtTokenUtil.getUsernameFromToken(authToken);
+            StudentInfo studentinfo = studentDao.selectStudent(username);
+            StudentDetail studentDetail = studentDao.queryForStudentPhone(username);
+            if (studentDetail != null) {
+                if (projectDao.queryProjectDetail(projectInfo.getProjectName()) == null) {
+                    projectInfo.setProjectConnector(username);
+                    projectInfo.setEmail(studentinfo.getEmail());
+                    projectInfo.setQq(studentDetail.getQq());
+                    int num = studentService.issueProject(projectInfo);
+                    if (num != 1) {
+                        return new ResultData(false, "发布项目失败");
+                    }
+                    return new ResultData(studentService.queryForReCommod(projectInfo.getProjectNeed()));
                 }
-                return new ResultData(studentService.queryForReCommod(projectInfo.getProjectNeed()));
+                return new ResultData(false, "请不要重复发布项目");
+            } else {
+                return new ResultData(false, "个人信息未填完整");
             }
-            return new ResultData(false,"请不要重复发布项目");
+        } catch (Exception e) {
+            return new ResultData(false, e.getMessage());
         }
-        else {
-            return new ResultData(false,"个人信息未填完整");
-        }
+
     }
 
     //学生向项目申请人发邮件申请参加项目
     //TODO
     @GetMapping("/student/sendApply")
-    public ResultData sendMail(@RequestParam String projectName,HttpServletRequest request){
-        String authHeader = request.getHeader(this.tokenHeader);
-        final String authToken = authHeader.substring(tokenHead.length());
-        String username = jwtTokenUtil.getUsernameFromToken(authToken);
-        StudentDetail studentDetail=studentDao.queryForStudentPhone(username);
-        ProjectDetail projectInfo =projectDao.queryProjectDetail(projectName);
-        String email= projectInfo.getEmail();
-        mailService.sendMail(email,"申请项目",username);
-        return new ResultData(true,"邮件发送成功");
+    public ResultData sendMail(@RequestParam String projectName, HttpServletRequest request) {
+        try {
+            String authHeader = request.getHeader(this.tokenHeader);
+            final String authToken = authHeader.substring(tokenHead.length());
+            String username = jwtTokenUtil.getUsernameFromToken(authToken);
+            StudentDetail studentDetail = studentDao.queryForStudentPhone(username);
+            ProjectDetail projectInfo = projectDao.queryProjectDetail(projectName);
+            String email = projectInfo.getEmail();
+            mailService.sendMail(email, "申请项目", username);
+            return new ResultData(true, "邮件发送成功");
+        } catch (Exception e) {
+            return new ResultData(false, e.getMessage());
+        }
+
     }
 
 
     @PostMapping("student/addPersonalDeail")
-    public ResultData addPersonalDetail(@RequestBody StudentDetail studentDetail, HttpServletRequest request){
-        String authHeader = request.getHeader(this.tokenHeader);
-        final String authToken = authHeader.substring(tokenHead.length());
-        String username = jwtTokenUtil.getUsernameFromToken(authToken);
-        if(studentDao.queryForStudentPhone(username)==null) {
-            studentDetail.setUsername(username);
-            int num=studentService.addPersonal(studentDetail);
-            if (num ==1) {
-                return new ResultData(true, "信息添加成功");
-            }
-            return new ResultData(false, "信息添加失败");
-        }
-        else
-            return new ResultData(false,"请勿重复添加");
-    }
+    public ResultData addPersonalDetail(@RequestBody StudentDetail studentDetail, HttpServletRequest request) {
+        try {
+            String authHeader = request.getHeader(this.tokenHeader);
+            final String authToken = authHeader.substring(tokenHead.length());
+            String username = jwtTokenUtil.getUsernameFromToken(authToken);
+            if (studentDao.queryForStudentPhone(username) == null) {
+                studentDetail.setUsername(username);
+                int num = studentService.addPersonal(studentDetail);
+                if (num == 1) {
+                    return new ResultData(true, "信息添加成功");
+                }
+                return new ResultData(false, "信息添加失败");
+            } else
+                return new ResultData(false, "请勿重复添加");
 
+        } catch (Exception e) {
+            return new ResultData(false, e.getMessage());
+        }
+    }
 
 }

@@ -24,7 +24,7 @@
     </insert>
 
     <!--添加个人详细信息-->
-<insert id="teacherAddPersonal" parameterType="cn.edu.swpu.cins.weike.entity.persistence.TeacherDetail">
+    <insert id="teacherAddPersonal" parameterType="cn.edu.swpu.cins.weike.entity.persistence.TeacherDetail">
 
     INSERT INTO TeacherDetailInfo
         (username,
@@ -45,7 +45,8 @@
 
 </insert>
 
-    <select id="queryForPhone" resultType="cn.edu.swpu.cins.weike.entity.persistence.TeacherDetail" parameterType="String">
+    <select id="queryForPhone" resultType="cn.edu.swpu.cins.weike.entity.persistence.TeacherDetail"
+            parameterType="String">
 
         SELECT * FROM TeacherDetailInfo
         WHERE

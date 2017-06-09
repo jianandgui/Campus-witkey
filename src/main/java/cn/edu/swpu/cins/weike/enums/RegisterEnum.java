@@ -17,7 +17,6 @@ public enum RegisterEnum {
     FAIL_SAVE("用户添加失败");
 
 
-
     private String message;
 
     RegisterEnum(String message) {

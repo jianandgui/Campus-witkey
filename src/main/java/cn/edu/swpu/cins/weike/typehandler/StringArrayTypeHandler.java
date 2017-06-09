@@ -29,7 +29,8 @@ public class StringArrayTypeHandler extends BaseTypeHandler<List<String>> {
     @Override
     public List<String> getNullableResult(ResultSet rs, int columnIndex) throws SQLException {
         try {
-            return varcharToList(rs.getString(columnIndex), new TypeReference<List<String>>() {});
+            return varcharToList(rs.getString(columnIndex), new TypeReference<List<String>>() {
+            });
         } catch (IOException e) {
             e.printStackTrace();
             throw new SQLException("Fail to convert json to string list.");
@@ -39,7 +40,8 @@ public class StringArrayTypeHandler extends BaseTypeHandler<List<String>> {
     @Override
     public List<String> getNullableResult(CallableStatement cs, int columnIndex) throws SQLException {
         try {
-            return varcharToList(cs.getString(columnIndex), new TypeReference<List<String>>() {});
+            return varcharToList(cs.getString(columnIndex), new TypeReference<List<String>>() {
+            });
         } catch (IOException e) {
             e.printStackTrace();
             throw new SQLException("Fail to convert json to string list.");
@@ -49,7 +51,8 @@ public class StringArrayTypeHandler extends BaseTypeHandler<List<String>> {
     @Override
     public List<String> getNullableResult(ResultSet rs, String columnName) throws SQLException {
         try {
-            return varcharToList(rs.getString(columnName), new TypeReference<List<String>>() {});
+            return varcharToList(rs.getString(columnName), new TypeReference<List<String>>() {
+            });
         } catch (IOException e) {
             e.printStackTrace();
             throw new SQLException("Fail to convert json to string list.");
@@ -66,7 +69,7 @@ public class StringArrayTypeHandler extends BaseTypeHandler<List<String>> {
         String result = objectMapper.writeValueAsString(list);
 
         //避免插入规则过长引起的错误
-        if(result.length()>255){
+        if (result.length() > 255) {
             throw new IOException();
         }
 

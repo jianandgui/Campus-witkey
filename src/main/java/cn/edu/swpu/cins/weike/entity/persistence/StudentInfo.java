@@ -21,10 +21,7 @@ public class StudentInfo {
     private String password;
 
 
-
-
     private String email;
-
 
 
     private long lastPasswordResetDate;
@@ -68,9 +65,6 @@ public class StudentInfo {
     public void setEmail(String email) {
         this.email = email;
     }
-
-
-
 
 
     public long getLastPasswordResetDate() {

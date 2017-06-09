@@ -20,25 +20,25 @@ public class ReduceRepeate {
     @Autowired
     private StudentDao studentDao;
 
-    public List<ProjectRecommend> reduceStudentRepeate(List<String> skills){
+    public List<ProjectRecommend> reduceStudentRepeate(List<String> skills) {
 
         List<ProjectRecommend> list;
-        list =new ArrayList<ProjectRecommend>();
-        for (String skill: skills){
+        list = new ArrayList<ProjectRecommend>();
+        for (String skill : skills) {
             list.addAll(studentDao.queryAllRecommod(skill));
 
         }
         //对List去重处理
-        List<ProjectRecommend> list1=new ArrayList<ProjectRecommend>();
-        int num=0;
-        for(ProjectRecommend projectRecommend :list){
-            String username= projectRecommend.getUsername();
-            for(ProjectRecommend projectRecommend1 :list1) {
-                if(username.equals(projectRecommend1.getUsername())) {
+        List<ProjectRecommend> list1 = new ArrayList<ProjectRecommend>();
+        int num = 0;
+        for (ProjectRecommend projectRecommend : list) {
+            String username = projectRecommend.getUsername();
+            for (ProjectRecommend projectRecommend1 : list1) {
+                if (username.equals(projectRecommend1.getUsername())) {
                     num++;
                 }
             }
-            if(num==0) {
+            if (num == 0) {
                 list1.add(projectRecommend);
             }
         }

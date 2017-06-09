@@ -26,18 +26,23 @@ public class ResultData<T> {
     public T getData() {
         return data;
     }
+
     public void setData(T data) {
         this.data = data;
     }
+
     public boolean isIfSuccess() {
         return ifSuccess;
     }
+
     public void setIfSuccess(boolean ifSuccess) {
         this.ifSuccess = ifSuccess;
     }
+
     public String getMsg() {
         return msg;
     }
+
     public void setMsg(String msg) {
         this.msg = msg;
     }

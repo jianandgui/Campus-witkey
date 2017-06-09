@@ -35,16 +35,16 @@
     </insert>
 
 
-
     <!--根据项目名字删除一个项目（管理员权限或发布项目本人）-->
     <delete id="deleteByName" parameterType="String">
 
       DELETE FROM ProjectInfo where projectName=#{projectName}
         
     </delete>
-    
+
     <!--根据名字显示一个项目的详细情况-->
-    <select id="queryProjectDetail" parameterType="String" resultType="cn.edu.swpu.cins.weike.entity.view.ProjectDetail">
+    <select id="queryProjectDetail" parameterType="String"
+            resultType="cn.edu.swpu.cins.weike.entity.view.ProjectDetail">
 
         SELECT
         projectName,

@@ -23,7 +23,6 @@ TeacherInfo {
     private long lastPasswordResetDate;
 
 
-
     public TeacherInfo() {
     }
 
@@ -50,9 +49,6 @@ TeacherInfo {
     public void setPassword(String password) {
         this.password = password;
     }
-
-
-
 
 
     public String getEmail() {
