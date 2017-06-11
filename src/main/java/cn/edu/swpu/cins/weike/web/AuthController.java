@@ -92,7 +92,7 @@ public class AuthController {
             if (studentDao.queryEmail(email) != null) {
                 return new ResultData(false, RegisterEnum.REPEATE_EMAIL.getMessage());
             }
-            return new ResultData<StudentInfo>(true, mailService.sendSimpleMail(email, "注册验证码"));
+            return new ResultData<StudentInfo>(true, mailService.sendSimpleMail(username, email));
         } catch (Exception e) {
             return new ResultData(false, e.getMessage());
         }
@@ -124,7 +124,7 @@ public class AuthController {
             if (!email.equals(studentinfo.getEmail())) {
                 return new ResultData(false, "非本人邮箱");
             }
-            return new ResultData(true, mailService.sendSimpleMail(studentinfo.getEmail(), "修改密码验证码"));
+            return new ResultData(true, mailService.sendMailForUpdatePwd(studentinfo.getEmail()));
         } catch (Exception e) {
             return new ResultData(false, e.getMessage());
         }
@@ -185,7 +185,7 @@ public class AuthController {
             if (teacherDao.queryEamil(email) != null) {
                 return new ResultData(false, RegisterEnum.REPEATE_EMAIL.getMessage());
             }
-            return new ResultData(true, mailService.sendSimpleMail(email, "注册验证码"));
+            return new ResultData(true, mailService.sendSimpleMail(username, email));
         } catch (Exception e) {
             return new ResultData(false, e.getMessage());
         }
@@ -205,7 +205,7 @@ public class AuthController {
             if (!email.equals(teacherinfo.getEmail())) {
                 return new ResultData(false, "非本人邮箱");
             }
-            return new ResultData(true, mailService.sendSimpleMail(teacherinfo.getEmail(), "修改密码验证码"));
+            return new ResultData(true, mailService.sendMailForUpdatePwd(teacherinfo.getEmail()));
         } catch (Exception e) {
             return new ResultData(false, e.getMessage());
         }

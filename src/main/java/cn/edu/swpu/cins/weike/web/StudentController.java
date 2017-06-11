@@ -77,23 +77,23 @@ public class StudentController {
     }
 
     //学生向项目申请人发邮件申请参加项目
-    //TODO
-    @GetMapping("/student/sendApply")
-    public ResultData sendMail(@RequestParam String projectName, HttpServletRequest request) {
-        try {
-            String authHeader = request.getHeader(this.tokenHeader);
-            final String authToken = authHeader.substring(tokenHead.length());
-            String username = jwtTokenUtil.getUsernameFromToken(authToken);
-            StudentDetail studentDetail = studentDao.queryForStudentPhone(username);
-            ProjectDetail projectInfo = projectDao.queryProjectDetail(projectName);
-            String email = projectInfo.getEmail();
-            mailService.sendMail(email, "申请项目", username);
-            return new ResultData(true, "邮件发送成功");
-        } catch (Exception e) {
-            return new ResultData(false, e.getMessage());
-        }
-
-    }
+//    //TODO
+//    @GetMapping("/student/sendApply")
+//    public ResultData sendMail(@RequestParam String projectName, HttpServletRequest request) {
+//        try {
+//            String authHeader = request.getHeader(this.tokenHeader);
+//            final String authToken = authHeader.substring(tokenHead.length());
+//            String username = jwtTokenUtil.getUsernameFromToken(authToken);
+//            StudentDetail studentDetail = studentDao.queryForStudentPhone(username);
+//            ProjectDetail projectInfo = projectDao.queryProjectDetail(projectName);
+//            String email = projectInfo.getEmail();
+//            mailService.sendMail(email, "申请项目", username);
+//            return new ResultData(true, "邮件发送成功");
+//        } catch (Exception e) {
+//            return new ResultData(false, e.getMessage());
+//        }
+//
+//    }
 
 
     @PostMapping("student/addPersonalDeail")

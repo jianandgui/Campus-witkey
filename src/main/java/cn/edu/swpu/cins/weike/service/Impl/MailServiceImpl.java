@@ -45,15 +45,25 @@ public class MailServiceImpl implements MailService {
     }
 
 
+    public String getSignUpSubject(String username) {
+        final String format = "尊敬的username，欢迎注册校园威客平台！";
+        return format.replaceAll("username", username);
+    }
+
+    public String getSignUpContent() {
+        final String previous = "请您在威客平台注册页面输入下面的验证码以激活您的邮箱，倘若非您本人操作，请忽略这封邮件，验证码为：";
+        return previous;
+    }
+
     @Override
-    public String sendSimpleMail(String to, String subject) throws Exception {
+    public String sendSimpleMail(String username,String to) throws Exception {
         try {
+            String verifyCode=getRandomString();
             SimpleMailMessage message = new SimpleMailMessage();
-            String verifyCode = getRandomString();
             message.setFrom(from);
             message.setTo(to);
-            message.setSubject(subject);
-            message.setText(verifyCode);
+            message.setSubject(getSignUpSubject(username));
+            message.setText(getSignUpContent()+verifyCode);
             sender.send(message);
             return verifyCode;
         } catch (Exception e) {
@@ -62,14 +72,16 @@ public class MailServiceImpl implements MailService {
     }
 
     @Override
-    public void sendMail(String to, String subject, String content) throws Exception {
+    public String sendMailForUpdatePwd(String to) throws Exception {
         try {
+            String verifyCode=getRandomString();
             SimpleMailMessage message = new SimpleMailMessage();
             message.setFrom(from);
             message.setTo(to);
-            message.setSubject(subject);
-            message.setText(forMatInfo(content));
+            message.setSubject("校园威客平台修改密码");
+            message.setText("请记住下面的验证码，将用于修改您的密码，倘若非您本人操作，请忽略这封邮件，验证码为："+verifyCode);
             sender.send(message);
+            return verifyCode;
         } catch (Exception e) {
             throw new Exception("邮件发送失败");
         }
