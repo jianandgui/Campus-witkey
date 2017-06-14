@@ -85,7 +85,6 @@ public class AuthController {
     @RequestMapping(value = "/student/GetVerifyCodeForRegister", method = RequestMethod.GET)
     public ResultData studentGetveriyCode(@RequestParam String username, @RequestParam String email) {
         try {
-
             if (studentDao.selectStudent(username) != null) {
                 return new ResultData(false, RegisterEnum.REPETE_USERNAME.getMessage());
             }

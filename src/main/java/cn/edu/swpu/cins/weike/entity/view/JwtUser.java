@@ -20,7 +20,7 @@ public class JwtUser implements UserDetails {
     private Collection<? extends GrantedAuthority> authorities;
     private final Date lastPasswordResetDate;
 
-    @JsonIgnore
+
     public int getId() {
         return id;
     }

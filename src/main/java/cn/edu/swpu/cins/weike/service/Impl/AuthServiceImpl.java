@@ -47,7 +47,7 @@ public class AuthServiceImpl implements AuthService {
     public int studentRegister(StudentInfo studentinfo) throws AuthException {
         try {
             final String username = studentinfo.getUsername();
-            if (studentDao.selectStudent(username) != null) {
+            if (studentDao.selectStudent(username) != null&& teacherDao.queryByName(username)!=null) {
                 return 0;
             }
             BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
@@ -85,7 +85,7 @@ public class AuthServiceImpl implements AuthService {
         try {
             final String username = teacherinfo.getUsername();
 
-            if (teacherDao.queryByName(username) != null) {
+            if (studentDao.selectStudent(username) != null&& teacherDao.queryByName(username)!=null) {
                 return 0;
             }
             BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
@@ -163,7 +163,7 @@ public class AuthServiceImpl implements AuthService {
     }
 
     @Override
-    public String getVerifyCodeForLogin() throws AuthException {
+    public String  getVerifyCodeForLogin() throws AuthException {
         try {
             return getRandomString();
         } catch (Exception e) {

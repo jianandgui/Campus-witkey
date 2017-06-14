@@ -71,4 +71,27 @@ public class StudentServiceImpl implements StudentService {
             throw new StudentException("数据库学生发布项目推荐人选异常");
         }
     }
+
+    @Override
+    public int updateInfo(StudentDetail studentDetail,String username) throws StudentException{
+        try{
+            studentDetail.setUsername(username);
+
+            return studentDao.updateInfo(studentDetail)>0?1:0;
+        }catch (Exception e){
+            throw new StudentException("服务器异常！");
+        }
+
+
+    }
+
+    @Override
+    public List<String> queryAllProject(String projectConnector) throws StudentException{
+        try{
+            return studentDao.queryAllProject(projectConnector);
+        }catch (Exception e){
+            throw new StudentException("服务器异常");
+        }
+
+    }
 }

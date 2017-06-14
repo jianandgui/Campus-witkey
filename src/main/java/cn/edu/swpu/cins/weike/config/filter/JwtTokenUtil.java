@@ -21,6 +21,7 @@ public class JwtTokenUtil implements Serializable {
 
     private static final String CLAIM_KEY_USERNAME = "sub";
     private static final String CLAIM_KEY_CREATED = "created";
+    private static final String CLAIM_KEY_ID ="id";
 
     @Value("${jwt.secret}")
     private String secret;

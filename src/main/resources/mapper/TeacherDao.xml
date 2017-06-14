@@ -77,4 +77,22 @@
         username=#{username}
     </update>
 
+    <update id="updateInfo" parameterType="cn.edu.swpu.cins.weike.entity.persistence.TeacherDetail">
+        UPDATE TeacherDetailInfo
+        SET image=#{image},
+        sex=#{sex},
+        university=#{university},
+        academy=#{academy},
+        rank=#{rank},
+        qq=#{qq}
+        WHERE username=#{username}
+
+    </update>
+
+    <select id="queryAllProject" parameterType="String" resultType="String">
+        SELECT projectName from ProjectInfo
+        WHERE projectConnector=#{projectConnector}
+
+    </select>
+
 </mapper>

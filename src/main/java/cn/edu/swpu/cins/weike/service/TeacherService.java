@@ -1,6 +1,7 @@
 package cn.edu.swpu.cins.weike.service;
 
 import cn.edu.swpu.cins.weike.entity.persistence.ProjectInfo;
+import cn.edu.swpu.cins.weike.entity.persistence.StudentDetail;
 import cn.edu.swpu.cins.weike.entity.persistence.TeacherDetail;
 import cn.edu.swpu.cins.weike.entity.view.ProjectRecommend;
 import cn.edu.swpu.cins.weike.exception.TeacherException;
@@ -24,6 +25,11 @@ public interface TeacherService {
 
     //发布项目进行推荐
     public List<ProjectRecommend> queryStudentForReCommod(List<String> skills) throws TeacherException;
+
+    public int updateInfo(TeacherDetail teacherDetail, String username) throws TeacherException;
+
+    //查询发布过的所有项目
+    public List<String> queryAllProject(String projectConnector) throws TeacherException;
 
 
 }

@@ -26,5 +26,11 @@ public interface StudentService {
     //推荐格式的学生参加项目
     public List<ProjectRecommend> queryForReCommod(List<String> skills) throws StudentException;
 
+    //修改学生信息
+    public int updateInfo(StudentDetail studentDetail, String username) throws StudentException;
+
+    //查询发布过的所有项目
+    public List<String> queryAllProject(String projectConnector) throws StudentException;
+
 
 }

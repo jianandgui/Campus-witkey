@@ -38,4 +38,10 @@ public interface StudentDao {
     //查询符合条件的学生
     public List<ProjectRecommend> queryAllRecommod(String skills);
 
+    //学生修改个人信息
+    public int updateInfo(StudentDetail studentDetail);
+
+    //查询发布所有项目
+    public List<String> queryAllProject(String projectConnector);
+
 }

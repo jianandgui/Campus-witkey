@@ -113,5 +113,27 @@ INSERT INTO StudentRegisterInfo
 
 </select>
 
+    <update id="updateInfo" parameterType="cn.edu.swpu.cins.weike.entity.persistence.StudentDetail">
+    UPDATE StudentDetailInfo
+    SET
+    image=#{image},
+    sex=#{sex},
+    eduBackgroud=#{eduBackgroud},
+    university=#{university},
+    majorAndGrade=#{majorAndGrade},
+    entryUniversity=#{entryUniversity},
+    leaveUniversity=#{leaveUniversity},
+    qq=#{qq},
+    skills=#{skills , javaType = List , jdbcType = VARCHAR,typeHandler=cn.edu.swpu.cins.weike.typehandler.StringArrayTypeHandler},
+    experience=#{experience},
+    selfFeel=#{selfFeel}
+    WHERE username=#{username}
 
+    </update>
+
+    <select id="queryAllProject" parameterType="String" resultType="String">
+        SELECT projectName from ProjectInfo
+        WHERE projectConnector=#{projectConnector}
+
+    </select>
 </mapper>

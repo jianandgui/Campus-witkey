@@ -1,5 +1,6 @@
 package cn.edu.swpu.cins.weike.dao;
 
+import cn.edu.swpu.cins.weike.entity.persistence.StudentDetail;
 import cn.edu.swpu.cins.weike.entity.persistence.TeacherDetail;
 import cn.edu.swpu.cins.weike.entity.persistence.TeacherInfo;
 import cn.edu.swpu.cins.weike.entity.view.ProjectRecommend;
@@ -38,6 +39,12 @@ public interface TeacherDao {
 
     //查询符合条件的学生
     public List<ProjectRecommend> queryAllRecommod(String skills);
+
+    //修改个人信息
+    public int updateInfo(TeacherDetail teacherDetail);
+
+    //查询发布所有项目
+    public List<String> queryAllProject(String projectConnector);
 
 }
 

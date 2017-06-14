@@ -1,6 +1,7 @@
 package cn.edu.swpu.cins.weike.web;
 
 import cn.edu.swpu.cins.weike.service.MailService;
+import cn.edu.swpu.cins.weike.util.GetUsrName;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.web.bind.annotation.*;
@@ -10,12 +11,12 @@ import cn.edu.swpu.cins.weike.dao.StudentDao;
 import cn.edu.swpu.cins.weike.entity.persistence.ProjectInfo;
 import cn.edu.swpu.cins.weike.entity.persistence.StudentDetail;
 import cn.edu.swpu.cins.weike.entity.persistence.StudentInfo;
-import cn.edu.swpu.cins.weike.entity.view.ProjectDetail;
 import cn.edu.swpu.cins.weike.entity.view.ResultData;
 import cn.edu.swpu.cins.weike.service.ProjectService;
 import cn.edu.swpu.cins.weike.service.StudentService;
 
 import javax.servlet.http.HttpServletRequest;
+import java.util.List;
 
 
 /**
@@ -23,7 +24,7 @@ import javax.servlet.http.HttpServletRequest;
  */
 @CrossOrigin(maxAge = 3600)
 @RestController
-@RequestMapping("/WeiKe")
+@RequestMapping("/WeiKe/student")
 public class StudentController {
 
     @Autowired
@@ -41,18 +42,17 @@ public class StudentController {
     @Autowired
     private ProjectDao projectDao;
 
-
+    @Autowired
+    private GetUsrName getUsrName;
     @Autowired
     private MailService mailService;
 
     //学生发布项目(增加推荐人选功能)
-    @PostMapping("/student/addProject")
+    @PostMapping("/addProject")
     public ResultData pulishproject(@RequestBody ProjectInfo projectInfo, HttpServletRequest request) {
 
         try {
-            String authHeader = request.getHeader(this.tokenHeader);
-            final String authToken = authHeader.substring(tokenHead.length());
-            String username = jwtTokenUtil.getUsernameFromToken(authToken);
+            String username = getUsrName.AllProjects(request);
             StudentInfo studentinfo = studentDao.selectStudent(username);
             StudentDetail studentDetail = studentDao.queryForStudentPhone(username);
             if (studentDetail != null) {
@@ -96,12 +96,10 @@ public class StudentController {
 //    }
 
 
-    @PostMapping("student/addPersonalDeail")
+    @PostMapping("/addPersonalDeail")
     public ResultData addPersonalDetail(@RequestBody StudentDetail studentDetail, HttpServletRequest request) {
         try {
-            String authHeader = request.getHeader(this.tokenHeader);
-            final String authToken = authHeader.substring(tokenHead.length());
-            String username = jwtTokenUtil.getUsernameFromToken(authToken);
+            String username = getUsrName.AllProjects(request);
             if (studentDao.queryForStudentPhone(username) == null) {
                 studentDetail.setUsername(username);
                 int num = studentService.addPersonal(studentDetail);
@@ -115,6 +113,37 @@ public class StudentController {
         } catch (Exception e) {
             return new ResultData(false, e.getMessage());
         }
+    }
+
+    @PostMapping("/updateInfo")
+    public ResultData updateInfo(@RequestBody StudentDetail studentDetail, HttpServletRequest request) {
+
+        try {
+            String username = getUsrName.AllProjects(request);
+            int num = studentService.updateInfo(studentDetail, username);
+            if (num == 1) {
+                return new ResultData(true, "修改成功");
+            } else
+                return new ResultData(false, "修改信息失败");
+        } catch (Exception e) {
+            return new ResultData(false, e.getMessage());
+        }
+
+    }
+
+    //查看发布过的项目
+    @GetMapping("/allProject")
+    public ResultData queryAllProject(HttpServletRequest request) {
+        try {
+            List<String> list = studentService.queryAllProject(getUsrName.AllProjects(request));
+            if (list.isEmpty()) {
+                return new ResultData(false, "没有发布过任何项目");
+            }
+            return new ResultData(true, list);
+        } catch (Exception e) {
+            return new ResultData(false, e.getMessage());
+        }
+
     }
 
 }

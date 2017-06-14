@@ -2,6 +2,7 @@ package cn.edu.swpu.cins.weike.service.Impl;
 
 import cn.edu.swpu.cins.weike.dao.StudentDao;
 import cn.edu.swpu.cins.weike.entity.persistence.ProjectInfo;
+import cn.edu.swpu.cins.weike.entity.persistence.StudentDetail;
 import cn.edu.swpu.cins.weike.entity.persistence.TeacherDetail;
 import cn.edu.swpu.cins.weike.entity.view.ProjectRecommend;
 import cn.edu.swpu.cins.weike.exception.TeacherException;
@@ -55,5 +56,26 @@ public class TeacherServiceImpl implements TeacherService {
         } catch (Exception e) {
             throw new TeacherException("数据库查询推荐学生异常");
         }
+    }
+
+    @Override
+    public int updateInfo(TeacherDetail teacherDetail, String username) throws TeacherException{
+        try{
+            teacherDetail.setUsername(username);
+            return teacherDao.updateInfo(teacherDetail)>0?1:0;
+        }catch (Exception e){
+            throw new TeacherException("服务器内部异常");
+        }
+
+    }
+
+    @Override
+    public List<String> queryAllProject(String projectConnector) throws TeacherException{
+        try{
+            return teacherDao.queryAllProject(projectConnector);
+        }catch (Exception e){
+            throw new TeacherException("服务器内部异常");
+        }
+
     }
 }
