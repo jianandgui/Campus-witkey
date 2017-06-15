@@ -23,4 +23,8 @@ public interface ProjectService {
     //根据关键词搜索
     public List<ProjectView> queryByKeyWords(String keyWords) throws ProjectException;
 
+    //首页显示八个项目
+
+    public List<ProjectView> queryForIndex() throws ProjectException;
+
 }

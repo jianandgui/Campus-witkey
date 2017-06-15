@@ -53,4 +53,13 @@ public class ProjectServiceImpl implements ProjectService {
             throw new ProjectException("数据库关键词搜索异常");
         }
     }
+
+    @Override
+    public List<ProjectView> queryForIndex() throws ProjectException {
+        try {
+            return projectDao.queryForIndex();
+        }catch (Exception e){
+            throw new ProjectException("获取信息失败");
+        }
+    }
 }

@@ -73,6 +73,18 @@
 
     </select>
 
+    <!--首页显示八个项目-->
+    <select id="queryForIndex" resultType="cn.edu.swpu.cins.weike.entity.view.ProjectView">
+        SELECT projectName,
+        projectProfile,
+        projectConnector,
+        qq,
+        email
+        FROM ProjectInfo ORDER BY projectStart
+        LIMIT 0,8;
+
+    </select>
+
     <select id="queryByKeywords" resultType="cn.edu.swpu.cins.weike.entity.view.ProjectView">
         SELECT *
         FROM
