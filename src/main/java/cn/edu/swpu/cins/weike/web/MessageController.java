@@ -3,6 +3,7 @@ package cn.edu.swpu.cins.weike.web;
 import cn.edu.swpu.cins.weike.config.filter.JwtTokenUtil;
 import cn.edu.swpu.cins.weike.entity.persistence.Message;
 import cn.edu.swpu.cins.weike.entity.view.ResultData;
+import cn.edu.swpu.cins.weike.enums.MessageEnum;
 import cn.edu.swpu.cins.weike.service.MessageService;
 import cn.edu.swpu.cins.weike.util.GetUsrName;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -39,10 +40,9 @@ public class MessageController {
             String userSender = getUsrName.AllProjects(request);
             int num=messageService.addMessage(content,projectName,userSender);
             if(num==1){
-                return new ResultData(true,"消息发送成功");
-            }
+                return new ResultData(true, MessageEnum.SEND_MESSAGE_SUCCESS.getMsg());}
             else
-                return new ResultData(false,"消息发送失败");
+                return new ResultData(false,MessageEnum.SEND_MESSAGE_FAILD.getMsg());
         }catch (Exception e){
             return new ResultData(false,e.getMessage());
         }
@@ -55,9 +55,7 @@ public class MessageController {
         try{
             List<Message> messages=messageService.getConversationDetail(conversationId);
             if(messages.isEmpty()){
-
-                return new ResultData("当前没有信息");
-            }
+                return new ResultData(MessageEnum.NO_MESSAGE.getMsg());}
             return new ResultData(true,messages);
         }catch (Exception e){
             return new ResultData(false,e.getMessage());
@@ -73,8 +71,7 @@ public class MessageController {
             String username = getUsrName.AllProjects(request);
             List<Message> list=messageService.getConversationList(username);
             if(list.isEmpty()){
-                return new ResultData("没有可读信息");
-            }
+                return new ResultData(MessageEnum.NO_MESSAGE.getMsg());}
             return new ResultData(true,list);
         }catch (Exception e){
             return new ResultData(false,e.getMessage());

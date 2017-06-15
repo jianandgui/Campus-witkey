@@ -1,5 +1,7 @@
 package cn.edu.swpu.cins.weike.web;
 
+import cn.edu.swpu.cins.weike.enums.ProjectEnum;
+import cn.edu.swpu.cins.weike.enums.UserEnum;
 import cn.edu.swpu.cins.weike.service.MailService;
 import cn.edu.swpu.cins.weike.util.GetUsrName;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -62,13 +64,13 @@ public class StudentController {
                     projectInfo.setQq(studentDetail.getQq());
                     int num = studentService.issueProject(projectInfo);
                     if (num != 1) {
-                        return new ResultData(false, "发布项目失败");
+                        return new ResultData(false, ProjectEnum.PUBLISH_PROJECT_FAILD.getMsg());
                     }
                     return new ResultData(studentService.queryForReCommod(projectInfo.getProjectNeed()));
                 }
-                return new ResultData(false, "请不要重复发布项目");
+                return new ResultData(false, ProjectEnum.REPEATE_PROJECT.getMsg());
             } else {
-                return new ResultData(false, "个人信息未填完整");
+                return new ResultData(false, UserEnum.ADD_PERSONNAL.getMsg());
             }
         } catch (Exception e) {
             return new ResultData(false, e.getMessage());
@@ -104,12 +106,10 @@ public class StudentController {
                 studentDetail.setUsername(username);
                 int num = studentService.addPersonal(studentDetail);
                 if (num == 1) {
-                    return new ResultData(true, "信息添加成功");
-                }
-                return new ResultData(false, "信息添加失败");
+                    return new ResultData(true, UserEnum.ADD_PERSONAL_SUCCESS.getMsg());}
+                return new ResultData(false, UserEnum.ADD_PERSONAL_FAILD.getMsg());
             } else
-                return new ResultData(false, "请勿重复添加");
-
+                return new ResultData(false, UserEnum.REPEATE_ADD.getMsg());
         } catch (Exception e) {
             return new ResultData(false, e.getMessage());
         }
@@ -122,9 +122,9 @@ public class StudentController {
             String username = getUsrName.AllProjects(request);
             int num = studentService.updateInfo(studentDetail, username);
             if (num == 1) {
-                return new ResultData(true, "修改成功");
+                return new ResultData(true, UserEnum.UPDATE_SUCCESS.getMsg());
             } else
-                return new ResultData(false, "修改信息失败");
+                return new ResultData(false, UserEnum.UPDATE_FAILD.getMsg());
         } catch (Exception e) {
             return new ResultData(false, e.getMessage());
         }
@@ -137,7 +137,7 @@ public class StudentController {
         try {
             List<String> list = studentService.queryAllProject(getUsrName.AllProjects(request));
             if (list.isEmpty()) {
-                return new ResultData(false, "没有发布过任何项目");
+                return new ResultData(false, UserEnum.NO_PROJECTS.getMsg());
             }
             return new ResultData(true, list);
         } catch (Exception e) {

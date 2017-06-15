@@ -5,7 +5,7 @@ package cn.edu.swpu.cins.weike.enums;
  */
 public enum LoginEnum {
 
-    NO_VERRIFY("邮箱未经过验证，请及时验证");
+    NO_USER("没有该用户信息，请确认信息后登录");
 
     private String message;
 

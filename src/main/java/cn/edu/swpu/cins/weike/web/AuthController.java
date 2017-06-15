@@ -5,6 +5,8 @@ import cn.edu.swpu.cins.weike.entity.view.JwtAuthenticationRequest;
 import cn.edu.swpu.cins.weike.entity.view.JwtAuthenticationResponse;
 import cn.edu.swpu.cins.weike.entity.view.ResultData;
 import cn.edu.swpu.cins.weike.entity.view.UpdatePassword;
+import cn.edu.swpu.cins.weike.enums.LoginEnum;
+import cn.edu.swpu.cins.weike.enums.UpdatePwd;
 import cn.edu.swpu.cins.weike.service.MailService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -61,7 +63,7 @@ public class AuthController {
 
             StudentInfo studentInfo = studentDao.selectStudent(authenticationRequest.getUsername());
             if (studentInfo == null) {
-                return new ResultData(false, "没有该用户信息，请确认信息后登录");
+                return new ResultData(false, LoginEnum.NO_USER);
             }
             StudentDetail studentDetail = studentDao.queryForStudentPhone(authenticationRequest.getUsername());
             String image;
@@ -103,13 +105,11 @@ public class AuthController {
     public ResultData StudentSaveToDB(@RequestBody StudentInfo studentinfo) {
         try {
             if (authService.studentRegister(studentinfo) == 1) {
-                return new ResultData(true, "注册成功");
-            }
-            return new ResultData(true, "注册失败，请勿重复注册");
+                return new ResultData(true, RegisterEnum.SUCCESS_SAVE.getMessage());}
+            return new ResultData(true, RegisterEnum.FAIL_SAVE.getMessage());
         } catch (Exception e) {
             return new ResultData(false, e.getMessage());
         }
-
     }
 
     //学生修改密码获取验证码
@@ -118,11 +118,9 @@ public class AuthController {
         try {
             StudentInfo studentinfo = studentDao.selectStudent(username);
             if (studentinfo == null) {
-                return new ResultData(false, "没有该用户的信息");
-            }
+                return new ResultData(false, UpdatePwd.NO_USER.getMsg());}
             if (!email.equals(studentinfo.getEmail())) {
-                return new ResultData(false, "非本人邮箱");
-            }
+                return new ResultData(false, UpdatePwd.WRONG_EMALI.getMsg());}
             return new ResultData(true, mailService.sendMailForUpdatePwd(studentinfo.getEmail()));
         } catch (Exception e) {
             return new ResultData(false, e.getMessage());
@@ -133,12 +131,10 @@ public class AuthController {
     @PostMapping("/student/FindPassword")
     public ResultData studentUpdatePassword(@RequestBody UpdatePassword updatePassword) {
         try {
-
             authService.studentUpdatePassword(updatePassword.getUsername(), updatePassword.getPassword());
             if (authService.studentUpdatePassword(updatePassword.getUsername(), updatePassword.getPassword()) != 1) {
-                return new ResultData(false, "密码修改失败");
-            }
-            return new ResultData(true, "密码修改成功");
+                return new ResultData(false, UpdatePwd.UPDATE_PWD_WRONG.getMsg());}
+            return new ResultData(true, UpdatePwd.UPDATE_PWD_SUCCESS.getMsg());
         } catch (Exception e) {
             return new ResultData(false, e.getMessage());
 
@@ -153,16 +149,14 @@ public class AuthController {
         try {
             TeacherInfo teacherInfo = teacherDao.queryByName(authenticationRequest.getUsername());
             if (teacherInfo == null) {
-                return new ResultData(false, "用户信息错误，请确认信息后登录");
-            }
+                return new ResultData(false, LoginEnum.NO_USER.getMessage());}
             final String token = authService.teacherLogin(authenticationRequest.getUsername(), authenticationRequest.getPassword());
             TeacherDetail teacherDetail = teacherDao.queryForPhone(authenticationRequest.getUsername());
             String image;
             if (teacherDetail != null) {
                 image = teacherDetail.getImage();
             } else {
-                image = null;
-            }
+                image = null;}
             String username = teacherInfo.getUsername();
             String role = teacherInfo.getRole();
             // Return the token
@@ -179,11 +173,9 @@ public class AuthController {
 
         try {
             if (teacherDao.queryByName(username) != null) {
-                return new ResultData(false, RegisterEnum.REPETE_USERNAME.getMessage());
-            }
+                return new ResultData(false, RegisterEnum.REPETE_USERNAME.getMessage());}
             if (teacherDao.queryEamil(email) != null) {
-                return new ResultData(false, RegisterEnum.REPEATE_EMAIL.getMessage());
-            }
+                return new ResultData(false, RegisterEnum.REPEATE_EMAIL.getMessage());}
             return new ResultData(true, mailService.sendSimpleMail(username, email));
         } catch (Exception e) {
             return new ResultData(false, e.getMessage());
@@ -199,11 +191,9 @@ public class AuthController {
         try {
             TeacherInfo teacherinfo = teacherDao.queryByName(username);
             if (teacherinfo == null) {
-                return new ResultData(false, "没有该用户的信息");
-            }
+                return new ResultData(false, UpdatePwd.NO_USER.getMsg());}
             if (!email.equals(teacherinfo.getEmail())) {
-                return new ResultData(false, "非本人邮箱");
-            }
+                return new ResultData(false, UpdatePwd.WRONG_EMALI.getMsg());}
             return new ResultData(true, mailService.sendMailForUpdatePwd(teacherinfo.getEmail()));
         } catch (Exception e) {
             return new ResultData(false, e.getMessage());
@@ -218,9 +208,8 @@ public class AuthController {
         try {
             authService.teacherUpdatePassword(updatePassword.getUsername(), updatePassword.getPassword());
             if (authService.teacherUpdatePassword(updatePassword.getUsername(), updatePassword.getPassword()) != 1) {
-                return new ResultData(false, "密码修改失败");
-            }
-            return new ResultData(true, "密码修改成功");
+                return new ResultData(false, UpdatePwd.UPDATE_PWD_WRONG.getMsg());}
+            return new ResultData(true, UpdatePwd.UPDATE_PWD_SUCCESS.getMsg());
         } catch (Exception e) {
             return new ResultData(false, e.getMessage());
         }
@@ -232,9 +221,9 @@ public class AuthController {
     public ResultData teacherSaveToDB(@RequestBody TeacherInfo teacherinfo) {
         try {
             if (authService.teacherRegister(teacherinfo) == 1) {
-                return new ResultData(true, "注册成功！");
+                return new ResultData(true, RegisterEnum.SUCCESS_SAVE.getMessage());
             }
-            return new ResultData(true, "注册失败，请勿重复注册");
+            return new ResultData(true, RegisterEnum.FAIL_SAVE);
         } catch (Exception e) {
             return new ResultData(false, e.getMessage());
         }
@@ -254,7 +243,7 @@ public class AuthController {
             String username = authenticationRequest.getUsername();
             String role = adminDao.queryByName(username).getRole();
             if (role == null) {
-                return new ResultData(false, "没有该用户信息，请确认信息后登录");
+                return new ResultData(false, LoginEnum.NO_USER.getMessage());
             }
             return new ResultData(true, new JwtAuthenticationResponse(token, username, role, null));
         } catch (Exception e) {

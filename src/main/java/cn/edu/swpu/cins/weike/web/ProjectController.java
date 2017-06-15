@@ -2,6 +2,7 @@ package cn.edu.swpu.cins.weike.web;
 
 import cn.edu.swpu.cins.weike.entity.view.ProjectDetail;
 import cn.edu.swpu.cins.weike.entity.view.ResultData;
+import cn.edu.swpu.cins.weike.enums.ProjectEnum;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import cn.edu.swpu.cins.weike.entity.view.ProjectView;
@@ -26,8 +27,7 @@ public class ProjectController {
         try {
             return new ResultData(projectService.showProjectAll(offset, limit));
         } catch (Exception e) {
-            return new ResultData(false, e.getMessage());
-        }
+            return new ResultData(false, e.getMessage());}
     }
 
     @GetMapping("/index")
@@ -36,8 +36,7 @@ public class ProjectController {
             List<ProjectView> list=projectService.queryForIndex();
             return new ResultData(true,list);
         }catch (Exception e){
-            return new ResultData(false,e.getMessage());
-        }
+            return new ResultData(false,e.getMessage());}
 
     }
 
@@ -47,9 +46,7 @@ public class ProjectController {
             ProjectDetail projectDetail = projectService.showProject(projectName);
             return new ResultData(projectDetail);
         } catch (Exception e) {
-            return new ResultData(false, e.getMessage());
-        }
-
+            return new ResultData(false, e.getMessage());}
     }
 
 
@@ -61,9 +58,8 @@ public class ProjectController {
             if (!projectViews.isEmpty()) {
                 return new ResultData(projectViews);
             }
-            return new ResultData(false, "很遗憾，没有为您找到合适的项目");
+            return new ResultData(false, ProjectEnum.NO_PROJECTS.getMsg());
         } catch (Exception e) {
-            return new ResultData(false, e.getMessage());
-        }
+            return new ResultData(false, e.getMessage());}
     }
 }

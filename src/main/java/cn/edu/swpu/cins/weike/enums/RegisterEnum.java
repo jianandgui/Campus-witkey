@@ -9,12 +9,10 @@ import lombok.Setter;
 
 public enum RegisterEnum {
 
-    NULL_USERNAME("用户名不能为空"),
-    NULL_PASSWORD("密码不能为空"),
     REPEATE_EMAIL("邮箱已经被注册"),
     REPETE_USERNAME("用户名已经被注册"),
     SUCCESS_SAVE("添加用户成功"),
-    FAIL_SAVE("用户添加失败");
+    FAIL_SAVE("用户添加失败,请勿重复注册");
 
 
     private String message;
