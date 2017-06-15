@@ -36,5 +36,5 @@ event:
 jwt:
   header: Authorization
   secret: mySecret
-  expiration: 604800
+  expiration: 86400
   tokenHead: "Bearer "

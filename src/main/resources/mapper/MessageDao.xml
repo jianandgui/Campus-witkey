@@ -25,9 +25,7 @@
 
 
     <select id="getConversationList" resultType="cn.edu.swpu.cins.weike.entity.persistence.Message" parameterType="int">
-        SELECT * from
-        (SELECT * from message WHERE fromId=#{userId} OR toId=#{userId} ORDER BY createDate DESC)
-         GROUP BY conversationId ORDER BY createDate DESC
-
+        SELECT * from (SELECT * from message WHERE fromId=#{userId} OR toId=#{userId}) as total
+        GROUP BY conversationId ORDER BY createDate DESC
     </select>
 </mapper>

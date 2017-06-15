@@ -68,7 +68,7 @@ public class MessageServiceImpl implements MessageService {
     }
 
     @Override
-    public List<Message> getConversationList(String username) throws MessageException {
+    public List<Message> getConversationList(String username) throws MessageException{
         try {
             StudentDetail studentDetail = studentDao.queryForStudentPhone(username);
             TeacherDetail teacherDetail = teacherDao.queryForPhone(username);
