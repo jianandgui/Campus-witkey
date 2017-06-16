@@ -4,6 +4,7 @@ import cn.edu.swpu.cins.weike.config.filter.JwtTokenUtil;
 import cn.edu.swpu.cins.weike.entity.persistence.Message;
 import cn.edu.swpu.cins.weike.entity.view.ResultData;
 import cn.edu.swpu.cins.weike.enums.MessageEnum;
+import cn.edu.swpu.cins.weike.service.MailService;
 import cn.edu.swpu.cins.weike.service.MessageService;
 import cn.edu.swpu.cins.weike.util.GetUsrName;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -30,7 +31,8 @@ public class MessageController {
     private JwtTokenUtil jwtTokenUtil;
     @Autowired
     private GetUsrName getUsrName;
-
+    @Autowired
+    private MailService service;
 
 
 
@@ -39,6 +41,7 @@ public class MessageController {
         try{
             String userSender = getUsrName.AllProjects(request);
             int num=messageService.addMessage(content,projectName,userSender);
+
             if(num==1){
                 return new ResultData(true, MessageEnum.SEND_MESSAGE_SUCCESS.getMsg());}
             else

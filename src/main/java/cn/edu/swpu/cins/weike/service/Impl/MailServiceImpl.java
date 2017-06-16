@@ -87,10 +87,26 @@ public class MailServiceImpl implements MailService {
         }
     }
 
+    @Override
+    public String sendMailForProject(String email,String username,String projectName) throws Exception{
+        try {
+            String verifyCode=getRandomString();
+            SimpleMailMessage message = new SimpleMailMessage();
+            message.setFrom(from);
+            message.setTo(email);
+            message.setSubject("威客平台消息");
+            message.setText(forMatInfo(username,projectName));
+            sender.send(message);
+            return verifyCode;
+        } catch (Exception e) {
+            throw new Exception("邮件发送失败");
+        }
+    }
+
     //处理发送邮件信息
 
-    public String forMatInfo(String content) {
-        return content = "尊敬的老师你好，我是" + content + "我想报名参加您的项目";
+    public String forMatInfo(String username,String projectName) {
+        return "尊敬的"+username+"您好，您在威客平台发布的项目:"+projectName+"有新动态，请您登录平台查看详情!";
     }
 
 }

@@ -6,11 +6,14 @@ import cn.edu.swpu.cins.weike.dao.StudentDao;
 import cn.edu.swpu.cins.weike.dao.TeacherDao;
 import cn.edu.swpu.cins.weike.entity.persistence.Message;
 import cn.edu.swpu.cins.weike.entity.persistence.StudentDetail;
+import cn.edu.swpu.cins.weike.entity.persistence.StudentInfo;
 import cn.edu.swpu.cins.weike.entity.persistence.TeacherDetail;
 import cn.edu.swpu.cins.weike.exception.MessageException;
+import cn.edu.swpu.cins.weike.service.MailService;
 import cn.edu.swpu.cins.weike.service.MessageService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Date;
 import java.util.List;
@@ -29,8 +32,11 @@ public class MessageServiceImpl implements MessageService {
     private StudentDao studentDao;
     @Autowired
     private ProjectDao projectDao;
+    @Autowired
+    private MailService mailService;
 
     @Override
+    @Transactional(rollbackFor = {RuntimeException.class, MessageException.class})
     public int addMessage(String content, String projectName, String userSender) throws MessageException {
         try {
             Message message = new Message();
@@ -39,6 +45,7 @@ public class MessageServiceImpl implements MessageService {
             String userSaver = projectDao.queryProjectDetail(projectName).getProjectConnector();
             StudentDetail studentSaver = studentDao.queryForStudentPhone(userSaver);
             TeacherDetail teacherSaver = teacherDao.queryForPhone(userSaver);
+            String email=projectDao.queryProjectDetail(projectName).getEmail();
             if (studentSender != null) {
                 message.setFromId(studentSender.getId());
             } else
@@ -46,8 +53,11 @@ public class MessageServiceImpl implements MessageService {
 
             if (studentSaver != null) {
                 message.setToId(studentSaver.getId());
-            } else
+                mailService.sendMailForProject(email,studentSaver.getUsername(),projectName);
+            } else {
                 message.setToId(teacherSaver.getId());
+                mailService.sendMailForProject(email,teacherSaver.getUsername(),projectName);
+            }
             message.setContent(content);
             message.setCreateDate(new Date());
             return messageDao.addMessage(message);
