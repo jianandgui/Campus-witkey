@@ -2,6 +2,7 @@ package cn.edu.swpu.cins.weike.service.Impl;
 
 import cn.edu.swpu.cins.weike.entity.view.ProjectDetail;
 import cn.edu.swpu.cins.weike.entity.view.ProjectView;
+import cn.edu.swpu.cins.weike.enums.ExceptionEnum;
 import cn.edu.swpu.cins.weike.exception.ProjectException;
 import cn.edu.swpu.cins.weike.service.ProjectService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -31,7 +32,7 @@ public class ProjectServiceImpl implements ProjectService {
             return projectDao.queryAll(offset * pageCount, pageCount);
         } catch (Exception e) {
 
-            throw new ProjectException("数据库查询项目异常");
+            throw new ProjectException(ExceptionEnum.INNER_ERROR.getMsg());
         }
     }
 
@@ -41,7 +42,7 @@ public class ProjectServiceImpl implements ProjectService {
         try {
             return projectDao.queryProjectDetail(projectName);
         } catch (Exception e) {
-            throw new ProjectException("数据库显示项目详情异常");
+            throw new ProjectException(ExceptionEnum.INNER_ERROR.getMsg());
         }
     }
 
@@ -50,7 +51,7 @@ public class ProjectServiceImpl implements ProjectService {
         try {
             return projectDao.queryByKeywords(keyWords);
         } catch (Exception e) {
-            throw new ProjectException("数据库关键词搜索异常");
+            throw new ProjectException(ExceptionEnum.INNER_ERROR.getMsg());
         }
     }
 
@@ -58,8 +59,8 @@ public class ProjectServiceImpl implements ProjectService {
     public List<ProjectView> queryForIndex() throws ProjectException {
         try {
             return projectDao.queryForIndex();
-        }catch (Exception e){
-            throw new ProjectException("获取信息失败");
+        } catch (Exception e) {
+            throw new ProjectException(ExceptionEnum.INNER_ERROR.getMsg());
         }
     }
 }

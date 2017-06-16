@@ -4,6 +4,7 @@ import cn.edu.swpu.cins.weike.config.filter.JwtTokenUtil;
 import cn.edu.swpu.cins.weike.dao.StudentDao;
 import cn.edu.swpu.cins.weike.entity.persistence.TeacherInfo;
 import cn.edu.swpu.cins.weike.entity.view.JwtUserFactory;
+import cn.edu.swpu.cins.weike.enums.ExceptionEnum;
 import cn.edu.swpu.cins.weike.exception.AuthException;
 import cn.edu.swpu.cins.weike.util.UpdatePwd;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -57,8 +58,7 @@ public class AuthServiceImpl implements AuthService {
             studentinfo.setRole("ROLE_STUDENT");
             return studentDao.studntRegister(studentinfo);
         } catch (Exception e) {
-
-            throw new AuthException("数据库异常！");
+            throw new AuthException(ExceptionEnum.INNER_ERROR.getMsg());
         }
     }
 
@@ -75,7 +75,6 @@ public class AuthServiceImpl implements AuthService {
             final String token = jwtTokenUtil.generateToken(userDetails);
             return token;
         } catch (Exception e) {
-
             throw new AuthException("获取token异常");
         }
     }
@@ -167,7 +166,6 @@ public class AuthServiceImpl implements AuthService {
         try {
             return getRandomString();
         } catch (Exception e) {
-
             throw new AuthException("获取验证码异常");
         }
     }
@@ -177,8 +175,7 @@ public class AuthServiceImpl implements AuthService {
         try {
             final String username = adminInfo.getUsername();
             if (adminDao.queryByName(username) != null) {
-                return null;
-            }
+                return null;}
             BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
             final String rawPassword = adminInfo.getPassword();
             adminInfo.setPassword(encoder.encode(rawPassword));

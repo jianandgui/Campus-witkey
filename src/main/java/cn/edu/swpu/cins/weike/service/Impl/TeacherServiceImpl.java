@@ -5,6 +5,7 @@ import cn.edu.swpu.cins.weike.entity.persistence.ProjectInfo;
 import cn.edu.swpu.cins.weike.entity.persistence.StudentDetail;
 import cn.edu.swpu.cins.weike.entity.persistence.TeacherDetail;
 import cn.edu.swpu.cins.weike.entity.view.ProjectRecommend;
+import cn.edu.swpu.cins.weike.enums.ExceptionEnum;
 import cn.edu.swpu.cins.weike.exception.TeacherException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -35,7 +36,7 @@ public class TeacherServiceImpl implements TeacherService {
         try {
             return teacherDao.teacherAddPersonal(teacherDetail);
         } catch (Exception e) {
-            throw new TeacherException("数据库老师添加个人信息异常");
+            throw new TeacherException(ExceptionEnum.INNER_ERROR.getMsg());
         }
     }
 
@@ -45,7 +46,7 @@ public class TeacherServiceImpl implements TeacherService {
         try {
             return projectDao.addProject(projectInfo);
         } catch (Exception e) {
-            throw new TeacherException("数据库添加项目异常");
+            throw new TeacherException(ExceptionEnum.INNER_ERROR.getMsg());
         }
     }
 
@@ -54,7 +55,7 @@ public class TeacherServiceImpl implements TeacherService {
         try {
             return reduceRepeate.reduceStudentRepeate(skills);
         } catch (Exception e) {
-            throw new TeacherException("数据库查询推荐学生异常");
+            throw new TeacherException(ExceptionEnum.INNER_ERROR.getMsg());
         }
     }
 
@@ -64,7 +65,7 @@ public class TeacherServiceImpl implements TeacherService {
             teacherDetail.setUsername(username);
             return teacherDao.updateInfo(teacherDetail)>0?1:0;
         }catch (Exception e){
-            throw new TeacherException("服务器内部异常");
+            throw new TeacherException(ExceptionEnum.INNER_ERROR.getMsg());
         }
 
     }
@@ -74,7 +75,7 @@ public class TeacherServiceImpl implements TeacherService {
         try{
             return teacherDao.queryAllProject(projectConnector);
         }catch (Exception e){
-            throw new TeacherException("服务器内部异常");
+            throw new TeacherException(ExceptionEnum.INNER_ERROR.getMsg());
         }
 
     }

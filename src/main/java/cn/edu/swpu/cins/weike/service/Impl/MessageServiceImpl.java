@@ -8,6 +8,7 @@ import cn.edu.swpu.cins.weike.entity.persistence.Message;
 import cn.edu.swpu.cins.weike.entity.persistence.StudentDetail;
 import cn.edu.swpu.cins.weike.entity.persistence.StudentInfo;
 import cn.edu.swpu.cins.weike.entity.persistence.TeacherDetail;
+import cn.edu.swpu.cins.weike.enums.ExceptionEnum;
 import cn.edu.swpu.cins.weike.exception.MessageException;
 import cn.edu.swpu.cins.weike.service.MailService;
 import cn.edu.swpu.cins.weike.service.MessageService;
@@ -45,24 +46,23 @@ public class MessageServiceImpl implements MessageService {
             String userSaver = projectDao.queryProjectDetail(projectName).getProjectConnector();
             StudentDetail studentSaver = studentDao.queryForStudentPhone(userSaver);
             TeacherDetail teacherSaver = teacherDao.queryForPhone(userSaver);
-            String email=projectDao.queryProjectDetail(projectName).getEmail();
+            String email = projectDao.queryProjectDetail(projectName).getEmail();
             if (studentSender != null) {
                 message.setFromId(studentSender.getId());
             } else
                 message.setFromId(teacherSender.getId());
-
             if (studentSaver != null) {
                 message.setToId(studentSaver.getId());
-                mailService.sendMailForProject(email,studentSaver.getUsername(),projectName);
+                mailService.sendMailForProject(email, studentSaver.getUsername(), projectName);
             } else {
                 message.setToId(teacherSaver.getId());
-                mailService.sendMailForProject(email,teacherSaver.getUsername(),projectName);
+                mailService.sendMailForProject(email, teacherSaver.getUsername(), projectName);
             }
             message.setContent(content);
             message.setCreateDate(new Date());
             return messageDao.addMessage(message);
         } catch (Exception e) {
-            throw new MessageException("发送信息失败！");
+            throw new MessageException(ExceptionEnum.INNER_ERROR.getMsg());
         }
 
     }
@@ -72,13 +72,12 @@ public class MessageServiceImpl implements MessageService {
         try {
             return messageDao.getConversationDetail(conversationId);
         } catch (Exception e) {
-            throw new MessageException("获取信息失败");
+            throw new MessageException(ExceptionEnum.INNER_ERROR.getMsg());
         }
-
     }
 
     @Override
-    public List<Message> getConversationList(String username) throws MessageException{
+    public List<Message> getConversationList(String username) throws MessageException {
         try {
             StudentDetail studentDetail = studentDao.queryForStudentPhone(username);
             TeacherDetail teacherDetail = teacherDao.queryForPhone(username);
@@ -90,8 +89,7 @@ public class MessageServiceImpl implements MessageService {
             }
             return messageDao.getConversationList(userId);
         } catch (Exception e) {
-            throw new MessageException("服务器异常，获取信息失败");
+            throw new MessageException(ExceptionEnum.INNER_ERROR.getMsg());
         }
-
     }
 }

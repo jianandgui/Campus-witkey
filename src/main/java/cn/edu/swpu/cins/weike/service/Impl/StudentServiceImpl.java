@@ -73,12 +73,12 @@ public class StudentServiceImpl implements StudentService {
     }
 
     @Override
-    public int updateInfo(StudentDetail studentDetail,String username) throws StudentException{
-        try{
+    public int updateInfo(StudentDetail studentDetail, String username) throws StudentException {
+        try {
             studentDetail.setUsername(username);
 
-            return studentDao.updateInfo(studentDetail)>0?1:0;
-        }catch (Exception e){
+            return studentDao.updateInfo(studentDetail) > 0 ? 1 : 0;
+        } catch (Exception e) {
             throw new StudentException("服务器异常！");
         }
 
@@ -86,10 +86,10 @@ public class StudentServiceImpl implements StudentService {
     }
 
     @Override
-    public List<String> queryAllProject(String projectConnector) throws StudentException{
-        try{
+    public List<String> queryAllProject(String projectConnector) throws StudentException {
+        try {
             return studentDao.queryAllProject(projectConnector);
-        }catch (Exception e){
+        } catch (Exception e) {
             throw new StudentException("服务器异常");
         }
 
