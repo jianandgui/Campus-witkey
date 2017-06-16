@@ -18,17 +18,16 @@ import org.springframework.stereotype.Service;
  */
 @Service
 public class JwtUserServiceDetailImpl implements UserDetailsService {
-
-
-    @Autowired
     private AdminDao adminDao;
-
-    @Autowired
     private TeacherDao teacherDao;
-
-    @Autowired
     private StudentDao studentDao;
 
+    @Autowired
+    public JwtUserServiceDetailImpl(AdminDao adminDao, TeacherDao teacherDao, StudentDao studentDao) {
+        this.adminDao = adminDao;
+        this.teacherDao = teacherDao;
+        this.studentDao = studentDao;
+    }
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {

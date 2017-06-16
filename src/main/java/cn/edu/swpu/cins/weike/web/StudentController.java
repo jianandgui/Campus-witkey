@@ -28,26 +28,28 @@ import java.util.List;
 @RestController
 @RequestMapping("/WeiKe/student")
 public class StudentController {
-
-    @Autowired
     private StudentService studentService;
-    @Autowired
     private StudentDao studentDao;
-    @Autowired
     private ProjectService projectService;
     @Value("${jwt.header}")
     private String tokenHeader;
     @Value("${jwt.tokenHead}")
     private String tokenHead;
-    @Autowired
     private JwtTokenUtil jwtTokenUtil;
-    @Autowired
     private ProjectDao projectDao;
+    private GetUsrName getUsrName;
+    private MailService mailService;
 
     @Autowired
-    private GetUsrName getUsrName;
-    @Autowired
-    private MailService mailService;
+    public StudentController(StudentService studentService, StudentDao studentDao, ProjectService projectService, JwtTokenUtil jwtTokenUtil, ProjectDao projectDao, GetUsrName getUsrName, MailService mailService) {
+        this.studentService = studentService;
+        this.studentDao = studentDao;
+        this.projectService = projectService;
+        this.jwtTokenUtil = jwtTokenUtil;
+        this.projectDao = projectDao;
+        this.getUsrName = getUsrName;
+        this.mailService = mailService;
+    }
 
     //学生发布项目(增加推荐人选功能)
     @PostMapping("/addProject")

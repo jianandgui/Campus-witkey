@@ -24,17 +24,20 @@ import java.util.List;
  */
 @Service
 public class MessageServiceImpl implements MessageService {
+    private MessageDao messageDao;
+    private TeacherDao teacherDao;
+    private StudentDao studentDao;
+    private ProjectDao projectDao;
+    private MailService mailService;
 
     @Autowired
-    private MessageDao messageDao;
-    @Autowired
-    private TeacherDao teacherDao;
-    @Autowired
-    private StudentDao studentDao;
-    @Autowired
-    private ProjectDao projectDao;
-    @Autowired
-    private MailService mailService;
+    public MessageServiceImpl(MessageDao messageDao, TeacherDao teacherDao, StudentDao studentDao, ProjectDao projectDao, MailService mailService) {
+        this.messageDao = messageDao;
+        this.teacherDao = teacherDao;
+        this.studentDao = studentDao;
+        this.projectDao = projectDao;
+        this.mailService = mailService;
+    }
 
     @Override
     @Transactional(rollbackFor = {RuntimeException.class, MessageException.class})

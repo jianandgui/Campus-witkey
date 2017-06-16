@@ -20,15 +20,18 @@ import java.util.List;
 @Service
 public class StudentServiceImpl implements StudentService {
 
-    @Autowired
     private StudentDao studentDao;
-    @Autowired
     private ProjectDao projectDao;
     @Value("${event.service.pageCount}")
     private int pageCount;
-    @Autowired
     private ReduceRepeate reduceRepeate;
 
+    @Autowired
+    public StudentServiceImpl(StudentDao studentDao, ProjectDao projectDao, ReduceRepeate reduceRepeate) {
+        this.studentDao = studentDao;
+        this.projectDao = projectDao;
+        this.reduceRepeate = reduceRepeate;
+    }
 
     //学生发布项目
     @Override

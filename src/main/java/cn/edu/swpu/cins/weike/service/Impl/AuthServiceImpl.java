@@ -31,18 +31,22 @@ import java.util.Random;
 @Service
 public class AuthServiceImpl implements AuthService {
 
-    @Autowired
     private StudentDao studentDao;
-    @Autowired
     private TeacherDao teacherDao;
-    @Autowired
     private AuthenticationManager authenticationManager;
-    @Autowired
     private UserDetailsService userDetailsService;
-    @Autowired
     private JwtTokenUtil jwtTokenUtil;
-    @Autowired
     private AdminDao adminDao;
+
+    @Autowired
+    public AuthServiceImpl(StudentDao studentDao, TeacherDao teacherDao, AuthenticationManager authenticationManager, UserDetailsService userDetailsService, JwtTokenUtil jwtTokenUtil, AdminDao adminDao) {
+        this.studentDao = studentDao;
+        this.teacherDao = teacherDao;
+        this.authenticationManager = authenticationManager;
+        this.userDetailsService = userDetailsService;
+        this.jwtTokenUtil = jwtTokenUtil;
+        this.adminDao = adminDao;
+    }
 
     @Override
     public int studentRegister(StudentInfo studentinfo) throws AuthException {

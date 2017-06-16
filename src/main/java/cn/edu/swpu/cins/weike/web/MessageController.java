@@ -20,21 +20,23 @@ import java.util.List;
 @RestController
 @RequestMapping
 public class MessageController {
-
-    @Autowired
-    private MessageService messageService;
     @Value("${jwt.header}")
     private String tokenHeader;
     @Value("${jwt.tokenHead}")
+
     private String tokenHead;
-    @Autowired
+    private MessageService messageService;
     private JwtTokenUtil jwtTokenUtil;
-    @Autowired
     private GetUsrName getUsrName;
-    @Autowired
     private MailService service;
 
-
+    @Autowired
+    public MessageController(MessageService messageService, JwtTokenUtil jwtTokenUtil, GetUsrName getUsrName, MailService service) {
+        this.messageService = messageService;
+        this.jwtTokenUtil = jwtTokenUtil;
+        this.getUsrName = getUsrName;
+        this.service = service;
+    }
 
     @PostMapping("/sendMessage")
     public ResultData sendMessage(@RequestParam String projectName,@RequestParam String content,HttpServletRequest request){
@@ -63,8 +65,6 @@ public class MessageController {
         }catch (Exception e){
             return new ResultData(false,e.getMessage());
         }
-
-
     }
 
     //获取所有通信信息

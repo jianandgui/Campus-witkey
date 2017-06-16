@@ -26,23 +26,27 @@ import java.util.List;
 @RestController
 @RequestMapping("/WeiKe/teacher")
 public class TeacherController {
-    @Autowired
+
     private TeacherService teacherService;
-    @Autowired
     private ProjectService projectService;
-    @Autowired
     private TeacherDao teacherDao;
-    @Autowired
     private JwtTokenUtil jwtTokenUtil;
+    private ProjectDao projectDao;
+    private GetUsrName getUsrName;
     @Value("${jwt.header}")
     private String tokenHeader;
     @Value("${jwt.tokenHead}")
     private String tokenHead;
-    @Autowired
-    private ProjectDao projectDao;
-    @Autowired
-    private GetUsrName getUsrName;
 
+    @Autowired
+    public TeacherController(TeacherService teacherService, ProjectService projectService, TeacherDao teacherDao, JwtTokenUtil jwtTokenUtil, ProjectDao projectDao, GetUsrName getUsrName) {
+        this.teacherService = teacherService;
+        this.projectService = projectService;
+        this.teacherDao = teacherDao;
+        this.jwtTokenUtil = jwtTokenUtil;
+        this.projectDao = projectDao;
+        this.getUsrName = getUsrName;
+    }
 
     //老师发布项目
     @PostMapping("/addProject")

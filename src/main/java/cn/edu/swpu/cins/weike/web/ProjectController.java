@@ -17,9 +17,12 @@ import java.util.List;
 @RestController
 @RequestMapping("/weike")
 public class ProjectController {
+    private ProjectService projectService;
 
     @Autowired
-    private ProjectService projectService;
+    public ProjectController(ProjectService projectService) {
+        this.projectService = projectService;
+    }
 
     //显示所有项目
     @GetMapping("/projects")

@@ -22,14 +22,18 @@ import java.util.List;
 @Service
 public class TeacherServiceImpl implements TeacherService {
 
-    @Autowired
     private TeacherDao teacherDao;
-    @Autowired
     private ProjectDao projectDao;
-    @Autowired
     private StudentDao studentDao;
-    @Autowired
     private ReduceRepeate reduceRepeate;
+
+    @Autowired
+    public TeacherServiceImpl(TeacherDao teacherDao, ProjectDao projectDao, StudentDao studentDao, ReduceRepeate reduceRepeate) {
+        this.teacherDao = teacherDao;
+        this.projectDao = projectDao;
+        this.studentDao = studentDao;
+        this.reduceRepeate = reduceRepeate;
+    }
 
     @Override
     public int teacherAddPersonal(TeacherDetail teacherDetail) throws TeacherException {

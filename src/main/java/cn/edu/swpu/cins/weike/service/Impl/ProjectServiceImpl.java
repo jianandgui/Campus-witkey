@@ -17,9 +17,11 @@ import java.util.List;
  */
 @Service
 public class ProjectServiceImpl implements ProjectService {
-
-    @Autowired
     private ProjectDao projectDao;
+    @Autowired
+    public ProjectServiceImpl(ProjectDao projectDao) {
+        this.projectDao = projectDao;
+    }
 
     @Value("${event.service.pageCount}")
     private int pageCount;

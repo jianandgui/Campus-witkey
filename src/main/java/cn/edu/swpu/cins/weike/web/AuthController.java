@@ -32,17 +32,20 @@ public class AuthController {
 
     @Value("${jwt.header}")
     private String tokenHeader;
-    @Autowired
     private AuthService authService;
-    @Autowired
     private StudentDao studentDao;
-    @Autowired
     private MailService mailService;
-    @Autowired
     private TeacherDao teacherDao;
-    @Autowired
     private AdminDao adminDao;
 
+    @Autowired
+    public AuthController(AuthService authService, StudentDao studentDao, MailService mailService, TeacherDao teacherDao, AdminDao adminDao) {
+        this.authService = authService;
+        this.studentDao = studentDao;
+        this.mailService = mailService;
+        this.teacherDao = teacherDao;
+        this.adminDao = adminDao;
+    }
 
     //学生或者老师登录获取验证码
     @GetMapping("/getVerifyCode")
