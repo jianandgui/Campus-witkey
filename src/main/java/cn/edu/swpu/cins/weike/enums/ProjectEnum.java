@@ -5,6 +5,7 @@ package cn.edu.swpu.cins.weike.enums;
  */
 public enum ProjectEnum {
     NO_PROJECTS("很遗憾，没有为您找到合适的项目"),
+    NO_SUITBLE_PERSON("很遗憾，没有为您的项目匹配到合适的人"),
     PUBLISH_PROJECT_FAILD("发布项目失败"),
     REPEATE_PROJECT("请不要重复发布项目"),
     ADD_PERSONNAL("个人信息未填完整");

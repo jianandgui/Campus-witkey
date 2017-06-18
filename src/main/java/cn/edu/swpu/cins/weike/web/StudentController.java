@@ -6,6 +6,7 @@ import cn.edu.swpu.cins.weike.service.MailService;
 import cn.edu.swpu.cins.weike.util.GetUsrName;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.security.access.method.P;
 import org.springframework.web.bind.annotation.*;
 import cn.edu.swpu.cins.weike.config.filter.JwtTokenUtil;
 import cn.edu.swpu.cins.weike.dao.ProjectDao;
@@ -68,7 +69,10 @@ public class StudentController {
                     if (num != 1) {
                         return new ResultData(false, ProjectEnum.PUBLISH_PROJECT_FAILD.getMsg());
                     }
-                    return new ResultData(studentService.queryForReCommod(projectInfo.getProjectNeed()));
+                    if(studentService.queryForReCommod(projectInfo.getProjectNeed()).isEmpty()){
+                        return new ResultData(true, ProjectEnum.NO_SUITBLE_PERSON.getMsg());
+                    }
+                    return new ResultData(true,studentService.queryForReCommod(projectInfo.getProjectNeed()));
                 }
                 return new ResultData(false, ProjectEnum.REPEATE_PROJECT.getMsg());
             } else {
@@ -80,24 +84,7 @@ public class StudentController {
 
     }
 
-    //学生向项目申请人发邮件申请参加项目
-//    //TODO
-//    @GetMapping("/student/sendApply")
-//    public ResultData sendMail(@RequestParam String projectName, HttpServletRequest request) {
-//        try {
-//            String authHeader = request.getHeader(this.tokenHeader);
-//            final String authToken = authHeader.substring(tokenHead.length());
-//            String username = jwtTokenUtil.getUsernameFromToken(authToken);
-//            StudentDetail studentDetail = studentDao.queryForStudentPhone(username);
-//            ProjectDetail projectInfo = projectDao.queryProjectDetail(projectName);
-//            String email = projectInfo.getEmail();
-//            mailService.sendMail(email, "申请项目", username);
-//            return new ResultData(true, "邮件发送成功");
-//        } catch (Exception e) {
-//            return new ResultData(false, e.getMessage());
-//        }
-//
-//    }
+
 
 
     @PostMapping("/addPersonalDeail")
