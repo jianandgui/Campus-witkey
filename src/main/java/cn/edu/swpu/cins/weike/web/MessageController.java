@@ -43,7 +43,6 @@ public class MessageController {
         try{
             String userSender = getUsrName.AllProjects(request);
             int num=messageService.addMessage(content,projectName,userSender);
-
             if(num==1){
                 return new ResultData(true, MessageEnum.SEND_MESSAGE_SUCCESS.getMsg());}
             else
@@ -79,6 +78,5 @@ public class MessageController {
         }catch (Exception e){
             return new ResultData(false,e.getMessage());
         }
-
     }
 }

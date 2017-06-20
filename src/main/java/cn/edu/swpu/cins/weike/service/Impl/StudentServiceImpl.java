@@ -3,6 +3,7 @@ package cn.edu.swpu.cins.weike.service.Impl;
 import cn.edu.swpu.cins.weike.entity.persistence.StudentDetail;
 import cn.edu.swpu.cins.weike.entity.view.ProjectRecommend;
 import cn.edu.swpu.cins.weike.exception.StudentException;
+import cn.edu.swpu.cins.weike.util.SensitiveWordsFilter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
@@ -27,6 +28,9 @@ public class StudentServiceImpl implements StudentService {
     private ReduceRepeate reduceRepeate;
 
     @Autowired
+    private SensitiveWordsFilter sensitiveWordsFilter;
+
+    @Autowired
     public StudentServiceImpl(StudentDao studentDao, ProjectDao projectDao, ReduceRepeate reduceRepeate) {
         this.studentDao = studentDao;
         this.projectDao = projectDao;
@@ -37,6 +41,7 @@ public class StudentServiceImpl implements StudentService {
     @Override
     public int issueProject(ProjectInfo projectInfo) throws StudentException {
         try {
+            projectInfo.setProjectName(sensitiveWordsFilter.Filter(projectInfo.getProjectName()));
             return projectDao.addProject(projectInfo);
         } catch (Exception e) {
             throw new StudentException("数据库学生添加异常");
