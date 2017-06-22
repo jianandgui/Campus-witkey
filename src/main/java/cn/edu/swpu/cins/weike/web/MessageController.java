@@ -18,7 +18,7 @@ import java.util.List;
  * Created by muyi on 17-6-12.
  */
 @RestController
-@RequestMapping
+@RequestMapping("/WeiKe")
 public class MessageController {
     @Value("${jwt.header}")
     private String tokenHeader;
