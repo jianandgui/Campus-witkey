@@ -10,17 +10,27 @@ public class JwtAuthenticationResponse implements Serializable {
     private final String username;
     private final String role;
     private final String image;
+    private final boolean isCompleted;
 
     public String getImage() {
         return image;
     }
 
-    public JwtAuthenticationResponse(String token, String username, String role, String image) {
+    public static long getSerialVersionUID() {
+        return serialVersionUID;
+    }
+
+    public boolean getIsCompleted() {
+        return isCompleted;
+    }
+
+    public JwtAuthenticationResponse(String token, String username, String role, String image, boolean isCompleted) {
 
         this.token = token;
         this.username = username;
         this.role = role;
         this.image = image;
+        this.isCompleted = isCompleted;
     }
 
     public String getToken() {

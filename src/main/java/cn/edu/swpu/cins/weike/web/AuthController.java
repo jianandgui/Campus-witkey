@@ -70,15 +70,18 @@ public class AuthController {
             }
             StudentDetail studentDetail = studentDao.queryForStudentPhone(authenticationRequest.getUsername());
             String image;
+            boolean isCompleted;
             if (studentDetail != null) {
                 image = studentDetail.getImage();
+                isCompleted=true;
             } else {
                 image = null;
+               isCompleted =false;
             }
             String username = studentInfo.getUsername();
             String role = studentInfo.getRole();
             final String token = authService.studentLogin(authenticationRequest.getUsername(), authenticationRequest.getPassword());
-            return new ResultData(true, new JwtAuthenticationResponse(token, username, role, image));
+            return new ResultData(true, new JwtAuthenticationResponse(token, username, role, image,isCompleted));
         } catch (Exception e) {
 
             return new ResultData(false, e.getMessage());
@@ -156,14 +159,17 @@ public class AuthController {
             final String token = authService.teacherLogin(authenticationRequest.getUsername(), authenticationRequest.getPassword());
             TeacherDetail teacherDetail = teacherDao.queryForPhone(authenticationRequest.getUsername());
             String image;
+            boolean isCompleted;
             if (teacherDetail != null) {
                 image = teacherDetail.getImage();
+                isCompleted=true;
             } else {
-                image = null;}
+                image = null;
+                isCompleted=false;}
             String username = teacherInfo.getUsername();
             String role = teacherInfo.getRole();
             // Return the token
-            return new ResultData(true, new JwtAuthenticationResponse(token, username, role, image));
+            return new ResultData(true, new JwtAuthenticationResponse(token, username, role, image,isCompleted));
         } catch (Exception e) {
             return new ResultData(false, e.getMessage());
         }
@@ -245,10 +251,11 @@ public class AuthController {
             // Return the token
             String username = authenticationRequest.getUsername();
             String role = adminDao.queryByName(username).getRole();
+            boolean isCompleted=false;
             if (role == null) {
                 return new ResultData(false, LoginEnum.NO_USER.getMessage());
             }
-            return new ResultData(true, new JwtAuthenticationResponse(token, username, role, null));
+            return new ResultData(true, new JwtAuthenticationResponse(token, username, role, null,false));
         } catch (Exception e) {
             return new ResultData(false, e.getMessage());
         }

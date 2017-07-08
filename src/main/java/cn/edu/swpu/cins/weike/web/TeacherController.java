@@ -74,12 +74,6 @@ public class TeacherController {
     }
 
 
-    //老师向学生发邮件邀请参加项目
-    //TODO
-    public ResultData sendMail() {
-
-        return null;
-    }
 
     //老师添加个人信息
     @PostMapping("/addPersonal")

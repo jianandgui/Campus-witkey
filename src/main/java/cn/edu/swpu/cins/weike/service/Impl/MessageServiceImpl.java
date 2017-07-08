@@ -39,6 +39,10 @@ public class MessageServiceImpl implements MessageService {
         this.mailService = mailService;
     }
 
+    /*
+    事务操作：发送信息的同时给该用户发送一封邮件通知他的项目有新动态
+     */
+
     @Override
     @Transactional(rollbackFor = {RuntimeException.class, MessageException.class})
     public int addMessage(String content, String projectName, String userSender) throws MessageException {
@@ -70,6 +74,10 @@ public class MessageServiceImpl implements MessageService {
 
     }
 
+    /*
+    获取该条站内信详细信息
+     */
+
     @Override
     public List<Message> getConversationDetail(String conversationId) throws MessageException {
         try {
@@ -79,16 +87,21 @@ public class MessageServiceImpl implements MessageService {
         }
     }
 
+      /*
+    实现思路：查询两张表，看是否存在该用户（两张表相互都不能存在同名）
+     */
     @Override
     public List<Message> getConversationList(String username) throws MessageException {
         try {
-            StudentDetail studentDetail = studentDao.queryForStudentPhone(username);
-            TeacherDetail teacherDetail = teacherDao.queryForPhone(username);
-            int userId;
+            StudentDetail studentDetail =null;
+            studentDetail=studentDao.queryForStudentPhone(username);
+            TeacherDetail teacherDetail = null;
+            teacherDetail=teacherDao.queryForPhone(username);
+            int userId=0;
             if (studentDetail != null) {
                 userId = studentDetail.getId();
             } else {
-                userId = teacherDao.queryForPhone(username).getId();
+                userId = teacherDetail.getId();
             }
             return messageDao.getConversationList(userId);
         } catch (Exception e) {

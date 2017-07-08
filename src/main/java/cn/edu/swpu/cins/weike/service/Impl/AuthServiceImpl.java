@@ -67,7 +67,7 @@ public class AuthServiceImpl implements AuthService {
     }
 
     @Override
-    public String studentLogin(String username, String password) throws AuthException {
+    public String studentLogin(String username, String password)  throws AuthException{
         try {
 
             UsernamePasswordAuthenticationToken upToken = new UsernamePasswordAuthenticationToken(username, password);
@@ -103,7 +103,7 @@ public class AuthServiceImpl implements AuthService {
     }
 
     @Override
-    public String teacherLogin(String username, String password) throws AuthException {
+    public String teacherLogin(String username, String password) throws AuthException{
 
         try {
             UsernamePasswordAuthenticationToken upToken = new UsernamePasswordAuthenticationToken(username, password);

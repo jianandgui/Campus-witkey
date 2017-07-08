@@ -26,6 +26,7 @@ public class ProjectController {
 
     //显示所有项目
     @GetMapping("/projects")
+    //requestmapping requestmethod=get
     public ResultData queryAll(@RequestParam("offset") int offset, @RequestParam("limit") int limit) {
         try {
             return new ResultData(projectService.showProjectAll(offset, limit));
@@ -38,7 +39,7 @@ public class ProjectController {
         try{
             List<ProjectView> list=projectService.queryForIndex();
             return new ResultData(true,list);
-        }catch (Exception e){
+        }catch (Exception e)  {
             return new ResultData(false,e.getMessage());}
 
     }

@@ -54,7 +54,7 @@ public class StudentController {
 
     //学生发布项目(增加推荐人选功能)
     @PostMapping("/addProject")
-    public ResultData pulishProject(@RequestBody ProjectInfo projectInfo, HttpServletRequest request) {
+    public ResultData publishProject(@RequestBody ProjectInfo projectInfo, HttpServletRequest request) {
 
         try {
             String username = getUsrName.AllProjects(request);
