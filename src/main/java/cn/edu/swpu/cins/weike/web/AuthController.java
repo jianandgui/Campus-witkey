@@ -25,7 +25,6 @@ import cn.edu.swpu.cins.weike.service.AuthService;
 /**
  * Created by muyi on 17-4-18.
  */
-@CrossOrigin(maxAge = 3600)
 @RestController
 @RequestMapping("/weike")
 public class AuthController {

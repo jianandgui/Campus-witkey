@@ -13,7 +13,6 @@ import java.util.List;
 /**
  * Created by muyi on 17-4-8.
  */
-@CrossOrigin(maxAge = 3600)
 @RestController
 @RequestMapping("/weike")
 public class ProjectController {

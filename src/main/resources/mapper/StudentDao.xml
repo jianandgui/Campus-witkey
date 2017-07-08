@@ -134,6 +134,5 @@ INSERT INTO StudentRegisterInfo
     <select id="queryAllProject" parameterType="String" resultType="String">
         SELECT projectName from ProjectInfo
         WHERE projectConnector=#{projectConnector}
-
     </select>
 </mapper>
