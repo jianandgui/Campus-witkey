@@ -17,7 +17,7 @@ import java.util.List;
 /**
  * Created by muyi on 17-6-12.
  */
-@CrossOrigin(maxAge = 3600)
+//@CrossOrigin(maxAge = 3600)
 @RestController
 @RequestMapping("/WeiKe")
 public class MessageController {
