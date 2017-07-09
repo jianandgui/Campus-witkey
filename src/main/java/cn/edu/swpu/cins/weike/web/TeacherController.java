@@ -22,6 +22,7 @@ import java.util.List;
 /**
  * Created by muyi on 17-4-7.
  */
+@CrossOrigin(maxAge = 3600)
 @RestController
 @RequestMapping("/WeiKe/teacher")
 public class TeacherController {
