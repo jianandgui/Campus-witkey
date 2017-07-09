@@ -81,7 +81,7 @@
         qq,
         email
         FROM ProjectInfo ORDER BY projectStart
-        LIMIT 0,8;
+        LIMIT 0,16;
 
     </select>
 
