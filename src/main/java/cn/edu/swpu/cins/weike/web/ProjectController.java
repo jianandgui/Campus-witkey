@@ -26,7 +26,6 @@ public class ProjectController {
 
     //显示所有项目
     @GetMapping("/projects")
-    //requestmapping requestmethod=get
     public ResultData queryAll(@RequestParam("offset") int offset, @RequestParam("limit") int limit) {
         try {
             return new ResultData(projectService.showProjectAll(offset, limit));

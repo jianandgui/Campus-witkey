@@ -2,6 +2,7 @@ package cn.edu.swpu.cins.weike.web;
 
 import cn.edu.swpu.cins.weike.config.filter.JwtTokenUtil;
 import cn.edu.swpu.cins.weike.entity.persistence.Message;
+import cn.edu.swpu.cins.weike.entity.view.MessageView;
 import cn.edu.swpu.cins.weike.entity.view.ResultData;
 import cn.edu.swpu.cins.weike.enums.MessageEnum;
 import cn.edu.swpu.cins.weike.service.MailService;
@@ -40,10 +41,10 @@ public class MessageController {
     }
 
     @PostMapping("/sendMessage")
-    public ResultData sendMessage(@RequestParam String projectName,@RequestParam String content,HttpServletRequest request){
+    public ResultData sendMessage(@RequestBody MessageView messageView, HttpServletRequest request){
         try{
             String userSender = getUsrName.AllProjects(request);
-            int num=messageService.addMessage(content,projectName,userSender);
+            int num=messageService.addMessage(messageView.getContent(),messageView.getProjectName(),userSender);
             if(num==1){
                 return new ResultData(true, MessageEnum.SEND_MESSAGE_SUCCESS.getMsg());}
             else
