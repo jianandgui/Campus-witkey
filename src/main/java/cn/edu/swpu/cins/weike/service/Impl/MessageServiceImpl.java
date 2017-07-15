@@ -121,10 +121,10 @@ public class MessageServiceImpl implements MessageService {
             for (Message message:messageDao.getConversationList(username)){
 
                 if(message.getToName().equals(username)){
-                    toMessages.add(message);
+                    fromMessages.add(message);
                 }
                 else {
-                    fromMessages.add(message);}
+                    toMessages.add(message);}
 
             }
             MessageList messageList=new MessageList(fromMessages,toMessages);
