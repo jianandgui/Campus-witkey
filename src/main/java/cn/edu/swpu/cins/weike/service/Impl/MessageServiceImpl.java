@@ -8,6 +8,7 @@ import cn.edu.swpu.cins.weike.entity.persistence.Message;
 import cn.edu.swpu.cins.weike.entity.persistence.StudentDetail;
 import cn.edu.swpu.cins.weike.entity.persistence.StudentInfo;
 import cn.edu.swpu.cins.weike.entity.persistence.TeacherDetail;
+import cn.edu.swpu.cins.weike.entity.view.MessageList;
 import cn.edu.swpu.cins.weike.enums.ExceptionEnum;
 import cn.edu.swpu.cins.weike.exception.MessageException;
 import cn.edu.swpu.cins.weike.service.MailService;
@@ -16,6 +17,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -45,24 +47,30 @@ public class MessageServiceImpl implements MessageService {
 
     @Override
     @Transactional(rollbackFor = {RuntimeException.class, MessageException.class})
-    public int addMessage(String content, String projectName, String userSender) throws MessageException {
+    public int addMessage(String content, String projectName, String userSender) throws MessageException{
         try {
             Message message = new Message();
             StudentDetail studentSender = studentDao.queryForStudentPhone(userSender);
+
             TeacherDetail teacherSender = teacherDao.queryForPhone(userSender);
+
             String userSaver = projectDao.queryProjectDetail(projectName).getProjectConnector();
+
             StudentDetail studentSaver = studentDao.queryForStudentPhone(userSaver);
+
             TeacherDetail teacherSaver = teacherDao.queryForPhone(userSaver);
+
             String email = projectDao.queryProjectDetail(projectName).getEmail();
             if (studentSender != null) {
-                message.setFromId(studentSender.getId());
+                message.setFromName(studentSender.getUsername());
             } else
-                message.setFromId(teacherSender.getId());
+                message.setFromName(teacherSender.getUsername());
             if (studentSaver != null) {
-                message.setToId(studentSaver.getId());
+                message.setToName(studentSaver.getUsername());
                 mailService.sendMailForProject(email, studentSaver.getUsername(), projectName);
             } else {
-                message.setToId(teacherSaver.getId());
+                message.setToName(teacherSaver.getUsername());
+
                 mailService.sendMailForProject(email, teacherSaver.getUsername(), projectName);
             }
             message.setContent(content);
@@ -91,19 +99,37 @@ public class MessageServiceImpl implements MessageService {
     实现思路：查询两张表，看是否存在该用户（两张表相互都不能存在同名）
      */
     @Override
-    public List<Message> getConversationList(String username) throws MessageException {
+    public MessageList getConversationList(String username)  throws MessageException{
         try {
-            StudentDetail studentDetail =null;
+            StudentDetail studentDetail = null;
             studentDetail=studentDao.queryForStudentPhone(username);
             TeacherDetail teacherDetail = null;
             teacherDetail=teacherDao.queryForPhone(username);
             int userId=0;
+            String userName=null;
             if (studentDetail != null) {
                 userId = studentDetail.getId();
+
             } else {
                 userId = teacherDetail.getId();
+
             }
-            return messageDao.getConversationList(userId);
+//            return null;
+            List<Message> fromMessages=new ArrayList<Message>();
+            List<Message> toMessages=new ArrayList<Message>();
+
+            for (Message message:messageDao.getConversationList(username)){
+
+                if(message.getToName().equals(username)){
+                    toMessages.add(message);
+                }
+                else {
+                    fromMessages.add(message);}
+
+            }
+            MessageList messageList=new MessageList(fromMessages,toMessages);
+            return messageList;
+
         } catch (Exception e) {
             throw new MessageException(ExceptionEnum.INNER_ERROR.getMsg());
         }

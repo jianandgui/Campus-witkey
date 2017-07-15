@@ -2,6 +2,7 @@ package cn.edu.swpu.cins.weike.service;
 
 import cn.edu.swpu.cins.weike.dao.MessageDao;
 import cn.edu.swpu.cins.weike.entity.persistence.Message;
+import cn.edu.swpu.cins.weike.entity.view.MessageList;
 import cn.edu.swpu.cins.weike.exception.MessageException;
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -16,5 +17,5 @@ public interface MessageService {
 
     public List<Message> getConversationDetail(String conversationId) throws MessageException;
 
-    public List<Message> getConversationList(String username) throws MessageException;
+    public MessageList getConversationList(String username) throws MessageException;
 }

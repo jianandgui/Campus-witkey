@@ -2,6 +2,7 @@ package cn.edu.swpu.cins.weike.web;
 
 import cn.edu.swpu.cins.weike.config.filter.JwtTokenUtil;
 import cn.edu.swpu.cins.weike.entity.persistence.Message;
+import cn.edu.swpu.cins.weike.entity.view.MessageList;
 import cn.edu.swpu.cins.weike.entity.view.MessageView;
 import cn.edu.swpu.cins.weike.entity.view.ResultData;
 import cn.edu.swpu.cins.weike.enums.MessageEnum;
@@ -73,8 +74,8 @@ public class MessageController {
     public ResultData getConversationDetail(HttpServletRequest request){
         try{
             String username = getUsrName.AllProjects(request);
-            List<Message> list=messageService.getConversationList(username);
-            if(list.isEmpty()){
+            MessageList list=messageService.getConversationList(username);
+            if(list==null){
                 return new ResultData(MessageEnum.NO_MESSAGE.getMsg());}
             return new ResultData(true,list);
         }catch (Exception e){

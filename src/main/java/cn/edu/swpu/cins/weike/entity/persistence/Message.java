@@ -8,17 +8,17 @@ import java.util.Date;
 public class Message {
 
     private int id;
-    private int fromId;
-    private int toId;
+    private String fromName;
+    private String toName;
     private String content;
     private Date createDate;
     private int hasRead;
     private String conversationId;
 
-    public Message(int id, int fromId, int toId, String content, Date createDate, int hasRead, String conversationId) {
+    public Message(int id, String fromName, String toName, String content, Date createDate, int hasRead, String conversationId) {
         this.id = id;
-        this.fromId = fromId;
-        this.toId = toId;
+        this.fromName = fromName;
+        this.toName = toName;
         this.content = content;
         this.createDate = createDate;
         this.hasRead = hasRead;
@@ -36,20 +36,20 @@ public class Message {
         this.id = id;
     }
 
-    public int getFromId() {
-        return fromId;
+    public String getFromName() {
+        return fromName;
     }
 
-    public void setFromId(int fromId) {
-        this.fromId = fromId;
+    public void setFromName(String fromName) {
+        this.fromName = fromName;
     }
 
-    public int getToId() {
-        return toId;
+    public String getToName() {
+        return toName;
     }
 
-    public void setToId(int toId) {
-        this.toId = toId;
+    public void setToName(String toName) {
+        this.toName = toName;
     }
 
     public String getContent() {
@@ -77,14 +77,10 @@ public class Message {
     }
 
     public String getConversationId() {
-        if(fromId<toId){
-            return String.format("%d_%d",fromId,toId);
-        }
-        else
-            return String.format("%d_%d",toId,fromId);
+        return conversationId;
     }
 
     public void setConversationId(String conversationId) {
-        this.conversationId=conversationId;
+        this.conversationId = conversationId;
     }
 }

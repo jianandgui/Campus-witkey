@@ -19,7 +19,7 @@ public interface MessageDao {
 
     public List<Message> getConversationDetail(String conversationId);
 
-    public List<Message> getConversationList(int userId);
+    public List<Message> getConversationList(String userName);
 
 
 }

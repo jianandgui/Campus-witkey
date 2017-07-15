@@ -9,8 +9,8 @@
 
       INSERT INTO
       message
-      (fromId,toId,content,createDate,hasRead,conversationId)
-      VALUES (#{fromId},#{toId},#{content},#{createDate},#{hasRead},#{conversationId})
+      (fromName,toName,content,createDate,hasRead,conversationId)
+      VALUES (#{fromName},#{toName},#{content},#{createDate},#{hasRead},#{conversationId})
 
 
     </insert>
@@ -23,9 +23,11 @@
         ORDER BY createDate DESC
     </select>
 
+    <!--SELECT * from (SELECT * from message WHERE fromId=#{userId} OR toId=#{userId} ORDER BY createDate) as total-->
+    <!--GROUP BY conversationId ORDER BY createDate DESC-->
+    <select id="getConversationList" resultType="cn.edu.swpu.cins.weike.entity.persistence.Message" parameterType="String">
 
-    <select id="getConversationList" resultType="cn.edu.swpu.cins.weike.entity.persistence.Message" parameterType="int">
-        SELECT * from (SELECT * from message WHERE fromId=#{userId} OR toId=#{userId} ORDER BY createDate) as total
-        GROUP BY conversationId ORDER BY createDate DESC
+        SELECT * from message WHERE fromName=#{userName} OR toName=#{userName} ORDER BY createDate
+
     </select>
 </mapper>
