@@ -4,6 +4,7 @@ import cn.edu.swpu.cins.weike.entity.persistence.ProjectInfo;
 import cn.edu.swpu.cins.weike.entity.persistence.StudentDetail;
 import cn.edu.swpu.cins.weike.entity.persistence.TeacherDetail;
 import cn.edu.swpu.cins.weike.entity.view.ProjectRecommend;
+import cn.edu.swpu.cins.weike.entity.view.TeacherPersonData;
 import cn.edu.swpu.cins.weike.exception.TeacherException;
 
 import java.util.List;
@@ -30,6 +31,8 @@ public interface TeacherService {
 
     //查询发布过的所有项目
     public List<String> queryAllProject(String projectConnector) throws TeacherException;
+
+    public TeacherPersonData queryForData(String username);
 
 
 }

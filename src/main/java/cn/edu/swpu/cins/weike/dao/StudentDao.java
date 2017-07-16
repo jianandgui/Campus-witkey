@@ -1,6 +1,7 @@
 package cn.edu.swpu.cins.weike.dao;
 
 import cn.edu.swpu.cins.weike.entity.persistence.StudentDetail;
+import cn.edu.swpu.cins.weike.entity.view.PersonData;
 import cn.edu.swpu.cins.weike.entity.view.ProjectRecommend;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
@@ -43,5 +44,8 @@ public interface StudentDao {
 
     //查询发布所有项目
     public List<String> queryAllProject(String projectConnector);
+
+    //学生查询个人所有信息
+    public PersonData queryPerson(String username);
 
 }

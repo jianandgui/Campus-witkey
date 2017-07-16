@@ -95,4 +95,9 @@
 
     </select>
 
+    <select id="queryForData" resultType="cn.edu.swpu.cins.weike.entity.view.TeacherPersonData" parameterType="String">
+        SELECT * from TeacherDetailInfo
+        WHERE username=#{username}
+    </select>
+
 </mapper>

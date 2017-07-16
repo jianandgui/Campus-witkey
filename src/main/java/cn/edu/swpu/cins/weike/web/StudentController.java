@@ -1,5 +1,6 @@
 package cn.edu.swpu.cins.weike.web;
 
+import cn.edu.swpu.cins.weike.entity.view.PersonData;
 import cn.edu.swpu.cins.weike.enums.ProjectEnum;
 import cn.edu.swpu.cins.weike.enums.UserEnum;
 import cn.edu.swpu.cins.weike.service.MailService;
@@ -133,6 +134,15 @@ public class StudentController {
             return new ResultData(false, e.getMessage());
         }
 
+    }
+
+    //查看个人信息
+    @GetMapping("/personalData")
+    public ResultData queryForData(HttpServletRequest request){
+
+        PersonData personData=studentService.queryForData(getUsrName.AllProjects(request));
+
+        return new ResultData(true,personData);
     }
 
 }

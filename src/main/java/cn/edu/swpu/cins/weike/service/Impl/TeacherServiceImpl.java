@@ -5,6 +5,7 @@ import cn.edu.swpu.cins.weike.entity.persistence.ProjectInfo;
 import cn.edu.swpu.cins.weike.entity.persistence.StudentDetail;
 import cn.edu.swpu.cins.weike.entity.persistence.TeacherDetail;
 import cn.edu.swpu.cins.weike.entity.view.ProjectRecommend;
+import cn.edu.swpu.cins.weike.entity.view.TeacherPersonData;
 import cn.edu.swpu.cins.weike.enums.ExceptionEnum;
 import cn.edu.swpu.cins.weike.exception.TeacherException;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -82,5 +83,12 @@ public class TeacherServiceImpl implements TeacherService {
             throw new TeacherException(ExceptionEnum.INNER_ERROR.getMsg());
         }
 
+    }
+
+    public TeacherPersonData queryForData(String username){
+
+        TeacherPersonData teacherPersonData=teacherDao.queryForData(username);
+        teacherPersonData.setEmail(teacherDao.queryByName(username).getEmail());
+        return teacherPersonData;
     }
 }

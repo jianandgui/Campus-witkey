@@ -1,6 +1,7 @@
 package cn.edu.swpu.cins.weike.service.Impl;
 
 import cn.edu.swpu.cins.weike.entity.persistence.StudentDetail;
+import cn.edu.swpu.cins.weike.entity.view.PersonData;
 import cn.edu.swpu.cins.weike.entity.view.ProjectRecommend;
 import cn.edu.swpu.cins.weike.exception.StudentException;
 import cn.edu.swpu.cins.weike.util.SensitiveWordsFilter;
@@ -101,5 +102,13 @@ public class StudentServiceImpl implements StudentService {
             throw new StudentException("服务器异常");
         }
 
+    }
+
+    @Override
+    public PersonData queryForData(String username) {
+
+        PersonData personData=studentDao.queryPerson(username);
+        personData.setEmail(studentDao.selectStudent(username).getEmail());
+        return personData;
     }
 }

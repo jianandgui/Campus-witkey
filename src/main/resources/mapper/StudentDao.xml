@@ -135,4 +135,10 @@ INSERT INTO StudentRegisterInfo
         SELECT projectName from ProjectInfo
         WHERE projectConnector=#{projectConnector}
     </select>
+
+    <select id="queryPerson" parameterType="String" resultType="cn.edu.swpu.cins.weike.entity.view.PersonData">
+        SELECT * from StudentDetailInfo
+        WHERE username=#{username}
+
+    </select>
 </mapper>

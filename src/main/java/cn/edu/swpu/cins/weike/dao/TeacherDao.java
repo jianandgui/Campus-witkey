@@ -4,6 +4,7 @@ import cn.edu.swpu.cins.weike.entity.persistence.StudentDetail;
 import cn.edu.swpu.cins.weike.entity.persistence.TeacherDetail;
 import cn.edu.swpu.cins.weike.entity.persistence.TeacherInfo;
 import cn.edu.swpu.cins.weike.entity.view.ProjectRecommend;
+import cn.edu.swpu.cins.weike.entity.view.TeacherPersonData;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Repository;
@@ -45,6 +46,8 @@ public interface TeacherDao {
 
     //查询发布所有项目
     public List<String> queryAllProject(String projectConnector);
+
+    public TeacherPersonData queryForData(String username);
 
 }
 

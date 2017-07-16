@@ -3,6 +3,7 @@ package cn.edu.swpu.cins.weike.web;
 import cn.edu.swpu.cins.weike.config.filter.JwtTokenUtil;
 import cn.edu.swpu.cins.weike.entity.persistence.TeacherDetail;
 import cn.edu.swpu.cins.weike.entity.view.ResultData;
+import cn.edu.swpu.cins.weike.entity.view.TeacherPersonData;
 import cn.edu.swpu.cins.weike.enums.ProjectEnum;
 import cn.edu.swpu.cins.weike.enums.UserEnum;
 import cn.edu.swpu.cins.weike.util.GetUsrName;
@@ -117,5 +118,12 @@ public class TeacherController {
         } catch (Exception e) {
             return new ResultData(false, e.getMessage());
         }
+    }
+
+    @GetMapping("/personalData")
+    public ResultData queryForData(HttpServletRequest request){
+
+        TeacherPersonData teacherPersonData=teacherService.queryForData(getUsrName.AllProjects(request));
+        return new ResultData(true,teacherPersonData);
     }
 }

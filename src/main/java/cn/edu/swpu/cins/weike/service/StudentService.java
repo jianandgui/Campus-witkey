@@ -2,6 +2,7 @@ package cn.edu.swpu.cins.weike.service;
 
 import cn.edu.swpu.cins.weike.entity.persistence.ProjectInfo;
 import cn.edu.swpu.cins.weike.entity.persistence.StudentDetail;
+import cn.edu.swpu.cins.weike.entity.view.PersonData;
 import cn.edu.swpu.cins.weike.entity.view.ProjectRecommend;
 import cn.edu.swpu.cins.weike.exception.StudentException;
 
@@ -31,6 +32,8 @@ public interface StudentService {
 
     //查询发布过的所有项目
     public List<String> queryAllProject(String projectConnector) throws StudentException;
+
+    public PersonData queryForData(String username);
 
 
 }
