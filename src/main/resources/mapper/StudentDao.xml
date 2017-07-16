@@ -113,6 +113,7 @@ INSERT INTO StudentRegisterInfo
 
 </select>
 
+
     <update id="updateInfo" parameterType="cn.edu.swpu.cins.weike.entity.persistence.StudentDetail">
     UPDATE StudentDetailInfo
     SET
@@ -136,8 +137,28 @@ INSERT INTO StudentRegisterInfo
         WHERE projectConnector=#{projectConnector}
     </select>
 
-    <select id="queryPerson" parameterType="String" resultType="cn.edu.swpu.cins.weike.entity.view.PersonData">
-        SELECT * from StudentDetailInfo
+    <resultMap id="studentDetailResultMap" type="cn.edu.swpu.cins.weike.entity.view.PersonData">
+        <result typeHandler="cn.edu.swpu.cins.weike.typehandler.StringArrayTypeHandler" column="skills" javaType="list"
+                jdbcType="VARCHAR"
+                property="skills"/>
+    </resultMap>
+    <select id="queryPerson" parameterType="String" resultMap="studentDetailResultMap">
+        SELECT
+         id,
+         username,
+         sex,
+         image,
+         eduBackgroud,
+         university,
+         majorAndGrade,
+         entryUniversity,
+         leaveUniversity,
+         qq,
+         skills,
+         experience,
+         selfFeel,
+         level
+        from StudentDetailInfo
         WHERE username=#{username}
 
     </select>

@@ -1,0 +1,99 @@
+Starting a Gradle Daemon (subsequent builds will be faster)
+Exception in thread "DisconnectableInputStream source reader" org.gradle.api.UncheckedIOException: java.io.IOException: 错误的文件描述符
+	at org.gradle.internal.UncheckedException.throwAsUncheckedException(UncheckedException.java:43)
+	at org.gradle.util.DisconnectableInputStream$1.run(DisconnectableInputStream.java:125)
+	at java.lang.Thread.run(Thread.java:745)
+Caused by: java.io.IOException: 错误的文件描述符
+	at java.io.FileInputStream.readBytes(Native Method)
+	at java.io.FileInputStream.read(FileInputStream.java:255)
+	at java.io.BufferedInputStream.fill(BufferedInputStream.java:246)
+	at java.io.BufferedInputStream.read1(BufferedInputStream.java:286)
+	at java.io.BufferedInputStream.read(BufferedInputStream.java:345)
+	at org.gradle.util.DisconnectableInputStream$1.run(DisconnectableInputStream.java:96)
+	... 1 more
+:compileJava注: 某些输入文件使用了未经检查或不安全的操作。
+注: 有关详细信息, 请使用 -Xlint:unchecked 重新编译。
+
+:processResources
+:classes
+:run
+
+  .   ____          _            __ _ _
+ /\\ / ___'_ __ _ _(_)_ __  __ _ \ \ \ \
+( ( )\___ | '_ | '_| | '_ \/ _` | \ \ \ \
+ \\/  ___)| |_)| | | | | || (_| |  ) ) ) )
+  '  |____| .__|_| |_|_| |_\__, | / / / /
+ =========|_|==============|___/=/_/_/_/
+ :: Spring Boot ::        (v1.5.2.RELEASE)
+
+2017-07-16 14:54:34.812  INFO 10772 --- [           main] cn.edu.swpu.cins.weike.WeikeApplication  : Starting WeikeApplication on muyi-N551JX with PID 10772 (started by muyi in /home/muyi/IDEA WorkSpace/weike)
+2017-07-16 14:54:34.829  INFO 10772 --- [           main] cn.edu.swpu.cins.weike.WeikeApplication  : No active profile set, falling back to default profiles: default
+2017-07-16 14:54:35.617  INFO 10772 --- [           main] ationConfigEmbeddedWebApplicationContext : Refreshing org.springframework.boot.context.embedded.AnnotationConfigEmbeddedWebApplicationContext@6f96c77: startup date [Sun Jul 16 14:54:35 CST 2017]; root of context hierarchy
+2017-07-16 14:54:44.165  INFO 10772 --- [           main] trationDelegate$BeanPostProcessorChecker : Bean 'org.springframework.security.config.annotation.configuration.ObjectPostProcessorConfiguration' of type [org.springframework.security.config.annotation.configuration.ObjectPostProcessorConfiguration$$EnhancerBySpringCGLIB$$3dc54ee6] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2017-07-16 14:54:44.182  INFO 10772 --- [           main] trationDelegate$BeanPostProcessorChecker : Bean 'org.springframework.transaction.annotation.ProxyTransactionManagementConfiguration' of type [org.springframework.transaction.annotation.ProxyTransactionManagementConfiguration$$EnhancerBySpringCGLIB$$a51786ac] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2017-07-16 14:54:44.381  INFO 10772 --- [           main] trationDelegate$BeanPostProcessorChecker : Bean 'objectPostProcessor' of type [org.springframework.security.config.annotation.configuration.AutowireBeanFactoryObjectPostProcessor] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2017-07-16 14:54:44.387  INFO 10772 --- [           main] trationDelegate$BeanPostProcessorChecker : Bean 'org.springframework.security.access.expression.method.DefaultMethodSecurityExpressionHandler@70e29e14' of type [org.springframework.security.access.expression.method.DefaultMethodSecurityExpressionHandler] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2017-07-16 14:54:44.436  INFO 10772 --- [           main] trationDelegate$BeanPostProcessorChecker : Bean 'org.springframework.security.config.annotation.method.configuration.GlobalMethodSecurityConfiguration' of type [org.springframework.security.config.annotation.method.configuration.GlobalMethodSecurityConfiguration$$EnhancerBySpringCGLIB$$6299f198] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2017-07-16 14:54:44.462  INFO 10772 --- [           main] trationDelegate$BeanPostProcessorChecker : Bean 'methodSecurityMetadataSource' of type [org.springframework.security.access.method.DelegatingMethodSecurityMetadataSource] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2017-07-16 14:54:46.061  INFO 10772 --- [           main] s.b.c.e.t.TomcatEmbeddedServletContainer : Tomcat initialized with port(s): 8080 (http)
+2017-07-16 14:54:46.221  INFO 10772 --- [           main] o.apache.catalina.core.StandardService   : Starting service Tomcat
+2017-07-16 14:54:46.234  INFO 10772 --- [           main] org.apache.catalina.core.StandardEngine  : Starting Servlet Engine: Apache Tomcat/8.5.11
+2017-07-16 14:54:47.049  INFO 10772 --- [ost-startStop-1] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2017-07-16 14:54:47.050  INFO 10772 --- [ost-startStop-1] o.s.web.context.ContextLoader            : Root WebApplicationContext: initialization completed in 11455 ms
+2017-07-16 14:54:54.847  INFO 10772 --- [ost-startStop-1] o.s.b.w.servlet.FilterRegistrationBean   : Mapping filter: 'characterEncodingFilter' to: [/*]
+2017-07-16 14:54:54.879  INFO 10772 --- [ost-startStop-1] o.s.b.w.servlet.FilterRegistrationBean   : Mapping filter: 'hiddenHttpMethodFilter' to: [/*]
+2017-07-16 14:54:54.879  INFO 10772 --- [ost-startStop-1] o.s.b.w.servlet.FilterRegistrationBean   : Mapping filter: 'httpPutFormContentFilter' to: [/*]
+2017-07-16 14:54:54.880  INFO 10772 --- [ost-startStop-1] o.s.b.w.servlet.FilterRegistrationBean   : Mapping filter: 'requestContextFilter' to: [/*]
+2017-07-16 14:54:54.881  INFO 10772 --- [ost-startStop-1] .s.DelegatingFilterProxyRegistrationBean : Mapping filter: 'springSecurityFilterChain' to: [/*]
+2017-07-16 14:54:54.885  INFO 10772 --- [ost-startStop-1] o.s.b.w.servlet.FilterRegistrationBean   : Mapping filter: 'jwtAuthenticationTokenFilter' to: [/*]
+2017-07-16 14:54:54.885  INFO 10772 --- [ost-startStop-1] o.s.b.w.servlet.FilterRegistrationBean   : Mapping filter: 'authenticationTokenFilterBean' to: [/*]
+2017-07-16 14:54:54.885  INFO 10772 --- [ost-startStop-1] o.s.b.w.servlet.ServletRegistrationBean  : Mapping servlet: 'dispatcherServlet' to [/]
+2017-07-16 14:54:57.401  INFO 10772 --- [           main] o.s.s.web.DefaultSecurityFilterChain     : Creating filter chain: org.springframework.security.web.util.matcher.AnyRequestMatcher@1, [org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter@3c89bb12, org.springframework.security.web.context.SecurityContextPersistenceFilter@53093491, org.springframework.security.web.header.HeaderWriterFilter@5f14a673, org.springframework.security.web.authentication.logout.LogoutFilter@340b7ef6, cn.edu.swpu.cins.weike.config.filter.JwtAuthenticationTokenFilter@3b661712, org.springframework.security.web.savedrequest.RequestCacheAwareFilter@76b224cd, org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter@aa10649, org.springframework.security.web.authentication.AnonymousAuthenticationFilter@48c4245d, org.springframework.security.web.session.SessionManagementFilter@40ab8a8, org.springframework.security.web.access.ExceptionTranslationFilter@4c9e38, org.springframework.security.web.access.intercept.FilterSecurityInterceptor@4bee18dc]
+2017-07-16 14:54:58.125  INFO 10772 --- [           main] s.w.s.m.m.a.RequestMappingHandlerAdapter : Looking for @ControllerAdvice: org.springframework.boot.context.embedded.AnnotationConfigEmbeddedWebApplicationContext@6f96c77: startup date [Sun Jul 16 14:54:35 CST 2017]; root of context hierarchy
+2017-07-16 14:54:59.630  INFO 10772 --- [           main] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped "{[/weike/student/FindPassword],methods=[POST]}" onto public cn.edu.swpu.cins.weike.entity.view.ResultData cn.edu.swpu.cins.weike.web.AuthController.studentUpdatePassword(cn.edu.swpu.cins.weike.entity.view.UpdatePassword)
+2017-07-16 14:54:59.631  INFO 10772 --- [           main] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped "{[/weike/teacher/FindPassword],methods=[POST]}" onto public cn.edu.swpu.cins.weike.entity.view.ResultData cn.edu.swpu.cins.weike.web.AuthController.teacherUpdatePassword(cn.edu.swpu.cins.weike.entity.view.UpdatePassword)
+2017-07-16 14:54:59.633  INFO 10772 --- [           main] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped "{[/weike/getVerifyCode],methods=[GET]}" onto public cn.edu.swpu.cins.weike.entity.view.ResultData cn.edu.swpu.cins.weike.web.AuthController.getVerifyCodeForLogin()
+2017-07-16 14:54:59.633  INFO 10772 --- [           main] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped "{[/weike/student/login],methods=[POST]}" onto public cn.edu.swpu.cins.weike.entity.view.ResultData cn.edu.swpu.cins.weike.web.AuthController.createStudentAuthenticationToken(cn.edu.swpu.cins.weike.entity.view.JwtAuthenticationRequest)
+2017-07-16 14:54:59.634  INFO 10772 --- [           main] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped "{[/weike/student/GetVerifyCodeForRegister],methods=[GET]}" onto public cn.edu.swpu.cins.weike.entity.view.ResultData cn.edu.swpu.cins.weike.web.AuthController.studentGetveriyCode(java.lang.String,java.lang.String)
+2017-07-16 14:54:59.634  INFO 10772 --- [           main] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped "{[/weike/student/register],methods=[POST]}" onto public cn.edu.swpu.cins.weike.entity.view.ResultData cn.edu.swpu.cins.weike.web.AuthController.StudentSaveToDB(cn.edu.swpu.cins.weike.entity.persistence.StudentInfo)
+2017-07-16 14:54:59.634  INFO 10772 --- [           main] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped "{[/weike/student/getVerifyCodeForFindPassword],methods=[GET]}" onto public cn.edu.swpu.cins.weike.entity.view.ResultData cn.edu.swpu.cins.weike.web.AuthController.studentGetVerifyForUpdate(java.lang.String,java.lang.String)
+2017-07-16 14:54:59.641  INFO 10772 --- [           main] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped "{[/weike/teacher/login],methods=[POST]}" onto public cn.edu.swpu.cins.weike.entity.view.ResultData cn.edu.swpu.cins.weike.web.AuthController.createTeacherAuthenticationToken(cn.edu.swpu.cins.weike.entity.view.JwtAuthenticationRequest)
+2017-07-16 14:54:59.642  INFO 10772 --- [           main] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped "{[/weike/teacher/GetVerifyCodeForRegister],methods=[GET]}" onto public cn.edu.swpu.cins.weike.entity.view.ResultData cn.edu.swpu.cins.weike.web.AuthController.teacherGetverifyCode(java.lang.String,java.lang.String)
+2017-07-16 14:54:59.642  INFO 10772 --- [           main] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped "{[/weike/teacher/getVerifyCodeForFindPassword],methods=[GET]}" onto public cn.edu.swpu.cins.weike.entity.view.ResultData cn.edu.swpu.cins.weike.web.AuthController.teacherGetVerifyForUpdatePassword(java.lang.String,java.lang.String)
+2017-07-16 14:54:59.643  INFO 10772 --- [           main] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped "{[/weike/teacher/register],methods=[POST]}" onto public cn.edu.swpu.cins.weike.entity.view.ResultData cn.edu.swpu.cins.weike.web.AuthController.teacherSaveToDB(cn.edu.swpu.cins.weike.entity.persistence.TeacherInfo)
+2017-07-16 14:54:59.650  INFO 10772 --- [           main] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped "{[/weike/admin/login],methods=[POST]}" onto public cn.edu.swpu.cins.weike.entity.view.ResultData cn.edu.swpu.cins.weike.web.AuthController.createAdminAuthenticationToken(cn.edu.swpu.cins.weike.entity.view.JwtAuthenticationRequest)
+2017-07-16 14:54:59.660  INFO 10772 --- [           main] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped "{[/WeiKe/deleteMessage],methods=[POST]}" onto public cn.edu.swpu.cins.weike.entity.view.ResultData cn.edu.swpu.cins.weike.web.MessageController.deleteMessage(int)
+2017-07-16 14:54:59.667  INFO 10772 --- [           main] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped "{[/WeiKe/messageList],methods=[GET]}" onto public cn.edu.swpu.cins.weike.entity.view.ResultData cn.edu.swpu.cins.weike.web.MessageController.getConversationDetail(javax.servlet.http.HttpServletRequest)
+2017-07-16 14:54:59.674  INFO 10772 --- [           main] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped "{[/WeiKe/sendMessage],methods=[POST]}" onto public cn.edu.swpu.cins.weike.entity.view.ResultData cn.edu.swpu.cins.weike.web.MessageController.sendMessage(cn.edu.swpu.cins.weike.entity.view.MessageView,javax.servlet.http.HttpServletRequest)
+2017-07-16 14:54:59.677  INFO 10772 --- [           main] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped "{[/WeiKe/messageDetail],methods=[GET]}" onto public cn.edu.swpu.cins.weike.entity.view.ResultData cn.edu.swpu.cins.weike.web.MessageController.getMessageDetail(java.lang.String)
+2017-07-16 14:54:59.686  INFO 10772 --- [           main] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped "{[/weike/projectsByWords],methods=[GET]}" onto public cn.edu.swpu.cins.weike.entity.view.ResultData cn.edu.swpu.cins.weike.web.ProjectController.queryByKeyWords(java.lang.String)
+2017-07-16 14:54:59.689  INFO 10772 --- [           main] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped "{[/weike/index],methods=[GET]}" onto public cn.edu.swpu.cins.weike.entity.view.ResultData cn.edu.swpu.cins.weike.web.ProjectController.queryForIndex()
+2017-07-16 14:54:59.705  INFO 10772 --- [           main] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped "{[/weike/projects],methods=[GET]}" onto public cn.edu.swpu.cins.weike.entity.view.ResultData cn.edu.swpu.cins.weike.web.ProjectController.queryAll(int,int)
+2017-07-16 14:54:59.706  INFO 10772 --- [           main] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped "{[/weike/projectName],methods=[GET]}" onto public cn.edu.swpu.cins.weike.entity.view.ResultData cn.edu.swpu.cins.weike.web.ProjectController.queryForProjectByName(java.lang.String)
+2017-07-16 14:54:59.708  INFO 10772 --- [           main] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped "{[/WeiKe/student/updateInfo],methods=[POST]}" onto public cn.edu.swpu.cins.weike.entity.view.ResultData cn.edu.swpu.cins.weike.web.StudentController.updateInfo(cn.edu.swpu.cins.weike.entity.persistence.StudentDetail,javax.servlet.http.HttpServletRequest)
+2017-07-16 14:54:59.708  INFO 10772 --- [           main] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped "{[/WeiKe/student/allProject],methods=[GET]}" onto public cn.edu.swpu.cins.weike.entity.view.ResultData cn.edu.swpu.cins.weike.web.StudentController.queryAllProject(javax.servlet.http.HttpServletRequest)
+2017-07-16 14:54:59.708  INFO 10772 --- [           main] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped "{[/WeiKe/student/personalData],methods=[GET]}" onto public cn.edu.swpu.cins.weike.entity.view.ResultData cn.edu.swpu.cins.weike.web.StudentController.queryForData(javax.servlet.http.HttpServletRequest)
+2017-07-16 14:54:59.708  INFO 10772 --- [           main] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped "{[/WeiKe/student/addProject],methods=[POST]}" onto public cn.edu.swpu.cins.weike.entity.view.ResultData cn.edu.swpu.cins.weike.web.StudentController.publishProject(cn.edu.swpu.cins.weike.entity.persistence.ProjectInfo,javax.servlet.http.HttpServletRequest)
+2017-07-16 14:54:59.708  INFO 10772 --- [           main] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped "{[/WeiKe/student/addPersonalDeail],methods=[POST]}" onto public cn.edu.swpu.cins.weike.entity.view.ResultData cn.edu.swpu.cins.weike.web.StudentController.addPersonalDetail(cn.edu.swpu.cins.weike.entity.persistence.StudentDetail,javax.servlet.http.HttpServletRequest)
+2017-07-16 14:54:59.739  INFO 10772 --- [           main] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped "{[/WeiKe/teacher/updateInfo],methods=[POST]}" onto public cn.edu.swpu.cins.weike.entity.view.ResultData cn.edu.swpu.cins.weike.web.TeacherController.updateInfo(cn.edu.swpu.cins.weike.entity.persistence.TeacherDetail,javax.servlet.http.HttpServletRequest)
+2017-07-16 14:54:59.739  INFO 10772 --- [           main] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped "{[/WeiKe/teacher/allProject],methods=[GET]}" onto public cn.edu.swpu.cins.weike.entity.view.ResultData cn.edu.swpu.cins.weike.web.TeacherController.queryAllProject(javax.servlet.http.HttpServletRequest)
+2017-07-16 14:54:59.740  INFO 10772 --- [           main] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped "{[/WeiKe/teacher/personalData],methods=[GET]}" onto public cn.edu.swpu.cins.weike.entity.view.ResultData cn.edu.swpu.cins.weike.web.TeacherController.queryForData(javax.servlet.http.HttpServletRequest)
+2017-07-16 14:54:59.740  INFO 10772 --- [           main] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped "{[/WeiKe/teacher/addProject],methods=[POST]}" onto public cn.edu.swpu.cins.weike.entity.view.ResultData cn.edu.swpu.cins.weike.web.TeacherController.publishProject(cn.edu.swpu.cins.weike.entity.persistence.ProjectInfo,javax.servlet.http.HttpServletRequest)
+2017-07-16 14:54:59.740  INFO 10772 --- [           main] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped "{[/WeiKe/teacher/addPersonal],methods=[POST]}" onto public cn.edu.swpu.cins.weike.entity.view.ResultData cn.edu.swpu.cins.weike.web.TeacherController.addTeacherPersonal(cn.edu.swpu.cins.weike.entity.persistence.TeacherDetail,javax.servlet.http.HttpServletRequest)
+2017-07-16 14:54:59.746  INFO 10772 --- [           main] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped "{[/error],produces=[text/html]}" onto public org.springframework.web.servlet.ModelAndView org.springframework.boot.autoconfigure.web.BasicErrorController.errorHtml(javax.servlet.http.HttpServletRequest,javax.servlet.http.HttpServletResponse)
+2017-07-16 14:54:59.746  INFO 10772 --- [           main] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped "{[/error]}" onto public org.springframework.http.ResponseEntity<java.util.Map<java.lang.String, java.lang.Object>> org.springframework.boot.autoconfigure.web.BasicErrorController.error(javax.servlet.http.HttpServletRequest)
+2017-07-16 14:55:00.252  INFO 10772 --- [           main] o.s.w.s.handler.SimpleUrlHandlerMapping  : Mapped URL path [/webjars/**] onto handler of type [class org.springframework.web.servlet.resource.ResourceHttpRequestHandler]
+2017-07-16 14:55:00.252  INFO 10772 --- [           main] o.s.w.s.handler.SimpleUrlHandlerMapping  : Mapped URL path [/**] onto handler of type [class org.springframework.web.servlet.resource.ResourceHttpRequestHandler]
+2017-07-16 14:55:00.514  INFO 10772 --- [           main] o.s.w.s.handler.SimpleUrlHandlerMapping  : Mapped URL path [/**/favicon.ico] onto handler of type [class org.springframework.web.servlet.resource.ResourceHttpRequestHandler]
+2017-07-16 14:55:04.505  INFO 10772 --- [           main] o.s.j.e.a.AnnotationMBeanExporter        : Registering beans for JMX exposure on startup
+2017-07-16 14:55:09.628  INFO 10772 --- [           main] s.b.c.e.t.TomcatEmbeddedServletContainer : Tomcat started on port(s): 8080 (http)
+2017-07-16 14:55:11.703  INFO 10772 --- [           main] cn.edu.swpu.cins.weike.WeikeApplication  : Started WeikeApplication in 39.592 seconds (JVM running for 42.091)
+Daemon is stopping immediately stop command received
+
+FAILURE: Build failed with an exception.
+
+* What went wrong:
+Gradle build daemon has been stopped: stop command received
+
+* Try:
+Run with --stacktrace option to get the stack trace. Run with --info or --debug option to get more log output.
