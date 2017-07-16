@@ -86,6 +86,11 @@ public class MessageController {
     //删除一条信息
     @PostMapping("/deleteMessage")
     public ResultData deleteMessage(@RequestParam int id){
-        return new ResultData(true,messageService.deleteMessage(id));
+        try{
+            return new ResultData(true,"信息删除成功");
+        }catch (Exception e){
+            return new ResultData(false,e.getMessage());
+        }
+
     }
 }

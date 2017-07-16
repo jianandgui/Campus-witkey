@@ -33,7 +33,7 @@ public interface StudentService {
     //查询发布过的所有项目
     public List<String> queryAllProject(String projectConnector) throws StudentException;
 
-    public PersonData queryForData(String username);
+    public PersonData queryForData(String username) throws StudentException;
 
 
 }

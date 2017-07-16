@@ -19,5 +19,5 @@ public interface MessageService {
 
     public MessageList getConversationList(String username) throws MessageException;
 
-    public int deleteMessage(int id);
+    public int deleteMessage(int id) throws MessageException;
 }

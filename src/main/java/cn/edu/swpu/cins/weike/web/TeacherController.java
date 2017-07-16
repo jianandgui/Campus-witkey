@@ -123,7 +123,12 @@ public class TeacherController {
     @GetMapping("/personalData")
     public ResultData queryForData(HttpServletRequest request){
 
-        TeacherPersonData teacherPersonData=teacherService.queryForData(getUsrName.AllProjects(request));
-        return new ResultData(true,teacherPersonData);
+        try{
+            TeacherPersonData teacherPersonData=teacherService.queryForData(getUsrName.AllProjects(request));
+            return new ResultData(true,teacherPersonData);
+        }catch (Exception e){
+            return new ResultData(false,e.getMessage());
+        }
+
     }
 }

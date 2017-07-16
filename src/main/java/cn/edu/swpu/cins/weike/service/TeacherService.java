@@ -32,7 +32,7 @@ public interface TeacherService {
     //查询发布过的所有项目
     public List<String> queryAllProject(String projectConnector) throws TeacherException;
 
-    public TeacherPersonData queryForData(String username);
+    public TeacherPersonData queryForData(String username) throws TeacherException;
 
 
 }

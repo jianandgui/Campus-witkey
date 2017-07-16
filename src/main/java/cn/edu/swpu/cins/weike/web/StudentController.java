@@ -140,9 +140,14 @@ public class StudentController {
     @GetMapping("/personalData")
     public ResultData queryForData(HttpServletRequest request){
 
-        PersonData personData=studentService.queryForData(getUsrName.AllProjects(request));
+        try{
+            PersonData personData=studentService.queryForData(getUsrName.AllProjects(request));
 
-        return new ResultData(true,personData);
+            return new ResultData(true,personData);
+        }catch (Exception e){
+            return new ResultData(false,e.getMessage());
+        }
+
     }
 
 }

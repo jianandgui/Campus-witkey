@@ -105,10 +105,14 @@ public class StudentServiceImpl implements StudentService {
     }
 
     @Override
-    public PersonData queryForData(String username) {
-
+    public PersonData queryForData(String username) throws StudentException{
+    try{
         PersonData personData=studentDao.queryPerson(username);
         personData.setEmail(studentDao.selectStudent(username).getEmail());
         return personData;
+    }catch (Exception e){
+        throw new StudentException("服务器异常");
+}
+
     }
 }
