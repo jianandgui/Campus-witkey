@@ -21,5 +21,6 @@ public interface MessageDao {
 
     public List<Message> getConversationList(String userName);
 
+    public int deleteMessage(int id);
 
 }

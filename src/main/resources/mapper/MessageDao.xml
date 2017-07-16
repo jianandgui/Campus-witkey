@@ -30,4 +30,8 @@
         SELECT * from message WHERE fromName=#{userName} OR toName=#{userName} ORDER BY createDate
 
     </select>
+
+    <delete id="deleteMessage" parameterType="int">
+        DELETE FROM message where id=#{id}
+    </delete>
 </mapper>

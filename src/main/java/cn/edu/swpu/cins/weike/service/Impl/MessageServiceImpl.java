@@ -134,4 +134,11 @@ public class MessageServiceImpl implements MessageService {
             throw new MessageException(ExceptionEnum.INNER_ERROR.getMsg());
         }
     }
+
+    @Override
+    public int deleteMessage(int id) {
+
+
+        return messageDao.deleteMessage(id);
+    }
 }

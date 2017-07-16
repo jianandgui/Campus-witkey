@@ -18,4 +18,6 @@ public interface MessageService {
     public List<Message> getConversationDetail(String conversationId) throws MessageException;
 
     public MessageList getConversationList(String username) throws MessageException;
+
+    public int deleteMessage(int id);
 }
