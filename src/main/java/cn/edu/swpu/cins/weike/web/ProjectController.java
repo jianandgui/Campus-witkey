@@ -47,7 +47,7 @@ public class ProjectController {
     public ResultData queryForProjectByName(@RequestParam String projectName) {
         try {
             ProjectDetail projectDetail = projectService.showProject(projectName);
-            return new ResultData(projectDetail);
+            return new ResultData(true,projectDetail);
         } catch (Exception e) {
             return new ResultData(false, e.getMessage());}
     }

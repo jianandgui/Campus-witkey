@@ -1,5 +1,7 @@
 package cn.edu.swpu.cins.weike.entity.view;
 
+import java.util.List;
+
 /**
  * Created by muyi on 17-5-21.
  */
@@ -16,7 +18,7 @@ public class ProjectDetail {
     //项目需要人数
     private int numNeed;
     //项目技能要求
-    private String projectNeed;
+    private List<String> projectNeed;
     //项目开始时间
     private long projectStart;
     //结束时间
@@ -24,7 +26,7 @@ public class ProjectDetail {
     //项目概述
     private String projectProfile;
 
-    public ProjectDetail(String projectName, String projectKind, String projectConnector, long qq, String email, int numNeed, String projectNeed, long projectStart, long projectEnd, String projectProfile) {
+    public ProjectDetail(String projectName, String projectKind, String projectConnector, long qq, String email, int numNeed, List<String> projectNeed, long projectStart, long projectEnd, String projectProfile) {
         this.projectName = projectName;
         this.projectKind = projectKind;
         this.projectConnector = projectConnector;
@@ -88,11 +90,11 @@ public class ProjectDetail {
         this.numNeed = numNeed;
     }
 
-    public String getProjectNeed() {
+    public List<String> getProjectNeed() {
         return projectNeed;
     }
 
-    public void setProjectNeed(String projectNeed) {
+    public void setProjectNeed(List<String> projectNeed) {
         this.projectNeed = projectNeed;
     }
 

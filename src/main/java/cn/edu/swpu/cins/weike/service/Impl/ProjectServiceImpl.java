@@ -40,7 +40,7 @@ public class ProjectServiceImpl implements ProjectService {
 
     //查询一个项目的详细信息
     @Override
-    public ProjectDetail showProject(String projectName) throws ProjectException {
+    public ProjectDetail showProject(String projectName)  throws ProjectException{
         try {
             return projectDao.queryProjectDetail(projectName);
         } catch (Exception e) {

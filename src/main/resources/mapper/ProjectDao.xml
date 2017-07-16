@@ -42,9 +42,15 @@
         
     </delete>
 
+    <resultMap id="projectResultMap" type="cn.edu.swpu.cins.weike.entity.view.ProjectDetail">
+        <result typeHandler="cn.edu.swpu.cins.weike.typehandler.StringArrayTypeHandler" column="projectNeed" javaType="list"
+                jdbcType="VARCHAR"
+                property="projectNeed"/>
+    </resultMap>
+
     <!--根据名字显示一个项目的详细情况-->
     <select id="queryProjectDetail" parameterType="String"
-            resultType="cn.edu.swpu.cins.weike.entity.view.ProjectDetail">
+            resultMap="projectResultMap">
 
         SELECT
         projectName,
