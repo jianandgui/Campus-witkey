@@ -2,6 +2,7 @@ package cn.edu.swpu.cins.weike.web;
 
 import cn.edu.swpu.cins.weike.config.filter.JwtTokenUtil;
 import cn.edu.swpu.cins.weike.entity.persistence.Message;
+import cn.edu.swpu.cins.weike.entity.view.MessageDelete;
 import cn.edu.swpu.cins.weike.entity.view.MessageList;
 import cn.edu.swpu.cins.weike.entity.view.MessageView;
 import cn.edu.swpu.cins.weike.entity.view.ResultData;
@@ -72,21 +73,22 @@ public class MessageController {
     //获取所有通信信息
     @GetMapping("/messageList")
     public ResultData getConversationDetail(HttpServletRequest request){
-//        try{
+        try{
             String username = getUsrName.AllProjects(request);
             MessageList list=messageService.getConversationList(username);
             if(list==null){
                 return new ResultData(MessageEnum.NO_MESSAGE.getMsg());}
             return new ResultData(true,list);
-//        }catch (Exception e){
-//            return new ResultData(false,e.getMessage());
-//        }
+        }catch (Exception e){
+            return new ResultData(false,e.getMessage());
+        }
     }
 
     //删除一条信息
     @PostMapping("/deleteMessage")
-    public ResultData deleteMessage(@RequestParam int id){
+    public ResultData deleteMessage(@RequestBody MessageDelete id){
         try{
+            messageService.deleteMessage(id.getId());
             return new ResultData(true,"信息删除成功");
         }catch (Exception e){
             return new ResultData(false,e.getMessage());
