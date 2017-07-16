@@ -72,15 +72,15 @@ public class MessageController {
     //获取所有通信信息
     @GetMapping("/messageList")
     public ResultData getConversationDetail(HttpServletRequest request){
-        try{
+//        try{
             String username = getUsrName.AllProjects(request);
             MessageList list=messageService.getConversationList(username);
             if(list==null){
                 return new ResultData(MessageEnum.NO_MESSAGE.getMsg());}
             return new ResultData(true,list);
-        }catch (Exception e){
-            return new ResultData(false,e.getMessage());
-        }
+//        }catch (Exception e){
+//            return new ResultData(false,e.getMessage());
+//        }
     }
 
     //删除一条信息

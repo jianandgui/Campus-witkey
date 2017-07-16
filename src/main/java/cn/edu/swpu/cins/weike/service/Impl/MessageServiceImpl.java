@@ -47,8 +47,8 @@ public class MessageServiceImpl implements MessageService {
 
     @Override
     @Transactional(rollbackFor = {RuntimeException.class, MessageException.class})
-    public int addMessage(String content, String projectName, String userSender) throws MessageException{
-        try {
+    public int addMessage(String content, String projectName, String userSender){
+//        try {
             Message message = new Message();
             StudentDetail studentSender = studentDao.queryForStudentPhone(userSender);
 
@@ -76,9 +76,9 @@ public class MessageServiceImpl implements MessageService {
             message.setContent(content);
             message.setCreateDate(new Date());
             return messageDao.addMessage(message);
-        } catch (Exception e) {
-            throw new MessageException(ExceptionEnum.INNER_ERROR.getMsg());
-        }
+//        } catch (Exception e) {
+//            throw new MessageException(ExceptionEnum.INNER_ERROR.getMsg());
+//        }
 
     }
 
@@ -99,8 +99,8 @@ public class MessageServiceImpl implements MessageService {
     实现思路：查询两张表，看是否存在该用户（两张表相互都不能存在同名）
      */
     @Override
-    public MessageList getConversationList(String username)  throws MessageException{
-        try {
+    public MessageList getConversationList(String username){
+//        try {
             StudentDetail studentDetail = null;
             studentDetail=studentDao.queryForStudentPhone(username);
             TeacherDetail teacherDetail = null;
@@ -130,9 +130,9 @@ public class MessageServiceImpl implements MessageService {
             MessageList messageList=new MessageList(fromMessages,toMessages);
             return messageList;
 
-        } catch (Exception e) {
-            throw new MessageException(ExceptionEnum.INNER_ERROR.getMsg());
-        }
+//        } catch (Exception e) {
+//            throw new MessageException(ExceptionEnum.INNER_ERROR.getMsg());
+//        }
     }
 
     @Override

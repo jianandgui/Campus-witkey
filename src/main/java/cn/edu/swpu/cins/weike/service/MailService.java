@@ -12,5 +12,5 @@ public interface MailService {
 
     public String sendMailForUpdatePwd(String to) throws Exception;
 
-    public String sendMailForProject(String email,String username,String projectName) throws Exception;
+    public String sendMailForProject(String email,String username,String projectName) ;
 }

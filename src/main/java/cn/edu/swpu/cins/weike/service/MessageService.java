@@ -13,11 +13,11 @@ import java.util.List;
  */
 public interface MessageService {
 
-    public int addMessage(String content,String projectName,String userSender) throws MessageException;
+    public int addMessage(String content,String projectName,String userSender) ;
 
     public List<Message> getConversationDetail(String conversationId) throws MessageException;
 
-    public MessageList getConversationList(String username) throws MessageException;
+    public MessageList getConversationList(String username) ;
 
     public int deleteMessage(int id) throws MessageException;
 }
