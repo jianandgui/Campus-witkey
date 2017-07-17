@@ -64,6 +64,17 @@ public class JwtUser implements UserDetails {
         this.email = email;
     }
 
+    @Override
+    public String toString() {
+        return "JwtUser{" +
+                "id=" + id +
+                ", username='" + username + '\'' +
+                ", password='" + password + '\'' +
+                ", email='" + email + '\'' +
+                ", authorities=" + authorities +
+                ", lastPasswordResetDate=" + lastPasswordResetDate +
+                '}';
+    }
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {

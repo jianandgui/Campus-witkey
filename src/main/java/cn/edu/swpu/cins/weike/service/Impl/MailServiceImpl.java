@@ -31,7 +31,7 @@ public class MailServiceImpl implements MailService {
 
 //    private String to = "yangquan95@163.com";
     //    获取4位随机数(验证码)
-    public static final char[] chars = "1234567890QWERTYUIOPASDFGHJKLZXCVBNM".toCharArray();
+    public static final char[] chars = "1234567890QWERTYUIOPASDFGHJKLZXCVBNMqwertyuiopasdfghjklzxcvbnm".toCharArray();
     public static Random random = new Random();
 
     public static String getRandomString() {

@@ -33,6 +33,18 @@ public class StudentInfo {
 
     }
 
+    @Override
+    public String toString() {
+        return "StudentInfo{" +
+                "Id=" + Id +
+                ", username='" + username + '\'' +
+                ", password='" + password + '\'' +
+                ", email='" + email + '\'' +
+                ", lastPasswordResetDate=" + lastPasswordResetDate +
+                ", role='" + role + '\'' +
+                '}';
+    }
+
     public int getId() {
         return Id;
     }

@@ -66,4 +66,15 @@ public class ProjectView {
     public void setEmail(String email) {
         this.email = email;
     }
+
+    @Override
+    public String toString() {
+        return "ProjectView{" +
+                "projectName='" + projectName + '\'' +
+                ", projectProfile='" + projectProfile + '\'' +
+                ", projectConnector='" + projectConnector + '\'' +
+                ", qq=" + qq +
+                ", email='" + email + '\'' +
+                '}';
+    }
 }

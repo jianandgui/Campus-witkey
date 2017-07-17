@@ -105,4 +105,18 @@ public class ProjectRecommend {
 
     public ProjectRecommend() {
     }
+
+    @Override
+    public String toString() {
+        return "ProjectRecommend{" +
+                "username='" + username + '\'' +
+                ", image='" + image + '\'' +
+                ", sex='" + sex + '\'' +
+                ", university='" + university + '\'' +
+                ", majorAndGrade='" + majorAndGrade + '\'' +
+                ", experience='" + experience + '\'' +
+                ", skills=" + skills +
+                ", qq=" + qq +
+                '}';
+    }
 }

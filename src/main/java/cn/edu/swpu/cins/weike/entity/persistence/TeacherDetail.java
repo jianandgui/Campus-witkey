@@ -44,6 +44,20 @@ public class TeacherDetail {
         this.qq = qq;
     }
 
+    @Override
+    public String toString() {
+        return "TeacherDetail{" +
+                "id=" + id +
+                ", username='" + username + '\'' +
+                ", image='" + image + '\'' +
+                ", sex='" + sex + '\'' +
+                ", university='" + university + '\'' +
+                ", academy='" + academy + '\'' +
+                ", rank='" + rank + '\'' +
+                ", qq=" + qq +
+                '}';
+    }
+
     public int getId() {
         return id;
     }

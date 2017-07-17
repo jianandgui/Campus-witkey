@@ -45,5 +45,14 @@ public class JwtAuthenticationResponse implements Serializable {
         return role;
     }
 
-
+    @Override
+    public String toString() {
+        return "JwtAuthenticationResponse{" +
+                "token='" + token + '\'' +
+                ", username='" + username + '\'' +
+                ", role='" + role + '\'' +
+                ", image='" + image + '\'' +
+                ", isCompleted=" + isCompleted +
+                '}';
+    }
 }

@@ -46,4 +46,13 @@ public class ResultData<T> {
     public void setMsg(String msg) {
         this.msg = msg;
     }
+
+    @Override
+    public String toString() {
+        return "ResultData{" +
+                "data=" + data +
+                ", ifSuccess=" + ifSuccess +
+                ", msg='" + msg + '\'' +
+                '}';
+    }
 }

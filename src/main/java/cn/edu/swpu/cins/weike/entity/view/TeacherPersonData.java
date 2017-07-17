@@ -109,4 +109,19 @@ public class TeacherPersonData {
     public void setEmail(String email) {
         this.email = email;
     }
+
+    @Override
+    public String toString() {
+        return "TeacherPersonData{" +
+                "id=" + id +
+                ", username='" + username + '\'' +
+                ", image='" + image + '\'' +
+                ", sex='" + sex + '\'' +
+                ", university='" + university + '\'' +
+                ", academy='" + academy + '\'' +
+                ", rank='" + rank + '\'' +
+                ", qq=" + qq +
+                ", email='" + email + '\'' +
+                '}';
+    }
 }

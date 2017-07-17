@@ -74,5 +74,15 @@ public class AdminInfo {
     public AdminInfo() {
     }
 
-
+    @Override
+    public String toString() {
+        return "AdminInfo{" +
+                "id=" + id +
+                ", username='" + username + '\'' +
+                ", password='" + password + '\'' +
+                ", role='" + role + '\'' +
+                ", email='" + email + '\'' +
+                ", lastPasswordResetDate=" + lastPasswordResetDate +
+                '}';
+    }
 }

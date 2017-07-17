@@ -179,4 +179,25 @@ public class PersonData {
     public void setId(int id) {
         this.id = id;
     }
+
+    @Override
+    public String toString() {
+        return "PersonData{" +
+                "id=" + id +
+                ", username='" + username + '\'' +
+                ", image='" + image + '\'' +
+                ", sex='" + sex + '\'' +
+                ", eduBackgroud='" + eduBackgroud + '\'' +
+                ", university='" + university + '\'' +
+                ", majorAndGrade='" + majorAndGrade + '\'' +
+                ", entryUniversity=" + entryUniversity +
+                ", leaveUniversity=" + leaveUniversity +
+                ", qq=" + qq +
+                ", skills=" + skills +
+                ", experience='" + experience + '\'' +
+                ", selfFeel='" + selfFeel + '\'' +
+                ", level='" + level + '\'' +
+                ", email='" + email + '\'' +
+                '}';
+    }
 }

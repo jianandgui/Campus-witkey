@@ -35,4 +35,12 @@ public class MessageList {
     public void setToMessages(List<Message> toMessages) {
         this.toMessages = toMessages;
     }
+
+    @Override
+    public String toString() {
+        return "MessageList{" +
+                "fromMessages=" + fromMessages +
+                ", toMessages=" + toMessages +
+                '}';
+    }
 }

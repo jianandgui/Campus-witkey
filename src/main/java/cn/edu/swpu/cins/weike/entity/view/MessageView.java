@@ -31,4 +31,12 @@ public class MessageView {
     public void setContent(String content) {
         this.content = content;
     }
+
+    @Override
+    public String toString() {
+        return "MessageView{" +
+                "projectName='" + projectName + '\'' +
+                ", content='" + content + '\'' +
+                '}';
+    }
 }

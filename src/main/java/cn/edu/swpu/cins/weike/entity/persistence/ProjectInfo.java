@@ -41,6 +41,22 @@ public class ProjectInfo {
 
     }
 
+    @Override
+    public String toString() {
+        return "ProjectInfo{" +
+                "projectId=" + projectId +
+                ", projectName='" + projectName + '\'' +
+                ", projectKind='" + projectKind + '\'' +
+                ", projectConnector='" + projectConnector + '\'' +
+                ", qq=" + qq +
+                ", email='" + email + '\'' +
+                ", numNeed=" + numNeed +
+                ", projectNeed=" + projectNeed +
+                ", projectStart=" + projectStart +
+                ", projectEnd=" + projectEnd +
+                ", projectProfile='" + projectProfile + '\'' +
+                '}';
+    }
 
     public int getProjectId() {
         return projectId;

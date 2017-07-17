@@ -26,6 +26,18 @@ TeacherInfo {
     public TeacherInfo() {
     }
 
+    @Override
+    public String toString() {
+        return "TeacherInfo{" +
+                "id=" + id +
+                ", username='" + username + '\'' +
+                ", password='" + password + '\'' +
+                ", email='" + email + '\'' +
+                ", role='" + role + '\'' +
+                ", lastPasswordResetDate=" + lastPasswordResetDate +
+                '}';
+    }
+
     public int getId() {
         return id;
     }

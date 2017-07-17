@@ -121,4 +121,20 @@ public class ProjectDetail {
     public void setProjectProfile(String projectProfile) {
         this.projectProfile = projectProfile;
     }
+
+    @Override
+    public String toString() {
+        return "ProjectDetail{" +
+                "projectName='" + projectName + '\'' +
+                ", projectKind='" + projectKind + '\'' +
+                ", projectConnector='" + projectConnector + '\'' +
+                ", qq=" + qq +
+                ", email='" + email + '\'' +
+                ", numNeed=" + numNeed +
+                ", projectNeed=" + projectNeed +
+                ", projectStart=" + projectStart +
+                ", projectEnd=" + projectEnd +
+                ", projectProfile='" + projectProfile + '\'' +
+                '}';
+    }
 }
