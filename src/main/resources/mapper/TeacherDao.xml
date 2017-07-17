@@ -67,6 +67,9 @@
         TeacherRegisterInfo
         WHERE
         email=#{email}
+
+
+        
     </select>
 
     <update id="updatePassword" parameterType="String">
