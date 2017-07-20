@@ -26,7 +26,6 @@ public interface StudentDao {
     //根据学生用户名查找学生（用于注册）
     public StudentInfo selectStudent(String username);
 
-
     //查找数据库中是否有相同邮箱（用于登录）或者邮箱的注册状态
     public StudentInfo queryEmail(String email);
 

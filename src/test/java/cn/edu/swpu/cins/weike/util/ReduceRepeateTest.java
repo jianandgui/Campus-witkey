@@ -32,9 +32,9 @@ public class ReduceRepeateTest {
     public void reduceStudentRepeate() throws Exception {
 
         List<String> list=new ArrayList<>();
-        list.add("spring");
         list.add("springmvc");
-        list.add("struct");
+        list.add("\"Java\"");
+        list.add("struct2");
         System.out.println(reduceRepeate.reduceStudentRepeate(list));
     }
 
