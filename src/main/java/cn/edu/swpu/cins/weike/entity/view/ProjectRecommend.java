@@ -107,6 +107,36 @@ public class ProjectRecommend {
     }
 
     @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof ProjectRecommend)) return false;
+
+        ProjectRecommend that = (ProjectRecommend) o;
+
+        if (getQq() != that.getQq()) return false;
+        if (!getUsername().equals(that.getUsername())) return false;
+        if (!getImage().equals(that.getImage())) return false;
+        if (!getSex().equals(that.getSex())) return false;
+        if (!getUniversity().equals(that.getUniversity())) return false;
+        if (!getMajorAndGrade().equals(that.getMajorAndGrade())) return false;
+        if (!getExperience().equals(that.getExperience())) return false;
+        return getSkills().equals(that.getSkills());
+    }
+
+    @Override
+    public int hashCode() {
+        int result = getUsername().hashCode();
+        result = 31 * result + getImage().hashCode();
+        result = 31 * result + getSex().hashCode();
+        result = 31 * result + getUniversity().hashCode();
+        result = 31 * result + getMajorAndGrade().hashCode();
+        result = 31 * result + getExperience().hashCode();
+        result = 31 * result + getSkills().hashCode();
+        result = 31 * result + (int) (getQq() ^ (getQq() >>> 32));
+        return result;
+    }
+
+    @Override
     public String toString() {
         return "ProjectRecommend{" +
                 "username='" + username + '\'' +

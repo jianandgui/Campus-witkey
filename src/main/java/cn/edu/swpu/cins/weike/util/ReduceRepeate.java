@@ -6,7 +6,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
+import java.util.stream.Collectors;
 
 /**
  * Created by muyi on 17-6-8.
@@ -27,29 +30,20 @@ public class ReduceRepeate {
 
         skills.forEach(s -> list.addAll(studentDao.queryAllRecommod(s)));
 
-
-//        for (String skill : skills) {
-//            list.addAll(studentDao.queryAllRecommod(skill));
-//        }
-
-
-
-
         //对List去重处理
-        List<ProjectRecommend> ProjectRecommodList = new ArrayList<ProjectRecommend>();
-        int num = 0;
-        for (ProjectRecommend projectRecommend : list) {
-            String username = projectRecommend.getUsername();
-            for (ProjectRecommend projectRecommend1 : ProjectRecommodList) {
-                if (username.equals(projectRecommend1.getUsername())) {
-                    num++;
-                }
-            }
-            if (num == 0) {
-                ProjectRecommodList.add(projectRecommend);
-            }
-        }
-        return ProjectRecommodList;
+        List<ProjectRecommend> projectRecommodList = new ArrayList<ProjectRecommend>();
+
+        //重写了hashCode和equal方法 尝试使用hash插入去重
+        HashSet<ProjectRecommend> projectRecommends=new HashSet<>();
+        list.forEach(projectRecommend -> {
+            projectRecommends.add(projectRecommend);
+        });
+
+        projectRecommends.forEach(projectRecommend -> {
+            projectRecommodList.add(projectRecommend);
+        });
+
+        return projectRecommodList;
     }
 
 
