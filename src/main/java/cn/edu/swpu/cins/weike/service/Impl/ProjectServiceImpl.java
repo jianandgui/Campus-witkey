@@ -33,7 +33,6 @@ public class ProjectServiceImpl implements ProjectService {
         try {
             return projectDao.queryAll(offset * pageCount, pageCount);
         } catch (Exception e) {
-
             throw new ProjectException(ExceptionEnum.INNER_ERROR.getMsg());
         }
     }

@@ -53,16 +53,16 @@ public class StudentServiceImpl implements StudentService {
     public int addPersonal(StudentDetail studentDetail) throws StudentException {
         try {
             int rate = studentDetail.getSkills().toArray().length;
-            if (rate == 1 || rate == 0) {
+            if (rate == 2 || rate == 0) {
                 studentDetail.setLevel("D");
             }
-            if (rate == 2) {
+            if (rate == 3) {
                 studentDetail.setLevel("C");
             }
-            if (rate == 3) {
+            if (rate == 4) {
                 studentDetail.setLevel("B");
             }
-            if (rate > 3) {
+            if (rate > 5) {
                 studentDetail.setLevel("A");
             }
             return studentDao.studentAddPersonal(studentDetail);
@@ -85,7 +85,6 @@ public class StudentServiceImpl implements StudentService {
     public int updateInfo(StudentDetail studentDetail, String username) throws StudentException {
         try {
             studentDetail.setUsername(username);
-
             return studentDao.updateInfo(studentDetail) > 0 ? 1 : 0;
         } catch (Exception e) {
             throw new StudentException("服务器异常！");

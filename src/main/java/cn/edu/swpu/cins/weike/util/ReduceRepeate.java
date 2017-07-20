@@ -24,25 +24,32 @@ public class ReduceRepeate {
 
         List<ProjectRecommend> list;
         list = new ArrayList<ProjectRecommend>();
-        for (String skill : skills) {
-            list.addAll(studentDao.queryAllRecommod(skill));
 
-        }
+        skills.forEach(s -> list.addAll(studentDao.queryAllRecommod(s)));
+
+
+//        for (String skill : skills) {
+//            list.addAll(studentDao.queryAllRecommod(skill));
+//        }
+
+
+
+
         //对List去重处理
-        List<ProjectRecommend> list1 = new ArrayList<ProjectRecommend>();
+        List<ProjectRecommend> ProjectRecommodList = new ArrayList<ProjectRecommend>();
         int num = 0;
         for (ProjectRecommend projectRecommend : list) {
             String username = projectRecommend.getUsername();
-            for (ProjectRecommend projectRecommend1 : list1) {
+            for (ProjectRecommend projectRecommend1 : ProjectRecommodList) {
                 if (username.equals(projectRecommend1.getUsername())) {
                     num++;
                 }
             }
             if (num == 0) {
-                list1.add(projectRecommend);
+                ProjectRecommodList.add(projectRecommend);
             }
         }
-        return list1;
+        return ProjectRecommodList;
     }
 
 

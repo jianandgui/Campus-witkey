@@ -51,15 +51,10 @@ public class MessageServiceImpl implements MessageService {
         try {
             Message message = new Message();
             StudentDetail studentSender = studentDao.queryForStudentPhone(userSender);
-
             TeacherDetail teacherSender = teacherDao.queryForPhone(userSender);
-
             String userSaver = projectDao.queryProjectDetail(projectName).getProjectConnector();
-
             StudentDetail studentSaver = studentDao.queryForStudentPhone(userSaver);
-
             TeacherDetail teacherSaver = teacherDao.queryForPhone(userSaver);
-
             String email = projectDao.queryProjectDetail(projectName).getEmail();
             if (studentSender != null) {
                 message.setFromName(studentSender.getUsername());
@@ -70,9 +65,7 @@ public class MessageServiceImpl implements MessageService {
                 mailService.sendMailForProject(email, studentSaver.getUsername(), projectName);
             } else {
                 message.setToName(teacherSaver.getUsername());
-
-                mailService.sendMailForProject(email, teacherSaver.getUsername(), projectName);
-            }
+                mailService.sendMailForProject(email, teacherSaver.getUsername(), projectName);}
             message.setContent(content);
             message.setCreateDate(new Date());
             return messageDao.addMessage(message);
@@ -117,15 +110,11 @@ public class MessageServiceImpl implements MessageService {
 //            return null;
             List<Message> fromMessages=new ArrayList<Message>();
             List<Message> toMessages=new ArrayList<Message>();
-
             for (Message message:messageDao.getConversationList(username)){
-
                 if(message.getToName().equals(username)){
-                    fromMessages.add(message);
-                }
+                    fromMessages.add(message);}
                 else {
                     toMessages.add(message);}
-
             }
             MessageList messageList=new MessageList(fromMessages,toMessages);
             return messageList;

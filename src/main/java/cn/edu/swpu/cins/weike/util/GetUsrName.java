@@ -21,10 +21,8 @@ public class GetUsrName {
     private String tokenHead;
 
     public String AllProjects(HttpServletRequest request) {
-
         String authHeader = request.getHeader(this.tokenHeader);
         final String authToken = authHeader.substring(tokenHead.length());
         return jwtTokenUtil.getUsernameFromToken(authToken);
-
     }
 }
