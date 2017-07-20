@@ -16,7 +16,6 @@
     </insert>
 
     <select id="getConversationDetail" parameterType="String" resultType="cn.edu.swpu.cins.weike.entity.persistence.Message">
-
         SELECT * from
         message
         where conversationId=#{conversationId}

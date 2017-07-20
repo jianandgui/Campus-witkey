@@ -50,14 +50,14 @@
 
         SELECT * FROM TeacherDetailInfo
         WHERE
-        username=#{username}
+        username=#{username} limit 1
     </select>
 
     <select id="queryByName" parameterType="String" resultType="cn.edu.swpu.cins.weike.entity.persistence.TeacherInfo">
 
         SELECT * FROM TeacherRegisterInfo
         WHERE
-        username=#{username}
+        username=#{username} limit 1
     </select>
 
 
@@ -66,7 +66,7 @@
         SELECT * FROM
         TeacherRegisterInfo
         WHERE
-        email=#{email}
+        email=#{email} limit 1
     </select>
 
     <update id="updatePassword" parameterType="String">
@@ -97,7 +97,7 @@
 
     <select id="queryForData" resultType="cn.edu.swpu.cins.weike.entity.view.TeacherPersonData" parameterType="String">
         SELECT * from TeacherDetailInfo
-        WHERE username=#{username}
+        WHERE username=#{username} limit 1
     </select>
 
 </mapper>

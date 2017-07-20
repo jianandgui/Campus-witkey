@@ -63,7 +63,7 @@
         projectStart,
         projectEnd,
         projectProfile
-        FROM ProjectInfo where projectName=#{projectName}
+        FROM ProjectInfo where projectName=#{projectName} limit 1
 
     </select>
 

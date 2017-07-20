@@ -11,7 +11,7 @@
         SELECT * FROM
         StudentRegisterInfo
         WHERE
-        username=#{username}
+        username=#{username} limit 1
     </select>
 
     <select id="queryEmail" parameterType="String" resultType="cn.edu.swpu.cins.weike.entity.persistence.StudentInfo">
@@ -19,7 +19,7 @@
         SELECT * FROM
         StudentRegisterInfo
         WHERE
-        email=#{email}
+        email=#{email} limit 1
     </select>
 
     <!--添加一个学生信息-->
@@ -78,7 +78,7 @@ INSERT INTO StudentRegisterInfo
 
     SELECT * FROM StudentDetailInfo
     WHERE
-    username=#{username}
+    username=#{username} limit 1
 </select>
 
     <update id="updatePassword" parameterType="String">
@@ -159,7 +159,7 @@ INSERT INTO StudentRegisterInfo
          selfFeel,
          level
         from StudentDetailInfo
-        WHERE username=#{username}
+        WHERE username=#{username} limit 1
 
     </select>
 </mapper>
