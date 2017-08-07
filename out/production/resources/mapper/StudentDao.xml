@@ -1,0 +1,165 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.edu.swpu.cins.weike.dao.StudentDao">
+
+    <!--根据用户名查询学生信息 用于注册-->
+    <select id="selectStudent" resultType="cn.edu.swpu.cins.weike.entity.persistence.StudentInfo"
+            parameterType="String">
+
+        SELECT * FROM
+        StudentRegisterInfo
+        WHERE
+        username=#{username} limit 1
+    </select>
+
+    <select id="queryEmail" parameterType="String" resultType="cn.edu.swpu.cins.weike.entity.persistence.StudentInfo">
+
+        SELECT * FROM
+        StudentRegisterInfo
+        WHERE
+        email=#{email} limit 1
+    </select>
+
+    <!--添加一个学生信息-->
+    <insert id="studentAddPersonal" parameterType="cn.edu.swpu.cins.weike.entity.persistence.StudentDetail">
+
+    INSERT INTO StudentDetailInfo
+    (username,
+    image,
+    sex,
+    eduBackgroud,
+    university,
+    majorAndGrade,
+    entryUniversity,
+    leaveUniversity,
+    qq,
+    skills,
+    experience,
+    selfFeel,
+    level)
+    VALUES
+    (#{username},
+    #{image},
+    #{sex},
+    #{eduBackgroud},
+    #{university},
+    #{majorAndGrade},
+    #{entryUniversity},
+    #{leaveUniversity},
+    #{qq},
+    #{skills , javaType = List , jdbcType = VARCHAR,typeHandler=cn.edu.swpu.cins.weike.typehandler.StringArrayTypeHandler},
+    #{experience},
+    #{selfFeel},
+    #{level})
+    </insert>
+
+    <insert id="studntRegister" parameterType="cn.edu.swpu.cins.weike.entity.persistence.StudentInfo">
+INSERT INTO StudentRegisterInfo
+    (username,
+    password,
+    email,
+    lastPasswordResetDate,
+    role)
+    VALUES
+    (#{username},
+    #{password},
+    #{email},
+    #{lastPasswordResetDate},
+    #{role})
+
+
+</insert>
+
+
+    <select id="queryForStudentPhone" parameterType="String"
+            resultType="cn.edu.swpu.cins.weike.entity.persistence.StudentDetail">
+
+    SELECT * FROM StudentDetailInfo
+    WHERE
+    username=#{username} limit 1
+</select>
+
+    <update id="updatePassword" parameterType="String">
+
+    UPDATE StudentRegisterInfo
+    SET password=#{password}
+    WHERE
+    username=#{username}
+</update>
+
+    <resultMap id="studentResultMap" type="cn.edu.swpu.cins.weike.entity.view.ProjectRecommend">
+        <result typeHandler="cn.edu.swpu.cins.weike.typehandler.StringArrayTypeHandler" column="skills" javaType="list"
+                jdbcType="VARCHAR"
+                property="skills"/>
+    </resultMap>
+
+    <select id="queryAllRecommod" parameterType="String" resultMap="studentResultMap">
+
+    SELECT
+    username,
+    image,
+    sex,
+    university,
+    majorAndGrade,
+    experience,
+    skills,
+    qq
+    FROM
+    StudentDetailInfo
+    WHERE
+    skills like "%"#{skills}"%"
+
+</select>
+
+
+    <update id="updateInfo" parameterType="cn.edu.swpu.cins.weike.entity.persistence.StudentDetail">
+    UPDATE StudentDetailInfo
+    SET
+    image=#{image},
+    sex=#{sex},
+    eduBackgroud=#{eduBackgroud},
+    university=#{university},
+    majorAndGrade=#{majorAndGrade},
+    entryUniversity=#{entryUniversity},
+    leaveUniversity=#{leaveUniversity},
+    qq=#{qq},
+    skills=#{skills , javaType = List , jdbcType = VARCHAR,typeHandler=cn.edu.swpu.cins.weike.typehandler.StringArrayTypeHandler},
+    experience=#{experience},
+    selfFeel=#{selfFeel}
+    WHERE username=#{username}
+
+    </update>
+
+    <select id="queryAllProject" parameterType="String" resultType="String">
+        SELECT projectName from ProjectInfo
+        WHERE projectConnector=#{projectConnector}
+    </select>
+
+    <resultMap id="studentDetailResultMap" type="cn.edu.swpu.cins.weike.entity.view.PersonData">
+        <result typeHandler="cn.edu.swpu.cins.weike.typehandler.StringArrayTypeHandler" column="skills" javaType="list"
+                jdbcType="VARCHAR"
+                property="skills"/>
+    </resultMap>
+    <select id="queryPerson" parameterType="String" resultMap="studentDetailResultMap">
+        SELECT
+         id,
+         username,
+         sex,
+         image,
+         eduBackgroud,
+         university,
+         majorAndGrade,
+         entryUniversity,
+         leaveUniversity,
+         qq,
+         skills,
+         experience,
+         selfFeel,
+         level
+        from StudentDetailInfo
+        WHERE username=#{username} limit 1
+
+    </select>
+</mapper>

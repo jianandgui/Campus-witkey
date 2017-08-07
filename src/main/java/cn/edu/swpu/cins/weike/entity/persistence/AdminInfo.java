@@ -1,6 +1,8 @@
 package cn.edu.swpu.cins.weike.entity.persistence;
 
 
+
+
 /**
  * Created by muyi on 17-4-12.
  */
@@ -13,15 +15,6 @@ public class AdminInfo {
     private String role;
     private String email;
     private long lastPasswordResetDate;
-
-    public AdminInfo(int id, String username, String password, String role, String email, long lastPasswordResetDate) {
-        this.id = id;
-        this.username = username;
-        this.password = password;
-        this.role = role;
-        this.email = email;
-        this.lastPasswordResetDate = lastPasswordResetDate;
-    }
 
     public int getId() {
         return id;
@@ -71,18 +64,19 @@ public class AdminInfo {
         this.lastPasswordResetDate = lastPasswordResetDate;
     }
 
+    public AdminInfo(int id, String username, String password, String role, String email, long lastPasswordResetDate) {
+        this.id = id;
+        this.username = username;
+        this.password = password;
+        this.role = role;
+        this.email = email;
+        this.lastPasswordResetDate = lastPasswordResetDate;
+    }
+
+
+
     public AdminInfo() {
     }
 
-    @Override
-    public String toString() {
-        return "AdminInfo{" +
-                "id=" + id +
-                ", username='" + username + '\'' +
-                ", password='" + password + '\'' +
-                ", role='" + role + '\'' +
-                ", email='" + email + '\'' +
-                ", lastPasswordResetDate=" + lastPasswordResetDate +
-                '}';
-    }
+
 }

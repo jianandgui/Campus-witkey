@@ -1,11 +1,15 @@
 package cn.edu.swpu.cins.weike.entity.persistence;
 
+
+
 import java.util.Date;
 
 /**
  * Created by muyi on 17-6-12.
  */
+
 public class Message {
+
 
     private int id;
     private String fromName;
@@ -14,19 +18,6 @@ public class Message {
     private Date createDate;
     private int hasRead;
     private String conversationId;
-
-    public Message(int id, String fromName, String toName, String content, Date createDate, int hasRead, String conversationId) {
-        this.id = id;
-        this.fromName = fromName;
-        this.toName = toName;
-        this.content = content;
-        this.createDate = createDate;
-        this.hasRead = hasRead;
-        this.conversationId = conversationId;
-    }
-
-    public Message() {
-    }
 
     public int getId() {
         return id;
@@ -84,16 +75,16 @@ public class Message {
         this.conversationId = conversationId;
     }
 
-    @Override
-    public String toString() {
-        return "Message{" +
-                "id=" + id +
-                ", fromName='" + fromName + '\'' +
-                ", toName='" + toName + '\'' +
-                ", content='" + content + '\'' +
-                ", createDate=" + createDate +
-                ", hasRead=" + hasRead +
-                ", conversationId='" + conversationId + '\'' +
-                '}';
+    public Message(int id, String fromName, String toName, String content, Date createDate, int hasRead, String conversationId) {
+        this.id = id;
+        this.fromName = fromName;
+        this.toName = toName;
+        this.content = content;
+        this.createDate = createDate;
+        this.hasRead = hasRead;
+        this.conversationId = conversationId;
+    }
+
+    public Message() {
     }
 }

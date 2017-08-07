@@ -1,11 +1,13 @@
 package cn.edu.swpu.cins.weike.entity.persistence;
 
+
 import java.sql.Date;
 import java.util.List;
 
 /**
  * Created by muyi on 17-4-24.
  */
+
 public class StudentDetail {
 
 
@@ -41,38 +43,6 @@ public class StudentDetail {
     //学生等级
     private String level;
 
-
-    public StudentDetail() {
-    }
-
-    @Override
-    public String toString() {
-        return "StudentDetail{" +
-                "id=" + id +
-                ", username='" + username + '\'' +
-                ", image='" + image + '\'' +
-                ", sex='" + sex + '\'' +
-                ", eduBackgroud='" + eduBackgroud + '\'' +
-                ", university='" + university + '\'' +
-                ", majorAndGrade='" + majorAndGrade + '\'' +
-                ", entryUniversity=" + entryUniversity +
-                ", leaveUniversity=" + leaveUniversity +
-                ", qq=" + qq +
-                ", skills=" + skills +
-                ", experience='" + experience + '\'' +
-                ", selfFeel='" + selfFeel + '\'' +
-                ", level='" + level + '\'' +
-                '}';
-    }
-
-    public String getImage() {
-        return image;
-    }
-
-    public void setImage(String image) {
-        this.image = image;
-    }
-
     public int getId() {
         return id;
     }
@@ -89,45 +59,20 @@ public class StudentDetail {
         this.username = username;
     }
 
+    public String getImage() {
+        return image;
+    }
+
+    public void setImage(String image) {
+        this.image = image;
+    }
+
     public String getSex() {
         return sex;
     }
 
     public void setSex(String sex) {
         this.sex = sex;
-    }
-
-
-    public long getQq() {
-        return qq;
-    }
-
-    public void setQq(long qq) {
-        this.qq = qq;
-    }
-
-    public List<String> getSkills() {
-        return skills;
-    }
-
-    public void setSkills(List<String> skills) {
-        this.skills = skills;
-    }
-
-    public String getLevel() {
-        return level;
-    }
-
-    public void setLevel(String level) {
-        this.level = level;
-    }
-
-    public String getExperience() {
-        return experience;
-    }
-
-    public void setExperience(String experience) {
-        this.experience = experience;
     }
 
     public String getEduBackgroud() {
@@ -170,12 +115,47 @@ public class StudentDetail {
         this.leaveUniversity = leaveUniversity;
     }
 
+    public long getQq() {
+        return qq;
+    }
+
+    public void setQq(long qq) {
+        this.qq = qq;
+    }
+
+    public List<String> getSkills() {
+        return skills;
+    }
+
+    public void setSkills(List<String> skills) {
+        this.skills = skills;
+    }
+
+    public String getExperience() {
+        return experience;
+    }
+
+    public void setExperience(String experience) {
+        this.experience = experience;
+    }
+
     public String getSelfFeel() {
         return selfFeel;
     }
 
     public void setSelfFeel(String selfFeel) {
         this.selfFeel = selfFeel;
+    }
+
+    public String getLevel() {
+        return level;
+    }
+
+    public void setLevel(String level) {
+        this.level = level;
+    }
+
+    public StudentDetail() {
     }
 
     public StudentDetail(int id, String username, String image, String sex, String eduBackgroud, String university, String majorAndGrade, long entryUniversity, long leaveUniversity, long qq, List<String> skills, String experience, String selfFeel, String level) {

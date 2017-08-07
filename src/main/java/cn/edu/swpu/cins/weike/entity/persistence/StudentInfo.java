@@ -1,7 +1,6 @@
 package cn.edu.swpu.cins.weike.entity.persistence;
 
-import lombok.Getter;
-import lombok.Setter;
+
 
 import java.sql.Date;
 
@@ -33,16 +32,14 @@ public class StudentInfo {
 
     }
 
-    @Override
-    public String toString() {
-        return "StudentInfo{" +
-                "Id=" + Id +
-                ", username='" + username + '\'' +
-                ", password='" + password + '\'' +
-                ", email='" + email + '\'' +
-                ", lastPasswordResetDate=" + lastPasswordResetDate +
-                ", role='" + role + '\'' +
-                '}';
+    public StudentInfo(int id, String username, String password, String email, long lastPasswordResetDate, String role) {
+        Id = id;
+        this.username = username;
+        this.password = password;
+
+        this.email = email;
+        this.lastPasswordResetDate = lastPasswordResetDate;
+        this.role = role;
     }
 
     public int getId() {
@@ -69,7 +66,6 @@ public class StudentInfo {
         this.password = password;
     }
 
-
     public String getEmail() {
         return email;
     }
@@ -77,7 +73,6 @@ public class StudentInfo {
     public void setEmail(String email) {
         this.email = email;
     }
-
 
     public long getLastPasswordResetDate() {
         return lastPasswordResetDate;
@@ -92,16 +87,6 @@ public class StudentInfo {
     }
 
     public void setRole(String role) {
-        this.role = role;
-    }
-
-    public StudentInfo(int id, String username, String password, String email, long lastPasswordResetDate, String role) {
-        Id = id;
-        this.username = username;
-        this.password = password;
-
-        this.email = email;
-        this.lastPasswordResetDate = lastPasswordResetDate;
         this.role = role;
     }
 }

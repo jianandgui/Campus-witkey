@@ -1,6 +1,9 @@
 package cn.edu.swpu.cins.weike.web;
 
 import cn.edu.swpu.cins.weike.WeikeApplication;
+import cn.edu.swpu.cins.weike.async.EventModel;
+import cn.edu.swpu.cins.weike.async.EventProducer;
+import cn.edu.swpu.cins.weike.async.EventType;
 import cn.edu.swpu.cins.weike.entity.view.JwtAuthenticationRequest;
 import cn.edu.swpu.cins.weike.entity.view.JwtAuthenticationResponse;
 import cn.edu.swpu.cins.weike.entity.view.ResultData;
@@ -8,9 +11,8 @@ import cn.edu.swpu.cins.weike.entity.view.UpdatePassword;
 import cn.edu.swpu.cins.weike.enums.LoginEnum;
 import cn.edu.swpu.cins.weike.enums.UpdatePwd;
 import cn.edu.swpu.cins.weike.service.MailService;
-import io.swagger.annotations.ApiImplicitParam;
-import io.swagger.annotations.ApiImplicitParams;
-import io.swagger.annotations.ApiOperation;
+
+import org.aspectj.lang.annotation.Aspect;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.web.bind.annotation.*;
@@ -40,6 +42,9 @@ public class AuthController {
     private MailService mailService;
     private TeacherDao teacherDao;
     private AdminDao adminDao;
+
+    @Autowired
+    EventProducer eventProducer;
 
     @Autowired
     public AuthController(AuthService authService, StudentDao studentDao, MailService mailService, TeacherDao teacherDao, AdminDao adminDao) {
@@ -94,7 +99,7 @@ public class AuthController {
 
     //学生获取验证码
     @RequestMapping(value = "/student/GetVerifyCodeForRegister", method = RequestMethod.GET)
-    public ResultData studentGetveriyCode(@RequestParam String username, @RequestParam String email) {
+    public ResultData studentGetVeriyCode(@RequestParam String username, @RequestParam String email) {
         try {
             if (studentDao.selectStudent(username) != null) {
                 return new ResultData(false, RegisterEnum.REPETE_USERNAME.getMessage());
@@ -103,6 +108,12 @@ public class AuthController {
                 return new ResultData(false, RegisterEnum.REPEATE_EMAIL.getMessage());
             }
             return new ResultData<StudentInfo>(true, mailService.sendSimpleMail(username, email));
+//            if(eventProducer.fireEvent(new EventModel(EventType.MAIL).setExts("username",username).setExts("email",email))){
+//                return new ResultData<StudentInfo>(true,"邮件发送成功");
+//            }
+
+//            return new ResultData(false,"服务器内部异常");
+
         } catch (Exception e) {
             return new ResultData(false, e.getMessage());
         }

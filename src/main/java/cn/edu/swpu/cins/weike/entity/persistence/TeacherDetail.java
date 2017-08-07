@@ -1,8 +1,11 @@
 package cn.edu.swpu.cins.weike.entity.persistence;
 
+
+
 /**
  * Created by muyi on 17-4-24.
  */
+
 public class TeacherDetail {
 
     //这个类用于用户注册后填写个人信息 允许不填 不过不能参加项目或其他项目功能
@@ -44,29 +47,12 @@ public class TeacherDetail {
         this.qq = qq;
     }
 
-    @Override
-    public String toString() {
-        return "TeacherDetail{" +
-                "id=" + id +
-                ", username='" + username + '\'' +
-                ", image='" + image + '\'' +
-                ", sex='" + sex + '\'' +
-                ", university='" + university + '\'' +
-                ", academy='" + academy + '\'' +
-                ", rank='" + rank + '\'' +
-                ", qq=" + qq +
-                '}';
-    }
-
     public int getId() {
         return id;
     }
 
     public void setId(int id) {
         this.id = id;
-    }
-
-    public TeacherDetail() {
     }
 
     public String getUsername() {
@@ -116,6 +102,4 @@ public class TeacherDetail {
     public void setQq(long qq) {
         this.qq = qq;
     }
-
-
 }

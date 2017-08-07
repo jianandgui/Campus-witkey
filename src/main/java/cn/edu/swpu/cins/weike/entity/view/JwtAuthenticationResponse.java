@@ -1,5 +1,7 @@
 package cn.edu.swpu.cins.weike.entity.view;
 
+
+
 import java.io.Serializable;
 
 public class JwtAuthenticationResponse implements Serializable {
@@ -12,17 +14,6 @@ public class JwtAuthenticationResponse implements Serializable {
     private final String image;
     private final boolean isCompleted;
 
-    public String getImage() {
-        return image;
-    }
-
-    public static long getSerialVersionUID() {
-        return serialVersionUID;
-    }
-
-    public boolean getIsCompleted() {
-        return isCompleted;
-    }
 
     public JwtAuthenticationResponse(String token, String username, String role, String image, boolean isCompleted) {
 
@@ -31,6 +22,10 @@ public class JwtAuthenticationResponse implements Serializable {
         this.role = role;
         this.image = image;
         this.isCompleted = isCompleted;
+    }
+
+    public static long getSerialVersionUID() {
+        return serialVersionUID;
     }
 
     public String getToken() {
@@ -45,14 +40,11 @@ public class JwtAuthenticationResponse implements Serializable {
         return role;
     }
 
-    @Override
-    public String toString() {
-        return "JwtAuthenticationResponse{" +
-                "token='" + token + '\'' +
-                ", username='" + username + '\'' +
-                ", role='" + role + '\'' +
-                ", image='" + image + '\'' +
-                ", isCompleted=" + isCompleted +
-                '}';
+    public String getImage() {
+        return image;
+    }
+
+    public boolean isCompleted() {
+        return isCompleted;
     }
 }

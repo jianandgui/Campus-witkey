@@ -1,8 +1,6 @@
 package cn.edu.swpu.cins.weike.entity.persistence;
 
-import lombok.Data;
-import lombok.Getter;
-import lombok.Setter;
+
 
 import java.sql.Date;
 import java.sql.Time;
@@ -12,6 +10,7 @@ import java.util.List;
 /**
  * Created by muyi on 17-4-6.
  */
+
 public class ProjectInfo {
 
     //项目id
@@ -35,28 +34,6 @@ public class ProjectInfo {
     private long projectEnd;
     //项目概述
     private String projectProfile;
-
-
-    public ProjectInfo() {
-
-    }
-
-    @Override
-    public String toString() {
-        return "ProjectInfo{" +
-                "projectId=" + projectId +
-                ", projectName='" + projectName + '\'' +
-                ", projectKind='" + projectKind + '\'' +
-                ", projectConnector='" + projectConnector + '\'' +
-                ", qq=" + qq +
-                ", email='" + email + '\'' +
-                ", numNeed=" + numNeed +
-                ", projectNeed=" + projectNeed +
-                ", projectStart=" + projectStart +
-                ", projectEnd=" + projectEnd +
-                ", projectProfile='" + projectProfile + '\'' +
-                '}';
-    }
 
     public int getProjectId() {
         return projectId;
@@ -82,6 +59,14 @@ public class ProjectInfo {
         this.projectKind = projectKind;
     }
 
+    public String getProjectConnector() {
+        return projectConnector;
+    }
+
+    public void setProjectConnector(String projectConnector) {
+        this.projectConnector = projectConnector;
+    }
+
     public long getQq() {
         return qq;
     }
@@ -102,6 +87,10 @@ public class ProjectInfo {
         return numNeed;
     }
 
+    public void setNumNeed(int numNeed) {
+        this.numNeed = numNeed;
+    }
+
     public List<String> getProjectNeed() {
         return projectNeed;
     }
@@ -110,38 +99,12 @@ public class ProjectInfo {
         this.projectNeed = projectNeed;
     }
 
-    public void setNumNeed(int numNeed) {
-        this.numNeed = numNeed;
-    }
-
-    public ProjectInfo(int projectId, String projectName, String projectKind, String projectConnector, long qq, String email, int numNeed, List<String> projectNeed, long projectStart, long projectEnd, String projectProfile) {
-        this.projectId = projectId;
-        this.projectName = projectName;
-        this.projectKind = projectKind;
-        this.projectConnector = projectConnector;
-        this.qq = qq;
-        this.email = email;
-        this.numNeed = numNeed;
-        this.projectNeed = projectNeed;
-        this.projectStart = projectStart;
-        this.projectEnd = projectEnd;
-        this.projectProfile = projectProfile;
-    }
-
     public long getProjectStart() {
         return projectStart;
     }
 
     public void setProjectStart(long projectStart) {
         this.projectStart = projectStart;
-    }
-
-    public String getProjectConnector() {
-        return projectConnector;
-    }
-
-    public void setProjectConnector(String projectConnector) {
-        this.projectConnector = projectConnector;
     }
 
     public long getProjectEnd() {
@@ -159,6 +122,25 @@ public class ProjectInfo {
     public void setProjectProfile(String projectProfile) {
         this.projectProfile = projectProfile;
     }
+
+    public ProjectInfo() {
+
+    }
+    public ProjectInfo(int projectId, String projectName, String projectKind, String projectConnector, long qq, String email, int numNeed, List<String> projectNeed, long projectStart, long projectEnd, String projectProfile) {
+        this.projectId = projectId;
+        this.projectName = projectName;
+        this.projectKind = projectKind;
+        this.projectConnector = projectConnector;
+        this.qq = qq;
+        this.email = email;
+        this.numNeed = numNeed;
+        this.projectNeed = projectNeed;
+        this.projectStart = projectStart;
+        this.projectEnd = projectEnd;
+        this.projectProfile = projectProfile;
+    }
+
+
 
 
 }

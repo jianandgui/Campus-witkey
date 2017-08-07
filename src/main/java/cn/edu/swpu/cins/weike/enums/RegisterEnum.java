@@ -1,7 +1,5 @@
 package cn.edu.swpu.cins.weike.enums;
 
-import lombok.Getter;
-import lombok.Setter;
 
 /**
  * Created by muyi on 17-4-6.

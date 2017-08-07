@@ -1,6 +1,8 @@
 package cn.edu.swpu.cins.weike.entity.view;
 
+
 import java.io.Serializable;
+
 
 public class JwtAuthenticationRequest implements Serializable {
 
@@ -17,8 +19,12 @@ public class JwtAuthenticationRequest implements Serializable {
         this.setPassword(password);
     }
 
+    public static long getSerialVersionUID() {
+        return serialVersionUID;
+    }
+
     public String getUsername() {
-        return this.username;
+        return username;
     }
 
     public void setUsername(String username) {
@@ -26,18 +32,10 @@ public class JwtAuthenticationRequest implements Serializable {
     }
 
     public String getPassword() {
-        return this.password;
+        return password;
     }
 
     public void setPassword(String password) {
         this.password = password;
-    }
-
-    @Override
-    public String toString() {
-        return "JwtAuthenticationRequest{" +
-                "username='" + username + '\'' +
-                ", password='" + password + '\'' +
-                '}';
     }
 }
