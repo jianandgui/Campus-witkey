@@ -99,7 +99,7 @@ public class AuthController {
 
     //学生获取验证码
     @RequestMapping(value = "/student/GetVerifyCodeForRegister", method = RequestMethod.GET)
-    public ResultData studentGetVeriyCode(@RequestParam String username, @RequestParam String email) {
+    public ResultData studentGetVerifyCode(@RequestParam String username, @RequestParam String email) {
         try {
             if (studentDao.selectStudent(username) != null) {
                 return new ResultData(false, RegisterEnum.REPETE_USERNAME.getMessage());
