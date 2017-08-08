@@ -1,5 +1,8 @@
 package cn.edu.swpu.cins.weike.service.Impl;
 
+import cn.edu.swpu.cins.weike.async.EventModel;
+import cn.edu.swpu.cins.weike.async.EventProducer;
+import cn.edu.swpu.cins.weike.async.EventType;
 import cn.edu.swpu.cins.weike.dao.MessageDao;
 import cn.edu.swpu.cins.weike.dao.ProjectDao;
 import cn.edu.swpu.cins.weike.dao.StudentDao;
@@ -33,6 +36,9 @@ public class MessageServiceImpl implements MessageService {
     private MailService mailService;
 
     @Autowired
+    EventProducer eventProducer;
+
+    @Autowired
     public MessageServiceImpl(MessageDao messageDao, TeacherDao teacherDao, StudentDao studentDao, ProjectDao projectDao, MailService mailService) {
         this.messageDao = messageDao;
         this.teacherDao = teacherDao;
@@ -46,7 +52,6 @@ public class MessageServiceImpl implements MessageService {
      */
 
     @Override
-    @Transactional(rollbackFor = {RuntimeException.class, MessageException.class})
     public int addMessage(String content, String projectName, String userSender) throws MessageException{
         try {
             Message message = new Message();
@@ -62,10 +67,16 @@ public class MessageServiceImpl implements MessageService {
                 message.setFromName(teacherSender.getUsername());
             if (studentSaver != null) {
                 message.setToName(studentSaver.getUsername());
-                mailService.sendMailForProject(email, studentSaver.getUsername(), projectName);
+//                mailService.sendMailForProject(email, studentSaver.getUsername(), projectName);
+                eventProducer.fireEvent(new EventModel(EventType.MAIL).setExts("email",email)
+                             .setExts("username",studentSaver.getUsername())
+                             .setExts("projectName",projectName));
             } else {
                 message.setToName(teacherSaver.getUsername());
-                mailService.sendMailForProject(email, teacherSaver.getUsername(), projectName);}
+//                mailService.sendMailForProject(email, teacherSaver.getUsername(), projectName)
+                eventProducer.fireEvent(new EventModel(EventType.MAIL).setExts("email",email)
+                        .setExts("username",teacherSaver.getUsername())
+                        .setExts("projectName",projectName));}
             message.setContent(content);
             message.setCreateDate(new Date());
             return messageDao.addMessage(message);

@@ -2,7 +2,8 @@ package cn.edu.swpu.cins.weike.async;
 
 public enum EventType {
 
-    MAIL(0);
+    MAIL(0),
+    MESSAGE(1);
 
     private int value;
 

@@ -3,11 +3,11 @@ spring:
     password: 1111
     username: root
     driver-class-name: com.mysql.jdbc.Driver
-    url: jdbc:mysql://127.0.0.1:3306/weike?verifyServerCertificate=false&useSSL=true&useUnicode=true&characterEncoding=utf8
+    url: jdbc:mysql://182.150.37.74:3306/weike?verifyServerCertificate=false&useSSL=true&useUnicode=true&characterEncoding=utf8
   mail:
       host: smtp.qq.com
       username: 879604213@qq.com
-      password: elqokecmeqqbbeba
+      password: jcdkjtlyoduybfje
       properties:
        mail:
         smtp:
