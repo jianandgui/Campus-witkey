@@ -4,6 +4,7 @@ import cn.edu.swpu.cins.weike.WeikeApplication;
 import cn.edu.swpu.cins.weike.async.EventModel;
 import cn.edu.swpu.cins.weike.async.EventProducer;
 import cn.edu.swpu.cins.weike.async.EventType;
+import cn.edu.swpu.cins.weike.entity.persistence.*;
 import cn.edu.swpu.cins.weike.entity.view.JwtAuthenticationRequest;
 import cn.edu.swpu.cins.weike.entity.view.JwtAuthenticationResponse;
 import cn.edu.swpu.cins.weike.entity.view.ResultData;
@@ -19,10 +20,6 @@ import org.springframework.web.bind.annotation.*;
 import cn.edu.swpu.cins.weike.dao.AdminDao;
 import cn.edu.swpu.cins.weike.dao.StudentDao;
 import cn.edu.swpu.cins.weike.dao.TeacherDao;
-import cn.edu.swpu.cins.weike.entity.persistence.StudentDetail;
-import cn.edu.swpu.cins.weike.entity.persistence.StudentInfo;
-import cn.edu.swpu.cins.weike.entity.persistence.TeacherDetail;
-import cn.edu.swpu.cins.weike.entity.persistence.TeacherInfo;
 import cn.edu.swpu.cins.weike.enums.RegisterEnum;
 import cn.edu.swpu.cins.weike.service.AuthService;
 
@@ -277,14 +274,16 @@ public class AuthController {
 
     }
 
-    //    //管理员注册 注册完毕关闭接口
-//    @RequestMapping(value = "/admin/register", method = RequestMethod.POST)
-//    public ResultData adminSaveToDB(@RequestBody AdminInfo adminInfo)throws AuthenticationException {
-//
-//
-//        return new ResultData<AdminInfo> (true,authService.adminRegister(adminInfo));
-//
-//    }
+/*
+    //管理员注册 注册完毕关闭接口
+    @RequestMapping(value = "/admin/register", method = RequestMethod.POST)
+    public ResultData adminSaveToDB(@RequestBody AdminInfo adminInfo) throws AuthenticationException {
+
+
+        return new ResultData<AdminInfo>(true, authService.adminRegister(adminInfo));
+
+    }
+*/
 
 
 }

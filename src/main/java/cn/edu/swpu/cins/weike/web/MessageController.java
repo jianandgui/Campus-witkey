@@ -82,6 +82,7 @@ public class MessageController {
         }catch (Exception e){
             return new ResultData(false,e.getMessage());
         }
+
     }
 
     //删除一条信息

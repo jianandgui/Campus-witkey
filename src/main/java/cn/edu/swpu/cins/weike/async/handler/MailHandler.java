@@ -23,17 +23,16 @@ public class MailHandler implements EventHandler {
 
     @Override
     public void doHandle(EventModel model){
-//        try{
+        try{
 
             mailService.sendSimpleMail(model.getExts().get("username"),model.getExts().get("email"));
             logger.info(model.getExts().get("username"),model.getExts().get("email"));
-//            mailService.sendSimpleMail("test","yangquan95@163.com");
 
 
-//        }catch (Exception e){
-//            logger.info(model.getExts().get("username"),model.getExts().get("email"));
-//            logger.info("出现错误咯！");
-//        }
+        }catch (Exception e){
+            logger.info(model.getExts().get("username"),model.getExts().get("email"));
+            logger.info("出现错误咯！");
+        }
 
 
     }
