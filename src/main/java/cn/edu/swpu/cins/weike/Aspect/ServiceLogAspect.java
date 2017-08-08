@@ -24,17 +24,21 @@ public class ServiceLogAspect {
     public void before(JoinPoint joinPoint) {
         Signature signature = joinPoint.getSignature();
         String method = signature.getDeclaringTypeName() + '.' + signature.getName();
+        logger.info("\n");
         logger.info("calling : " + method);
         Object[] args = joinPoint.getArgs();
         for (Object arg : args) {
             logger.info("arg : " + arg);
         }
+        logger.info("\n");
+
     }
 
     @AfterReturning(pointcut = "service()", returning = "ret")
     public void afterReturn(Object ret) {
+        logger.info("\n");
         logger.info("service return : " + ret);
-
+        logger.info("\n");
     }
 
 }

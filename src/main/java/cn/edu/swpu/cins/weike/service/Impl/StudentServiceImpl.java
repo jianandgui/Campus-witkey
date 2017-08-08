@@ -73,9 +73,9 @@ public class StudentServiceImpl implements StudentService {
 
     //重新抽离出一个方法
     @Override
-    public List<ProjectRecommend> queryForReCommod(List<String> skills) throws StudentException {
+    public List<ProjectRecommend> queryForReCommod(List<String> skills,String username) throws StudentException {
         try {
-            return reduceRepeate.reduceStudentRepeate(skills);
+            return reduceRepeate.reduceStudentRepeat(skills,username);
         } catch (Exception e) {
             throw new StudentException("数据库学生发布项目推荐人选异常");
         }

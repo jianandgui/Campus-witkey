@@ -23,16 +23,13 @@ public class ReduceRepeate {
     @Autowired
     private StudentDao studentDao;
 
-    public List<ProjectRecommend> reduceStudentRepeate(List<String> skills) {
+    public List<ProjectRecommend> reduceStudentRepeat(List<String> skills,String username) {
 
         List<ProjectRecommend> list;
         list = new ArrayList<ProjectRecommend>();
-
         skills.forEach(s -> list.addAll(studentDao.queryAllRecommod(s)));
-
         //对List去重处理
         List<ProjectRecommend> projectRecommodList = new ArrayList<ProjectRecommend>();
-
         //重写了hashCode和equal方法 尝试使用hash插入去重
         HashSet<ProjectRecommend> projectRecommends=new HashSet<>();
         list.forEach(projectRecommend -> {
@@ -43,7 +40,11 @@ public class ReduceRepeate {
             projectRecommodList.add(projectRecommend);
         });
 
-        return projectRecommodList;
+        //去除自己
+
+
+
+        return  projectRecommodList.stream().filter(projectRecommend -> !projectRecommend.getUsername().equals(username)).collect(Collectors.toList());
     }
 
 

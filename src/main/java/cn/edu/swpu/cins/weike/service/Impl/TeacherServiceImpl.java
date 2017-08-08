@@ -56,9 +56,9 @@ public class TeacherServiceImpl implements TeacherService {
     }
 
     @Override
-    public List<ProjectRecommend> queryStudentForReCommod(List<String> skills) throws TeacherException {
+    public List<ProjectRecommend> queryStudentForReCommod(List<String> skills,String username) throws TeacherException {
         try {
-            return reduceRepeate.reduceStudentRepeate(skills);
+            return reduceRepeate.reduceStudentRepeat(skills,username);
         } catch (Exception e) {
             throw new TeacherException(ExceptionEnum.INNER_ERROR.getMsg());
         }

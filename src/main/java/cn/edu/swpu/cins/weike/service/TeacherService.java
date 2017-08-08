@@ -25,7 +25,7 @@ public interface TeacherService {
     //老师发送邮件给学生
 
     //发布项目进行推荐
-    public List<ProjectRecommend> queryStudentForReCommod(List<String> skills) throws TeacherException;
+    public List<ProjectRecommend> queryStudentForReCommod(List<String> skills,String username) throws TeacherException;
 
     public int updateInfo(TeacherDetail teacherDetail, String username) throws TeacherException;
 

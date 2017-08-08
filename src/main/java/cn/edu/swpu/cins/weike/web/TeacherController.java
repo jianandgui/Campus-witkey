@@ -63,10 +63,10 @@ public class TeacherController {
                     projectInfo.setQq(teacherDetail.getQq());
                     if (teacherService.issueProject(projectInfo) != 1) {
                         return new ResultData(false, ProjectEnum.PUBLISH_PROJECT_FAILD.getMsg());}
-                        if(teacherService.queryStudentForReCommod(projectInfo.getProjectNeed()).isEmpty()){
+                        if(teacherService.queryStudentForReCommod(projectInfo.getProjectNeed(),username).isEmpty()){
                         return new ResultData(true,ProjectEnum.NO_SUITBLE_PERSON.getMsg());
                         }
-                    return new ResultData(true,teacherService.queryStudentForReCommod(projectInfo.getProjectNeed()));}
+                    return new ResultData(true,teacherService.queryStudentForReCommod(projectInfo.getProjectNeed(),username));}
                 return new ResultData(false, ProjectEnum.ADD_PERSONNAL.getMsg());}
             return new ResultData(false, ProjectEnum.REPEATE_PROJECT.getMsg());
         } catch (Exception e) {
