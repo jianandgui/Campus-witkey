@@ -35,16 +35,16 @@ public class MailHandler implements EventHandler {
             if(model.getExts().containsKey("projectName")){
                 mailService.sendMailForProject(model.getExts().get("email"),model.getExts().get("username"),model.getExts().get("projectName"));
             }
-            if(model.getExts().containsKey("updatePwd")){
+            else if(model.getExts().containsKey("updatePwd")){
                 String toEmail=model.getExts().get("email");
                 String verifyCode =mailService.sendMailForUpdatePwd(toEmail);
                 jedis.setex(RedisKey.getBizFindPassword(model.getExts().get("username")),1800,verifyCode);
             }
-            String username=model.getExts().get("username");
-            String verifyCode=mailService.sendSimpleMail(username,model.getExts().get("email"));
-            jedis.setex(RedisKey.getBizRegisterKey(username),1800,verifyCode);
-
-
+            else {
+                String username=model.getExts().get("username");
+                String verifyCode=mailService.sendSimpleMail(username,model.getExts().get("email"));
+                jedis.setex(RedisKey.getBizRegisterKey(username),1800,verifyCode);
+            }
         }catch (Exception e){
             logger.info("出现错误咯！");
         }
