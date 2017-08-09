@@ -23,7 +23,7 @@ public class JedisAdapter implements InitializingBean {
     }
 
     public static void mainx(String[] argv) {
-        Jedis jedis = new Jedis("redis://localhost:6379/9");
+        Jedis jedis = new Jedis("redis://127.0.0.1:6379/9");
         jedis.flushDB();
 
         // get set
@@ -408,5 +408,20 @@ public class JedisAdapter implements InitializingBean {
     public void afterPropertiesSet() throws Exception {
         pool = new JedisPool("redis://127.0.0.1:6379/10");
     }
+
+  /*  public Jedis getJedis(String key, String member) {
+        Jedis jedis = null;
+        try {
+            jedis = pool.getResource();
+            return jedis;
+        } catch (Exception e) {
+            logger.error("发生异常" + e.getMessage());
+        } finally {
+            if (jedis != null) {
+                jedis.close();
+            }
+        }
+        return null;
+    }*/
 
 }

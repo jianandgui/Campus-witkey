@@ -49,8 +49,8 @@ public class AuthServiceImpl implements AuthService {
     }
 
     @Override
-    public int studentRegister(StudentInfo studentinfo) throws AuthException {
-        try {
+    public int studentRegister(StudentInfo studentinfo) {
+//        try {
             final String username = studentinfo.getUsername();
             if (studentDao.selectStudent(username) != null&& teacherDao.queryByName(username)!=null) {
                 return 0;
@@ -61,9 +61,9 @@ public class AuthServiceImpl implements AuthService {
             studentinfo.setLastPasswordResetDate(new Date().getTime());
             studentinfo.setRole("ROLE_STUDENT");
             return studentDao.studntRegister(studentinfo);
-        } catch (Exception e) {
-            throw new AuthException(ExceptionEnum.INNER_ERROR.getMsg());
-        }
+//        } catch (Exception e) {
+//            throw new AuthException(ExceptionEnum.INNER_ERROR.getMsg());
+//        }
     }
 
     @Override

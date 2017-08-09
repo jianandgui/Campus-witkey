@@ -1,19 +1,16 @@
 package cn.edu.swpu.cins.weike.web;
 
-import cn.edu.swpu.cins.weike.WeikeApplication;
 import cn.edu.swpu.cins.weike.async.EventModel;
 import cn.edu.swpu.cins.weike.async.EventProducer;
 import cn.edu.swpu.cins.weike.async.EventType;
 import cn.edu.swpu.cins.weike.entity.persistence.*;
-import cn.edu.swpu.cins.weike.entity.view.JwtAuthenticationRequest;
-import cn.edu.swpu.cins.weike.entity.view.JwtAuthenticationResponse;
-import cn.edu.swpu.cins.weike.entity.view.ResultData;
-import cn.edu.swpu.cins.weike.entity.view.UpdatePassword;
+import cn.edu.swpu.cins.weike.entity.view.*;
 import cn.edu.swpu.cins.weike.enums.LoginEnum;
 import cn.edu.swpu.cins.weike.enums.UpdatePwd;
 import cn.edu.swpu.cins.weike.service.MailService;
 
-import org.aspectj.lang.annotation.Aspect;
+import cn.edu.swpu.cins.weike.util.JedisAdapter;
+import cn.edu.swpu.cins.weike.util.RedisKey;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.web.bind.annotation.*;
@@ -22,6 +19,7 @@ import cn.edu.swpu.cins.weike.dao.StudentDao;
 import cn.edu.swpu.cins.weike.dao.TeacherDao;
 import cn.edu.swpu.cins.weike.enums.RegisterEnum;
 import cn.edu.swpu.cins.weike.service.AuthService;
+import redis.clients.jedis.Jedis;
 
 
 /**
@@ -39,6 +37,13 @@ public class AuthController {
     private MailService mailService;
     private TeacherDao teacherDao;
     private AdminDao adminDao;
+
+
+
+
+    @Autowired
+    JedisAdapter jedisAdapter;
+
 
     @Autowired
     EventProducer eventProducer;
@@ -95,21 +100,20 @@ public class AuthController {
     }
 
     //学生获取验证码
+    //前端验证成后端验证 采用异步发送邮件
     @RequestMapping(value = "/student/GetVerifyCodeForRegister", method = RequestMethod.GET)
     public ResultData studentGetVerifyCode(@RequestParam String username, @RequestParam String email) {
         try {
             if (studentDao.selectStudent(username) != null) {
-                return new ResultData(false, RegisterEnum.REPETE_USERNAME.getMessage());
-            }
+                return new ResultData(false, RegisterEnum.REPETE_USERNAME.getMessage()); }
             if (studentDao.queryEmail(email) != null) {
-                return new ResultData(false, RegisterEnum.REPEATE_EMAIL.getMessage());
-            }
-            return new ResultData<StudentInfo>(true, mailService.sendSimpleMail(username, email));
-//            if(eventProducer.fireEvent(new EventModel(EventType.MAIL).setExts("username",username).setExts("email",email))){
-//                return new ResultData<StudentInfo>(true,"邮件发送成功");
-//            }
-
-//            return new ResultData(false,"服务器内部异常");
+                return new ResultData(false, RegisterEnum.REPEATE_EMAIL.getMessage()); }
+//            return new ResultData<StudentInfo>(true, mailService.sendSimpleMail(username, email));
+            eventProducer.fireEvent(new EventModel(EventType.MAIL)
+                         .setExts("username",username)
+                         .setExts("email",email));
+                return new ResultData<StudentInfo>(true,"请到您的邮箱查看验证码");
+            //return new ResultData(false,"服务器内部异常");
 
         } catch (Exception e) {
             return new ResultData(false, e.getMessage());
@@ -119,16 +123,26 @@ public class AuthController {
 
     //学生保存信息（在前端验证码通过之后）
     @RequestMapping(value = "/student/register", method = RequestMethod.POST)
-    public ResultData StudentSaveToDB(@RequestBody StudentInfo studentinfo) {
-        try {
-            if (authService.studentRegister(studentinfo) == 1) {
-                return new ResultData(true, RegisterEnum.SUCCESS_SAVE.getMessage());}
-            return new ResultData(true, RegisterEnum.FAIL_SAVE.getMessage());
-        } catch (Exception e) {
-            return new ResultData(false, e.getMessage());
-        }
+    public ResultData StudentSaveToDB(@RequestBody RegisterStudentVO registerStudentVO) {
+
+//        try {
+
+           Jedis jedis = jedisAdapter.getJedis();
+            String username=registerStudentVO.getStudentInfo().getUsername();
+            String redisKey= RedisKey.getBizRegisterKey(username);
+            if(jedis.exists(redisKey)){
+                if(jedis.get(redisKey).equals(registerStudentVO.getVerifyCode())){
+                    if (authService.studentRegister(registerStudentVO.getStudentInfo()) == 1) {
+                        return new ResultData(true, RegisterEnum.SUCCESS_SAVE.getMessage());}
+                    return new ResultData(true, RegisterEnum.FAIL_SAVE.getMessage()); }
+                return new ResultData(false,"验证码错误"); }
+            return new ResultData(false,"请重新获取验证码");
+//        } catch (Exception e) {
+//            return new ResultData(false, e.getMessage());
+//        }
     }
 
+    //修改密码发送邮件验证码修改为异步操作 通过消息队列
     //学生修改密码获取验证码
     @GetMapping("/student/getVerifyCodeForFindPassword")
     public ResultData studentGetVerifyForUpdate(@RequestParam String username, @RequestParam String email) {
@@ -139,6 +153,9 @@ public class AuthController {
             if (!email.equals(studentinfo.getEmail())) {
                 return new ResultData(false, UpdatePwd.WRONG_EMALI.getMsg());}
             return new ResultData(true, mailService.sendMailForUpdatePwd(studentinfo.getEmail()));
+//            if(eventProducer.fireEvent(new EventModel(EventType.MAIL).setExts("username",username).setExts("email",email))){
+//                return new ResultData<StudentInfo>(true,"邮件发送成功"); }
+//            return new ResultData(false, "发送邮件失败");
         } catch (Exception e) {
             return new ResultData(false, e.getMessage());
         }
@@ -238,12 +255,22 @@ public class AuthController {
 
     //教师注册（保存数据库） 在前端未通过之前我们不进行保存
     @RequestMapping(value = "/teacher/register", method = RequestMethod.POST)
-    public ResultData teacherSaveToDB(@RequestBody TeacherInfo teacherinfo) {
+    public ResultData teacherSaveToDB(@RequestBody RegisterTeacherVO registerTeacherVO) {
         try {
-            if (authService.teacherRegister(teacherinfo) == 1) {
-                return new ResultData(true, RegisterEnum.SUCCESS_SAVE.getMessage());
+
+            Jedis jedis=jedisAdapter.getJedis();
+            String username=registerTeacherVO.getTeacherInfo().getUsername();
+            String redisKey= RedisKey.getBizRegisterKey(username);
+            if(jedis.exists(redisKey)){
+                if(jedis.get(redisKey).equals(registerTeacherVO.getVerifyCode())){
+
+                    if (authService.teacherRegister(registerTeacherVO.getTeacherInfo()) == 1) {
+                        return new ResultData(true, RegisterEnum.SUCCESS_SAVE.getMessage());}
+                    return new ResultData(true, RegisterEnum.FAIL_SAVE.getMessage());
+                }
+                return new ResultData(false,"验证码错误");
             }
-            return new ResultData(true, RegisterEnum.FAIL_SAVE);
+            return new ResultData(false,"请重新获取验证码");
         } catch (Exception e) {
             return new ResultData(false, e.getMessage());
         }

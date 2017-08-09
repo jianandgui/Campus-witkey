@@ -4,10 +4,13 @@ import cn.edu.swpu.cins.weike.async.EventHandler;
 import cn.edu.swpu.cins.weike.async.EventModel;
 import cn.edu.swpu.cins.weike.async.EventType;
 import cn.edu.swpu.cins.weike.service.MailService;
+import cn.edu.swpu.cins.weike.util.JedisAdapter;
+import cn.edu.swpu.cins.weike.util.RedisKey;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+import redis.clients.jedis.Jedis;
 
 import java.util.Arrays;
 import java.util.HashMap;
@@ -20,14 +23,24 @@ public class MailHandler implements EventHandler {
     private static final Logger logger = LoggerFactory.getLogger(EventHandler.class);
     @Autowired
     MailService mailService;
+    @Autowired
+    JedisAdapter jedisAdapter;
+
+
 
     @Override
     public void doHandle(EventModel model){
-        try{
-            mailService.sendMailForProject(model.getExts().get("email"),model.getExts().get("username"),model.getExts().get("projectName"));
-        }catch (Exception e){
-            logger.info("出现错误咯！");
-        }
+//        try{
+            Jedis jedis =jedisAdapter.getJedis();
+            if(model.getExts().containsKey("projectName")){
+                mailService.sendMailForProject(model.getExts().get("email"),model.getExts().get("username"),model.getExts().get("projectName"));
+            }
+            String username=model.getExts().get("username");
+            String verifyCode=mailService.sendSimpleMail(username,model.getExts().get("email"));
+            jedis.setex(RedisKey.getBizRegisterKey(username),1800,verifyCode);
+//        }catch (Exception e){
+//            logger.info("出现错误咯！");
+//        }
     }
 
     @Override

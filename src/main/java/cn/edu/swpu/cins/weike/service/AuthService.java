@@ -11,7 +11,7 @@ import cn.edu.swpu.cins.weike.exception.AuthException;
 public interface AuthService {
 
     //学生注册
-    public int studentRegister(StudentInfo studentinfo) throws AuthException;
+    public int studentRegister(StudentInfo studentinfo);
 
     //学生登陆
     public String studentLogin(String userName, String password) throws AuthException;
