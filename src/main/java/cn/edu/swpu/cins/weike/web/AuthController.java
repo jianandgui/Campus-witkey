@@ -188,13 +188,38 @@ public class AuthController {
             if (!email.equals(studentinfo.getEmail())) {
                 return new ResultData(false, UpdatePwd.WRONG_EMALI.getMsg());}
 //            return new ResultData(true, mailService.sendMailForUpdatePwd(studentinfo.getEmail()));
-            if(eventProducer.fireEvent(new EventModel(EventType.MAIL).setExts("username",username).setExts("email",email).setExts("updatePwd","UPDATE_PWD"))){
+            if(eventProducer.fireEvent(new EventModel(EventType.MAIL)
+                    .setExts("username",username)
+                    .setExts("email",email)
+                    .setExts("updatePwd","UPDATE_PWD"))){
                 return new ResultData<StudentInfo>(true,"邮件发送成功"); }
             return new ResultData(false, "发送邮件失败");
+
         } catch (Exception e) {
             return new ResultData(false, e.getMessage());
         }
+    }
 
+    //教师召回密码 生成验证码
+
+    @GetMapping("/teacher/getVerifyCodeForFindPassword")
+    public ResultData teacherGetVerifyForUpdatePassword(@RequestParam String username, @RequestParam String email) {
+        try {
+            TeacherInfo teacherinfo = teacherDao.queryByName(username);
+            if (teacherinfo == null) {
+                return new ResultData(false, UpdatePwd.NO_USER.getMsg());}
+            if (!email.equals(teacherinfo.getEmail())) {
+                return new ResultData(false, UpdatePwd.WRONG_EMALI.getMsg());}
+            //return new ResultData(true, mailService.sendMailForUpdatePwd(teacherinfo.getEmail()));
+            if(eventProducer.fireEvent(new EventModel(EventType.MAIL)
+                    .setExts("username",username)
+                    .setExts("email",email)
+                    .setExts("updatePwd","UPDATE_PWD"))){
+            return new ResultData<StudentInfo>(true,"邮件发送成功"); }
+        return new ResultData(false, "发送邮件失败");
+        } catch (Exception e) {
+            return new ResultData(false, e.getMessage());
+        }
     }
 
     @PostMapping("/student/FindPassword")
@@ -205,20 +230,36 @@ public class AuthController {
             String redisKey= RedisKey.getBizFindPassword(username);
             if(jedis.exists(redisKey)){
                 if(jedis.get(redisKey).equals(updatePassword.getVerifyCode())){
-                    authService.studentUpdatePassword(updatePassword.getUsername(), updatePassword.getPassword());
+                   // authService.studentUpdatePassword(updatePassword.getUsername(), updatePassword.getPassword());
                     if (authService.studentUpdatePassword(updatePassword.getUsername(), updatePassword.getPassword()) != 1) {
                         return new ResultData(false, UpdatePwd.UPDATE_PWD_WRONG.getMsg());}
-                    return new ResultData(true, UpdatePwd.UPDATE_PWD_SUCCESS.getMsg());
-                }
-                return new ResultData(false,"验证码错误");
-            }
+                    return new ResultData(true, UpdatePwd.UPDATE_PWD_SUCCESS.getMsg()); }
+                return new ResultData(false,"验证码错误"); }
             return new ResultData(false,"请重新获取验证码");
-
         } catch (Exception e) {
             return new ResultData(false, e.getMessage());
-
         }
+    }
+    //验证码验证成功
 
+    @PostMapping("/teacher/FindPassword")
+    public ResultData teacherUpdatePassword(@RequestBody UpdatePassword updatePassword) {
+        try {
+            Jedis jedis=jedisAdapter.getJedis();
+            String username=updatePassword.getUsername();
+            String redisKey= RedisKey.getBizFindPassword(username);
+
+            if(jedis.exists(redisKey)){
+                if(jedis.get(redisKey).equals(updatePassword.getVerifyCode())){
+                    //authService.teacherUpdatePassword(updatePassword.getUsername(), updatePassword.getPassword());
+                    if (authService.teacherUpdatePassword(updatePassword.getUsername(), updatePassword.getPassword()) != 1) {
+                        return new ResultData(false, UpdatePwd.UPDATE_PWD_WRONG.getMsg());}
+                    return new ResultData(true, UpdatePwd.UPDATE_PWD_SUCCESS.getMsg()); }
+                return new ResultData(false,"验证码错误"); }
+            return new ResultData(false,"请重新获取验证码");
+        } catch (Exception e) {
+            return new ResultData(false, e.getMessage());
+        }
     }
 
     //教师登录 同时返回token
@@ -252,36 +293,9 @@ public class AuthController {
 
 
 
-    //教师召回密码 生成验证码
 
-    @GetMapping("/teacher/getVerifyCodeForFindPassword")
-    public ResultData teacherGetVerifyForUpdatePassword(@RequestParam String username, @RequestParam String email) {
-        try {
-            TeacherInfo teacherinfo = teacherDao.queryByName(username);
-            if (teacherinfo == null) {
-                return new ResultData(false, UpdatePwd.NO_USER.getMsg());}
-            if (!email.equals(teacherinfo.getEmail())) {
-                return new ResultData(false, UpdatePwd.WRONG_EMALI.getMsg());}
-            return new ResultData(true, mailService.sendMailForUpdatePwd(teacherinfo.getEmail()));
-        } catch (Exception e) {
-            return new ResultData(false, e.getMessage());
-        }
 
-    }
 
-    //验证码验证成功
-
-    @PostMapping("/teacher/FindPassword")
-    public ResultData teacherUpdatePassword(@RequestBody UpdatePassword updatePassword) {
-        try {
-            authService.teacherUpdatePassword(updatePassword.getUsername(), updatePassword.getPassword());
-            if (authService.teacherUpdatePassword(updatePassword.getUsername(), updatePassword.getPassword()) != 1) {
-                return new ResultData(false, UpdatePwd.UPDATE_PWD_WRONG.getMsg());}
-            return new ResultData(true, UpdatePwd.UPDATE_PWD_SUCCESS.getMsg());
-        } catch (Exception e) {
-            return new ResultData(false, e.getMessage());
-        }
-    }
 
 
 
