@@ -15,9 +15,7 @@ public class RedisKey {
         return BIZ_REGISTER+SPLIT+username;
     }
 
-
-    private static String getBizFindPassword(String username,String email) {
-        return BIZ_FIND_PASSWORD + SPLIT + username + SPLIT + email;
+    public static String getBizFindPassword(String username){
+        return BIZ_FIND_PASSWORD+SPLIT+username;
     }
-
 }

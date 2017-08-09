@@ -7,14 +7,8 @@ public class UpdatePassword {
 
     private String username;
     private String password;
+    private String verifyCode;
 
-    public UpdatePassword(String username, String password) {
-        this.username = username;
-        this.password = password;
-    }
-
-    public UpdatePassword() {
-    }
 
     public String getUsername() {
         return username;
@@ -32,11 +26,20 @@ public class UpdatePassword {
         this.password = password;
     }
 
-    @Override
-    public String toString() {
-        return "UpdatePassword{" +
-                "username='" + username + '\'' +
-                ", password='" + password + '\'' +
-                '}';
+    public String getVerifyCode() {
+        return verifyCode;
+    }
+
+    public void setVerifyCode(String verifyCode) {
+        this.verifyCode = verifyCode;
+    }
+
+    public UpdatePassword(String username, String password, String verifyCode) {
+        this.username = username;
+        this.password = password;
+        this.verifyCode = verifyCode;
+    }
+
+    public UpdatePassword() {
     }
 }

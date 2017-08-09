@@ -56,8 +56,8 @@ public class MailServiceImpl implements MailService {
     }
 
     @Override
-    public String sendSimpleMail(String username,String to)  {
-//        try {
+    public String sendSimpleMail(String username,String to)  throws Exception{
+        try {
             String verifyCode=getRandomString();
             SimpleMailMessage message = new SimpleMailMessage();
             message.setFrom(from);
@@ -66,9 +66,9 @@ public class MailServiceImpl implements MailService {
             message.setText(getSignUpContent()+verifyCode);
             sender.send(message);
             return verifyCode;
-//        } catch (Exception e) {
-//            throw new Exception("邮件发送失败");
-//        }
+        } catch (Exception e) {
+            throw new Exception("邮件发送失败");
+        }
     }
 
     @Override
@@ -88,8 +88,8 @@ public class MailServiceImpl implements MailService {
     }
 
     @Override
-    public String sendMailForProject(String email,String username,String projectName) {
-//        try {
+    public String sendMailForProject(String email,String username,String projectName) throws Exception{
+        try {
             String verifyCode=getRandomString();
             SimpleMailMessage message = new SimpleMailMessage();
             message.setFrom(from);
@@ -98,9 +98,9 @@ public class MailServiceImpl implements MailService {
             message.setText(forMatInfo(username,projectName));
             sender.send(message);
             return verifyCode;
-//        } catch (Exception e) {
-//            throw new Exception("邮件发送失败");
-//        }
+        } catch (Exception e) {
+            throw new Exception("邮件发送失败");
+        }
     }
 
     //处理发送邮件信息
