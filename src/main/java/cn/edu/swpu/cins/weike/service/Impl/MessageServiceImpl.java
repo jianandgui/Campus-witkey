@@ -79,6 +79,7 @@ public class MessageServiceImpl implements MessageService {
                         .setExts("projectName",projectName));}
             message.setContent(content);
             message.setCreateDate(new Date());
+            message.setProjectAbout(projectName);
             return messageDao.addMessage(message);
         } catch (Exception e) {
             throw new MessageException(ExceptionEnum.INNER_ERROR.getMsg());

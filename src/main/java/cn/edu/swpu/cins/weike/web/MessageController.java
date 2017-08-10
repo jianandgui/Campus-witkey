@@ -10,9 +10,11 @@ import cn.edu.swpu.cins.weike.enums.MessageEnum;
 import cn.edu.swpu.cins.weike.service.MailService;
 import cn.edu.swpu.cins.weike.service.MessageService;
 import cn.edu.swpu.cins.weike.util.GetUsrName;
+import cn.edu.swpu.cins.weike.util.JedisAdapter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.web.bind.annotation.*;
+import redis.clients.jedis.Jedis;
 
 import javax.servlet.http.HttpServletRequest;
 import java.util.List;
@@ -33,6 +35,11 @@ public class MessageController {
     private JwtTokenUtil jwtTokenUtil;
     private GetUsrName getUsrName;
     private MailService service;
+
+    @Autowired
+    private JedisAdapter jedisAdapter;
+
+    private Jedis jedis=jedisAdapter.getJedis();
 
     @Autowired
     public MessageController(MessageService messageService, JwtTokenUtil jwtTokenUtil, GetUsrName getUsrName, MailService service) {
