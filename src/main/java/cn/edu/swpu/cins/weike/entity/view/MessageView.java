@@ -7,10 +7,12 @@ public class MessageView {
 
     private String projectName;
     private String content;
+    private String projectAbout;
 
-    public MessageView(String projectName, String content) {
+    public MessageView(String projectName, String content, String projectAbout) {
         this.projectName = projectName;
         this.content = content;
+        this.projectAbout = projectAbout;
     }
 
     public MessageView() {
@@ -32,11 +34,11 @@ public class MessageView {
         this.content = content;
     }
 
-    @Override
-    public String toString() {
-        return "MessageView{" +
-                "projectName='" + projectName + '\'' +
-                ", content='" + content + '\'' +
-                '}';
+    public String getProjectAbout() {
+        return projectAbout;
+    }
+
+    public void setProjectAbout(String projectAbout) {
+        this.projectAbout = projectAbout;
     }
 }

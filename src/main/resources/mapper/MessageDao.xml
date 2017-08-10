@@ -10,17 +10,17 @@
       INSERT INTO
       message
       (fromName,toName,content,createDate,hasRead,conversationId)
-      VALUES (#{fromName},#{toName},#{content},#{createDate},#{hasRead},#{conversationId})
+      VALUES (#{fromName},#{toName},#{content},#{createDate},#{hasRead},#{projectAbout})
 
 
     </insert>
 
-    <select id="getConversationDetail" parameterType="String" resultType="cn.edu.swpu.cins.weike.entity.persistence.Message">
-        SELECT * from
-        message
-        where conversationId=#{conversationId}
-        ORDER BY createDate DESC
-    </select>
+    <!--<select id="getConversationDetail" parameterType="String" resultType="cn.edu.swpu.cins.weike.entity.persistence.Message">-->
+        <!--SELECT * from-->
+        <!--message-->
+        <!--where conversationId=#{conversationId}-->
+        <!--ORDER BY createDate DESC-->
+    <!--</select>-->
 
     <!--SELECT * from (SELECT * from message WHERE fromId=#{userId} OR toId=#{userId} ORDER BY createDate) as total-->
     <!--GROUP BY conversationId ORDER BY createDate DESC-->

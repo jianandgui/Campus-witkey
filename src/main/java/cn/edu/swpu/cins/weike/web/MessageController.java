@@ -57,7 +57,7 @@ public class MessageController {
 
 
     }
-    //获取与某人的通信信息
+    /*//获取与某人的通信信息
     @GetMapping("/messageDetail")
     public ResultData getMessageDetail(@RequestParam String conversationId){
         try{
@@ -68,7 +68,7 @@ public class MessageController {
         }catch (Exception e){
             return new ResultData(false,e.getMessage());
         }
-    }
+    }*/
 
     //获取所有通信信息
     @GetMapping("/messageList")
