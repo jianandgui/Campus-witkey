@@ -62,7 +62,7 @@ public class MessageServiceImpl implements MessageService {
     @Override
     public int addMessage(String content, String projectName, String userSender) throws MessageException{
         try {
-            String sennder=null;
+            String sender=null;
             Message message = new Message();
             StudentDetail studentSender = studentDao.queryForStudentPhone(userSender);
             TeacherDetail teacherSender = teacherDao.queryForPhone(userSender);
@@ -71,11 +71,11 @@ public class MessageServiceImpl implements MessageService {
             TeacherDetail teacherSaver = teacherDao.queryForPhone(userSaver);
             String email = projectDao.queryProjectDetail(projectName).getEmail();
             if (studentSender != null) {
-                sennder=studentSender.getUsername();
+                sender=studentSender.getUsername();
                 message.setFromName(studentSender.getUsername());
             } else{
                 message.setFromName(teacherSender.getUsername());
-                sennder=teacherSender.getUsername();
+                sender=teacherSender.getUsername();
             }
             if (studentSaver != null) {
                 message.setToName(studentSaver.getUsername());
@@ -97,12 +97,11 @@ public class MessageServiceImpl implements MessageService {
             if(num!=1){
                 throw new MessageException("发送信息失败");
             }
-
             //申请项目
-            String joiningProjectKey= RedisKey.getBizApplyingPro(sennder);
-            String projectAppllicantsKey=RedisKey.getBizProApplicant(projectName);
+            String joiningProjectKey= RedisKey.getBizApplyingPro(sender);
+            String projectAppllyingKey=RedisKey.getBizProApplying(projectName);
 
-            jedisAdapter.sadd(projectAppllicantsKey,sennder);
+            jedisAdapter.sadd(projectAppllyingKey,sender);
             jedisAdapter.sadd(joiningProjectKey,projectName);
             return num;
         } catch (Exception e) {

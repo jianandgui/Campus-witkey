@@ -16,9 +16,11 @@ public class RedisKey {
     //申请成功的项目
     private static String BIZ_JOIN_SUCCESS = "JOIN_SUCCESS";
 
-    //项目申请人
+    //项目成功申请人（项目团队）
     private static String BIZ_PRO_APPLICANT = "PRO_APPLICANT";
 
+    //项目正在申请人（正在考察的人）
+    private static String BIZ_PRO_APPLYING = "PRO_APPLYING";
     public static String getEventQueueKey() {
         return BIZ_EVENTQUEUE;
     }
@@ -45,5 +47,9 @@ public class RedisKey {
 
     public static String getBizJoinSuccess(String username){
         return BIZ_JOIN_SUCCESS+SPLIT+username;
+    }
+
+    public static String getBizProApplying(String projectName){
+        return BIZ_PRO_APPLYING+SPLIT+projectName;
     }
 }

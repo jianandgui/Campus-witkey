@@ -8,7 +8,9 @@ import cn.edu.swpu.cins.weike.exception.MailException;
 public interface MailService {
 
 
-    public String sendSimpleMail(String username,String to) throws Exception;
-    public String sendMailForUpdatePwd(String to) throws Exception;
-    public String sendMailForProject(String email,String username,String projectName) throws Exception;
+     String sendSimpleMail(String username,String to) throws Exception;
+     String sendMailForUpdatePwd(String to) throws Exception;
+     void sendMailForProject(String email,String username,String projectName) throws Exception;
+     void sendMailForJoinPro(String email,String username,String projectName) ;
+
 }

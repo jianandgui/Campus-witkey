@@ -2,10 +2,7 @@ package cn.edu.swpu.cins.weike.web;
 
 import cn.edu.swpu.cins.weike.config.filter.JwtTokenUtil;
 import cn.edu.swpu.cins.weike.entity.persistence.Message;
-import cn.edu.swpu.cins.weike.entity.view.MessageDelete;
-import cn.edu.swpu.cins.weike.entity.view.MessageList;
-import cn.edu.swpu.cins.weike.entity.view.MessageView;
-import cn.edu.swpu.cins.weike.entity.view.ResultData;
+import cn.edu.swpu.cins.weike.entity.view.*;
 import cn.edu.swpu.cins.weike.enums.MessageEnum;
 import cn.edu.swpu.cins.weike.service.MailService;
 import cn.edu.swpu.cins.weike.service.MessageService;
@@ -17,6 +14,7 @@ import org.springframework.web.bind.annotation.*;
 import redis.clients.jedis.Jedis;
 
 import javax.servlet.http.HttpServletRequest;
+import java.security.Principal;
 import java.util.List;
 
 /**
@@ -58,8 +56,22 @@ public class MessageController {
         }catch (Exception e){
             return new ResultData(false,e.getMessage());
         }
+    }
+
+    /**
+     *
+     * 增加这个接口用来接受项目参加的请求，此时我们需要给他发送一条站内信和邮件，通知他被同意参加项目
+     * 并且在他申请项目的列表中删除这个项目，并在他申请成功项目列表中加入这个项目
+     * 对于发布项目的人我们需要在他项目的申请人列表中删除这个人，并且在项目团队名单中加入这个人。
+     * @param joinMessage
+     * @return
+     */
+    public ResultData acceptJoin(@RequestBody JoinMessage joinMessage, Principal principal){
 
 
+
+
+        return null;
     }
     /*//获取与某人的通信信息
     @GetMapping("/messageDetail")

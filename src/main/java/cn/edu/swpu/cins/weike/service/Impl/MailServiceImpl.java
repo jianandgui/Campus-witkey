@@ -88,19 +88,33 @@ public class MailServiceImpl implements MailService {
     }
 
     @Override
-    public String sendMailForProject(String email,String username,String projectName) throws Exception{
+    public void sendMailForProject(String email,String username,String projectName) throws Exception{
         try {
-            String verifyCode=getRandomString();
+//            String verifyCode=getRandomString();
             SimpleMailMessage message = new SimpleMailMessage();
             message.setFrom(from);
             message.setTo(email);
             message.setSubject("威客平台消息");
             message.setText(forMatInfo(username,projectName));
             sender.send(message);
-            return verifyCode;
+//            return verifyCode;
         } catch (Exception e) {
             throw new Exception("邮件发送失败");
         }
+    }
+
+    @Override
+    public void sendMailForJoinPro(String email, String username, String projectName)  {
+//        try {
+            SimpleMailMessage message = new SimpleMailMessage();
+            message.setFrom(from);
+            message.setTo(email);
+            message.setSubject("威客平台消息");
+            message.setText("尊敬的"+username+"您好，您在威客平台申请参加的项目:"+projectName+"已经通过申请了，快上平台看看吧!");
+            sender.send(message);
+//        } catch (Exception e) {
+//            throw new Exception("邮件发送失败");
+//        }
     }
 
     //处理发送邮件信息
