@@ -36,10 +36,7 @@ public class MessageController {
     private GetUsrName getUsrName;
     private MailService service;
 
-    @Autowired
-    private JedisAdapter jedisAdapter;
 
-    private Jedis jedis=jedisAdapter.getJedis();
 
     @Autowired
     public MessageController(MessageService messageService, JwtTokenUtil jwtTokenUtil, GetUsrName getUsrName, MailService service) {

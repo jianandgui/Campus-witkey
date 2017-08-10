@@ -16,9 +16,12 @@ import cn.edu.swpu.cins.weike.enums.ExceptionEnum;
 import cn.edu.swpu.cins.weike.exception.MessageException;
 import cn.edu.swpu.cins.weike.service.MailService;
 import cn.edu.swpu.cins.weike.service.MessageService;
+import cn.edu.swpu.cins.weike.util.JedisAdapter;
+import cn.edu.swpu.cins.weike.util.RedisKey;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import redis.clients.jedis.Jedis;
 
 import java.util.ArrayList;
 import java.util.Date;
@@ -34,6 +37,11 @@ public class MessageServiceImpl implements MessageService {
     private StudentDao studentDao;
     private ProjectDao projectDao;
     private MailService mailService;
+
+    @Autowired
+    private JedisAdapter jedisAdapter;
+
+    private Jedis jedis=jedisAdapter.getJedis();
 
     @Autowired
     EventProducer eventProducer;
@@ -54,6 +62,7 @@ public class MessageServiceImpl implements MessageService {
     @Override
     public int addMessage(String content, String projectName, String userSender) throws MessageException{
         try {
+            String sennder=null;
             Message message = new Message();
             StudentDetail studentSender = studentDao.queryForStudentPhone(userSender);
             TeacherDetail teacherSender = teacherDao.queryForPhone(userSender);
@@ -62,9 +71,12 @@ public class MessageServiceImpl implements MessageService {
             TeacherDetail teacherSaver = teacherDao.queryForPhone(userSaver);
             String email = projectDao.queryProjectDetail(projectName).getEmail();
             if (studentSender != null) {
+                sennder=studentSender.getUsername();
                 message.setFromName(studentSender.getUsername());
-            } else
+            } else{
                 message.setFromName(teacherSender.getUsername());
+                sennder=teacherSender.getUsername();
+            }
             if (studentSaver != null) {
                 message.setToName(studentSaver.getUsername());
 //                mailService.sendMailForProject(email, studentSaver.getUsername(), projectName);
@@ -80,7 +92,19 @@ public class MessageServiceImpl implements MessageService {
             message.setContent(content);
             message.setCreateDate(new Date());
             message.setProjectAbout(projectName);
-            return messageDao.addMessage(message);
+
+            int num=messageDao.addMessage(message);
+            if(num!=1){
+                throw new MessageException("发送信息失败");
+            }
+
+            //申请项目
+            String joiningProjectKey= RedisKey.getBizApplyingPro(sennder);
+            String projectAppllicantsKey=RedisKey.getBizProApplicant(projectName);
+
+            jedisAdapter.sadd(projectAppllicantsKey,sennder);
+            jedisAdapter.sadd(joiningProjectKey,projectName);
+            return num;
         } catch (Exception e) {
             throw new MessageException(ExceptionEnum.INNER_ERROR.getMsg());
         }
