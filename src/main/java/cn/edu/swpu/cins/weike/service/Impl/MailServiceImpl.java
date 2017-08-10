@@ -63,7 +63,7 @@ public class MailServiceImpl implements MailService {
             message.setFrom(from);
             message.setTo(to);
             message.setSubject(getSignUpSubject(username));
-            message.setText(getSignUpContent()+verifyCode);
+            message.setText(getSignUpContent()+verifyCode+",验证码有效期为30分钟。");
             sender.send(message);
             return verifyCode;
         } catch (Exception e) {
@@ -79,7 +79,7 @@ public class MailServiceImpl implements MailService {
             message.setFrom(from);
             message.setTo(to);
             message.setSubject("校园威客平台修改密码");
-            message.setText("请记住下面的验证码，将用于修改您的密码，倘若非您本人操作，请忽略这封邮件，验证码为："+verifyCode);
+            message.setText("请记住下面的验证码，将用于修改您的密码，倘若非您本人操作，请忽略这封邮件，验证码为："+verifyCode+",验证码有效期为30分钟。");
             sender.send(message);
             return verifyCode;
         } catch (Exception e) {
