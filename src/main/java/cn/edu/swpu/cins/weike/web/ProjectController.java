@@ -4,6 +4,8 @@ import cn.edu.swpu.cins.weike.entity.view.ProjectDetail;
 import cn.edu.swpu.cins.weike.entity.view.ResultData;
 import cn.edu.swpu.cins.weike.enums.ProjectEnum;
 
+import cn.edu.swpu.cins.weike.util.JedisAdapter;
+import cn.edu.swpu.cins.weike.util.RedisKey;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import cn.edu.swpu.cins.weike.entity.view.ProjectView;
@@ -19,6 +21,8 @@ import java.util.List;
 @RequestMapping("/weike")
 public class ProjectController {
     private ProjectService projectService;
+
+
 
     @Autowired
     public ProjectController(ProjectService projectService) {
@@ -64,6 +68,5 @@ public class ProjectController {
             }
             return new ResultData(false, ProjectEnum.NO_PROJECTS.getMsg());
         } catch (Exception e) {
-            return new ResultData(false, e.getMessage());}
-    }
+            return new ResultData(false, e.getMessage());} }
 }

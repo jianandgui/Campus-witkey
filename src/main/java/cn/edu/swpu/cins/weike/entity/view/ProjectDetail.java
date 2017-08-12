@@ -25,8 +25,10 @@ public class ProjectDetail {
     private long projectEnd;
     //项目概述
     private String projectProfile;
+    //访问量
+    private long proHits;
 
-    public ProjectDetail(String projectName, String projectKind, String projectConnector, long qq, String email, int numNeed, List<String> projectNeed, long projectStart, long projectEnd, String projectProfile) {
+    public ProjectDetail(String projectName, String projectKind, String projectConnector, long qq, String email, int numNeed, List<String> projectNeed, long projectStart, long projectEnd, String projectProfile, long proHits) {
         this.projectName = projectName;
         this.projectKind = projectKind;
         this.projectConnector = projectConnector;
@@ -37,6 +39,7 @@ public class ProjectDetail {
         this.projectStart = projectStart;
         this.projectEnd = projectEnd;
         this.projectProfile = projectProfile;
+        this.proHits = proHits;
     }
 
     public ProjectDetail() {
@@ -122,19 +125,11 @@ public class ProjectDetail {
         this.projectProfile = projectProfile;
     }
 
-    @Override
-    public String toString() {
-        return "ProjectDetail{" +
-                "projectName='" + projectName + '\'' +
-                ", projectKind='" + projectKind + '\'' +
-                ", projectConnector='" + projectConnector + '\'' +
-                ", qq=" + qq +
-                ", email='" + email + '\'' +
-                ", numNeed=" + numNeed +
-                ", projectNeed=" + projectNeed +
-                ", projectStart=" + projectStart +
-                ", projectEnd=" + projectEnd +
-                ", projectProfile='" + projectProfile + '\'' +
-                '}';
+    public long getProHits() {
+        return proHits;
+    }
+
+    public void setProHits(long proHits) {
+        this.proHits = proHits;
     }
 }

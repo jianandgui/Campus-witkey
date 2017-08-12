@@ -47,7 +47,11 @@ public class ProjectServiceImpl implements ProjectService {
     @Override
     public ProjectDetail showProject(String projectName)  throws ProjectException{
         try {
-            return projectDao.queryProjectDetail(projectName);
+            String proClickNum = RedisKey.getBizProClickNum(projectName);
+            long hitsNum=jedisAdapter.incr(proClickNum);
+            ProjectDetail projectDetail=projectDao.queryProjectDetail(projectName);
+            projectDetail.setProHits(hitsNum);
+            return projectDetail;
         } catch (Exception e) {
             throw new ProjectException(ExceptionEnum.INNER_ERROR.getMsg());
         }
