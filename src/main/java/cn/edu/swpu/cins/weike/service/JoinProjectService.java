@@ -10,5 +10,5 @@ public interface JoinProjectService {
 
 
     int acceptJoin(JoinMessage joinMessage, HttpServletRequest request);
-    int refuseJoin(JoinMessage joinMessage, HttpServletRequest request);
+    void refuseJoin(JoinMessage joinMessage, HttpServletRequest request);
 }

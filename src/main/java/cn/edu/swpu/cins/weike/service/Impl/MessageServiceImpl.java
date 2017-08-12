@@ -62,7 +62,7 @@ public class MessageServiceImpl implements MessageService {
     @Override
     public int addMessage(String content, String projectName, String userSender) throws MessageException{
 //        try {
-            String sender=null;
+            String sender;
             Message message = new Message();
             StudentDetail studentSender = studentDao.queryForStudentPhone(userSender);
             TeacherDetail teacherSender = teacherDao.queryForPhone(userSender);
@@ -99,9 +99,10 @@ public class MessageServiceImpl implements MessageService {
             }
             //申请项目
             String joiningProjectKey= RedisKey.getBizApplyingPro(sender);
-            String projectAppllyingKey=RedisKey.getBizProApplying(projectName);
+            //项目正在申请人
+            String projectApplyingKey=RedisKey.getBizProApplying(projectName);
 
-            jedisAdapter.sadd(projectAppllyingKey,sender);
+            jedisAdapter.sadd(projectApplyingKey,sender);
             jedisAdapter.sadd(joiningProjectKey,projectName);
             return num;
 //        } catch (Exception e) {

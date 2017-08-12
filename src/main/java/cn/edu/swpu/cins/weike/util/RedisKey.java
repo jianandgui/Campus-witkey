@@ -21,6 +21,8 @@ public class RedisKey {
 
     //项目正在申请人（正在考察的人）
     private static String BIZ_PRO_APPLYING = "PRO_APPLYING";
+
+    private static String BIZ_PRO_APPLY_FAIL = "PRO_APPLY_FAIL";
     public static String getEventQueueKey() {
         return BIZ_EVENTQUEUE;
     }
@@ -52,4 +54,7 @@ public class RedisKey {
     public static String getBizProApplying(String projectName){
         return BIZ_PRO_APPLYING+SPLIT+projectName;
     }
+
+    public static String getBizProApplyFail(String projectName){return BIZ_PRO_APPLY_FAIL+SPLIT+projectName;}
+
 }

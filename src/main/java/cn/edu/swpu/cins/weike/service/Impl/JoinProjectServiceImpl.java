@@ -16,7 +16,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.servlet.http.HttpServletRequest;
-import java.security.Principal;
 import java.util.Date;
 
 @Service
@@ -90,8 +89,37 @@ public class JoinProjectServiceImpl implements JoinProjectService{
     }
 
     @Override
-    public int refuseJoin(JoinMessage joinMessage,HttpServletRequest request) {
-        return 0;
+    public void refuseJoin(JoinMessage joinMessage,HttpServletRequest request) {
+        String projectName=joinMessage.getProjectAbout();
+        String saver=joinMessage.getProjectApplicant();
+
+        String sender=getName.AllProjects(request);
+
+        StudentInfo studentInfo=studentDao.selectStudent(saver);
+        String email=studentInfo.getEmail();
+        mailService.sendMailForJoinPro(email,saver,projectName);
+
+
+
+        //正在申请
+        String joiningProjectKey= RedisKey.getBizApplyingPro(saver);
+        //项目正在申请人
+        String projectApplyingKey=RedisKey.getBizProApplying(projectName);
+
+        //申请失败
+        String joinProjectFailedKey = RedisKey.getBizJoinFail(saver);
+        //项目团队人员（没有通过申请）
+        String projectApplyFailKey = RedisKey.getBizProApplyFail(projectName);
+
+
+        jedisAdapter.srem(joiningProjectKey,projectName);
+        jedisAdapter.sadd(joinProjectFailedKey,projectName);
+
+        jedisAdapter.srem(projectApplyingKey,saver);
+        jedisAdapter.sadd(projectApplyFailKey,saver);
+
+
+
     }
 
 

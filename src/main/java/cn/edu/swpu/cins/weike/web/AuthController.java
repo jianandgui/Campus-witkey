@@ -111,6 +111,34 @@ public class AuthController {
 //        }
 
     }
+    //教师登录 同时返回token
+    @RequestMapping(value = "/teacher/login", method = RequestMethod.POST)
+    public ResultData createTeacherAuthenticationToken(
+            @RequestBody JwtAuthenticationRequest authenticationRequest) {
+        try {
+            JoinProject joinProject=null;
+            TeacherInfo teacherInfo = teacherDao.queryByName(authenticationRequest.getUsername());
+            if (teacherInfo == null) {
+                return new ResultData(false, LoginEnum.NO_USER.getMessage());}
+            final String token = authService.teacherLogin(authenticationRequest.getUsername(), authenticationRequest.getPassword());
+            TeacherDetail teacherDetail = teacherDao.queryForPhone(authenticationRequest.getUsername());
+            String image;
+            boolean isCompleted;
+            if (teacherDetail != null) {
+                image = teacherDetail.getImage();
+                isCompleted=true;
+            } else {
+                image = null;
+                isCompleted=false;}
+            String username = teacherInfo.getUsername();
+            String role = teacherInfo.getRole();
+            // Return the token
+            return new ResultData(true, new JwtAuthenticationResponse(token, username, role, image,isCompleted,joinProject));
+        } catch (Exception e) {
+            return new ResultData(false, e.getMessage());
+        }
+
+    }
 
     //学生获取验证码
     //前端验证成后端验证 采用异步发送邮件
@@ -275,34 +303,7 @@ public class AuthController {
         }
     }
 
-    //教师登录 同时返回token
-    @RequestMapping(value = "/teacher/login", method = RequestMethod.POST)
-    public ResultData createTeacherAuthenticationToken(
-            @RequestBody JwtAuthenticationRequest authenticationRequest) {
-        try {
-            JoinProject joinProject=null;
-            TeacherInfo teacherInfo = teacherDao.queryByName(authenticationRequest.getUsername());
-            if (teacherInfo == null) {
-                return new ResultData(false, LoginEnum.NO_USER.getMessage());}
-            final String token = authService.teacherLogin(authenticationRequest.getUsername(), authenticationRequest.getPassword());
-            TeacherDetail teacherDetail = teacherDao.queryForPhone(authenticationRequest.getUsername());
-            String image;
-            boolean isCompleted;
-            if (teacherDetail != null) {
-                image = teacherDetail.getImage();
-                isCompleted=true;
-            } else {
-                image = null;
-                isCompleted=false;}
-            String username = teacherInfo.getUsername();
-            String role = teacherInfo.getRole();
-            // Return the token
-            return new ResultData(true, new JwtAuthenticationResponse(token, username, role, image,isCompleted,joinProject));
-        } catch (Exception e) {
-            return new ResultData(false, e.getMessage());
-        }
 
-    }
 
 
 

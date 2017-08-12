@@ -74,6 +74,14 @@ public class MessageController {
         joinProjectService.acceptJoin(joinMessage,request);
         return new ResultData(true);
     }
+
+
+    @PostMapping("/refuseApply")
+    public ResultData refuseJoin(@RequestBody JoinMessage joinMessage, HttpServletRequest request){
+        joinProjectService.refuseJoin(joinMessage,request);
+        return new ResultData(true);
+    }
+    
     /*//获取与某人的通信信息
     @GetMapping("/messageDetail")
     public ResultData getMessageDetail(@RequestParam String conversationId){
