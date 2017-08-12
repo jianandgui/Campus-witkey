@@ -119,6 +119,17 @@ public class MessageController {
         }catch (Exception e){
             return new ResultData(false,e.getMessage());
         }
+    }
 
+    @PostMapping("/followPro")
+    public ResultData attentionPro(@RequestBody FollowPro followPro,HttpServletRequest request){
+        messageService.followPro(followPro.getProjectName(),getUsrName.AllProjects(request));
+        return new ResultData(true,"关注项目成功");
+    }
+
+    @PostMapping("/unFollowPro")
+    public ResultData unAttentionPro(@RequestBody FollowPro followPro,HttpServletRequest request){
+        messageService.unFollowPro(followPro.getProjectName(),getUsrName.AllProjects(request));
+        return new ResultData(true,"取消关注项目成功");
     }
 }

@@ -129,12 +129,11 @@ public class MessageServiceImpl implements MessageService {
     @Override
     public MessageList getConversationList(String username) throws MessageException{
         try {
-            StudentDetail studentDetail = null;
+            StudentDetail studentDetail ;
             studentDetail=studentDao.queryForStudentPhone(username);
-            TeacherDetail teacherDetail = null;
+            TeacherDetail teacherDetail ;
             teacherDetail=teacherDao.queryForPhone(username);
-            int userId=0;
-            String userName=null;
+            int userId;
             if (studentDetail != null) {
                 userId = studentDetail.getId();
 
@@ -166,5 +165,23 @@ public class MessageServiceImpl implements MessageService {
            throw new MessageException(ExceptionEnum.INNER_ERROR.getMsg());
        }
 
+    }
+
+    @Override
+    public void followPro(String projectName, String username) {
+        String followProKey=RedisKey.getBizAttentionPro(username);
+        String proFollower = RedisKey.getBizProFollower(projectName);
+
+        jedisAdapter.sadd(followProKey,projectName);
+        jedisAdapter.sadd(proFollower,username);
+    }
+
+    @Override
+    public void unFollowPro(String projectName, String username) {
+        String followProKey=RedisKey.getBizAttentionPro(username);
+        String proFollower = RedisKey.getBizProFollower(projectName);
+
+        jedisAdapter.srem(followProKey,projectName);
+        jedisAdapter.srem(proFollower,username);
     }
 }

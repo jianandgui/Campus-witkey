@@ -20,4 +20,8 @@ public interface MessageService {
     MessageList getConversationList(String username) throws MessageException;
 
     int deleteMessage(int id) throws MessageException;
+
+    void followPro(String projectName,String username);
+
+    void unFollowPro(String projectName,String username);
 }

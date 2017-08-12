@@ -64,9 +64,10 @@ public class ProjectController {
         try {
             List<ProjectView> projectViews = projectService.queryByKeyWords(keyWords);
             if (!projectViews.isEmpty()) {
-                return new ResultData(projectViews);
-            }
+                return new ResultData(projectViews); }
             return new ResultData(false, ProjectEnum.NO_PROJECTS.getMsg());
         } catch (Exception e) {
             return new ResultData(false, e.getMessage());} }
+
+
 }

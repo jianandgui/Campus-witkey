@@ -31,5 +31,8 @@ public interface StudentService {
 
     PersonData queryForData(String username) throws StudentException;
 
+    //查看项目关注的人
+    List<String> queryProFollower(String projectName);
+
 
 }

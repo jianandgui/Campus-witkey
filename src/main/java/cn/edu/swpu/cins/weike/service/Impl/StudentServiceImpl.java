@@ -4,6 +4,8 @@ import cn.edu.swpu.cins.weike.entity.persistence.StudentDetail;
 import cn.edu.swpu.cins.weike.entity.view.PersonData;
 import cn.edu.swpu.cins.weike.entity.view.ProjectRecommend;
 import cn.edu.swpu.cins.weike.exception.StudentException;
+import cn.edu.swpu.cins.weike.util.JedisAdapter;
+import cn.edu.swpu.cins.weike.util.RedisKey;
 import cn.edu.swpu.cins.weike.util.SensitiveWordsFilter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -15,6 +17,7 @@ import cn.edu.swpu.cins.weike.service.StudentService;
 import cn.edu.swpu.cins.weike.util.ReduceRepeate;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 /**
  * Created by muyi on 17-4-7.
@@ -27,6 +30,9 @@ public class StudentServiceImpl implements StudentService {
     @Value("${event.service.pageCount}")
     private int pageCount;
     private ReduceRepeate reduceRepeate;
+
+    @Autowired
+    private JedisAdapter jedisAdapter;
 
     @Autowired
     private SensitiveWordsFilter sensitiveWordsFilter;
@@ -113,5 +119,11 @@ public class StudentServiceImpl implements StudentService {
         throw new StudentException("服务器异常");
 }
 
+    }
+
+    @Override
+    public List<String> queryProFollower(String projectName) {
+        String projectFollowerKey = RedisKey.getBizProFollower(projectName);
+        return jedisAdapter.smenber(projectFollowerKey).stream().collect(Collectors.toList());
     }
 }

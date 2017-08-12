@@ -81,12 +81,13 @@ public class AuthController {
             String applyingProKey=RedisKey.getBizApplyingPro(authenticationRequest.getUsername());
             String applySuccessKey = RedisKey.getBizJoinSuccess(authenticationRequest.getUsername());
             String applyFailedKey = RedisKey.getBizJoinFail(authenticationRequest.getUsername());
-
+            String folloeProKey = RedisKey.getBizAttentionPro(authenticationRequest.getUsername());
 
             joinProject.setReleased(studentDao.queryAllProject(authenticationRequest.getUsername()));
             joinProject.setJoining((jedisAdapter.smenber(applyingProKey).stream().collect(Collectors.toList())));
             joinProject.setJoinSuccess(jedisAdapter.smenber(applySuccessKey).stream().collect(Collectors.toList()));
             joinProject.setJoinFailed(jedisAdapter.smenber(applyFailedKey).stream().collect(Collectors.toList()));
+            joinProject.setFollowPro(jedisAdapter.smenber(folloeProKey).stream().collect(Collectors.toList()));
             StudentInfo studentInfo = studentDao.selectStudent(authenticationRequest.getUsername());
             if (studentInfo == null) {
                 return new ResultData(false, LoginEnum.NO_USER);
