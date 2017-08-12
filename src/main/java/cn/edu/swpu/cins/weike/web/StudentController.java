@@ -1,10 +1,13 @@
 package cn.edu.swpu.cins.weike.web;
 
 import cn.edu.swpu.cins.weike.entity.view.PersonData;
+import cn.edu.swpu.cins.weike.entity.view.ProApplyInfo;
 import cn.edu.swpu.cins.weike.enums.ProjectEnum;
 import cn.edu.swpu.cins.weike.enums.UserEnum;
 import cn.edu.swpu.cins.weike.service.MailService;
 import cn.edu.swpu.cins.weike.util.GetUsrName;
+import cn.edu.swpu.cins.weike.util.JedisAdapter;
+import cn.edu.swpu.cins.weike.util.RedisKey;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.access.method.P;
@@ -21,6 +24,7 @@ import cn.edu.swpu.cins.weike.service.StudentService;
 
 import javax.servlet.http.HttpServletRequest;
 import java.util.List;
+import java.util.stream.Collectors;
 
 
 /**
@@ -30,17 +34,21 @@ import java.util.List;
 @RestController
 @RequestMapping("/WeiKe/student")
 public class StudentController {
-    private StudentService studentService;
-    private StudentDao studentDao;
-    private ProjectService projectService;
+
     @Value("${jwt.header}")
-    private String tokenHeader;
+    String tokenHeader;
     @Value("${jwt.tokenHead}")
-    private String tokenHead;
-    private JwtTokenUtil jwtTokenUtil;
-    private ProjectDao projectDao;
-    private GetUsrName getUsrName;
-    private MailService mailService;
+    String tokenHead;
+
+    StudentService studentService;
+    StudentDao studentDao;
+    ProjectService projectService;
+    JwtTokenUtil jwtTokenUtil;
+    ProjectDao projectDao;
+    GetUsrName getUsrName;
+    MailService mailService;
+
+
 
     @Autowired
     public StudentController(StudentService studentService, StudentDao studentDao, ProjectService projectService, JwtTokenUtil jwtTokenUtil, ProjectDao projectDao, GetUsrName getUsrName, MailService mailService) {
@@ -143,7 +151,15 @@ public class StudentController {
         }catch (Exception e){
             return new ResultData(false,e.getMessage());
         }
-
     }
 
+    /**
+     * 查看项目申请详细信息
+     * @param projectName
+     * @return
+     */
+    @GetMapping("/projetName")
+    public ResultData queryApplyInfo(@RequestParam String projectName){
+        return new ResultData(true,projectService.queryProApplyInfoByName(projectName));
+    }
 }

@@ -1,5 +1,6 @@
 package cn.edu.swpu.cins.weike.service;
 
+import cn.edu.swpu.cins.weike.entity.view.ProApplyInfo;
 import cn.edu.swpu.cins.weike.entity.view.ProjectDetail;
 import cn.edu.swpu.cins.weike.entity.view.ProjectView;
 import cn.edu.swpu.cins.weike.exception.ProjectException;
@@ -26,5 +27,8 @@ public interface ProjectService {
     //首页显示八个项目
 
     List<ProjectView> queryForIndex() throws ProjectException;
+
+    //显示项目申请详情
+    ProApplyInfo queryProApplyInfoByName(String projectName);
 
 }

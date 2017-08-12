@@ -1,6 +1,5 @@
 package cn.edu.swpu.cins.weike.dao;
 
-import cn.edu.swpu.cins.weike.entity.persistence.StudentDetail;
 import cn.edu.swpu.cins.weike.entity.persistence.TeacherDetail;
 import cn.edu.swpu.cins.weike.entity.persistence.TeacherInfo;
 import cn.edu.swpu.cins.weike.entity.view.ProjectRecommend;
