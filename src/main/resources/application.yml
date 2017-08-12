@@ -5,9 +5,9 @@ spring:
     driver-class-name: com.mysql.jdbc.Driver
     url: jdbc:mysql://182.150.37.74:3306/weike?verifyServerCertificate=false&useSSL=true&useUnicode=true&characterEncoding=utf8
   mail:
-      host: smtp.qq.com
-      username: 879604213@qq.com
-      password: jcdkjtlyoduybfje
+      host: smtp.163.com
+      username: yangquan95@163.com
+      password: Bangnicayanlei59
       properties:
        mail:
         smtp:

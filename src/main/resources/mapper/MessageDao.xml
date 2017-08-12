@@ -9,7 +9,7 @@
 
       INSERT INTO
       message
-      (fromName,toName,content,createDate,hasRead,conversationId)
+      (fromName,toName,content,createDate,hasRead,projectAbout)
       VALUES (#{fromName},#{toName},#{content},#{createDate},#{hasRead},#{projectAbout})
 
 

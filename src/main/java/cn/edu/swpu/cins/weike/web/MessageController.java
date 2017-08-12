@@ -4,6 +4,7 @@ import cn.edu.swpu.cins.weike.config.filter.JwtTokenUtil;
 import cn.edu.swpu.cins.weike.entity.persistence.Message;
 import cn.edu.swpu.cins.weike.entity.view.*;
 import cn.edu.swpu.cins.weike.enums.MessageEnum;
+import cn.edu.swpu.cins.weike.service.JoinProjectService;
 import cn.edu.swpu.cins.weike.service.MailService;
 import cn.edu.swpu.cins.weike.service.MessageService;
 import cn.edu.swpu.cins.weike.util.GetUsrName;
@@ -34,6 +35,8 @@ public class MessageController {
     private GetUsrName getUsrName;
     private MailService service;
 
+    @Autowired
+    JoinProjectService joinProjectService;
 
 
     @Autowired
@@ -66,12 +69,10 @@ public class MessageController {
      * @param joinMessage
      * @return
      */
-    public ResultData acceptJoin(@RequestBody JoinMessage joinMessage, Principal principal){
-
-
-
-
-        return null;
+    @PostMapping("/acceptApply")
+    public ResultData acceptJoin(@RequestBody JoinMessage joinMessage, HttpServletRequest request){
+        joinProjectService.acceptJoin(joinMessage,request);
+        return new ResultData(true);
     }
     /*//获取与某人的通信信息
     @GetMapping("/messageDetail")

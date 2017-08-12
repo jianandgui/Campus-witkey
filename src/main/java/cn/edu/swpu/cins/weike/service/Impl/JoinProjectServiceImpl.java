@@ -9,13 +9,13 @@ import cn.edu.swpu.cins.weike.entity.persistence.StudentInfo;
 import cn.edu.swpu.cins.weike.entity.view.JoinMessage;
 import cn.edu.swpu.cins.weike.service.JoinProjectService;
 import cn.edu.swpu.cins.weike.service.MailService;
+import cn.edu.swpu.cins.weike.util.GetUsrName;
 import cn.edu.swpu.cins.weike.util.JedisAdapter;
 import cn.edu.swpu.cins.weike.util.RedisKey;
-import com.sun.org.apache.regexp.internal.RE;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.autoconfigure.session.SessionProperties;
 import org.springframework.stereotype.Service;
 
+import javax.servlet.http.HttpServletRequest;
 import java.security.Principal;
 import java.util.Date;
 
@@ -30,6 +30,9 @@ public class JoinProjectServiceImpl implements JoinProjectService{
     StudentDao studentDao;
 
     @Autowired
+    GetUsrName getName;
+
+    @Autowired
     public JoinProjectServiceImpl(JedisAdapter jedisAdapter, MailService mailService, MessageDao messageDao, TeacherDao teacherDao, StudentDao studentDao) {
         this.jedisAdapter = jedisAdapter;
         this.mailService = mailService;
@@ -42,21 +45,21 @@ public class JoinProjectServiceImpl implements JoinProjectService{
      * 同意或者拒绝申请，发送邮件和站内信（失败就不发送站内信了）
      * 同时完成redis中的操作
      * @param joinMessage
-     * @param principal
+     * @param request
      * @return
      */
     @Override
-    public int acceptJoin(JoinMessage joinMessage,Principal principal) {
+    public int acceptJoin(JoinMessage joinMessage,HttpServletRequest request) {
         String projectName=joinMessage.getProjectAbout();
         String saver=joinMessage.getProjectApplicant();
 
-        String sender=principal.getName();
+        String sender=getName.AllProjects(request);
 
-        StudentInfo studentInfo=studentDao.queryEmail(saver);
+        StudentInfo studentInfo=studentDao.selectStudent(saver);
         String email=studentInfo.getEmail();
         mailService.sendMailForJoinPro(email,saver,projectName);
 
-        Message message=null;
+        Message message=new Message();
         String content="尊敬的"+saver+"您好,"+"您在威客平台申请参与的项目"+projectName+"已经成功通过申请,请登录平台查看详情！";
         message.setContent(content);
         message.setProjectAbout(projectName);
@@ -68,26 +71,26 @@ public class JoinProjectServiceImpl implements JoinProjectService{
         //正在申请
         String joiningProjectKey= RedisKey.getBizApplyingPro(saver);
         //项目正在申请人
-        String projectAppllyingKey=RedisKey.getBizProApplying(projectName);
+        String projectApplyingKey=RedisKey.getBizProApplying(projectName);
 
         //申请成功
         String joinProjectSuccessKey = RedisKey.getBizJoinSuccess(saver);
         //项目团队人员（成功通过申请）
-        String projectAppllySuccessKey = RedisKey.getBizProApplicant(projectName);
+        String projectApplySuccessKey = RedisKey.getBizProApplicant(projectName);
 
 
         jedisAdapter.srem(joiningProjectKey,projectName);
         jedisAdapter.sadd(joinProjectSuccessKey,projectName);
 
-        jedisAdapter.srem(projectAppllyingKey,saver);
-        jedisAdapter.sadd(projectAppllySuccessKey,saver);
+        jedisAdapter.srem(projectApplyingKey,saver);
+        jedisAdapter.sadd(projectApplySuccessKey,saver);
 
 
         return messageDao.addMessage(message);
     }
 
     @Override
-    public int refuseJoin(JoinMessage joinMessage,Principal principal) {
+    public int refuseJoin(JoinMessage joinMessage,HttpServletRequest request) {
         return 0;
     }
 

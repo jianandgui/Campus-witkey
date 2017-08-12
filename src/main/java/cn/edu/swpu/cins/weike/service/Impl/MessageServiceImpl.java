@@ -41,7 +41,7 @@ public class MessageServiceImpl implements MessageService {
     @Autowired
     private JedisAdapter jedisAdapter;
 
-    private Jedis jedis=jedisAdapter.getJedis();
+
 
     @Autowired
     EventProducer eventProducer;
@@ -61,7 +61,7 @@ public class MessageServiceImpl implements MessageService {
 
     @Override
     public int addMessage(String content, String projectName, String userSender) throws MessageException{
-        try {
+//        try {
             String sender=null;
             Message message = new Message();
             StudentDetail studentSender = studentDao.queryForStudentPhone(userSender);
@@ -104,10 +104,9 @@ public class MessageServiceImpl implements MessageService {
             jedisAdapter.sadd(projectAppllyingKey,sender);
             jedisAdapter.sadd(joiningProjectKey,projectName);
             return num;
-        } catch (Exception e) {
-            throw new MessageException(ExceptionEnum.INNER_ERROR.getMsg());
-        }
-
+//        } catch (Exception e) {
+//            throw new MessageException(ExceptionEnum.INNER_ERROR.getMsg());
+//        }
     }
 
     /*

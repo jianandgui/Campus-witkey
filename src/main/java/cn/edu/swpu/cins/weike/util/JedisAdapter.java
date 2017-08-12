@@ -203,11 +203,11 @@ public class JedisAdapter implements InitializingBean {
         return 0;
     }
 
-    public long scard(String key) {
+    public Set<String> smenber(String key) {
         Jedis jedis = null;
         try {
             jedis = pool.getResource();
-            return jedis.scard(key);
+            return jedis.smembers(key);
         } catch (Exception e) {
             logger.error("发生异常" + e.getMessage());
         } finally {
@@ -215,7 +215,7 @@ public class JedisAdapter implements InitializingBean {
                 jedis.close();
             }
         }
-        return 0;
+        return null;
     }
 
     public boolean sismember(String key, String value) {

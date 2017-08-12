@@ -67,8 +67,8 @@ public class AuthServiceImpl implements AuthService {
     }
 
     @Override
-    public String studentLogin(String username, String password)  throws AuthException{
-        try {
+    public String studentLogin(String username, String password) {
+//        try {
             UsernamePasswordAuthenticationToken upToken = new UsernamePasswordAuthenticationToken(username, password);
             // Perform the security
             final Authentication authentication = authenticationManager.authenticate(upToken);
@@ -77,9 +77,9 @@ public class AuthServiceImpl implements AuthService {
             final UserDetails userDetails = JwtUserFactory.createStudent(studentDao.selectStudent(username));
             final String token = jwtTokenUtil.generateToken(userDetails);
             return token;
-        } catch (Exception e) {
-            throw new AuthException("获取token异常");
-        }
+//        } catch (Exception e) {
+//            throw new AuthException("获取token异常");
+//        }
     }
 
     @Override

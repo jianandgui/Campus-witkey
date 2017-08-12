@@ -14,7 +14,7 @@ public interface AuthService {
     public int studentRegister(StudentInfo studentinfo);
 
     //学生登陆
-    public String studentLogin(String userName, String password) throws AuthException;
+    public String studentLogin(String userName, String password);
 
     //老师注册
     public int teacherRegister(TeacherInfo teacherinfo) throws AuthException;

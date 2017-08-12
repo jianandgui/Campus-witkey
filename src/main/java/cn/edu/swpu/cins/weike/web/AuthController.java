@@ -21,6 +21,9 @@ import cn.edu.swpu.cins.weike.enums.RegisterEnum;
 import cn.edu.swpu.cins.weike.service.AuthService;
 import redis.clients.jedis.Jedis;
 
+import java.util.List;
+import java.util.stream.Collectors;
+
 
 /**
  * Created by muyi on 17-4-18.
@@ -72,8 +75,18 @@ public class AuthController {
     @RequestMapping(value = "/student/login", method = RequestMethod.POST)
     public ResultData createStudentAuthenticationToken(
             @RequestBody JwtAuthenticationRequest authenticationRequest) {
-        try {
+//        try {
+            JoinProject joinProject=new JoinProject();
 
+            String applyingProKey=RedisKey.getBizApplyingPro(authenticationRequest.getUsername());
+            String applySuccessKey = RedisKey.getBizJoinSuccess(authenticationRequest.getUsername());
+            String applyFailedKey = RedisKey.getBizJoinFail(authenticationRequest.getUsername());
+
+
+            joinProject.setReleased(studentDao.queryAllProject(authenticationRequest.getUsername()));
+            joinProject.setJoining((jedisAdapter.smenber(applyingProKey).stream().collect(Collectors.toList())));
+            joinProject.setJoinSuccess(jedisAdapter.smenber(applySuccessKey).stream().collect(Collectors.toList()));
+            joinProject.setJoinFailed(jedisAdapter.smenber(applyFailedKey).stream().collect(Collectors.toList()));
             StudentInfo studentInfo = studentDao.selectStudent(authenticationRequest.getUsername());
             if (studentInfo == null) {
                 return new ResultData(false, LoginEnum.NO_USER);
@@ -91,11 +104,11 @@ public class AuthController {
             String username = studentInfo.getUsername();
             String role = studentInfo.getRole();
             final String token = authService.studentLogin(authenticationRequest.getUsername(), authenticationRequest.getPassword());
-            return new ResultData(true, new JwtAuthenticationResponse(token, username, role, image,isCompleted));
-        } catch (Exception e) {
-
-            return new ResultData(false, e.getMessage());
-        }
+            return new ResultData(true, new JwtAuthenticationResponse(token, username, role, image,isCompleted,joinProject));
+//        } catch (Exception e) {
+//
+//            return new ResultData(false, e.getMessage());
+//        }
 
     }
 
@@ -267,6 +280,7 @@ public class AuthController {
     public ResultData createTeacherAuthenticationToken(
             @RequestBody JwtAuthenticationRequest authenticationRequest) {
         try {
+            JoinProject joinProject=null;
             TeacherInfo teacherInfo = teacherDao.queryByName(authenticationRequest.getUsername());
             if (teacherInfo == null) {
                 return new ResultData(false, LoginEnum.NO_USER.getMessage());}
@@ -283,7 +297,7 @@ public class AuthController {
             String username = teacherInfo.getUsername();
             String role = teacherInfo.getRole();
             // Return the token
-            return new ResultData(true, new JwtAuthenticationResponse(token, username, role, image,isCompleted));
+            return new ResultData(true, new JwtAuthenticationResponse(token, username, role, image,isCompleted,joinProject));
         } catch (Exception e) {
             return new ResultData(false, e.getMessage());
         }
@@ -307,6 +321,8 @@ public class AuthController {
             @RequestBody JwtAuthenticationRequest authenticationRequest) {
         try {
 
+            JoinProject joinProject=null;
+
             final String token = authService.adminLogin(authenticationRequest.getUsername(), authenticationRequest.getPassword());
             // Return the token
             String username = authenticationRequest.getUsername();
@@ -314,7 +330,7 @@ public class AuthController {
             boolean isCompleted=false;
             if (role == null) {
                 return new ResultData(false, LoginEnum.NO_USER.getMessage()); }
-            return new ResultData(true, new JwtAuthenticationResponse(token, username, role, null,false));
+            return new ResultData(true, new JwtAuthenticationResponse(token, username, role, null,false,joinProject));
         } catch (Exception e) {
             return new ResultData(false, e.getMessage());
         }

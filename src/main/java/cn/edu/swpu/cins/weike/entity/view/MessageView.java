@@ -7,12 +7,10 @@ public class MessageView {
 
     private String projectName;
     private String content;
-    private String projectAbout;
 
-    public MessageView(String projectName, String content, String projectAbout) {
+    public MessageView(String projectName, String content) {
         this.projectName = projectName;
         this.content = content;
-        this.projectAbout = projectAbout;
     }
 
     public MessageView() {
@@ -34,11 +32,5 @@ public class MessageView {
         this.content = content;
     }
 
-    public String getProjectAbout() {
-        return projectAbout;
-    }
 
-    public void setProjectAbout(String projectAbout) {
-        this.projectAbout = projectAbout;
-    }
 }

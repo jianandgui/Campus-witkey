@@ -30,7 +30,7 @@ public class MailHandler implements EventHandler {
 
     @Override
     public void doHandle(EventModel model){
-        try{
+//        try{
             Jedis jedis =jedisAdapter.getJedis();
             if(model.getExts().containsKey("projectName")){
                 mailService.sendMailForProject(model.getExts().get("email"),model.getExts().get("username"),model.getExts().get("projectName"));
@@ -45,9 +45,9 @@ public class MailHandler implements EventHandler {
                 String verifyCode=mailService.sendSimpleMail(username,model.getExts().get("email"));
                 jedis.setex(RedisKey.getBizRegisterKey(username),1800,verifyCode);
             }
-        }catch (Exception e){
-            logger.info("出现错误咯！");
-        }
+//        }catch (Exception e){
+//            logger.info("出现错误咯！");
+//        }
     }
 
     @Override
