@@ -20,34 +20,34 @@ public interface TeacherDao {
 
 
     //增加一个老师信息（注册）
-    public int teacherRegister(TeacherInfo teacherinfo);
+    int teacherRegister(TeacherInfo teacherinfo);
 
 
     //用于登录(根据用户名查询老师信息)
-    public TeacherInfo queryByName(String username);
+    TeacherInfo queryByName(String username);
 
     //根据邮箱查找对象 看是否已经注册
-    public TeacherInfo queryEamil(String email);
+    TeacherInfo queryEamil(String email);
 
     //获取老师电话
-    public TeacherDetail queryForPhone(String username);
+    TeacherDetail queryForPhone(String username);
 
     //老师添加个人信息
-    public int teacherAddPersonal(TeacherDetail teacherDetail);
+    int teacherAddPersonal(TeacherDetail teacherDetail);
 
     //修改密码
-    public int updatePassword(@Param("username") String username, @Param("password") String password);
+    int updatePassword(@Param("username") String username, @Param("password") String password);
 
     //查询符合条件的学生
-    public List<ProjectRecommend> queryAllRecommod(String skills);
+    List<ProjectRecommend> queryAllRecommod(String skills);
 
     //修改个人信息
-    public int updateInfo(TeacherDetail teacherDetail);
+    int updateInfo(TeacherDetail teacherDetail);
 
     //查询发布所有项目
-    public List<String> queryAllProject(String projectConnector);
+    List<String> queryAllProject(String projectConnector);
 
-    public TeacherPersonData queryForData(String username);
+    TeacherPersonData queryForData(String username);
 
 }
 

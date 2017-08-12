@@ -15,24 +15,24 @@ import java.util.List;
 public interface TeacherService {
 
 
-    public int teacherAddPersonal(TeacherDetail teacherDetail) throws TeacherException;
+    int teacherAddPersonal(TeacherDetail teacherDetail) throws TeacherException;
 
 
     //老师发布项目
-    public int issueProject(ProjectInfo projectInfo) throws TeacherException;
+    int issueProject(ProjectInfo projectInfo) throws TeacherException;
 
     //TODO
     //老师发送邮件给学生
 
     //发布项目进行推荐
-    public List<ProjectRecommend> queryStudentForReCommod(List<String> skills,String username) throws TeacherException;
+    List<ProjectRecommend> queryStudentForReCommod(List<String> skills,String username) throws TeacherException;
 
-    public int updateInfo(TeacherDetail teacherDetail, String username) throws TeacherException;
+    int updateInfo(TeacherDetail teacherDetail, String username) throws TeacherException;
 
     //查询发布过的所有项目
-    public List<String> queryAllProject(String projectConnector) throws TeacherException;
+    List<String> queryAllProject(String projectConnector) throws TeacherException;
 
-    public TeacherPersonData queryForData(String username) throws TeacherException;
+    TeacherPersonData queryForData(String username) throws TeacherException;
 
 
 }

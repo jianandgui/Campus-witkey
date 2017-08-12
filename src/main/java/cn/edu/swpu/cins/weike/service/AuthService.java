@@ -11,29 +11,29 @@ import cn.edu.swpu.cins.weike.exception.AuthException;
 public interface AuthService {
 
     //学生注册
-    public int studentRegister(StudentInfo studentinfo);
+    int studentRegister(StudentInfo studentinfo);
 
     //学生登陆
-    public String studentLogin(String userName, String password);
+    String studentLogin(String userName, String password);
 
     //老师注册
-    public int teacherRegister(TeacherInfo teacherinfo) throws AuthException;
+    int teacherRegister(TeacherInfo teacherinfo) throws AuthException;
 
     //老师登陆
-    public String teacherLogin(String username, String password) throws AuthException;
+    String teacherLogin(String username, String password) throws AuthException;
 
     //管理员登录
-    public String adminLogin(String username, String password) throws AuthException;
+    String adminLogin(String username, String password) throws AuthException;
 
     //学生找回密码
-    public int studentUpdatePassword(String username, String password) throws AuthException;
+    int studentUpdatePassword(String username, String password) throws AuthException;
 
     //老师召回密码
-    public int teacherUpdatePassword(String username, String password) throws AuthException;
+    int teacherUpdatePassword(String username, String password) throws AuthException;
 
     //    //管理员注册
-    public AdminInfo adminRegister(AdminInfo adminInfo) throws AuthException;
+    AdminInfo adminRegister(AdminInfo adminInfo) throws AuthException;
 
-    public String getVerifyCodeForLogin() throws AuthException;
+    String getVerifyCodeForLogin() throws AuthException;
 
 }

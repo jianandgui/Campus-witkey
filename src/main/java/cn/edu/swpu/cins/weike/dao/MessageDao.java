@@ -15,12 +15,12 @@ import java.util.List;
 @Repository
 public interface MessageDao {
 
-    public int addMessage(Message message);
+    int addMessage(Message message);
 
-    public List<Message> getConversationDetail(String conversationId);
+    List<Message> getConversationDetail(String conversationId);
 
-    public List<Message> getConversationList(String userName);
+    List<Message> getConversationList(String userName);
 
-    public int deleteMessage(int id);
+    int deleteMessage(int id);
 
 }

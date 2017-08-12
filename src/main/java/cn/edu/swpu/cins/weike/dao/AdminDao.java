@@ -11,7 +11,7 @@ import org.springframework.stereotype.Repository;
 @Mapper
 public interface AdminDao {
 
-    public AdminInfo queryByName(String AdminName);
+    AdminInfo queryByName(String AdminName);
 
-    public int addAdmin(AdminInfo adminInfo);
+    int addAdmin(AdminInfo adminInfo);
 }

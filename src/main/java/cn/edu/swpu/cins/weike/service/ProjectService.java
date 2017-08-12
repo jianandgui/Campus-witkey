@@ -13,18 +13,18 @@ public interface ProjectService {
 
 
     //显示所有项目详情(只显示三个字段)
-    public List<ProjectView> showProjectAll(int offset, int limit) throws ProjectException;
+    List<ProjectView> showProjectAll(int offset, int limit) throws ProjectException;
 
 
     //显示一个项目的详情
-    public ProjectDetail showProject(String projectName) throws ProjectException;
+    ProjectDetail showProject(String projectName) throws ProjectException;
 
 
     //根据关键词搜索
-    public List<ProjectView> queryByKeyWords(String keyWords) throws ProjectException;
+    List<ProjectView> queryByKeyWords(String keyWords) throws ProjectException;
 
     //首页显示八个项目
 
-    public List<ProjectView> queryForIndex() throws ProjectException;
+    List<ProjectView> queryForIndex() throws ProjectException;
 
 }

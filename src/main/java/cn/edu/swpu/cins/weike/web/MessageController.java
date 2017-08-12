@@ -81,7 +81,7 @@ public class MessageController {
         joinProjectService.refuseJoin(joinMessage,request);
         return new ResultData(true);
     }
-    
+
     /*//获取与某人的通信信息
     @GetMapping("/messageDetail")
     public ResultData getMessageDetail(@RequestParam String conversationId){
