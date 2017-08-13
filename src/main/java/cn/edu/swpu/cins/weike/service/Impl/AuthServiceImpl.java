@@ -50,16 +50,17 @@ public class AuthServiceImpl implements AuthService {
 
     @Override
     public int studentRegister(StudentInfo studentinfo) throws AuthException{
+
+        final String username = studentinfo.getUsername();
+        if (studentDao.selectStudent(username) != null&& teacherDao.queryByName(username)!=null) {
+            return 0;
+        }
+        BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
+        final String rawPassword = studentinfo.getPassword();
+        studentinfo.setPassword(encoder.encode(rawPassword));
+        studentinfo.setLastPasswordResetDate(new Date().getTime());
+        studentinfo.setRole("ROLE_STUDENT");
         try {
-            final String username = studentinfo.getUsername();
-            if (studentDao.selectStudent(username) != null&& teacherDao.queryByName(username)!=null) {
-                return 0;
-            }
-            BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
-            final String rawPassword = studentinfo.getPassword();
-            studentinfo.setPassword(encoder.encode(rawPassword));
-            studentinfo.setLastPasswordResetDate(new Date().getTime());
-            studentinfo.setRole("ROLE_STUDENT");
             return studentDao.studntRegister(studentinfo);
         } catch (Exception e) {
             throw new AuthException(ExceptionEnum.INNER_ERROR.getMsg());
@@ -68,8 +69,9 @@ public class AuthServiceImpl implements AuthService {
 
     @Override
     public String studentLogin(String username, String password) throws AuthException{
+
+        UsernamePasswordAuthenticationToken upToken = new UsernamePasswordAuthenticationToken(username, password);
         try {
-            UsernamePasswordAuthenticationToken upToken = new UsernamePasswordAuthenticationToken(username, password);
             // Perform the security
             final Authentication authentication = authenticationManager.authenticate(upToken);
             SecurityContextHolder.getContext().setAuthentication(authentication);
@@ -84,16 +86,16 @@ public class AuthServiceImpl implements AuthService {
 
     @Override
     public int teacherRegister(TeacherInfo teacherinfo) throws AuthException {
+        final String username = teacherinfo.getUsername();
+        if (studentDao.selectStudent(username) != null&& teacherDao.queryByName(username)!=null) {
+            return 0;
+        }
+        BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
+        final String rawPassword = teacherinfo.getPassword();
+        teacherinfo.setPassword(encoder.encode(rawPassword));
+        teacherinfo.setLastPasswordResetDate(new Date().getTime());
+        teacherinfo.setRole("ROLE_TEACHER");
         try {
-            final String username = teacherinfo.getUsername();
-            if (studentDao.selectStudent(username) != null&& teacherDao.queryByName(username)!=null) {
-                return 0;
-            }
-            BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
-            final String rawPassword = teacherinfo.getPassword();
-            teacherinfo.setPassword(encoder.encode(rawPassword));
-            teacherinfo.setLastPasswordResetDate(new Date().getTime());
-            teacherinfo.setRole("ROLE_TEACHER");
             return teacherDao.teacherRegister(teacherinfo);
         } catch (Exception e) {
             throw new AuthException("数据库异常");
@@ -103,8 +105,8 @@ public class AuthServiceImpl implements AuthService {
     @Override
     public String teacherLogin(String username, String password) throws AuthException{
 
+        UsernamePasswordAuthenticationToken upToken = new UsernamePasswordAuthenticationToken(username, password);
         try {
-            UsernamePasswordAuthenticationToken upToken = new UsernamePasswordAuthenticationToken(username, password);
             final Authentication authentication = authenticationManager.authenticate(upToken);
             SecurityContextHolder.getContext().setAuthentication(authentication);
             // Reload password post-security so we can generate token

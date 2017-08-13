@@ -49,7 +49,6 @@ public class StudentController {
     MailService mailService;
 
 
-
     @Autowired
     public StudentController(StudentService studentService, StudentDao studentDao, ProjectService projectService, JwtTokenUtil jwtTokenUtil, ProjectDao projectDao, GetUsrName getUsrName, MailService mailService) {
         this.studentService = studentService;
@@ -63,13 +62,13 @@ public class StudentController {
 
     /**
      * 学生发布项目
+     *
      * @param projectInfo
      * @param request
      * @return 推荐人选列表
      */
     @PostMapping("/addProject")
     public ResultData publishProject(@RequestBody ProjectInfo projectInfo, HttpServletRequest request) {
-
         try {
             String username = getUsrName.AllProjects(request);
             StudentInfo studentinfo = studentDao.selectStudent(username);
@@ -81,19 +80,26 @@ public class StudentController {
                     projectInfo.setQq(studentDetail.getQq());
                     int num = studentService.issueProject(projectInfo);
                     if (num != 1) {
-                        return new ResultData(false, ProjectEnum.PUBLISH_PROJECT_FAILD.getMsg()); }
-                    if(studentService.queryForReCommod(projectInfo.getProjectNeed(),username).isEmpty()){
-                        return new ResultData(true, ProjectEnum.NO_SUITBLE_PERSON.getMsg()); }
-                    return new ResultData(true,studentService.queryForReCommod(projectInfo.getProjectNeed(),username)); }
-                return new ResultData(false, ProjectEnum.REPEATE_PROJECT.getMsg()); } else {
+                        return new ResultData(false, ProjectEnum.PUBLISH_PROJECT_FAILD.getMsg());
+                    }
+                    if (studentService.queryForReCommod(projectInfo.getProjectNeed(), username).isEmpty()) {
+                        return new ResultData(true, ProjectEnum.NO_SUITBLE_PERSON.getMsg());
+                    }
+                    return new ResultData(true, studentService.queryForReCommod(projectInfo.getProjectNeed(), username));
+                }
+                return new ResultData(false, ProjectEnum.REPEATE_PROJECT.getMsg());
+            } else {
                 return new ResultData(false, UserEnum.ADD_PERSONNAL.getMsg());
-            } } catch (Exception e) {
-            return new ResultData(false, e.getMessage()); }
+            }
+        } catch (Exception e) {
+            return new ResultData(false, e.getMessage());
+        }
     }
 
 
     /**
      * 学生添加个人信息
+     *
      * @param studentDetail
      * @param request
      * @return
@@ -106,7 +112,8 @@ public class StudentController {
                 studentDetail.setUsername(username);
                 int num = studentService.addPersonal(studentDetail);
                 if (num == 1) {
-                    return new ResultData(true, UserEnum.ADD_PERSONAL_SUCCESS.getMsg());}
+                    return new ResultData(true, UserEnum.ADD_PERSONAL_SUCCESS.getMsg());
+                }
                 return new ResultData(false, UserEnum.ADD_PERSONAL_FAILD.getMsg());
             } else
                 return new ResultData(false, UserEnum.REPEATE_ADD.getMsg());
@@ -117,6 +124,7 @@ public class StudentController {
 
     /**
      * 学生修改自己信息
+     *
      * @param studentDetail
      * @param request
      * @return
@@ -134,11 +142,11 @@ public class StudentController {
         } catch (Exception e) {
             return new ResultData(false, e.getMessage());
         }
-
     }
 
     /**
      * 学生查看发布过的项目
+     *
      * @param request
      * @return
      */
@@ -158,27 +166,29 @@ public class StudentController {
 
     /**
      * 学生查看个人信息
+     *
      * @param request
      * @return
      */
     @GetMapping("/personalData")
-    public ResultData queryForData(HttpServletRequest request){
+    public ResultData queryForData(HttpServletRequest request) {
 
-        try{
-            PersonData personData=studentService.queryForData(getUsrName.AllProjects(request));
-            return new ResultData(true,personData);
-        }catch (Exception e){
-            return new ResultData(false,e.getMessage());
+        try {
+            PersonData personData = studentService.queryForData(getUsrName.AllProjects(request));
+            return new ResultData(true, personData);
+        } catch (Exception e) {
+            return new ResultData(false, e.getMessage());
         }
     }
 
     /**
      * 学生查看项目申请详细信息
+     *
      * @param projectName
      * @return
      */
     @GetMapping("/projetName")
-    public ResultData queryApplyInfo(@RequestParam String projectName){
-        return new ResultData(true,projectService.queryProApplyInfoByName(projectName));
+    public ResultData queryApplyInfo(@RequestParam String projectName) {
+        return new ResultData(true, projectService.queryProApplyInfoByName(projectName));
     }
 }

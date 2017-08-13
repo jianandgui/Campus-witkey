@@ -24,6 +24,7 @@ public class ProjectServiceImpl implements ProjectService {
     private ProjectDao projectDao;
     @Autowired
     JedisAdapter jedisAdapter;
+
     @Autowired
     public ProjectServiceImpl(ProjectDao projectDao) {
         this.projectDao = projectDao;
@@ -33,28 +34,24 @@ public class ProjectServiceImpl implements ProjectService {
     private int pageCount;
 
 
-    //显示所有项目(三个字段)
     @Override
     public List<ProjectView> showProjectAll(int offset, int limit) throws ProjectException {
         try {
             return projectDao.queryAll(offset * pageCount, pageCount);
         } catch (Exception e) {
-            throw new ProjectException(ExceptionEnum.INNER_ERROR.getMsg());
-        }
+            throw new ProjectException(ExceptionEnum.INNER_ERROR.getMsg()); }
     }
 
-    //查询一个项目的详细信息
     @Override
-    public ProjectDetail showProject(String projectName)  throws ProjectException{
+    public ProjectDetail showProject(String projectName) throws ProjectException {
+        String proClickNum = RedisKey.getBizProClickNum(projectName);
         try {
-            String proClickNum = RedisKey.getBizProClickNum(projectName);
-            long hitsNum=jedisAdapter.incr(proClickNum);
-            ProjectDetail projectDetail=projectDao.queryProjectDetail(projectName);
+            long hitsNum = jedisAdapter.incr(proClickNum);
+            ProjectDetail projectDetail = projectDao.queryProjectDetail(projectName);
             projectDetail.setProHits(hitsNum);
             return projectDetail;
         } catch (Exception e) {
-            throw new ProjectException(ExceptionEnum.INNER_ERROR.getMsg());
-        }
+            throw new ProjectException(ExceptionEnum.INNER_ERROR.getMsg()); }
     }
 
     @Override
@@ -62,8 +59,7 @@ public class ProjectServiceImpl implements ProjectService {
         try {
             return projectDao.queryByKeywords(keyWords);
         } catch (Exception e) {
-            throw new ProjectException(ExceptionEnum.INNER_ERROR.getMsg());
-        }
+            throw new ProjectException(ExceptionEnum.INNER_ERROR.getMsg()); }
     }
 
     @Override
@@ -71,19 +67,22 @@ public class ProjectServiceImpl implements ProjectService {
         try {
             return projectDao.queryForIndex();
         } catch (Exception e) {
-            throw new ProjectException(ExceptionEnum.INNER_ERROR.getMsg());
-        }
+            throw new ProjectException(ExceptionEnum.INNER_ERROR.getMsg()); }
     }
 
     @Override
-    public ProApplyInfo queryProApplyInfoByName(String projectName) {
+    public ProApplyInfo queryProApplyInfoByName(String projectName) throws ProjectException{
         String proApplySuccess = RedisKey.getBizProApplicant(projectName);
-        String proApplyFailed =RedisKey.getBizProApplyFail(projectName);
+        String proApplyFailed = RedisKey.getBizProApplyFail(projectName);
         String proApplying = RedisKey.getBizProApplying(projectName);
-        ProApplyInfo proApplyInfo=new ProApplyInfo();
-        proApplyInfo.setApllySuccess(jedisAdapter.smenber(proApplySuccess).stream().collect(Collectors.toList()));
-        proApplyInfo.setApplyFailed(jedisAdapter.smenber(proApplyFailed).stream().collect(Collectors.toList()));
-        proApplyInfo.setApplying(jedisAdapter.smenber(proApplying).stream().collect(Collectors.toList()));
-        return proApplyInfo;
+        ProApplyInfo proApplyInfo = new ProApplyInfo();
+        try{
+            proApplyInfo.setApllySuccess(jedisAdapter.smenber(proApplySuccess).stream().collect(Collectors.toList()));
+            proApplyInfo.setApplyFailed(jedisAdapter.smenber(proApplyFailed).stream().collect(Collectors.toList()));
+            proApplyInfo.setApplying(jedisAdapter.smenber(proApplying).stream().collect(Collectors.toList()));
+            return proApplyInfo;
+        }catch (Exception e){
+            throw e;
+        }
     }
 }

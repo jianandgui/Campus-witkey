@@ -29,7 +29,6 @@ public class MailServiceImpl implements MailService {
      * @param content
      */
 
-//    private String to = "yangquan95@163.com";
     //    获取4位随机数(验证码)
     public static final char[] chars = "1234567890QWERTYUIOPASDFGHJKLZXCVBNMqwertyuiopasdfghjklzxcvbnm".toCharArray();
     public static Random random = new Random();
@@ -56,14 +55,15 @@ public class MailServiceImpl implements MailService {
     }
 
     @Override
-    public String sendSimpleMail(String username,String to)  throws Exception{
+    public String sendSimpleMail(String username, String to) throws Exception {
+
+        String verifyCode = getRandomString();
+        SimpleMailMessage message = new SimpleMailMessage();
+        message.setFrom(from);
+        message.setTo(to);
+        message.setSubject(getSignUpSubject(username));
+        message.setText(getSignUpContent() + verifyCode + ",验证码有效期为30分钟。");
         try {
-            String verifyCode=getRandomString();
-            SimpleMailMessage message = new SimpleMailMessage();
-            message.setFrom(from);
-            message.setTo(to);
-            message.setSubject(getSignUpSubject(username));
-            message.setText(getSignUpContent()+verifyCode+",验证码有效期为30分钟。");
             sender.send(message);
             return verifyCode;
         } catch (Exception e) {
@@ -72,14 +72,14 @@ public class MailServiceImpl implements MailService {
     }
 
     @Override
-    public String sendMailForUpdatePwd(String to) throws Exception{
+    public String sendMailForUpdatePwd(String to) throws Exception {
+        String verifyCode = getRandomString();
+        SimpleMailMessage message = new SimpleMailMessage();
+        message.setFrom(from);
+        message.setTo(to);
+        message.setSubject("校园威客平台修改密码");
+        message.setText("请记住下面的验证码，将用于修改您的密码，倘若非您本人操作，请忽略这封邮件，验证码为：" + verifyCode + ",验证码有效期为30分钟。");
         try {
-            String verifyCode=getRandomString();
-            SimpleMailMessage message = new SimpleMailMessage();
-            message.setFrom(from);
-            message.setTo(to);
-            message.setSubject("校园威客平台修改密码");
-            message.setText("请记住下面的验证码，将用于修改您的密码，倘若非您本人操作，请忽略这封邮件，验证码为："+verifyCode+",验证码有效期为30分钟。");
             sender.send(message);
             return verifyCode;
         } catch (Exception e) {
@@ -88,13 +88,13 @@ public class MailServiceImpl implements MailService {
     }
 
     @Override
-    public void sendMailForProject(String email,String username,String projectName) throws Exception{
+    public void sendMailForProject(String email, String username, String projectName) throws Exception {
+        SimpleMailMessage message = new SimpleMailMessage();
+        message.setFrom(from);
+        message.setTo(email);
+        message.setSubject("威客平台消息");
+        message.setText(forMatInfo(username, projectName));
         try {
-            SimpleMailMessage message = new SimpleMailMessage();
-            message.setFrom(from);
-            message.setTo(email);
-            message.setSubject("威客平台消息");
-            message.setText(forMatInfo(username,projectName));
             sender.send(message);
         } catch (Exception e) {
             throw new Exception("邮件发送失败");
@@ -102,13 +102,13 @@ public class MailServiceImpl implements MailService {
     }
 
     @Override
-    public void sendMailForJoinPro(String email, String username, String projectName)  throws Exception{
+    public void sendMailForJoinPro(String email, String username, String projectName) throws Exception {
+        SimpleMailMessage message = new SimpleMailMessage();
+        message.setFrom(from);
+        message.setTo(email);
+        message.setSubject("威客平台消息");
+        message.setText("尊敬的" + username + "您好，您在威客平台申请参加的项目:" + projectName + "已经通过申请了，快上平台看看吧!");
         try {
-            SimpleMailMessage message = new SimpleMailMessage();
-            message.setFrom(from);
-            message.setTo(email);
-            message.setSubject("威客平台消息");
-            message.setText("尊敬的"+username+"您好，您在威客平台申请参加的项目:"+projectName+"已经通过申请了，快上平台看看吧!");
             sender.send(message);
         } catch (Exception e) {
             throw new Exception("邮件发送失败");
@@ -117,8 +117,8 @@ public class MailServiceImpl implements MailService {
 
     //处理发送邮件信息
 
-    public String forMatInfo(String username,String projectName) {
-        return "尊敬的"+username+"您好，您在威客平台发布的项目:"+projectName+"有新动态，请您登录平台查看详情!";
+    public String forMatInfo(String username, String projectName) {
+        return "尊敬的" + username + "您好，您在威客平台发布的项目:" + projectName + "有新动态，请您登录平台查看详情!";
     }
 
 }

@@ -9,8 +9,11 @@ public interface MailService {
 
 
      String sendSimpleMail(String username,String to) throws Exception;
+
      String sendMailForUpdatePwd(String to) throws Exception;
+
      void sendMailForProject(String email,String username,String projectName) throws Exception;
+
      void sendMailForJoinPro(String email,String username,String projectName) throws Exception;
 
 }

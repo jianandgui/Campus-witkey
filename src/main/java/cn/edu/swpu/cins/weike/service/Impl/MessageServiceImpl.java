@@ -43,7 +43,6 @@ public class MessageServiceImpl implements MessageService {
     private JedisAdapter jedisAdapter;
 
 
-
     @Autowired
     EventProducer eventProducer;
 
@@ -61,7 +60,7 @@ public class MessageServiceImpl implements MessageService {
      */
 
     @Override
-    public int addMessage(String content, String projectName, String userSender) throws MessageException{
+    public int addMessage(String content, String projectName, String userSender) throws MessageException {
         try {
             String sender;
             Message message = new Message();
@@ -72,39 +71,39 @@ public class MessageServiceImpl implements MessageService {
             TeacherDetail teacherSaver = teacherDao.queryForPhone(userSaver);
             String email = projectDao.queryProjectDetail(projectName).getEmail();
             if (studentSender != null) {
-                sender=studentSender.getUsername();
+                sender = studentSender.getUsername();
                 message.setFromName(studentSender.getUsername());
-            } else{
+            } else {
                 message.setFromName(teacherSender.getUsername());
-                sender=teacherSender.getUsername();
+                sender = teacherSender.getUsername();
             }
             if (studentSaver != null) {
                 message.setToName(studentSaver.getUsername());
-                eventProducer.fireEvent(new EventModel(EventType.MAIL).setExts("email",email)
-                             .setExts("username",studentSaver.getUsername())
-                             .setExts("projectName",projectName)
-                             .setExts("status","joinPro"));
+                eventProducer.fireEvent(new EventModel(EventType.MAIL).setExts("email", email)
+                        .setExts("username", studentSaver.getUsername())
+                        .setExts("projectName", projectName)
+                        .setExts("status", "joinPro"));
             } else {
                 message.setToName(teacherSaver.getUsername());
-                eventProducer.fireEvent(new EventModel(EventType.MAIL).setExts("email",email)
-                        .setExts("username",teacherSaver.getUsername())
-                        .setExts("projectName",projectName)
-                        .setExts("status","joinPro"));}
+                eventProducer.fireEvent(new EventModel(EventType.MAIL).setExts("email", email)
+                        .setExts("username", teacherSaver.getUsername())
+                        .setExts("projectName", projectName)
+                        .setExts("status", "joinPro"));
+            }
             message.setContent(content);
             message.setCreateDate(new Date());
             message.setProjectAbout(projectName);
 
-            int num=messageDao.addMessage(message);
-            if(num!=1){
+            int num = messageDao.addMessage(message);
+            if (num != 1) {
                 throw new MessageException("发送信息失败");
             }
             //申请项目
-            String joiningProjectKey= RedisKey.getBizApplyingPro(sender);
+            String joiningProjectKey = RedisKey.getBizApplyingPro(sender);
             //项目正在申请人
-            String projectApplyingKey=RedisKey.getBizProApplying(projectName);
-
-            jedisAdapter.sadd(projectApplyingKey,sender);
-            jedisAdapter.sadd(joiningProjectKey,projectName);
+            String projectApplyingKey = RedisKey.getBizProApplying(projectName);
+            jedisAdapter.sadd(projectApplyingKey, sender);
+            jedisAdapter.sadd(joiningProjectKey, projectName);
             return num;
         } catch (Exception e) {
             throw new MessageException(ExceptionEnum.INNER_ERROR.getMsg());
@@ -124,72 +123,70 @@ public class MessageServiceImpl implements MessageService {
         }
     }
 
-      /*
-    实现思路：查询两张表，看是否存在该用户（两张表相互都不能存在同名）
-     */
+    /*
+  实现思路：查询两张表，看是否存在该用户（两张表相互都不能存在同名）
+   */
     @Override
-    public MessageList getConversationList(String username) throws MessageException{
+    public MessageList getConversationList(String username) throws MessageException {
         try {
-            StudentDetail studentDetail ;
-            studentDetail=studentDao.queryForStudentPhone(username);
-            TeacherDetail teacherDetail ;
-            teacherDetail=teacherDao.queryForPhone(username);
+            StudentDetail studentDetail;
+            studentDetail = studentDao.queryForStudentPhone(username);
+            TeacherDetail teacherDetail;
+            teacherDetail = teacherDao.queryForPhone(username);
             int userId;
             if (studentDetail != null) {
                 userId = studentDetail.getId();
 
             } else {
                 userId = teacherDetail.getId();
-
             }
-//            return null;
-            List<Message> fromMessages=new ArrayList<Message>();
-            List<Message> toMessages=new ArrayList<Message>();
-            for (Message message:messageDao.getConversationList(username)){
-                if(message.getToName().equals(username)){
-                    fromMessages.add(message);}
-                else {
-                    toMessages.add(message);}
+            List<Message> fromMessages = new ArrayList<Message>();
+            List<Message> toMessages = new ArrayList<Message>();
+            for (Message message : messageDao.getConversationList(username)) {
+                if (message.getToName().equals(username)) {
+                    fromMessages.add(message);
+                } else {
+                    toMessages.add(message);
+                }
             }
-            MessageList messageList=new MessageList(fromMessages,toMessages);
+            MessageList messageList = new MessageList(fromMessages, toMessages);
             return messageList;
-
         } catch (Exception e) {
             throw new MessageException(ExceptionEnum.INNER_ERROR.getMsg());
         }
     }
+
     @Override
     public int deleteMessage(int id) throws MessageException {
-       try{
-           return messageDao.deleteMessage(id)>0?1:0;
-       } catch (Exception e){
-           throw new MessageException(ExceptionEnum.INNER_ERROR.getMsg());
-       }
-
+        try {
+            return messageDao.deleteMessage(id) > 0 ? 1 : 0;
+        } catch (Exception e) {
+            throw new MessageException(ExceptionEnum.INNER_ERROR.getMsg());
+        }
     }
 
     @Override
-    public void followPro(String projectName, String username,String toName) {
-        String followProKey=RedisKey.getBizAttentionPro(username);
+    public void followPro(String projectName, String username, String toName) {
+        String followProKey = RedisKey.getBizAttentionPro(username);
         String proFollower = RedisKey.getBizProFollower(projectName);
-        Message message=new Message();
+        Message message = new Message();
         message.setToName(toName);
         message.setHasRead(0);
         message.setFromName(username);
         message.setCreateDate(new Date());
         message.setProjectAbout(projectName);
-        message.setContent("尊敬的"+toName+"你好，"+username+"关注了你的项目 : "+projectName+"去看看吧！");
+        message.setContent("尊敬的" + toName + "你好，" + username + "关注了你的项目 : " + projectName + "去看看吧！");
         messageDao.addMessage(message);
-        jedisAdapter.sadd(followProKey,projectName);
-        jedisAdapter.sadd(proFollower,username);
+        jedisAdapter.sadd(followProKey, projectName);
+        jedisAdapter.sadd(proFollower, username);
     }
 
     @Override
-    public void unFollowPro(String projectName, String username,String toName) {
-        String followProKey=RedisKey.getBizAttentionPro(username);
+    public void unFollowPro(String projectName, String username, String toName) {
+        String followProKey = RedisKey.getBizAttentionPro(username);
         String proFollower = RedisKey.getBizProFollower(projectName);
-        jedisAdapter.srem(followProKey,projectName);
-        jedisAdapter.srem(proFollower,username);
+        jedisAdapter.srem(followProKey, projectName);
+        jedisAdapter.srem(proFollower, username);
     }
 
     @Override

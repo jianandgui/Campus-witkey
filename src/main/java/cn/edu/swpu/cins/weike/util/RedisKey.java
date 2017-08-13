@@ -3,7 +3,7 @@ package cn.edu.swpu.cins.weike.util;
 public class RedisKey {
 
     //消息队列
-    private static String BIZ_EVENTQUEUE ="EVENT_QUEUE";
+    private static String BIZ_EVENTQUEUE = "EVENT_QUEUE";
     //注册
     private static String BIZ_REGISTER = "REGISTER";
     private static String SPLIT = ":";
@@ -29,50 +29,59 @@ public class RedisKey {
     private static String BIZ_PRO_APPLY_FAIL = "PRO_APPLY_FAIL";
 
     //项目点击数
-    private static String BIZ_PRO_CLICK_NUM ="PRO_CLICK_NUM";
+    private static String BIZ_PRO_CLICK_NUM = "PRO_CLICK_NUM";
 
     //每个人关注的项目
     private static String BIZ_ATTENTION_PRO = "ATTENTION_PRO";
 
     //项目有哪些人关注
     private static String BIZ_PRO_FOLLOWER = "PRO_FOLLOWER";
+
     public static String getEventQueueKey() {
         return BIZ_EVENTQUEUE;
     }
 
-    public static String getBizRegisterKey(String username){
-        return BIZ_REGISTER+SPLIT+username;
+    public static String getBizRegisterKey(String username) {
+        return BIZ_REGISTER + SPLIT + username;
     }
 
-    public static String getBizFindPassword(String username){
-        return BIZ_FIND_PASSWORD+SPLIT+username;
+    public static String getBizFindPassword(String username) {
+        return BIZ_FIND_PASSWORD + SPLIT + username;
     }
 
-    public static String getBizApplyingPro(String username){
-        return BIZ_APPLYING_PRO+SPLIT+username;
+    public static String getBizApplyingPro(String username) {
+        return BIZ_APPLYING_PRO + SPLIT + username;
     }
 
-    public static String getBizProApplicant(String projectName){
-        return BIZ_PRO_APPLICANT+SPLIT+projectName;
+    public static String getBizProApplicant(String projectName) {
+        return BIZ_PRO_APPLICANT + SPLIT + projectName;
     }
 
-    public static String getBizJoinFail(String username){
-        return BIZ_JOIN_FAIL+SPLIT+username;
+    public static String getBizJoinFail(String username) {
+        return BIZ_JOIN_FAIL + SPLIT + username;
     }
 
-    public static String getBizJoinSuccess(String username){
-        return BIZ_JOIN_SUCCESS+SPLIT+username;
+    public static String getBizJoinSuccess(String username) {
+        return BIZ_JOIN_SUCCESS + SPLIT + username;
     }
 
-    public static String getBizProApplying(String projectName){
-        return BIZ_PRO_APPLYING+SPLIT+projectName;
+    public static String getBizProApplying(String projectName) {
+        return BIZ_PRO_APPLYING + SPLIT + projectName;
     }
 
-    public static String getBizProApplyFail(String projectName){return BIZ_PRO_APPLY_FAIL+SPLIT+projectName;}
+    public static String getBizProApplyFail(String projectName) {
+        return BIZ_PRO_APPLY_FAIL + SPLIT + projectName;
+    }
 
-    public static String getBizProClickNum(String projectName){return BIZ_PRO_CLICK_NUM+SPLIT+projectName;}
+    public static String getBizProClickNum(String projectName) {
+        return BIZ_PRO_CLICK_NUM + SPLIT + projectName;
+    }
 
-    public static String getBizAttentionPro(String username){return BIZ_ATTENTION_PRO+SPLIT+username;}
+    public static String getBizAttentionPro(String username) {
+        return BIZ_ATTENTION_PRO + SPLIT + username;
+    }
 
-    public static String getBizProFollower(String projectName){return BIZ_PRO_FOLLOWER+SPLIT+projectName;}
+    public static String getBizProFollower(String projectName) {
+        return BIZ_PRO_FOLLOWER + SPLIT + projectName;
+    }
 }

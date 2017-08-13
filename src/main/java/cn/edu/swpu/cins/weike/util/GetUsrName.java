@@ -11,7 +11,7 @@ import javax.servlet.http.HttpServletRequest;
  * Created by muyi on 17-6-14.
  */
 @Component
-public class GetUsrName{
+public class GetUsrName {
 
     @Autowired
     private JwtTokenUtil jwtTokenUtil;

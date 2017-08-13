@@ -51,6 +51,7 @@ public class TeacherController {
 
     /**
      * 老师发布项目
+     *
      * @param projectInfo
      * @param request
      * @return 推荐人选列表
@@ -67,12 +68,15 @@ public class TeacherController {
                     projectInfo.setEmail(teacherinfo.getEmail());
                     projectInfo.setQq(teacherDetail.getQq());
                     if (teacherService.issueProject(projectInfo) != 1) {
-                        return new ResultData(false, ProjectEnum.PUBLISH_PROJECT_FAILD.getMsg());}
-                        if(teacherService.queryStudentForReCommod(projectInfo.getProjectNeed(),username).isEmpty()){
-                        return new ResultData(true,ProjectEnum.NO_SUITBLE_PERSON.getMsg());
-                        }
-                    return new ResultData(true,teacherService.queryStudentForReCommod(projectInfo.getProjectNeed(),username));}
-                return new ResultData(false, ProjectEnum.ADD_PERSONNAL.getMsg());}
+                        return new ResultData(false, ProjectEnum.PUBLISH_PROJECT_FAILD.getMsg());
+                    }
+                    if (teacherService.queryStudentForReCommod(projectInfo.getProjectNeed(), username).isEmpty()) {
+                        return new ResultData(true, ProjectEnum.NO_SUITBLE_PERSON.getMsg());
+                    }
+                    return new ResultData(true, teacherService.queryStudentForReCommod(projectInfo.getProjectNeed(), username));
+                }
+                return new ResultData(false, ProjectEnum.ADD_PERSONNAL.getMsg());
+            }
             return new ResultData(false, ProjectEnum.REPEATE_PROJECT.getMsg());
         } catch (Exception e) {
             return new ResultData(false, e.getMessage());
@@ -82,6 +86,7 @@ public class TeacherController {
 
     /**
      * 老师添加个人详细信息
+     *
      * @param teacherDetail
      * @param request
      * @return
@@ -94,15 +99,19 @@ public class TeacherController {
                 teacherDetail.setUsername(username);
                 int num = teacherDao.teacherAddPersonal(teacherDetail);
                 if (num == 1) {
-                    return new ResultData(true, UserEnum.ADD_PERSONAL_SUCCESS.getMsg());}
-                return new ResultData(false, UserEnum.ADD_PERSONAL_FAILD.getMsg());}
+                    return new ResultData(true, UserEnum.ADD_PERSONAL_SUCCESS.getMsg());
+                }
+                return new ResultData(false, UserEnum.ADD_PERSONAL_FAILD.getMsg());
+            }
             return new ResultData(false, UserEnum.REPEATE_ADD.getMsg());
         } catch (Exception e) {
-            return new ResultData(false, e.getMessage()); }
+            return new ResultData(false, e.getMessage());
+        }
     }
 
     /**
      * 老师修改自己的信息
+     *
      * @param teacherDetail
      * @param request
      * @return
@@ -113,14 +122,17 @@ public class TeacherController {
             String username = getUsrName.AllProjects(request);
             int num = teacherService.updateInfo(teacherDetail, username);
             if (num == 1) {
-                return new ResultData(true, UserEnum.UPDATE_SUCCESS.getMsg());}
+                return new ResultData(true, UserEnum.UPDATE_SUCCESS.getMsg());
+            }
             return new ResultData(false, UserEnum.UPDATE_FAILD.getMsg());
         } catch (Exception e) {
-            return new ResultData(false, e.getMessage()); }
+            return new ResultData(false, e.getMessage());
+        }
     }
 
     /**
      * 老师查看发布过的项目
+     *
      * @param request
      * @return
      */
@@ -129,24 +141,28 @@ public class TeacherController {
         try {
             List<String> list = teacherService.queryAllProject(getUsrName.AllProjects(request));
             if (!list.isEmpty()) {
-                return new ResultData(true, list);}
+                return new ResultData(true, list);
+            }
             return new ResultData(false, UserEnum.NO_PROJECTS.getMsg());
         } catch (Exception e) {
-            return new ResultData(false, e.getMessage()); }
+            return new ResultData(false, e.getMessage());
+        }
     }
 
     /**
      * 老师查看个人信息
+     *
      * @param request
      * @return
      */
     @GetMapping("/personalData")
-    public ResultData queryForData(HttpServletRequest request){
+    public ResultData queryForData(HttpServletRequest request) {
 
-        try{
-            TeacherPersonData teacherPersonData=teacherService.queryForData(getUsrName.AllProjects(request));
-            return new ResultData(true,teacherPersonData);
-        }catch (Exception e){
-            return new ResultData(false,e.getMessage()); }
+        try {
+            TeacherPersonData teacherPersonData = teacherService.queryForData(getUsrName.AllProjects(request));
+            return new ResultData(true, teacherPersonData);
+        } catch (Exception e) {
+            return new ResultData(false, e.getMessage());
+        }
     }
 }

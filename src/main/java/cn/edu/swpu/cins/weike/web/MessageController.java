@@ -101,7 +101,6 @@ public class MessageController {
         }
     }*/
 
-    //获取所有通信信息
     @GetMapping("/messageList")
     public ResultData getConversationDetail(HttpServletRequest request){
         try{
@@ -116,7 +115,11 @@ public class MessageController {
 
     }
 
-    //删除一条信息
+    /**
+     * 根据id删除一条信息
+     * @param id
+     * @return
+     */
     @PostMapping("/deleteMessage")
     public ResultData deleteMessage(@RequestBody MessageDelete id){
         try{

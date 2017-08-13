@@ -23,7 +23,6 @@ public class ProjectController {
     private ProjectService projectService;
 
 
-
     @Autowired
     public ProjectController(ProjectService projectService) {
         this.projectService = projectService;
@@ -35,23 +34,28 @@ public class ProjectController {
         try {
             return new ResultData(projectService.showProjectAll(offset, limit));
         } catch (Exception e) {
-            return new ResultData(false, e.getMessage());}
+            return new ResultData(false, e.getMessage());
+        }
     }
 
     /**
      * 首页显示项目
+     *
      * @return
      */
     @GetMapping("/index")
-    public ResultData queryForIndex(){
-        try{
-            List<ProjectView> list=projectService.queryForIndex();
-            return new ResultData(true,list);
-        }catch (Exception e)  {
-            return new ResultData(false,e.getMessage());} }
+    public ResultData queryForIndex() {
+        try {
+            List<ProjectView> list = projectService.queryForIndex();
+            return new ResultData(true, list);
+        } catch (Exception e) {
+            return new ResultData(false, e.getMessage());
+        }
+    }
 
     /**
      * 根据项目名字查看项目详情
+     *
      * @param projectName
      * @return
      */
@@ -59,13 +63,16 @@ public class ProjectController {
     public ResultData queryForProjectByName(@RequestParam String projectName) {
         try {
             ProjectDetail projectDetail = projectService.showProject(projectName);
-            return new ResultData(true,projectDetail);
+            return new ResultData(true, projectDetail);
         } catch (Exception e) {
-            return new ResultData(false, e.getMessage());} }
+            return new ResultData(false, e.getMessage());
+        }
+    }
 
 
     /**
      * 根据关键词查询项目
+     *
      * @param keyWords
      * @return
      */
@@ -74,8 +81,11 @@ public class ProjectController {
         try {
             List<ProjectView> projectViews = projectService.queryByKeyWords(keyWords);
             if (!projectViews.isEmpty()) {
-                return new ResultData(projectViews); }
+                return new ResultData(projectViews);
+            }
             return new ResultData(false, ProjectEnum.NO_PROJECTS.getMsg());
         } catch (Exception e) {
-            return new ResultData(false, e.getMessage());} }
+            return new ResultData(false, e.getMessage());
+        }
+    }
 }

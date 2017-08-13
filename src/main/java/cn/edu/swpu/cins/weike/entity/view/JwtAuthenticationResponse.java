@@ -60,4 +60,24 @@ public class JwtAuthenticationResponse implements Serializable {
     public void setJoinProject(JoinProject joinProject) {
         this.joinProject = joinProject;
     }
+
+    public void setToken(String token) {
+        this.token = token;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
+    }
+
+    public void setRole(String role) {
+        this.role = role;
+    }
+
+    public void setImage(String image) {
+        this.image = image;
+    }
+
+    public void setCompleted(boolean completed) {
+        isCompleted = completed;
+    }
 }

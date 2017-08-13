@@ -3,6 +3,7 @@ package cn.edu.swpu.cins.weike.util;
 import org.springframework.beans.factory.InitializingBean;
 import org.springframework.stereotype.Component;
 import org.springframework.util.StringUtils;
+
 import java.io.BufferedReader;
 import java.io.InputStream;
 import java.io.InputStreamReader;
