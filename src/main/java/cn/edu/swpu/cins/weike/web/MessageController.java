@@ -77,15 +77,23 @@ public class MessageController {
      */
     @PostMapping("/acceptApply")
     public ResultData acceptJoin(@RequestBody JoinMessage joinMessage, HttpServletRequest request){
-        joinProjectService.acceptJoin(joinMessage,request);
-        return new ResultData(true);
+        try{
+            joinProjectService.acceptJoin(joinMessage,request);
+            return new ResultData(true);
+        }catch (Exception e){
+            return new ResultData(false,"服务器内部异常");
+        }
     }
 
 
     @PostMapping("/refuseApply")
     public ResultData refuseJoin(@RequestBody JoinMessage joinMessage, HttpServletRequest request){
-        joinProjectService.refuseJoin(joinMessage,request);
-        return new ResultData(true);
+        try {
+            joinProjectService.refuseJoin(joinMessage,request);
+            return new ResultData(true,"拒绝申请成功");
+        }catch (Exception e){
+            return new ResultData(false,"服务器内部异常");
+        }
     }
 
     /*//获取与某人的通信信息

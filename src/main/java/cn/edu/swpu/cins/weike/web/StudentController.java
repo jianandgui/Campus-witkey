@@ -189,6 +189,10 @@ public class StudentController {
      */
     @GetMapping("/projetName")
     public ResultData queryApplyInfo(@RequestParam String projectName) {
-        return new ResultData(true, projectService.queryProApplyInfoByName(projectName));
+        try{
+            return new ResultData(true, projectService.queryProApplyInfoByName(projectName));
+        }catch (Exception e){
+            return new ResultData(false,"服务器内部异常，操作失败");
+        }
     }
 }
