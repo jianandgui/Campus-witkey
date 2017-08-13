@@ -1,8 +1,11 @@
 package cn.edu.swpu.cins.weike.entity.view;
 
+import lombok.Data;
+
 /**
  * Created by muyi on 17-7-15.
  */
+@Data
 public class MessageView {
 
     private String projectName;
@@ -15,22 +18,5 @@ public class MessageView {
 
     public MessageView() {
     }
-
-    public String getProjectName() {
-        return projectName;
-    }
-
-    public void setProjectName(String projectName) {
-        this.projectName = projectName;
-    }
-
-    public String getContent() {
-        return content;
-    }
-
-    public void setContent(String content) {
-        this.content = content;
-    }
-
 
 }

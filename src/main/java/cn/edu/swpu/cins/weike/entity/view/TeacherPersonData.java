@@ -1,8 +1,11 @@
 package cn.edu.swpu.cins.weike.entity.view;
 
+import lombok.Data;
+
 /**
  * Created by muyi on 17-7-16.
  */
+@Data
 public class TeacherPersonData {
 
     private int id;
@@ -38,90 +41,4 @@ public class TeacherPersonData {
     public TeacherPersonData() {
     }
 
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
-    }
-
-    public String getUsername() {
-        return username;
-    }
-
-    public void setUsername(String username) {
-        this.username = username;
-    }
-
-    public String getImage() {
-        return image;
-    }
-
-    public void setImage(String image) {
-        this.image = image;
-    }
-
-    public String getSex() {
-        return sex;
-    }
-
-    public void setSex(String sex) {
-        this.sex = sex;
-    }
-
-    public String getUniversity() {
-        return university;
-    }
-
-    public void setUniversity(String university) {
-        this.university = university;
-    }
-
-    public String getAcademy() {
-        return academy;
-    }
-
-    public void setAcademy(String academy) {
-        this.academy = academy;
-    }
-
-    public String getRank() {
-        return rank;
-    }
-
-    public void setRank(String rank) {
-        this.rank = rank;
-    }
-
-    public long getQq() {
-        return qq;
-    }
-
-    public void setQq(long qq) {
-        this.qq = qq;
-    }
-
-    public String getEmail() {
-        return email;
-    }
-
-    public void setEmail(String email) {
-        this.email = email;
-    }
-
-    @Override
-    public String toString() {
-        return "TeacherPersonData{" +
-                "id=" + id +
-                ", username='" + username + '\'' +
-                ", image='" + image + '\'' +
-                ", sex='" + sex + '\'' +
-                ", university='" + university + '\'' +
-                ", academy='" + academy + '\'' +
-                ", rank='" + rank + '\'' +
-                ", qq=" + qq +
-                ", email='" + email + '\'' +
-                '}';
-    }
 }

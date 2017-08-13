@@ -2,6 +2,8 @@ package cn.edu.swpu.cins.weike.entity.persistence;
 
 
 
+import lombok.Data;
+
 import java.sql.Date;
 import java.sql.Time;
 import java.sql.Timestamp;
@@ -10,7 +12,7 @@ import java.util.List;
 /**
  * Created by muyi on 17-4-6.
  */
-
+@Data
 public class ProjectInfo {
 
     //项目id
@@ -35,96 +37,8 @@ public class ProjectInfo {
     //项目概述
     private String projectProfile;
 
-    public int getProjectId() {
-        return projectId;
-    }
-
-    public void setProjectId(int projectId) {
-        this.projectId = projectId;
-    }
-
-    public String getProjectName() {
-        return projectName;
-    }
-
-    public void setProjectName(String projectName) {
-        this.projectName = projectName;
-    }
-
-    public String getProjectKind() {
-        return projectKind;
-    }
-
-    public void setProjectKind(String projectKind) {
-        this.projectKind = projectKind;
-    }
-
-    public String getProjectConnector() {
-        return projectConnector;
-    }
-
-    public void setProjectConnector(String projectConnector) {
-        this.projectConnector = projectConnector;
-    }
-
-    public long getQq() {
-        return qq;
-    }
-
-    public void setQq(long qq) {
-        this.qq = qq;
-    }
-
-    public String getEmail() {
-        return email;
-    }
-
-    public void setEmail(String email) {
-        this.email = email;
-    }
-
-    public int getNumNeed() {
-        return numNeed;
-    }
-
-    public void setNumNeed(int numNeed) {
-        this.numNeed = numNeed;
-    }
-
-    public List<String> getProjectNeed() {
-        return projectNeed;
-    }
-
-    public void setProjectNeed(List<String> projectNeed) {
-        this.projectNeed = projectNeed;
-    }
-
-    public long getProjectStart() {
-        return projectStart;
-    }
-
-    public void setProjectStart(long projectStart) {
-        this.projectStart = projectStart;
-    }
-
-    public long getProjectEnd() {
-        return projectEnd;
-    }
-
-    public void setProjectEnd(long projectEnd) {
-        this.projectEnd = projectEnd;
-    }
-
-    public String getProjectProfile() {
-        return projectProfile;
-    }
-
-    public void setProjectProfile(String projectProfile) {
-        this.projectProfile = projectProfile;
-    }
 
     public ProjectInfo() {
-
     }
     public ProjectInfo(int projectId, String projectName, String projectKind, String projectConnector, long qq, String email, int numNeed, List<String> projectNeed, long projectStart, long projectEnd, String projectProfile) {
         this.projectId = projectId;
@@ -139,8 +53,4 @@ public class ProjectInfo {
         this.projectEnd = projectEnd;
         this.projectProfile = projectProfile;
     }
-
-
-
-
 }

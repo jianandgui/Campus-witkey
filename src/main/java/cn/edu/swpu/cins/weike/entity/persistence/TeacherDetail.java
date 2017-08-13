@@ -1,15 +1,15 @@
 package cn.edu.swpu.cins.weike.entity.persistence;
 
 
+import lombok.Data;
 
 /**
  * Created by muyi on 17-4-24.
  */
-
+@Data
 public class TeacherDetail {
 
     //这个类用于用户注册后填写个人信息 允许不填 不过不能参加项目或其他项目功能
-
     private int id;
     private String username;
     private String image;
@@ -21,7 +21,6 @@ public class TeacherDetail {
     //老师职称
     private String rank;
     private long qq;
-
     public String getImage() {
         return image;
     }
@@ -42,46 +41,5 @@ public class TeacherDetail {
 
     public TeacherDetail() {
     }
-    public int getId() {
-        return id;
-    }
-    public void setId(int id) {
-        this.id = id;
-    }
-    public String getUsername() {
-        return username;
-    }
-    public void setUsername(String username) {
-        this.username = username;
-    }
-    public String getSex() {
-        return sex;
-    }
-    public void setSex(String sex) {
-        this.sex = sex;
-    }
-    public String getUniversity() {
-        return university;
-    }
-    public void setUniversity(String university) {
-        this.university = university;
-    }
-    public String getAcademy() {
-        return academy;
-    }
-    public void setAcademy(String academy) {
-        this.academy = academy;
-    }
-    public String getRank() {
-        return rank;
-    }
-    public void setRank(String rank) {
-        this.rank = rank;
-    }
-    public long getQq() {
-        return qq;
-    }
-    public void setQq(long qq) {
-        this.qq = qq;
-    }
+
 }

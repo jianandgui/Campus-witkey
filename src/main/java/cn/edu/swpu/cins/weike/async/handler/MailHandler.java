@@ -28,7 +28,7 @@ public class MailHandler implements EventHandler {
 
     @Override
     public void doHandle(EventModel model){
-//        try{
+        try{
             Jedis jedis =jedisAdapter.getJedis();
             String status=model.getExts().get("status");
             String verifyCode;
@@ -51,9 +51,9 @@ public class MailHandler implements EventHandler {
                 default:
                     return;
         }
-//        }catch (Exception e){
-//            logger.info("出现错误咯！");
-//        }
+        }catch (Exception e){
+            logger.info("出现错误咯！");
+        }
     }
 
     @Override

@@ -1,8 +1,10 @@
 package cn.edu.swpu.cins.weike.entity.view;
 
 
-import java.util.List;
+import lombok.Data;
 
+import java.util.List;
+@Data
 public class JoinProject {
 
     private List<String> released;
@@ -19,46 +21,7 @@ public class JoinProject {
         this.followPro = followPro;
     }
 
-    public List<String> getFollowPro() {
-        return followPro;
-    }
-
-    public void setFollowPro(List<String> followPro) {
-        this.followPro = followPro;
-    }
-
     public JoinProject() {
     }
 
-    public List<String> getReleased() {
-        return released;
-    }
-
-    public void setReleased(List<String> released) {
-        this.released = released;
-    }
-
-    public List<String> getJoining() {
-        return joining;
-    }
-
-    public void setJoining(List<String> joining) {
-        this.joining = joining;
-    }
-
-    public List<String> getJoinFailed() {
-        return joinFailed;
-    }
-
-    public void setJoinFailed(List<String> joinFailed) {
-        this.joinFailed = joinFailed;
-    }
-
-    public List<String> getJoinSuccess() {
-        return joinSuccess;
-    }
-
-    public void setJoinSuccess(List<String> joinSuccess) {
-        this.joinSuccess = joinSuccess;
-    }
 }

@@ -1,8 +1,11 @@
 package cn.edu.swpu.cins.weike.entity.view;
 
+import lombok.Data;
+
 /**
  * Created by muyi on 17-4-8.
  */
+@Data
 public class ProjectView {
 
     //用于首页显示所有项目，但是不是所有项目信息 只是概要
@@ -25,56 +28,5 @@ public class ProjectView {
     }
 
     public ProjectView() {
-    }
-
-    public String getProjectName() {
-        return projectName;
-    }
-
-    public void setProjectName(String projectName) {
-        this.projectName = projectName;
-    }
-
-    public String getProjectProfile() {
-        return projectProfile;
-    }
-
-    public void setProjectProfile(String projectProfile) {
-        this.projectProfile = projectProfile;
-    }
-
-    public String getProjectConnector() {
-        return projectConnector;
-    }
-
-    public void setProjectConnector(String projectConnector) {
-        this.projectConnector = projectConnector;
-    }
-
-    public long getQq() {
-        return qq;
-    }
-
-    public void setQq(long qq) {
-        this.qq = qq;
-    }
-
-    public String getEmail() {
-        return email;
-    }
-
-    public void setEmail(String email) {
-        this.email = email;
-    }
-
-    @Override
-    public String toString() {
-        return "ProjectView{" +
-                "projectName='" + projectName + '\'' +
-                ", projectProfile='" + projectProfile + '\'' +
-                ", projectConnector='" + projectConnector + '\'' +
-                ", qq=" + qq +
-                ", email='" + email + '\'' +
-                '}';
     }
 }

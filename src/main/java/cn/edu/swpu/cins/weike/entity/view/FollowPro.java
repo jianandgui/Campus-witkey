@@ -1,5 +1,8 @@
 package cn.edu.swpu.cins.weike.entity.view;
 
+import lombok.Data;
+
+@Data
 public class FollowPro {
 
     private String projectName;
@@ -10,23 +13,8 @@ public class FollowPro {
         this.projectConnector = projectConnector;
     }
 
-    public String getProjectConnector() {
-
-        return projectConnector;
-    }
-
-    public void setProjectConnector(String projectConnector) {
-        this.projectConnector = projectConnector;
-    }
-
     public FollowPro() {
     }
 
-    public String getProjectName() {
-        return projectName;
-    }
 
-    public void setProjectName(String projectName) {
-        this.projectName = projectName;
-    }
 }

@@ -1,19 +1,13 @@
 package cn.edu.swpu.cins.weike.entity.view;
 
 
+import lombok.Data;
 
+@Data
 public class JoinMessage {
 
     private String projectAbout;
     private String projectApplicant;
-
-    public String getProjectAbout() {
-        return projectAbout;
-    }
-
-    public void setProjectAbout(String projectAbout) {
-        this.projectAbout = projectAbout;
-    }
 
     public JoinMessage(String projectAbout, String projectApplicant) {
         this.projectAbout = projectAbout;
@@ -23,11 +17,5 @@ public class JoinMessage {
     public JoinMessage() {
     }
 
-    public String getProjectApplicant() {
-        return projectApplicant;
-    }
 
-    public void setProjectApplicant(String projectApplicant) {
-        this.projectApplicant = projectApplicant;
-    }
 }

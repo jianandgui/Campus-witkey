@@ -1,10 +1,13 @@
 package cn.edu.swpu.cins.weike.entity.view;
 
+import lombok.Data;
+
 import java.util.List;
 
 /**
  * Created by muyi on 17-7-16.
  */
+@Data
 public class PersonData {
 
     private int id;
@@ -57,147 +60,6 @@ public class PersonData {
         this.email = email;
     }
 
-    public String getUsername() {
-        return username;
-    }
-
-    public void setUsername(String username) {
-        this.username = username;
-    }
-
-    public String getImage() {
-        return image;
-    }
-
-    public void setImage(String image) {
-        this.image = image;
-    }
-
-    public String getSex() {
-        return sex;
-    }
-
-    public void setSex(String sex) {
-        this.sex = sex;
-    }
-
-    public String getEduBackgroud() {
-        return eduBackgroud;
-    }
-
-    public void setEduBackgroud(String eduBackgroud) {
-        this.eduBackgroud = eduBackgroud;
-    }
-
-    public String getUniversity() {
-        return university;
-    }
-
-    public void setUniversity(String university) {
-        this.university = university;
-    }
-
-    public String getMajorAndGrade() {
-        return majorAndGrade;
-    }
-
-    public void setMajorAndGrade(String majorAndGrade) {
-        this.majorAndGrade = majorAndGrade;
-    }
-
-    public long getEntryUniversity() {
-        return entryUniversity;
-    }
-
-    public void setEntryUniversity(long entryUniversity) {
-        this.entryUniversity = entryUniversity;
-    }
-
-    public long getLeaveUniversity() {
-        return leaveUniversity;
-    }
-
-    public void setLeaveUniversity(long leaveUniversity) {
-        this.leaveUniversity = leaveUniversity;
-    }
-
-    public long getQq() {
-        return qq;
-    }
-
-    public void setQq(long qq) {
-        this.qq = qq;
-    }
-
-    public List<String> getSkills() {
-        return skills;
-    }
-
-    public void setSkills(List<String> skills) {
-        this.skills = skills;
-    }
-
-    public String getExperience() {
-        return experience;
-    }
-
-    public void setExperience(String experience) {
-        this.experience = experience;
-    }
-
-    public String getSelfFeel() {
-        return selfFeel;
-    }
-
-    public void setSelfFeel(String selfFeel) {
-        this.selfFeel = selfFeel;
-    }
-
-    public String getLevel() {
-        return level;
-    }
-
-    public void setLevel(String level) {
-        this.level = level;
-    }
-
-    public String getEmail() {
-        return email;
-    }
-
-    public void setEmail(String email) {
-        this.email = email;
-    }
-
     public PersonData() {
-    }
-
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
-    }
-
-    @Override
-    public String toString() {
-        return "PersonData{" +
-                "id=" + id +
-                ", username='" + username + '\'' +
-                ", image='" + image + '\'' +
-                ", sex='" + sex + '\'' +
-                ", eduBackgroud='" + eduBackgroud + '\'' +
-                ", university='" + university + '\'' +
-                ", majorAndGrade='" + majorAndGrade + '\'' +
-                ", entryUniversity=" + entryUniversity +
-                ", leaveUniversity=" + leaveUniversity +
-                ", qq=" + qq +
-                ", skills=" + skills +
-                ", experience='" + experience + '\'' +
-                ", selfFeel='" + selfFeel + '\'' +
-                ", level='" + level + '\'' +
-                ", email='" + email + '\'' +
-                '}';
     }
 }

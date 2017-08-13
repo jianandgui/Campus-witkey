@@ -1,5 +1,8 @@
 package cn.edu.swpu.cins.weike.entity.view;
 
+import lombok.Data;
+
+@Data
 public class ResultData<T> {
 
     /*请求数据*/
@@ -21,38 +24,5 @@ public class ResultData<T> {
     public ResultData(T data) {
         this.data = data;
         this.ifSuccess = true;
-    }
-
-    public T getData() {
-        return data;
-    }
-
-    public void setData(T data) {
-        this.data = data;
-    }
-
-    public boolean isIfSuccess() {
-        return ifSuccess;
-    }
-
-    public void setIfSuccess(boolean ifSuccess) {
-        this.ifSuccess = ifSuccess;
-    }
-
-    public String getMsg() {
-        return msg;
-    }
-
-    public void setMsg(String msg) {
-        this.msg = msg;
-    }
-
-    @Override
-    public String toString() {
-        return "ResultData{" +
-                "data=" + data +
-                ", ifSuccess=" + ifSuccess +
-                ", msg='" + msg + '\'' +
-                '}';
     }
 }

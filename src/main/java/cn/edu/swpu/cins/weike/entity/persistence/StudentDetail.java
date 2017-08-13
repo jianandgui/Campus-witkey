@@ -1,18 +1,18 @@
 package cn.edu.swpu.cins.weike.entity.persistence;
 
 
+import lombok.Data;
+
 import java.sql.Date;
 import java.util.List;
 
 /**
  * Created by muyi on 17-4-24.
  */
-
+@Data
 public class StudentDetail {
 
-
     //这个类用于学生用户注册后填写个人信息 允许不填 不过不能参加项目或其他项目功能
-
     private int id;
 
     private String username;
@@ -42,118 +42,6 @@ public class StudentDetail {
 
     //学生等级
     private String level;
-
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
-    }
-
-    public String getUsername() {
-        return username;
-    }
-
-    public void setUsername(String username) {
-        this.username = username;
-    }
-
-    public String getImage() {
-        return image;
-    }
-
-    public void setImage(String image) {
-        this.image = image;
-    }
-
-    public String getSex() {
-        return sex;
-    }
-
-    public void setSex(String sex) {
-        this.sex = sex;
-    }
-
-    public String getEduBackgroud() {
-        return eduBackgroud;
-    }
-
-    public void setEduBackgroud(String eduBackgroud) {
-        this.eduBackgroud = eduBackgroud;
-    }
-
-    public String getUniversity() {
-        return university;
-    }
-
-    public void setUniversity(String university) {
-        this.university = university;
-    }
-
-    public String getMajorAndGrade() {
-        return majorAndGrade;
-    }
-
-    public void setMajorAndGrade(String majorAndGrade) {
-        this.majorAndGrade = majorAndGrade;
-    }
-
-    public long getEntryUniversity() {
-        return entryUniversity;
-    }
-
-    public void setEntryUniversity(long entryUniversity) {
-        this.entryUniversity = entryUniversity;
-    }
-
-    public long getLeaveUniversity() {
-        return leaveUniversity;
-    }
-
-    public void setLeaveUniversity(long leaveUniversity) {
-        this.leaveUniversity = leaveUniversity;
-    }
-
-    public long getQq() {
-        return qq;
-    }
-
-    public void setQq(long qq) {
-        this.qq = qq;
-    }
-
-    public List<String> getSkills() {
-        return skills;
-    }
-
-    public void setSkills(List<String> skills) {
-        this.skills = skills;
-    }
-
-    public String getExperience() {
-        return experience;
-    }
-
-    public void setExperience(String experience) {
-        this.experience = experience;
-    }
-
-    public String getSelfFeel() {
-        return selfFeel;
-    }
-
-    public void setSelfFeel(String selfFeel) {
-        this.selfFeel = selfFeel;
-    }
-
-    public String getLevel() {
-        return level;
-    }
-
-    public void setLevel(String level) {
-        this.level = level;
-    }
 
     public StudentDetail() {
     }

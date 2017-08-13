@@ -1,12 +1,14 @@
 package cn.edu.swpu.cins.weike.entity.view;
 
 import cn.edu.swpu.cins.weike.entity.persistence.Message;
+import lombok.Data;
 
 import java.util.List;
 
 /**
  * Created by muyi on 17-7-15.
  */
+@Data
 public class MessageList {
 
     private List<Message> fromMessages;
@@ -20,27 +22,5 @@ public class MessageList {
     public MessageList() {
     }
 
-    public List<Message> getFromMessages() {
-        return fromMessages;
-    }
 
-    public void setFromMessages(List<Message> fromMessages) {
-        this.fromMessages = fromMessages;
-    }
-
-    public List<Message> getToMessages() {
-        return toMessages;
-    }
-
-    public void setToMessages(List<Message> toMessages) {
-        this.toMessages = toMessages;
-    }
-
-    @Override
-    public String toString() {
-        return "MessageList{" +
-                "fromMessages=" + fromMessages +
-                ", toMessages=" + toMessages +
-                '}';
-    }
 }

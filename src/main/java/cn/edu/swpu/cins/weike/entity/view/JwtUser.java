@@ -1,6 +1,7 @@
 package cn.edu.swpu.cins.weike.entity.view;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import lombok.Data;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
@@ -10,6 +11,7 @@ import java.util.Date;
 /**
  * Created by muyi on 17-4-12.
  */
+
 public class JwtUser implements UserDetails {
 
     //只为安全服务的类  用来获取用户验证等信息
@@ -19,7 +21,6 @@ public class JwtUser implements UserDetails {
     private String email;
     private Collection<? extends GrantedAuthority> authorities;
     private final Date lastPasswordResetDate;
-
 
     public int getId() {
         return id;

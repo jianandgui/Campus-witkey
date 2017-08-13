@@ -1,10 +1,13 @@
 package cn.edu.swpu.cins.weike.entity.view;
 
+import lombok.Data;
+
 import java.util.List;
 
 /**
  * Created by muyi on 17-5-21.
  */
+@Data
 public class ProjectDetail {
 
     private String projectName;
@@ -45,91 +48,5 @@ public class ProjectDetail {
     public ProjectDetail() {
     }
 
-    public String getProjectName() {
-        return projectName;
-    }
 
-    public void setProjectName(String projectName) {
-        this.projectName = projectName;
-    }
-
-    public String getProjectKind() {
-        return projectKind;
-    }
-
-    public void setProjectKind(String projectKind) {
-        this.projectKind = projectKind;
-    }
-
-    public String getProjectConnector() {
-        return projectConnector;
-    }
-
-    public void setProjectConnector(String projectConnector) {
-        this.projectConnector = projectConnector;
-    }
-
-    public long getQq() {
-        return qq;
-    }
-
-    public void setQq(long qq) {
-        this.qq = qq;
-    }
-
-    public String getEmail() {
-        return email;
-    }
-
-    public void setEmail(String email) {
-        this.email = email;
-    }
-
-    public int getNumNeed() {
-        return numNeed;
-    }
-
-    public void setNumNeed(int numNeed) {
-        this.numNeed = numNeed;
-    }
-
-    public List<String> getProjectNeed() {
-        return projectNeed;
-    }
-
-    public void setProjectNeed(List<String> projectNeed) {
-        this.projectNeed = projectNeed;
-    }
-
-    public long getProjectStart() {
-        return projectStart;
-    }
-
-    public void setProjectStart(long projectStart) {
-        this.projectStart = projectStart;
-    }
-
-    public long getProjectEnd() {
-        return projectEnd;
-    }
-
-    public void setProjectEnd(long projectEnd) {
-        this.projectEnd = projectEnd;
-    }
-
-    public String getProjectProfile() {
-        return projectProfile;
-    }
-
-    public void setProjectProfile(String projectProfile) {
-        this.projectProfile = projectProfile;
-    }
-
-    public long getProHits() {
-        return proHits;
-    }
-
-    public void setProHits(long proHits) {
-        this.proHits = proHits;
-    }
 }
