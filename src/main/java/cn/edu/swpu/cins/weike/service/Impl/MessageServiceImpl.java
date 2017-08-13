@@ -62,7 +62,7 @@ public class MessageServiceImpl implements MessageService {
 
     @Override
     public int addMessage(String content, String projectName, String userSender) throws MessageException{
-//        try {
+        try {
             String sender;
             Message message = new Message();
             StudentDetail studentSender = studentDao.queryForStudentPhone(userSender);
@@ -80,14 +80,12 @@ public class MessageServiceImpl implements MessageService {
             }
             if (studentSaver != null) {
                 message.setToName(studentSaver.getUsername());
-//                mailService.sendMailForProject(email, studentSaver.getUsername(), projectName);
                 eventProducer.fireEvent(new EventModel(EventType.MAIL).setExts("email",email)
                              .setExts("username",studentSaver.getUsername())
                              .setExts("projectName",projectName)
                              .setExts("status","joinPro"));
             } else {
                 message.setToName(teacherSaver.getUsername());
-//                mailService.sendMailForProject(email, teacherSaver.getUsername(), projectName)
                 eventProducer.fireEvent(new EventModel(EventType.MAIL).setExts("email",email)
                         .setExts("username",teacherSaver.getUsername())
                         .setExts("projectName",projectName)
@@ -108,9 +106,9 @@ public class MessageServiceImpl implements MessageService {
             jedisAdapter.sadd(projectApplyingKey,sender);
             jedisAdapter.sadd(joiningProjectKey,projectName);
             return num;
-//        } catch (Exception e) {
-//            throw new MessageException(ExceptionEnum.INNER_ERROR.getMsg());
-//        }
+        } catch (Exception e) {
+            throw new MessageException(ExceptionEnum.INNER_ERROR.getMsg());
+        }
     }
 
     /*
@@ -171,19 +169,25 @@ public class MessageServiceImpl implements MessageService {
     }
 
     @Override
-    public void followPro(String projectName, String username) {
+    public void followPro(String projectName, String username,String toName) {
         String followProKey=RedisKey.getBizAttentionPro(username);
         String proFollower = RedisKey.getBizProFollower(projectName);
-
+        Message message=new Message();
+        message.setToName(toName);
+        message.setHasRead(0);
+        message.setFromName(username);
+        message.setCreateDate(new Date());
+        message.setProjectAbout(projectName);
+        message.setContent("尊敬的"+toName+"你好，"+username+"关注了你的项目 : "+projectName+"去看看吧！");
+        messageDao.addMessage(message);
         jedisAdapter.sadd(followProKey,projectName);
         jedisAdapter.sadd(proFollower,username);
     }
 
     @Override
-    public void unFollowPro(String projectName, String username) {
+    public void unFollowPro(String projectName, String username,String toName) {
         String followProKey=RedisKey.getBizAttentionPro(username);
         String proFollower = RedisKey.getBizProFollower(projectName);
-
         jedisAdapter.srem(followProKey,projectName);
         jedisAdapter.srem(proFollower,username);
     }

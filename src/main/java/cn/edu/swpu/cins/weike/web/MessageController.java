@@ -134,13 +134,13 @@ public class MessageController {
      */
     @PostMapping("/followPro")
     public ResultData attentionPro(@RequestBody FollowPro followPro,HttpServletRequest request){
-        messageService.followPro(followPro.getProjectName(),getUsrName.AllProjects(request));
+        messageService.followPro(followPro.getProjectName(),getUsrName.AllProjects(request),followPro.getProjectConnector());
         return new ResultData(true,"关注项目成功");
     }
 
     @PostMapping("/unFollowPro")
     public ResultData unAttentionPro(@RequestBody FollowPro followPro,HttpServletRequest request){
-        messageService.unFollowPro(followPro.getProjectName(),getUsrName.AllProjects(request));
+        messageService.unFollowPro(followPro.getProjectName(),getUsrName.AllProjects(request),followPro.getProjectConnector());
         return new ResultData(true,"取消关注项目成功");
     }
 

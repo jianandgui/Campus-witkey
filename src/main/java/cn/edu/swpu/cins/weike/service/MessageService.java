@@ -21,9 +21,9 @@ public interface MessageService {
 
     int deleteMessage(int id) throws MessageException;
 
-    void followPro(String projectName,String username);
+    void followPro(String projectName,String username,String toName);
 
-    void unFollowPro(String projectName,String username);
+    void unFollowPro(String projectName,String username,String toName);
 
     List<String> queryFollower(String projectName);
 }
