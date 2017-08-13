@@ -24,4 +24,6 @@ public interface MessageService {
     void followPro(String projectName,String username);
 
     void unFollowPro(String projectName,String username);
+
+    List<String> queryFollower(String projectName);
 }

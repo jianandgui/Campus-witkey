@@ -26,6 +26,7 @@ import redis.clients.jedis.Jedis;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.stream.Collectors;
 
 /**
  * Created by muyi on 17-6-12.
@@ -183,5 +184,11 @@ public class MessageServiceImpl implements MessageService {
 
         jedisAdapter.srem(followProKey,projectName);
         jedisAdapter.srem(proFollower,username);
+    }
+
+    @Override
+    public List<String> queryFollower(String projectName) {
+        String proFollowerKeys = RedisKey.getBizProFollower(projectName);
+        return jedisAdapter.smenber(proFollowerKeys).stream().collect(Collectors.toList());
     }
 }

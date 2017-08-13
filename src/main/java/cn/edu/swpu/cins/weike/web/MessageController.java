@@ -132,4 +132,10 @@ public class MessageController {
         messageService.unFollowPro(followPro.getProjectName(),getUsrName.AllProjects(request));
         return new ResultData(true,"取消关注项目成功");
     }
+
+    //查看项目关注人
+    @GetMapping("/proFollower")
+    public ResultData queryProFollower (@RequestParam String projectName){
+        return new ResultData(true, messageService.queryFollower(projectName));
+    }
 }

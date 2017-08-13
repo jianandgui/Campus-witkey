@@ -163,10 +163,5 @@ public class StudentController {
         return new ResultData(true,projectService.queryProApplyInfoByName(projectName));
     }
 
-    //查看项目关注人
-    @GetMapping("/proFollower")
-    public ResultData queryProFollower (@RequestParam String projectName){
 
-        return new ResultData(true);
-    }
 }
