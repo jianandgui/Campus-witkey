@@ -47,6 +47,12 @@ public class MessageController {
         this.service = service;
     }
 
+    /**
+     * 用户申请项目 发送消息和站内信
+     * @param messageView
+     * @param request
+     * @return
+     */
     @PostMapping("/sendMessage")
     public ResultData sendMessage(@RequestBody MessageView messageView, HttpServletRequest request){
         try{
@@ -121,6 +127,11 @@ public class MessageController {
         }
     }
 
+    /** 用户关注一个项目
+     * @param followPro
+     * @param request
+     * @return
+     */
     @PostMapping("/followPro")
     public ResultData attentionPro(@RequestBody FollowPro followPro,HttpServletRequest request){
         messageService.followPro(followPro.getProjectName(),getUsrName.AllProjects(request));
@@ -133,7 +144,11 @@ public class MessageController {
         return new ResultData(true,"取消关注项目成功");
     }
 
-    //查看项目关注人
+    /**
+     * 查看项目关注列表
+     * @param projectName
+     * @return
+     */
     @GetMapping("/proFollower")
     public ResultData queryProFollower (@RequestParam String projectName){
         return new ResultData(true, messageService.queryFollower(projectName));

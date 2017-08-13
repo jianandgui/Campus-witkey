@@ -61,7 +61,12 @@ public class StudentController {
         this.mailService = mailService;
     }
 
-    //学生发布项目(增加推荐人选功能)
+    /**
+     * 学生发布项目
+     * @param projectInfo
+     * @param request
+     * @return 推荐人选列表
+     */
     @PostMapping("/addProject")
     public ResultData publishProject(@RequestBody ProjectInfo projectInfo, HttpServletRequest request) {
 
@@ -87,8 +92,12 @@ public class StudentController {
     }
 
 
-
-
+    /**
+     * 学生添加个人信息
+     * @param studentDetail
+     * @param request
+     * @return
+     */
     @PostMapping("/addPersonalDeail")
     public ResultData addPersonalDetail(@RequestBody StudentDetail studentDetail, HttpServletRequest request) {
         try {
@@ -106,6 +115,12 @@ public class StudentController {
         }
     }
 
+    /**
+     * 学生修改自己信息
+     * @param studentDetail
+     * @param request
+     * @return
+     */
     @PostMapping("/updateInfo")
     public ResultData updateInfo(@RequestBody StudentDetail studentDetail, HttpServletRequest request) {
 
@@ -122,7 +137,11 @@ public class StudentController {
 
     }
 
-    //查看发布过的项目
+    /**
+     * 学生查看发布过的项目
+     * @param request
+     * @return
+     */
     @GetMapping("/allProject")
     public ResultData queryAllProject(HttpServletRequest request) {
         try {
@@ -137,7 +156,11 @@ public class StudentController {
 
     }
 
-    //查看个人信息
+    /**
+     * 学生查看个人信息
+     * @param request
+     * @return
+     */
     @GetMapping("/personalData")
     public ResultData queryForData(HttpServletRequest request){
 
@@ -150,7 +173,7 @@ public class StudentController {
     }
 
     /**
-     * 查看项目申请详细信息
+     * 学生查看项目申请详细信息
      * @param projectName
      * @return
      */
@@ -158,6 +181,4 @@ public class StudentController {
     public ResultData queryApplyInfo(@RequestParam String projectName){
         return new ResultData(true,projectService.queryProApplyInfoByName(projectName));
     }
-
-
 }

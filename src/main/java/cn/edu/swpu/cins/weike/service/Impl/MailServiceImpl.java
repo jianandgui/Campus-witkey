@@ -56,8 +56,8 @@ public class MailServiceImpl implements MailService {
     }
 
     @Override
-    public String sendSimpleMail(String username,String to)  {
-//        try {
+    public String sendSimpleMail(String username,String to)  throws Exception{
+        try {
             String verifyCode=getRandomString();
             SimpleMailMessage message = new SimpleMailMessage();
             message.setFrom(from);
@@ -66,14 +66,14 @@ public class MailServiceImpl implements MailService {
             message.setText(getSignUpContent()+verifyCode+",验证码有效期为30分钟。");
             sender.send(message);
             return verifyCode;
-//        } catch (Exception e) {
-//            throw new Exception("邮件发送失败");
-//        }
+        } catch (Exception e) {
+            throw new Exception("邮件发送失败");
+        }
     }
 
     @Override
-    public String sendMailForUpdatePwd(String to) {
-//        try {
+    public String sendMailForUpdatePwd(String to) throws Exception{
+        try {
             String verifyCode=getRandomString();
             SimpleMailMessage message = new SimpleMailMessage();
             message.setFrom(from);
@@ -82,39 +82,37 @@ public class MailServiceImpl implements MailService {
             message.setText("请记住下面的验证码，将用于修改您的密码，倘若非您本人操作，请忽略这封邮件，验证码为："+verifyCode+",验证码有效期为30分钟。");
             sender.send(message);
             return verifyCode;
-//        } catch (Exception e) {
-//            throw new Exception("邮件发送失败");
-//        }
+        } catch (Exception e) {
+            throw new Exception("邮件发送失败");
+        }
     }
 
     @Override
-    public void sendMailForProject(String email,String username,String projectName){
-//        try {
-//            String verifyCode=getRandomString();
+    public void sendMailForProject(String email,String username,String projectName) throws Exception{
+        try {
             SimpleMailMessage message = new SimpleMailMessage();
             message.setFrom(from);
             message.setTo(email);
             message.setSubject("威客平台消息");
             message.setText(forMatInfo(username,projectName));
             sender.send(message);
-//            return verifyCode;
-//        } catch (Exception e) {
-//            throw new Exception("邮件发送失败");
-//        }
+        } catch (Exception e) {
+            throw new Exception("邮件发送失败");
+        }
     }
 
     @Override
-    public void sendMailForJoinPro(String email, String username, String projectName)  {
-//        try {
+    public void sendMailForJoinPro(String email, String username, String projectName)  throws Exception{
+        try {
             SimpleMailMessage message = new SimpleMailMessage();
             message.setFrom(from);
             message.setTo(email);
             message.setSubject("威客平台消息");
             message.setText("尊敬的"+username+"您好，您在威客平台申请参加的项目:"+projectName+"已经通过申请了，快上平台看看吧!");
             sender.send(message);
-//        } catch (Exception e) {
-//            throw new Exception("邮件发送失败");
-//        }
+        } catch (Exception e) {
+            throw new Exception("邮件发送失败");
+        }
     }
 
     //处理发送邮件信息

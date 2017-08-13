@@ -49,8 +49,8 @@ public class AuthServiceImpl implements AuthService {
     }
 
     @Override
-    public int studentRegister(StudentInfo studentinfo) {
-//        try {
+    public int studentRegister(StudentInfo studentinfo) throws AuthException{
+        try {
             final String username = studentinfo.getUsername();
             if (studentDao.selectStudent(username) != null&& teacherDao.queryByName(username)!=null) {
                 return 0;
@@ -61,14 +61,14 @@ public class AuthServiceImpl implements AuthService {
             studentinfo.setLastPasswordResetDate(new Date().getTime());
             studentinfo.setRole("ROLE_STUDENT");
             return studentDao.studntRegister(studentinfo);
-//        } catch (Exception e) {
-//            throw new AuthException(ExceptionEnum.INNER_ERROR.getMsg());
-//        }
+        } catch (Exception e) {
+            throw new AuthException(ExceptionEnum.INNER_ERROR.getMsg());
+        }
     }
 
     @Override
-    public String studentLogin(String username, String password) {
-//        try {
+    public String studentLogin(String username, String password) throws AuthException{
+        try {
             UsernamePasswordAuthenticationToken upToken = new UsernamePasswordAuthenticationToken(username, password);
             // Perform the security
             final Authentication authentication = authenticationManager.authenticate(upToken);
@@ -77,9 +77,9 @@ public class AuthServiceImpl implements AuthService {
             final UserDetails userDetails = JwtUserFactory.createStudent(studentDao.selectStudent(username));
             final String token = jwtTokenUtil.generateToken(userDetails);
             return token;
-//        } catch (Exception e) {
-//            throw new AuthException("获取token异常");
-//        }
+        } catch (Exception e) {
+            throw new AuthException("获取token异常");
+        }
     }
 
     @Override

@@ -38,27 +38,37 @@ public class ProjectController {
             return new ResultData(false, e.getMessage());}
     }
 
+    /**
+     * 首页显示项目
+     * @return
+     */
     @GetMapping("/index")
     public ResultData queryForIndex(){
         try{
             List<ProjectView> list=projectService.queryForIndex();
             return new ResultData(true,list);
         }catch (Exception e)  {
-            return new ResultData(false,e.getMessage());}
+            return new ResultData(false,e.getMessage());} }
 
-    }
-
+    /**
+     * 根据项目名字查看项目详情
+     * @param projectName
+     * @return
+     */
     @GetMapping("/projectName")
     public ResultData queryForProjectByName(@RequestParam String projectName) {
         try {
             ProjectDetail projectDetail = projectService.showProject(projectName);
             return new ResultData(true,projectDetail);
         } catch (Exception e) {
-            return new ResultData(false, e.getMessage());}
-    }
+            return new ResultData(false, e.getMessage());} }
 
 
-    //根据关键词搜索项目
+    /**
+     * 根据关键词查询项目
+     * @param keyWords
+     * @return
+     */
     @GetMapping("/projectsByWords")
     public ResultData queryByKeyWords(@RequestParam String keyWords) {
         try {
@@ -68,6 +78,4 @@ public class ProjectController {
             return new ResultData(false, ProjectEnum.NO_PROJECTS.getMsg());
         } catch (Exception e) {
             return new ResultData(false, e.getMessage());} }
-
-
 }
