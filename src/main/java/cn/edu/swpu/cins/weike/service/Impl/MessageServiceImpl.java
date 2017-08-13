@@ -83,13 +83,15 @@ public class MessageServiceImpl implements MessageService {
 //                mailService.sendMailForProject(email, studentSaver.getUsername(), projectName);
                 eventProducer.fireEvent(new EventModel(EventType.MAIL).setExts("email",email)
                              .setExts("username",studentSaver.getUsername())
-                             .setExts("projectName",projectName));
+                             .setExts("projectName",projectName)
+                             .setExts("status","joinPro"));
             } else {
                 message.setToName(teacherSaver.getUsername());
 //                mailService.sendMailForProject(email, teacherSaver.getUsername(), projectName)
                 eventProducer.fireEvent(new EventModel(EventType.MAIL).setExts("email",email)
                         .setExts("username",teacherSaver.getUsername())
-                        .setExts("projectName",projectName));}
+                        .setExts("projectName",projectName)
+                        .setExts("status","joinPro"));}
             message.setContent(content);
             message.setCreateDate(new Date());
             message.setProjectAbout(projectName);

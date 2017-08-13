@@ -80,14 +80,10 @@ public class StudentController {
                     if(studentService.queryForReCommod(projectInfo.getProjectNeed(),username).isEmpty()){
                         return new ResultData(true, ProjectEnum.NO_SUITBLE_PERSON.getMsg()); }
                     return new ResultData(true,studentService.queryForReCommod(projectInfo.getProjectNeed(),username)); }
-                return new ResultData(false, ProjectEnum.REPEATE_PROJECT.getMsg());
-            } else {
+                return new ResultData(false, ProjectEnum.REPEATE_PROJECT.getMsg()); } else {
                 return new ResultData(false, UserEnum.ADD_PERSONNAL.getMsg());
-            }
-        } catch (Exception e) {
-            return new ResultData(false, e.getMessage());
-        }
-
+            } } catch (Exception e) {
+            return new ResultData(false, e.getMessage()); }
     }
 
 

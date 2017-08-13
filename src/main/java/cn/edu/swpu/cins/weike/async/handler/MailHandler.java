@@ -13,9 +13,7 @@ import org.springframework.stereotype.Component;
 import redis.clients.jedis.Jedis;
 
 import java.util.Arrays;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 @Component
 public class MailHandler implements EventHandler {
@@ -32,19 +30,27 @@ public class MailHandler implements EventHandler {
     public void doHandle(EventModel model){
 //        try{
             Jedis jedis =jedisAdapter.getJedis();
-            if(model.getExts().containsKey("projectName")){
-                mailService.sendMailForProject(model.getExts().get("email"),model.getExts().get("username"),model.getExts().get("projectName"));
-            }
-            else if(model.getExts().containsKey("updatePwd")){
-                String toEmail=model.getExts().get("email");
-                String verifyCode =mailService.sendMailForUpdatePwd(toEmail);
-                jedis.setex(RedisKey.getBizFindPassword(model.getExts().get("username")),1800,verifyCode);
-            }
-            else {
-                String username=model.getExts().get("username");
-                String verifyCode=mailService.sendSimpleMail(username,model.getExts().get("email"));
-                jedis.setex(RedisKey.getBizRegisterKey(username),1800,verifyCode);
-            }
+            String status=model.getExts().get("status");
+            String verifyCode;
+            switch (status) {
+                case "joinPro" :
+                    mailService.sendMailForProject(model.getExts().get("email"),
+                            model.getExts().get("username"),
+                            model.getExts().get("projectName"));
+                    break;
+                case "updatePwd" :
+                    String toEmail=model.getExts().get("email");
+                    verifyCode =mailService.sendMailForUpdatePwd(toEmail);
+                    jedis.setex(RedisKey.getBizFindPassword(model.getExts().get("username")),1800,verifyCode);
+                    break;
+                case "register" :
+                    String username=model.getExts().get("username");
+                    verifyCode=mailService.sendSimpleMail(username,model.getExts().get("email"));
+                    jedis.setex(RedisKey.getBizRegisterKey(username),1800,verifyCode);
+                    break;
+                default:
+                    return;
+        }
 //        }catch (Exception e){
 //            logger.info("出现错误咯！");
 //        }

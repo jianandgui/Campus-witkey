@@ -47,6 +47,9 @@ public class TeacherDetail {
         this.qq = qq;
     }
 
+    public TeacherDetail() {
+    }
+
     public int getId() {
         return id;
     }

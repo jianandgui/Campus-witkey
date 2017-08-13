@@ -81,13 +81,13 @@ public class AuthController {
             String applyingProKey=RedisKey.getBizApplyingPro(authenticationRequest.getUsername());
             String applySuccessKey = RedisKey.getBizJoinSuccess(authenticationRequest.getUsername());
             String applyFailedKey = RedisKey.getBizJoinFail(authenticationRequest.getUsername());
-            String folloeProKey = RedisKey.getBizAttentionPro(authenticationRequest.getUsername());
+            String followerProKey = RedisKey.getBizAttentionPro(authenticationRequest.getUsername());
 
             joinProject.setReleased(studentDao.queryAllProject(authenticationRequest.getUsername()));
             joinProject.setJoining((jedisAdapter.smenber(applyingProKey).stream().collect(Collectors.toList())));
             joinProject.setJoinSuccess(jedisAdapter.smenber(applySuccessKey).stream().collect(Collectors.toList()));
             joinProject.setJoinFailed(jedisAdapter.smenber(applyFailedKey).stream().collect(Collectors.toList()));
-            joinProject.setFollowPro(jedisAdapter.smenber(folloeProKey).stream().collect(Collectors.toList()));
+            joinProject.setFollowPro(jedisAdapter.smenber(followerProKey).stream().collect(Collectors.toList()));
             StudentInfo studentInfo = studentDao.selectStudent(authenticationRequest.getUsername());
             if (studentInfo == null) {
                 return new ResultData(false, LoginEnum.NO_USER);
@@ -117,7 +117,18 @@ public class AuthController {
     public ResultData createTeacherAuthenticationToken(
             @RequestBody JwtAuthenticationRequest authenticationRequest) {
         try {
-            JoinProject joinProject=null;
+            JoinProject joinProject=new JoinProject();
+
+            String applyingProKey=RedisKey.getBizApplyingPro(authenticationRequest.getUsername());
+            String applySuccessKey = RedisKey.getBizJoinSuccess(authenticationRequest.getUsername());
+            String applyFailedKey = RedisKey.getBizJoinFail(authenticationRequest.getUsername());
+            String followerProKey = RedisKey.getBizAttentionPro(authenticationRequest.getUsername());
+
+            joinProject.setReleased(studentDao.queryAllProject(authenticationRequest.getUsername()));
+            joinProject.setJoining((jedisAdapter.smenber(applyingProKey).stream().collect(Collectors.toList())));
+            joinProject.setJoinSuccess(jedisAdapter.smenber(applySuccessKey).stream().collect(Collectors.toList()));
+            joinProject.setJoinFailed(jedisAdapter.smenber(applyFailedKey).stream().collect(Collectors.toList()));
+            joinProject.setFollowPro(jedisAdapter.smenber(followerProKey).stream().collect(Collectors.toList()));
             TeacherInfo teacherInfo = teacherDao.queryByName(authenticationRequest.getUsername());
             if (teacherInfo == null) {
                 return new ResultData(false, LoginEnum.NO_USER.getMessage());}
@@ -151,7 +162,7 @@ public class AuthController {
             if (studentDao.queryEmail(email) != null) {
                 return new ResultData(false, RegisterEnum.REPEATE_EMAIL.getMessage()); }
 //            return new ResultData<StudentInfo>(true, mailService.sendSimpleMail(username, email));
-            if(eventProducer.fireEvent(new EventModel(EventType.MAIL).setExts("username",username).setExts("email",email))){
+            if(eventProducer.fireEvent(new EventModel(EventType.MAIL).setExts("username",username).setExts("email",email).setExts("status","register"))){
                 return new ResultData<StudentInfo>(true,"请到您的邮箱查看验证码");}
             return new ResultData(false,"服务器内部异常");
 
@@ -171,7 +182,7 @@ public class AuthController {
             if (teacherDao.queryEamil(email) != null) {
                 return new ResultData(false, RegisterEnum.REPEATE_EMAIL.getMessage());}
 //            return new ResultData(true, mailService.sendSimpleMail(username, email));
-            if(eventProducer.fireEvent(new EventModel(EventType.MAIL).setExts("username",username).setExts("email",email))){
+            if(eventProducer.fireEvent(new EventModel(EventType.MAIL).setExts("username",username).setExts("email",email).setExts("status","register"))){
                 return new ResultData<StudentInfo>(true,"请到您的邮箱查看验证码");}
             return new ResultData(false,"服务器内部异常");
         } catch (Exception e) {
@@ -233,7 +244,8 @@ public class AuthController {
             if(eventProducer.fireEvent(new EventModel(EventType.MAIL)
                     .setExts("username",username)
                     .setExts("email",email)
-                    .setExts("updatePwd","UPDATE_PWD"))){
+                    .setExts("updatePwd","UPDATE_PWD")
+                    .setExts("status","updatePwd"))){
                 return new ResultData<StudentInfo>(true,"邮件发送成功"); }
             return new ResultData(false, "发送邮件失败");
 
@@ -256,7 +268,7 @@ public class AuthController {
             if(eventProducer.fireEvent(new EventModel(EventType.MAIL)
                     .setExts("username",username)
                     .setExts("email",email)
-                    .setExts("updatePwd","UPDATE_PWD"))){
+                    .setExts("status","updatePwd"))){
             return new ResultData<StudentInfo>(true,"邮件发送成功"); }
         return new ResultData(false, "发送邮件失败");
         } catch (Exception e) {
