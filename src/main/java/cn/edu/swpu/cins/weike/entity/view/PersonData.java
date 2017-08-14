@@ -11,11 +11,8 @@ import java.util.List;
 public class PersonData {
 
     private int id;
-
     private String username;
-
     private String image;
-
     private String sex;
     //学生学历
     private String eduBackgroud;
@@ -27,19 +24,15 @@ public class PersonData {
     private long entryUniversity;
     //毕业时间
     private long leaveUniversity;
-
     private long qq;
-
     //拥有技能
     private List<String> skills;
     //项目经验
     private String experience;
     //自我评价
     private String selfFeel;
-
     //学生等级
     private String level;
-
     private String email;
 
     public PersonData(int id, String username, String image, String sex, String eduBackgroud, String university, String majorAndGrade, long entryUniversity, long leaveUniversity, long qq, List<String> skills, String experience, String selfFeel, String level, String email) {

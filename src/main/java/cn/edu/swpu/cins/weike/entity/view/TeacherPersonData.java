@@ -9,11 +9,8 @@ import lombok.Data;
 public class TeacherPersonData {
 
     private int id;
-
     private String username;
-
     private String image;
-
     private String sex;
     //老师所在大学
     private String university;
@@ -21,9 +18,7 @@ public class TeacherPersonData {
     private String academy;
     //老师职称
     private String rank;
-
     private long qq;
-
     private String email;
 
     public TeacherPersonData(int id, String username, String image, String sex, String university, String academy, String rank, long qq, String email) {

@@ -14,11 +14,8 @@ public class StudentDetail {
 
     //这个类用于学生用户注册后填写个人信息 允许不填 不过不能参加项目或其他项目功能
     private int id;
-
     private String username;
-
     private String image;
-
     private String sex;
     //学生学历
     private String eduBackgroud;
@@ -30,16 +27,13 @@ public class StudentDetail {
     private long entryUniversity;
     //毕业时间
     private long leaveUniversity;
-
     private long qq;
-
     //拥有技能
     private List<String> skills;
     //项目经验
     private String experience;
     //自我评价
     private String selfFeel;
-
     //学生等级
     private String level;
 

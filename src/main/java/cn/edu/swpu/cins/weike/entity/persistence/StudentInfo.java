@@ -4,7 +4,6 @@ package cn.edu.swpu.cins.weike.entity.persistence;
 
 import lombok.Data;
 
-import java.sql.Date;
 
 
 /**
@@ -19,11 +18,8 @@ public class StudentInfo {
     private String username;
     //密码
     private String password;
-
     private String email;
-
     private long lastPasswordResetDate;
-
     private String role;
 
     public StudentInfo() {
@@ -38,5 +34,4 @@ public class StudentInfo {
         this.lastPasswordResetDate = lastPasswordResetDate;
         this.role = role;
     }
-
 }

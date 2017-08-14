@@ -16,8 +16,6 @@ public class AdminInfo {
     private String email;
     private long lastPasswordResetDate;
 
-    
-
     public AdminInfo(int id, String username, String password, String role, String email, long lastPasswordResetDate) {
         this.id = id;
         this.username = username;
@@ -26,9 +24,6 @@ public class AdminInfo {
         this.email = email;
         this.lastPasswordResetDate = lastPasswordResetDate;
     }
-
-
-
     public AdminInfo() {
     }
 

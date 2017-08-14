@@ -29,7 +29,6 @@ public class ProjectRecommend {
     private long qq;
 
 
-
     public ProjectRecommend() {
     }
 

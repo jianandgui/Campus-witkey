@@ -14,13 +14,9 @@ public class TeacherInfo {
     private String username;
     //用户密码
     private String password;
-
     private String email;
-
     private String role;
-
     private long lastPasswordResetDate;
-
 
     public TeacherInfo() {
     }

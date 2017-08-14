@@ -21,15 +21,12 @@ public class JwtUser implements UserDetails {
     private String email;
     private Collection<? extends GrantedAuthority> authorities;
     private final Date lastPasswordResetDate;
-
     public int getId() {
         return id;
     }
-
     public void setId(int id) {
         this.id = id;
     }
-
     public void setAuthorities(Collection<? extends GrantedAuthority> authorities) {
         this.authorities = authorities;
     }
