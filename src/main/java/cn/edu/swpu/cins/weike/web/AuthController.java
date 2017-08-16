@@ -103,36 +103,8 @@ public class AuthController {
     public ResultData createStudentAuthenticationToken(
             @RequestBody JwtAuthenticationRequest authenticationRequest ,@RequestHeader("CaptchaCode") String captchaCode) {
         try {
-            String loginKey=captchaCode;
-            String code=jedisAdapter.get(loginKey);
-            if(!code.equals(authenticationRequest.getVerifyCode())){
-                return new ResultData(false,"请重新输入验证码"); }
-            JoinProject joinProject = new JoinProject();
-            String applyingProKey = RedisKey.getBizApplyingPro(authenticationRequest.getUsername());
-            String applySuccessKey = RedisKey.getBizJoinSuccess(authenticationRequest.getUsername());
-            String applyFailedKey = RedisKey.getBizJoinFail(authenticationRequest.getUsername());
-            String followerProKey = RedisKey.getBizAttentionPro(authenticationRequest.getUsername());
-            joinProject.setReleased(studentDao.queryAllProject(authenticationRequest.getUsername()));
-            joinProject.setJoining((jedisAdapter.smenber(applyingProKey).stream().collect(Collectors.toList())));
-            joinProject.setJoinSuccess(jedisAdapter.smenber(applySuccessKey).stream().collect(Collectors.toList()));
-            joinProject.setJoinFailed(jedisAdapter.smenber(applyFailedKey).stream().collect(Collectors.toList()));
-            joinProject.setFollowPro(jedisAdapter.smenber(followerProKey).stream().collect(Collectors.toList()));
-            StudentInfo studentInfo = studentDao.selectStudent(authenticationRequest.getUsername());
-            if (studentInfo == null) {
-                return new ResultData(false, LoginEnum.NO_USER); }
-            StudentDetail studentDetail = studentDao.queryForStudentPhone(authenticationRequest.getUsername());
-            String image;
-            boolean isCompleted;
-            if (studentDetail != null) {
-                image = studentDetail.getImage();
-                isCompleted = true;
-            } else {
-                image = null;
-                isCompleted = false; }
-            String username = studentInfo.getUsername();
-            String role = studentInfo.getRole();
-            final String token = authService.studentLogin(authenticationRequest.getUsername(), authenticationRequest.getPassword());
-            return new ResultData(true, new JwtAuthenticationResponse(token, username, role, image, isCompleted, joinProject));
+            JwtAuthenticationResponse response = authService.studentLogin(authenticationRequest,captchaCode);
+            return new ResultData(true,response);
         } catch (Exception e) {
             return new ResultData(false, e.getMessage()); }
     }

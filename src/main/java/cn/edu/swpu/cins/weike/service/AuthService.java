@@ -3,6 +3,8 @@ package cn.edu.swpu.cins.weike.service;
 import cn.edu.swpu.cins.weike.entity.persistence.AdminInfo;
 import cn.edu.swpu.cins.weike.entity.persistence.StudentInfo;
 import cn.edu.swpu.cins.weike.entity.persistence.TeacherInfo;
+import cn.edu.swpu.cins.weike.entity.view.JwtAuthenticationRequest;
+import cn.edu.swpu.cins.weike.entity.view.JwtAuthenticationResponse;
 import cn.edu.swpu.cins.weike.exception.AuthException;
 
 /**
@@ -14,7 +16,7 @@ public interface AuthService {
     int studentRegister(StudentInfo studentinfo) throws AuthException;
 
     //学生登陆
-    String studentLogin(String userName, String password) throws AuthException;
+    JwtAuthenticationResponse studentLogin(JwtAuthenticationRequest request,String captchaCode) throws AuthException;
 
     //老师注册
     int teacherRegister(TeacherInfo teacherinfo) throws AuthException;
