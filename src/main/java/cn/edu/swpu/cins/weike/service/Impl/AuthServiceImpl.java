@@ -227,20 +227,35 @@ public class AuthServiceImpl implements AuthService {
     }
 
     @Override
-    public int studentUpdatePassword(String username, String password) throws AuthException {
+    public int studentUpdatePassword(UpdatePassword updatePassword) throws AuthException {
         try {
-            return studentDao.updatePassword(username, UpdatePwd.updatePwd(password));
+            String username = updatePassword.getUsername();
+            String redisKey = RedisKey.getBizFindPassword(username);
+            if (jedisAdapter.exists(redisKey)) {
+                if (jedisAdapter.get(redisKey).equals(updatePassword.getVerifyCode())) {
+                    if (studentDao.updatePassword(username, UpdatePwd.updatePwd(updatePassword.getPassword())) != 1) {
+                        throw  new AuthException(cn.edu.swpu.cins.weike.enums.UpdatePwd.UPDATE_PWD_WRONG.getMsg()); }
+                    return 1; }
+                throw  new AuthException("验证码错误"); }
+            throw  new AuthException( "请重新获取验证码");
         } catch (Exception e) {
-            throw new AuthException("更新密码异常");
-        }
+            throw e; }
     }
 
     @Override
-    public int teacherUpdatePassword(String username, String password) throws AuthException {
+    public int teacherUpdatePassword(UpdatePassword updatePassword) throws AuthException {
         try {
-            return teacherDao.updatePassword(username, UpdatePwd.updatePwd(password));
+            String username = updatePassword.getUsername();
+            String redisKey = RedisKey.getBizFindPassword(username);
+            if (jedisAdapter.exists(redisKey)) {
+                if (jedisAdapter.get(redisKey).equals(updatePassword.getVerifyCode())) {
+                    if (teacherDao.updatePassword(username, UpdatePwd.updatePwd(updatePassword.getPassword())) != 1) {
+                        throw  new AuthException(cn.edu.swpu.cins.weike.enums.UpdatePwd.UPDATE_PWD_WRONG.getMsg()); }
+                    return  1; }
+                throw  new AuthException("验证码错误"); }
+            throw  new AuthException("请重新获取验证码");
         } catch (Exception e) {
-            throw new AuthException("更新密码异常");
+            throw e;
         }
     }
 

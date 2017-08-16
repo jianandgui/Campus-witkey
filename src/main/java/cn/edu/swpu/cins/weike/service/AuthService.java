@@ -3,10 +3,7 @@ package cn.edu.swpu.cins.weike.service;
 import cn.edu.swpu.cins.weike.entity.persistence.AdminInfo;
 import cn.edu.swpu.cins.weike.entity.persistence.StudentInfo;
 import cn.edu.swpu.cins.weike.entity.persistence.TeacherInfo;
-import cn.edu.swpu.cins.weike.entity.view.JwtAuthenticationRequest;
-import cn.edu.swpu.cins.weike.entity.view.JwtAuthenticationResponse;
-import cn.edu.swpu.cins.weike.entity.view.RegisterStudentVO;
-import cn.edu.swpu.cins.weike.entity.view.RegisterTeacherVO;
+import cn.edu.swpu.cins.weike.entity.view.*;
 import cn.edu.swpu.cins.weike.exception.AuthException;
 
 /**
@@ -30,10 +27,10 @@ public interface AuthService {
     String adminLogin(String username, String password) throws AuthException;
 
     //学生找回密码
-    int studentUpdatePassword(String username, String password) throws AuthException;
+    int studentUpdatePassword(UpdatePassword updatePassword) throws AuthException;
 
     //老师召回密码
-    int teacherUpdatePassword(String username, String password) throws AuthException;
+    int teacherUpdatePassword(UpdatePassword updatePassword) throws AuthException;
 
     //    //管理员注册
     AdminInfo adminRegister(AdminInfo adminInfo) throws AuthException;

@@ -222,15 +222,8 @@ public class AuthController {
     @PostMapping("/student/FindPassword")
     public ResultData studentUpdatePassword(@RequestBody UpdatePassword updatePassword) {
         try {
-            String username = updatePassword.getUsername();
-            String redisKey = RedisKey.getBizFindPassword(username);
-            if (jedisAdapter.exists(redisKey)) {
-                if (jedisAdapter.get(redisKey).equals(updatePassword.getVerifyCode())) {
-                    if (authService.studentUpdatePassword(updatePassword.getUsername(), updatePassword.getPassword()) != 1) {
-                        return new ResultData(false, UpdatePwd.UPDATE_PWD_WRONG.getMsg()); }
-                    return new ResultData(true, UpdatePwd.UPDATE_PWD_SUCCESS.getMsg()); }
-                return new ResultData(false, "验证码错误"); }
-            return new ResultData(false, "请重新获取验证码");
+            authService.studentUpdatePassword(updatePassword);
+            return new ResultData(true, cn.edu.swpu.cins.weike.enums.UpdatePwd.UPDATE_PWD_SUCCESS.getMsg());
         } catch (Exception e) {
             return new ResultData(false, e.getMessage()); }
     }
@@ -238,16 +231,8 @@ public class AuthController {
     @PostMapping("/teacher/FindPassword")
     public ResultData teacherUpdatePassword(@RequestBody UpdatePassword updatePassword) {
         try {
-            String username = updatePassword.getUsername();
-            String redisKey = RedisKey.getBizFindPassword(username);
-            if (jedisAdapter.exists(redisKey)) {
-                if (jedisAdapter.get(redisKey).equals(updatePassword.getVerifyCode())) {
-                    //authService.teacherUpdatePassword(updatePassword.getUsername(), updatePassword.getPassword());
-                    if (authService.teacherUpdatePassword(updatePassword.getUsername(), updatePassword.getPassword()) != 1) {
-                        return new ResultData(false, UpdatePwd.UPDATE_PWD_WRONG.getMsg()); }
-                    return new ResultData(true, UpdatePwd.UPDATE_PWD_SUCCESS.getMsg()); }
-                return new ResultData(false, "验证码错误"); }
-            return new ResultData(false, "请重新获取验证码");
+            authService.teacherUpdatePassword(updatePassword);
+            return new ResultData(true, cn.edu.swpu.cins.weike.enums.UpdatePwd.UPDATE_PWD_SUCCESS.getMsg());
         } catch (Exception e) {
             return new ResultData(false, e.getMessage()); }
     }
