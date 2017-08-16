@@ -5,6 +5,8 @@ import cn.edu.swpu.cins.weike.entity.persistence.StudentInfo;
 import cn.edu.swpu.cins.weike.entity.persistence.TeacherInfo;
 import cn.edu.swpu.cins.weike.entity.view.JwtAuthenticationRequest;
 import cn.edu.swpu.cins.weike.entity.view.JwtAuthenticationResponse;
+import cn.edu.swpu.cins.weike.entity.view.RegisterStudentVO;
+import cn.edu.swpu.cins.weike.entity.view.RegisterTeacherVO;
 import cn.edu.swpu.cins.weike.exception.AuthException;
 
 /**
@@ -13,13 +15,13 @@ import cn.edu.swpu.cins.weike.exception.AuthException;
 public interface AuthService {
 
     //学生注册
-    int studentRegister(StudentInfo studentinfo) throws AuthException;
+    int studentRegister(RegisterStudentVO registerStudentVO) throws AuthException;
 
     //学生登陆
     JwtAuthenticationResponse studentLogin(JwtAuthenticationRequest request,String captchaCode) throws AuthException;
 
     //老师注册
-    int teacherRegister(TeacherInfo teacherinfo) throws AuthException;
+    int teacherRegister(RegisterTeacherVO registerTeacherVO) throws AuthException;
 
     //老师登陆
     JwtAuthenticationResponse teacherLogin(JwtAuthenticationRequest jwtAuthenticationRequest,String captchaCode) throws AuthException;
@@ -41,5 +43,9 @@ public interface AuthService {
     void studentGetVerifyCodeForRegister(String username,String email) throws AuthException;
 
     void teacherGetVerifyCodeForRegister(String username,String email) throws AuthException;
+
+    void studentGetVerifyCodeForFindPassword(String username,String email) throws AuthException;
+
+    void teacherGetVerifyCodeForFindPassword(String username, String email) throws AuthException;
 
 }

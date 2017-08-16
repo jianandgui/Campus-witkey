@@ -10,6 +10,7 @@ import cn.edu.swpu.cins.weike.entity.persistence.*;
 import cn.edu.swpu.cins.weike.entity.view.*;
 import cn.edu.swpu.cins.weike.enums.LoginEnum;
 import cn.edu.swpu.cins.weike.enums.UpdatePwd;
+import cn.edu.swpu.cins.weike.exception.AuthException;
 import cn.edu.swpu.cins.weike.service.MailService;
 import cn.edu.swpu.cins.weike.util.JedisAdapter;
 import cn.edu.swpu.cins.weike.util.RedisKey;
@@ -67,69 +68,75 @@ public class AuthController {
     private static int captchaExpires = 60; //超时时间3min
     private static int captchaW = 200;
     private static int captchaH = 60;
+
     /**
      * 获取登录验证码接口
+     *
      * @return
      */
-    @GetMapping(value = "/getVerifyCode",produces = MediaType.IMAGE_PNG_VALUE)
+    @GetMapping(value = "/getVerifyCode", produces = MediaType.IMAGE_PNG_VALUE)
     public byte[] getVerifyCodeForLogin(HttpServletResponse response) {
 
-            String uuid = UUID.randomUUID().toString();
-            Captcha captcha = new Captcha.Builder(captchaW, captchaH)
-                    .addText().addBackground(new GradiatedBackgroundProducer(Color.orange,Color.white))
-                    .gimp(new FishEyeGimpyRenderer())
-                    .build();
-            System.out.println("验证码为    " +captcha.getAnswer());
-            //将验证码以<key,value>形式缓存到redis
-            jedisAdapter.setex(uuid,captchaExpires,captcha.getAnswer());
-            //将验证码key，及验证码的图片返回
-        response.addHeader("captchaCode",uuid);
+        String uuid = UUID.randomUUID().toString();
+        Captcha captcha = new Captcha.Builder(captchaW, captchaH)
+                .addText().addBackground(new GradiatedBackgroundProducer(Color.orange, Color.white))
+                .gimp(new FishEyeGimpyRenderer())
+                .build();
+        System.out.println("验证码为    " + captcha.getAnswer());
+        //将验证码以<key,value>形式缓存到redis
+        jedisAdapter.setex(uuid, captchaExpires, captcha.getAnswer());
+        //将验证码key，及验证码的图片返回
+        response.addHeader("captchaCode", uuid);
         ByteArrayOutputStream bao = new ByteArrayOutputStream();
-            try {
-                ImageIO.write(captcha.getImage(), "png", bao);
-                return bao.toByteArray();
-            } catch (IOException e) {
-                return null; }
+        try {
+            ImageIO.write(captcha.getImage(), "png", bao);
+            return bao.toByteArray();
+        } catch (IOException e) {
+            return null;
+        }
     }
-
 
 
     /**
      * 学生登录接口
+     *
      * @param authenticationRequest 请求体
      * @return 返回token和申请项目的信息
      */
     @RequestMapping(value = "/student/login", method = RequestMethod.POST)
     public ResultData createStudentAuthenticationToken(
-            @RequestBody JwtAuthenticationRequest authenticationRequest ,@RequestHeader("captchaCode") String captchaCode) {
+            @RequestBody JwtAuthenticationRequest authenticationRequest, @RequestHeader("captchaCode") String captchaCode) {
         try {
-            JwtAuthenticationResponse response = authService.studentLogin(authenticationRequest,captchaCode);
-            return new ResultData(true,response);
+            JwtAuthenticationResponse response = authService.studentLogin(authenticationRequest, captchaCode);
+            return new ResultData(true, response);
         } catch (Exception e) {
-            return new ResultData(false, e.getMessage()); }
+            return new ResultData(false, e.getMessage());
+        }
     }
 
 
     /**
      * 教师登录接口
+     *
      * @param authenticationRequest
      * @return 返回token和申请项目的信息
      */
     @RequestMapping(value = "/teacher/login", method = RequestMethod.POST)
     public ResultData createTeacherAuthenticationToken(
-            @RequestBody JwtAuthenticationRequest authenticationRequest,@RequestHeader("captchaCode") String captchaCode) {
+            @RequestBody JwtAuthenticationRequest authenticationRequest, @RequestHeader("captchaCode") String captchaCode) {
         try {
             // Return the token
             JwtAuthenticationResponse response = authService.teacherLogin(authenticationRequest, captchaCode);
-            return new ResultData(true,response);
+            return new ResultData(true, response);
         } catch (Exception e) {
-            return new ResultData(false, e.getMessage()); }
+            return new ResultData(false, e.getMessage());
+        }
     }
-
 
 
     /**
      * 学生注册时获取验证码
+     *
      * @param username
      * @param email
      * @return
@@ -137,16 +144,17 @@ public class AuthController {
     @RequestMapping(value = "/student/GetVerifyCodeForRegister", method = RequestMethod.GET)
     public ResultData studentGetVerifyCode(@RequestParam String username, @RequestParam String email) {
         try {
-            authService.studentGetVerifyCodeForRegister(username,email);
+            authService.studentGetVerifyCodeForRegister(username, email);
             return new ResultData<StudentInfo>(true, "请到您的邮箱查看验证码");
         } catch (Exception e) {
-            return new ResultData(false, e.getMessage()); }
+            return new ResultData(false, e.getMessage());
+        }
     }
-
 
 
     /**
      * 老师注册获取验证码
+     *
      * @param username
      * @param email
      * @return
@@ -154,92 +162,61 @@ public class AuthController {
     @RequestMapping(value = "/teacher/GetVerifyCodeForRegister", method = RequestMethod.GET)
     public ResultData teacherGetVerifyCode(@RequestParam String username, @RequestParam String email) {
         try {
-                authService.teacherGetVerifyCodeForRegister(username,email);
-                return new ResultData<StudentInfo>(true, "请到您的邮箱查看验证码");
+            authService.teacherGetVerifyCodeForRegister(username, email);
+            return new ResultData<StudentInfo>(true, "请到您的邮箱查看验证码");
         } catch (Exception e) {
-            return new ResultData(false, e.getMessage()); }
+            return new ResultData(false, e.getMessage());
+        }
     }
 
 
     /**
      * 学生通过注册验证码，将数据保存在DB中
+     *
      * @param registerStudentVO
      * @return
      */
     @RequestMapping(value = "/student/register", method = RequestMethod.POST)
     public ResultData StudentSaveToDB(@RequestBody RegisterStudentVO registerStudentVO) {
-
         try {
-            String username = registerStudentVO.getStudentInfo().getUsername();
-            String redisKey = RedisKey.getBizRegisterKey(username);
-            if (jedisAdapter.exists(redisKey)) {
-                if (jedisAdapter.get(redisKey).equals(registerStudentVO.getVerifyCode())) {
-                    if (authService.studentRegister(registerStudentVO.getStudentInfo()) == 1) {
-                        return new ResultData(true, RegisterEnum.SUCCESS_SAVE.getMessage()); }
-                    return new ResultData(true, RegisterEnum.FAIL_SAVE.getMessage()); }
-                return new ResultData(false, "验证码错误"); }
-            return new ResultData(false, "请重新获取验证码");
+            authService.studentRegister(registerStudentVO);
+            return new ResultData(true, RegisterEnum.SUCCESS_SAVE);
         } catch (Exception e) {
-            return new ResultData(false, e.getMessage()); }
+            return new ResultData(false, e.getMessage());
+        }
     }
 
 
     @RequestMapping(value = "/teacher/register", method = RequestMethod.POST)
     public ResultData teacherSaveToDB(@RequestBody RegisterTeacherVO registerTeacherVO) {
         try {
-
-            String username = registerTeacherVO.getTeacherInfo().getUsername();
-            String redisKey = RedisKey.getBizRegisterKey(username);
-            if (jedisAdapter.exists(redisKey)) {
-                if (jedisAdapter.get(redisKey).equals(registerTeacherVO.getVerifyCode())) {
-                    if (authService.teacherRegister(registerTeacherVO.getTeacherInfo()) == 1) {
-                        return new ResultData(true, RegisterEnum.SUCCESS_SAVE.getMessage()); }
-                    return new ResultData(true, RegisterEnum.FAIL_SAVE.getMessage()); }
-                return new ResultData(false, "验证码错误"); }
-            return new ResultData(false, "请重新获取验证码");
+            authService.teacherRegister(registerTeacherVO);
+            return new ResultData(true, RegisterEnum.SUCCESS_SAVE);
         } catch (Exception e) {
-            return new ResultData(false, e.getMessage()); }
+            return new ResultData(false, e.getMessage());
+        }
     }
 
 
     @GetMapping("/student/getVerifyCodeForFindPassword")
     public ResultData studentGetVerifyForUpdate(@RequestParam String username, @RequestParam String email) {
         try {
-            StudentInfo studentinfo = studentDao.selectStudent(username);
-            if (studentinfo == null) {
-                return new ResultData(false, UpdatePwd.NO_USER.getMsg()); }
-            if (!email.equals(studentinfo.getEmail())) {
-                return new ResultData(false, UpdatePwd.WRONG_EMALI.getMsg()); }
-//            return new ResultData(true, mailService.sendMailForUpdatePwd(studentinfo.getEmail()));
-            if (eventProducer.fireEvent(new EventModel(EventType.MAIL)
-                    .setExts("username", username)
-                    .setExts("email", email)
-                    .setExts("updatePwd", "UPDATE_PWD")
-                    .setExts("status", "updatePwd"))) {
-                return new ResultData<StudentInfo>(true, "邮件发送成功"); }
-            return new ResultData(false, "发送邮件失败");
+            authService.studentGetVerifyCodeForFindPassword(username, email);
+            return new ResultData(true, "邮件发送成功");
         } catch (Exception e) {
-            return new ResultData(false, e.getMessage()); }
+            return new ResultData(false, e.getMessage());
+        }
     }
 
 
     @GetMapping("/teacher/getVerifyCodeForFindPassword")
     public ResultData teacherGetVerifyForUpdatePassword(@RequestParam String username, @RequestParam String email) {
         try {
-            TeacherInfo teacherinfo = teacherDao.queryByName(username);
-            if (teacherinfo == null) {
-                return new ResultData(false, UpdatePwd.NO_USER.getMsg()); }
-            if (!email.equals(teacherinfo.getEmail())) {
-                return new ResultData(false, UpdatePwd.WRONG_EMALI.getMsg()); }
-            //return new ResultData(true, mailService.sendMailForUpdatePwd(teacherinfo.getEmail()));
-            if (eventProducer.fireEvent(new EventModel(EventType.MAIL)
-                    .setExts("username", username)
-                    .setExts("email", email)
-                    .setExts("status", "updatePwd"))) {
-                return new ResultData<StudentInfo>(true, "邮件发送成功"); }
-            return new ResultData(false, "发送邮件失败");
-        } catch (Exception e) {
-            return new ResultData(false, e.getMessage()); }
+            authService.teacherGetVerifyCodeForFindPassword(username, email);
+            return new ResultData(true, "邮件发送成功");
+        } catch(Exception e) {
+        return new ResultData(false, e.getMessage());
+    }
     }
 
     @PostMapping("/student/FindPassword")
