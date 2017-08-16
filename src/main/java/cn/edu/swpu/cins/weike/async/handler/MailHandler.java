@@ -29,7 +29,6 @@ public class MailHandler implements EventHandler {
     @Override
     public void doHandle(EventModel model){
         try{
-            Jedis jedis =jedisAdapter.getJedis();
             String status=model.getExts().get("status");
             String verifyCode;
             switch (status) {
@@ -41,12 +40,12 @@ public class MailHandler implements EventHandler {
                 case "updatePwd" :
                     String toEmail=model.getExts().get("email");
                     verifyCode =mailService.sendMailForUpdatePwd(toEmail);
-                    jedis.setex(RedisKey.getBizFindPassword(model.getExts().get("username")),1800,verifyCode);
+                    jedisAdapter.setex(RedisKey.getBizFindPassword(model.getExts().get("username")),1800,verifyCode);
                     break;
                 case "register" :
                     String username=model.getExts().get("username");
                     verifyCode=mailService.sendSimpleMail(username,model.getExts().get("email"));
-                    jedis.setex(RedisKey.getBizRegisterKey(username),1800,verifyCode);
+                    jedisAdapter.setex(RedisKey.getBizRegisterKey(username),1800,verifyCode);
                     break;
                 default:
                     return;

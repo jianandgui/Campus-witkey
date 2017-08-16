@@ -77,7 +77,7 @@ public class ProjectServiceImpl implements ProjectService {
         String proApplying = RedisKey.getBizProApplying(projectName);
         ProApplyInfo proApplyInfo = new ProApplyInfo();
         try{
-            proApplyInfo.setApllySuccess(jedisAdapter.smenber(proApplySuccess).stream().collect(Collectors.toList()));
+            proApplyInfo.setApplySuccess(jedisAdapter.smenber(proApplySuccess).stream().collect(Collectors.toList()));
             proApplyInfo.setApplyFailed(jedisAdapter.smenber(proApplyFailed).stream().collect(Collectors.toList()));
             proApplyInfo.setApplying(jedisAdapter.smenber(proApplying).stream().collect(Collectors.toList()));
             return proApplyInfo;

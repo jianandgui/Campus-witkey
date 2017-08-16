@@ -188,6 +188,35 @@ public class JedisAdapter implements InitializingBean {
         return 0;
     }
 
+    public Boolean exists(String key) {
+        Jedis jedis = null;
+        try {
+            jedis = pool.getResource();
+            return jedis.exists(key);
+        } catch (Exception e) {
+            logger.error("发生异常" + e.getMessage());
+        } finally {
+            if (jedis != null) {
+                jedis.close();
+            }
+        }
+        return false;
+    }
+    public String get(String key) {
+        Jedis jedis = null;
+        try {
+            jedis = pool.getResource();
+            return jedis.get(key);
+        } catch (Exception e) {
+            logger.error("发生异常" + e.getMessage());
+        } finally {
+            if (jedis != null) {
+                jedis.close();
+            }
+        }
+        return null;
+    }
+
     public long incr(String key) {
         Jedis jedis = null;
         try {
@@ -409,6 +438,20 @@ public class JedisAdapter implements InitializingBean {
         try {
             jedis = pool.getResource();
             return jedis.zscore(key, member);
+        } catch (Exception e) {
+            logger.error("发生异常" + e.getMessage());
+        } finally {
+            if (jedis != null) {
+                jedis.close();
+            }
+        }
+        return null;
+    }
+    public String setex(String key, int time,String value) {
+        Jedis jedis = null;
+        try {
+            jedis = pool.getResource();
+            return jedis.setex(key,time,value);
         } catch (Exception e) {
             logger.error("发生异常" + e.getMessage());
         } finally {

@@ -34,6 +34,6 @@ public interface AuthService {
     //    //管理员注册
     AdminInfo adminRegister(AdminInfo adminInfo) throws AuthException;
 
-    String getVerifyCodeForLogin() throws AuthException;
+  //  String getVerifyCodeForLogin() throws AuthException;
 
 }

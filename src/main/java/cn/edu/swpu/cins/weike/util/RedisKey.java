@@ -37,6 +37,10 @@ public class RedisKey {
     //项目有哪些人关注
     private static String BIZ_PRO_FOLLOWER = "PRO_FOLLOWER";
 
+    private static String BIZ_LOGIN = "LOGIN";
+
+
+
     public static String getEventQueueKey() {
         return BIZ_EVENTQUEUE;
     }

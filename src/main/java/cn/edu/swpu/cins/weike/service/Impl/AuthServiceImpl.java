@@ -152,7 +152,7 @@ public class AuthServiceImpl implements AuthService {
         }
     }
 
-    public static final char[] chars = "1234567890QWERTYUIOPASDFGHJKLZXCVBNMqwertyuioplkjhgfdsazxcvbnm".toCharArray();
+/*    public static final char[] chars = "1234567890QWERTYUIOPASDFGHJKLZXCVBNMqwertyuioplkjhgfdsazxcvbnm".toCharArray();
     public static Random random = new Random();
 
     public static String getRandomString() {
@@ -172,7 +172,7 @@ public class AuthServiceImpl implements AuthService {
         } catch (Exception e) {
             throw new AuthException("获取验证码异常");
         }
-    }
+    }*/
 
     @Override
     public AdminInfo adminRegister(AdminInfo adminInfo) throws AuthException {
