@@ -22,7 +22,7 @@ public interface AuthService {
     int teacherRegister(TeacherInfo teacherinfo) throws AuthException;
 
     //老师登陆
-    String teacherLogin(String username, String password) throws AuthException;
+    JwtAuthenticationResponse teacherLogin(JwtAuthenticationRequest jwtAuthenticationRequest,String captchaCode) throws AuthException;
 
     //管理员登录
     String adminLogin(String username, String password) throws AuthException;

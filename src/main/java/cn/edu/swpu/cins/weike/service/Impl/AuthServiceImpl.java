@@ -2,11 +2,9 @@ package cn.edu.swpu.cins.weike.service.Impl;
 
 import cn.edu.swpu.cins.weike.config.filter.JwtTokenUtil;
 import cn.edu.swpu.cins.weike.dao.StudentDao;
-import cn.edu.swpu.cins.weike.entity.persistence.StudentDetail;
-import cn.edu.swpu.cins.weike.entity.persistence.TeacherInfo;
+import cn.edu.swpu.cins.weike.entity.persistence.*;
 import cn.edu.swpu.cins.weike.entity.view.*;
 import cn.edu.swpu.cins.weike.enums.ExceptionEnum;
-import cn.edu.swpu.cins.weike.enums.LoginEnum;
 import cn.edu.swpu.cins.weike.exception.AuthException;
 import cn.edu.swpu.cins.weike.util.JedisAdapter;
 import cn.edu.swpu.cins.weike.util.RedisKey;
@@ -22,12 +20,9 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import cn.edu.swpu.cins.weike.dao.AdminDao;
 import cn.edu.swpu.cins.weike.dao.TeacherDao;
-import cn.edu.swpu.cins.weike.entity.persistence.AdminInfo;
-import cn.edu.swpu.cins.weike.entity.persistence.StudentInfo;
 import cn.edu.swpu.cins.weike.service.AuthService;
 
 import java.util.Date;
-import java.util.Random;
 import java.util.stream.Collectors;
 
 /**
@@ -144,16 +139,48 @@ public class AuthServiceImpl implements AuthService {
     }
 
     @Override
-    public String teacherLogin(String username, String password) throws AuthException{
+    public JwtAuthenticationResponse teacherLogin(JwtAuthenticationRequest authenticationRequest,String captchaCode) throws AuthException{
 
-        UsernamePasswordAuthenticationToken upToken = new UsernamePasswordAuthenticationToken(username, password);
+        UsernamePasswordAuthenticationToken upToken = new UsernamePasswordAuthenticationToken(authenticationRequest.getUsername(),authenticationRequest.getPassword());
         try {
+            String loginKey=captchaCode;
+            String code=jedisAdapter.get(loginKey);
+            if(!code.equals(authenticationRequest.getVerifyCode())){
+                throw new AuthException("请重新输入验证码"); }
+            JoinProject joinProject = new JoinProject();
+            String applyingProKey = RedisKey.getBizApplyingPro(authenticationRequest.getUsername());
+            String applySuccessKey = RedisKey.getBizJoinSuccess(authenticationRequest.getUsername());
+            String applyFailedKey = RedisKey.getBizJoinFail(authenticationRequest.getUsername());
+            String followerProKey = RedisKey.getBizAttentionPro(authenticationRequest.getUsername());
+            joinProject.setReleased(studentDao.queryAllProject(authenticationRequest.getUsername()));
+            joinProject.setJoining((jedisAdapter.smenber(applyingProKey).stream().collect(Collectors.toList())));
+            joinProject.setJoinSuccess(jedisAdapter.smenber(applySuccessKey).stream().collect(Collectors.toList()));
+            joinProject.setJoinFailed(jedisAdapter.smenber(applyFailedKey).stream().collect(Collectors.toList()));
+            joinProject.setFollowPro(jedisAdapter.smenber(followerProKey).stream().collect(Collectors.toList()));
+            TeacherInfo teacherInfo = teacherDao.queryByName(authenticationRequest.getUsername());
+            if (teacherInfo == null) {
+                throw new AuthException("没有该用户，请确认后登录"); }
+
+            TeacherDetail teacherDetail = teacherDao.queryForPhone(authenticationRequest.getUsername());
+            String image;
+            boolean isCompleted;
+            if (teacherDetail != null) {
+                image = teacherDetail.getImage();
+                isCompleted = true;
+            } else {
+                image = null;
+                isCompleted = false; }
+            String username = teacherInfo.getUsername();
+            String role = teacherInfo.getRole();
+
             final Authentication authentication = authenticationManager.authenticate(upToken);
             SecurityContextHolder.getContext().setAuthentication(authentication);
             // Reload password post-security so we can generate token
             final UserDetails userDetails = JwtUserFactory.createTeacher(teacherDao.queryByName(username));
             final String token = jwtTokenUtil.generateToken(userDetails);
-            return token;
+
+            JwtAuthenticationResponse response =new JwtAuthenticationResponse(token,username,role,image,isCompleted,joinProject);
+            return response;
         } catch (Exception e) {
             throw new AuthException("获取token失败");
         }

@@ -119,37 +119,9 @@ public class AuthController {
     public ResultData createTeacherAuthenticationToken(
             @RequestBody JwtAuthenticationRequest authenticationRequest,@RequestHeader("CaptchaCode") String captchaCode) {
         try {
-            String loginKey=captchaCode;
-            String code=jedisAdapter.get(loginKey);
-            if(!code.equals(authenticationRequest.getVerifyCode())){
-                return new ResultData(false,"请重新输入验证码"); }
-            JoinProject joinProject = new JoinProject();
-            String applyingProKey = RedisKey.getBizApplyingPro(authenticationRequest.getUsername());
-            String applySuccessKey = RedisKey.getBizJoinSuccess(authenticationRequest.getUsername());
-            String applyFailedKey = RedisKey.getBizJoinFail(authenticationRequest.getUsername());
-            String followerProKey = RedisKey.getBizAttentionPro(authenticationRequest.getUsername());
-            joinProject.setReleased(studentDao.queryAllProject(authenticationRequest.getUsername()));
-            joinProject.setJoining((jedisAdapter.smenber(applyingProKey).stream().collect(Collectors.toList())));
-            joinProject.setJoinSuccess(jedisAdapter.smenber(applySuccessKey).stream().collect(Collectors.toList()));
-            joinProject.setJoinFailed(jedisAdapter.smenber(applyFailedKey).stream().collect(Collectors.toList()));
-            joinProject.setFollowPro(jedisAdapter.smenber(followerProKey).stream().collect(Collectors.toList()));
-            TeacherInfo teacherInfo = teacherDao.queryByName(authenticationRequest.getUsername());
-            if (teacherInfo == null) {
-                return new ResultData(false, LoginEnum.NO_USER.getMessage()); }
-            final String token = authService.teacherLogin(authenticationRequest.getUsername(), authenticationRequest.getPassword());
-            TeacherDetail teacherDetail = teacherDao.queryForPhone(authenticationRequest.getUsername());
-            String image;
-            boolean isCompleted;
-            if (teacherDetail != null) {
-                image = teacherDetail.getImage();
-                isCompleted = true;
-            } else {
-                image = null;
-                isCompleted = false; }
-            String username = teacherInfo.getUsername();
-            String role = teacherInfo.getRole();
             // Return the token
-            return new ResultData(true, new JwtAuthenticationResponse(token, username, role, image, isCompleted, joinProject));
+            JwtAuthenticationResponse response = authService.teacherLogin(authenticationRequest, captchaCode);
+            return new ResultData(true,response);
         } catch (Exception e) {
             return new ResultData(false, e.getMessage()); }
     }
