@@ -64,7 +64,7 @@ public class AuthController {
         this.adminDao = adminDao;
     }
 
-    private static int captchaExpires = 3*60; //超时时间3min
+    private static int captchaExpires = 60; //超时时间3min
     private static int captchaW = 200;
     private static int captchaH = 60;
     /**
@@ -79,11 +79,11 @@ public class AuthController {
                     .addText().addBackground(new GradiatedBackgroundProducer(Color.orange,Color.white))
                     .gimp(new FishEyeGimpyRenderer())
                     .build();
-            System.out.println("验证码为" +captcha.getAnswer());
+            System.out.println("验证码为    " +captcha.getAnswer());
             //将验证码以<key,value>形式缓存到redis
             jedisAdapter.setex(uuid,captchaExpires,captcha.getAnswer());
             //将验证码key，及验证码的图片返回
-        response.addHeader("CaptchaCode",uuid);
+        response.addHeader("captchaCode",uuid);
         ByteArrayOutputStream bao = new ByteArrayOutputStream();
             try {
                 ImageIO.write(captcha.getImage(), "png", bao);
@@ -101,7 +101,7 @@ public class AuthController {
      */
     @RequestMapping(value = "/student/login", method = RequestMethod.POST)
     public ResultData createStudentAuthenticationToken(
-            @RequestBody JwtAuthenticationRequest authenticationRequest ,@RequestHeader("CaptchaCode") String captchaCode) {
+            @RequestBody JwtAuthenticationRequest authenticationRequest ,@RequestHeader("captchaCode") String captchaCode) {
         try {
             JwtAuthenticationResponse response = authService.studentLogin(authenticationRequest,captchaCode);
             return new ResultData(true,response);
@@ -117,7 +117,7 @@ public class AuthController {
      */
     @RequestMapping(value = "/teacher/login", method = RequestMethod.POST)
     public ResultData createTeacherAuthenticationToken(
-            @RequestBody JwtAuthenticationRequest authenticationRequest,@RequestHeader("CaptchaCode") String captchaCode) {
+            @RequestBody JwtAuthenticationRequest authenticationRequest,@RequestHeader("captchaCode") String captchaCode) {
         try {
             // Return the token
             JwtAuthenticationResponse response = authService.teacherLogin(authenticationRequest, captchaCode);
@@ -137,13 +137,8 @@ public class AuthController {
     @RequestMapping(value = "/student/GetVerifyCodeForRegister", method = RequestMethod.GET)
     public ResultData studentGetVerifyCode(@RequestParam String username, @RequestParam String email) {
         try {
-            if (studentDao.selectStudent(username) != null) {
-                return new ResultData(false, RegisterEnum.REPETE_USERNAME.getMessage()); }
-            if (studentDao.queryEmail(email) != null) {
-                return new ResultData(false, RegisterEnum.REPEATE_EMAIL.getMessage()); }
-            if (eventProducer.fireEvent(new EventModel(EventType.MAIL).setExts("username", username).setExts("email", email).setExts("status", "register"))) {
-                return new ResultData<StudentInfo>(true, "请到您的邮箱查看验证码"); }
-            return new ResultData(false, "服务器内部异常");
+            authService.studentGetVerifyCodeForRegister(username,email);
+            return new ResultData<StudentInfo>(true, "请到您的邮箱查看验证码");
         } catch (Exception e) {
             return new ResultData(false, e.getMessage()); }
     }
@@ -157,16 +152,10 @@ public class AuthController {
      * @return
      */
     @RequestMapping(value = "/teacher/GetVerifyCodeForRegister", method = RequestMethod.GET)
-    public ResultData teacherGetverifyCode(@RequestParam String username, @RequestParam String email) {
-
+    public ResultData teacherGetVerifyCode(@RequestParam String username, @RequestParam String email) {
         try {
-            if (teacherDao.queryByName(username) != null) {
-                return new ResultData(false, RegisterEnum.REPETE_USERNAME.getMessage()); }
-            if (teacherDao.queryEamil(email) != null) {
-                return new ResultData(false, RegisterEnum.REPEATE_EMAIL.getMessage()); }
-            if (eventProducer.fireEvent(new EventModel(EventType.MAIL).setExts("username", username).setExts("email", email).setExts("status", "register"))) {
-                return new ResultData<StudentInfo>(true, "请到您的邮箱查看验证码"); }
-            return new ResultData(false, "服务器内部异常");
+                authService.teacherGetVerifyCodeForRegister(username,email);
+                return new ResultData<StudentInfo>(true, "请到您的邮箱查看验证码");
         } catch (Exception e) {
             return new ResultData(false, e.getMessage()); }
     }

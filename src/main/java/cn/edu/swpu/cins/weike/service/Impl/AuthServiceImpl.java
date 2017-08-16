@@ -1,10 +1,14 @@
 package cn.edu.swpu.cins.weike.service.Impl;
 
+import cn.edu.swpu.cins.weike.async.EventModel;
+import cn.edu.swpu.cins.weike.async.EventProducer;
+import cn.edu.swpu.cins.weike.async.EventType;
 import cn.edu.swpu.cins.weike.config.filter.JwtTokenUtil;
 import cn.edu.swpu.cins.weike.dao.StudentDao;
 import cn.edu.swpu.cins.weike.entity.persistence.*;
 import cn.edu.swpu.cins.weike.entity.view.*;
 import cn.edu.swpu.cins.weike.enums.ExceptionEnum;
+import cn.edu.swpu.cins.weike.enums.RegisterEnum;
 import cn.edu.swpu.cins.weike.exception.AuthException;
 import cn.edu.swpu.cins.weike.util.JedisAdapter;
 import cn.edu.swpu.cins.weike.util.RedisKey;
@@ -41,6 +45,9 @@ public class AuthServiceImpl implements AuthService {
 
     @Autowired
     JedisAdapter jedisAdapter;
+
+    @Autowired
+    EventProducer eventProducer;
 
 
     @Autowired
@@ -79,8 +86,12 @@ public class AuthServiceImpl implements AuthService {
         try {
             String loginKey=captchaCode;
             String code=jedisAdapter.get(loginKey);
+            if(jedisAdapter.get(loginKey).isEmpty()){
+                throw new AuthException("请重新获取验证码");
+            }
             if(!code.equals(authenticationRequest.getVerifyCode())){
                 throw new AuthException("请重新输入验证码");}
+
             JoinProject joinProject = new JoinProject();
             String applyingProKey = RedisKey.getBizApplyingPro(authenticationRequest.getUsername());
             String applySuccessKey = RedisKey.getBizJoinSuccess(authenticationRequest.getUsername());
@@ -116,7 +127,7 @@ public class AuthServiceImpl implements AuthService {
             JwtAuthenticationResponse response =new JwtAuthenticationResponse(token,username,role,image,isCompleted,joinProject);
             return response;
         } catch (Exception e) {
-            throw new AuthException("获取token异常");
+            throw e;
         }
     }
 
@@ -140,13 +151,12 @@ public class AuthServiceImpl implements AuthService {
 
     @Override
     public JwtAuthenticationResponse teacherLogin(JwtAuthenticationRequest authenticationRequest,String captchaCode) throws AuthException{
-
         UsernamePasswordAuthenticationToken upToken = new UsernamePasswordAuthenticationToken(authenticationRequest.getUsername(),authenticationRequest.getPassword());
         try {
             String loginKey=captchaCode;
             String code=jedisAdapter.get(loginKey);
             if(!code.equals(authenticationRequest.getVerifyCode())){
-                throw new AuthException("请重新输入验证码"); }
+                throw new AuthException("请重新输入验证码");}
             JoinProject joinProject = new JoinProject();
             String applyingProKey = RedisKey.getBizApplyingPro(authenticationRequest.getUsername());
             String applySuccessKey = RedisKey.getBizJoinSuccess(authenticationRequest.getUsername());
@@ -160,7 +170,6 @@ public class AuthServiceImpl implements AuthService {
             TeacherInfo teacherInfo = teacherDao.queryByName(authenticationRequest.getUsername());
             if (teacherInfo == null) {
                 throw new AuthException("没有该用户，请确认后登录"); }
-
             TeacherDetail teacherDetail = teacherDao.queryForPhone(authenticationRequest.getUsername());
             String image;
             boolean isCompleted;
@@ -182,7 +191,7 @@ public class AuthServiceImpl implements AuthService {
             JwtAuthenticationResponse response =new JwtAuthenticationResponse(token,username,role,image,isCompleted,joinProject);
             return response;
         } catch (Exception e) {
-            throw new AuthException("获取token失败");
+            throw e;
         }
     }
 
@@ -258,4 +267,37 @@ public class AuthServiceImpl implements AuthService {
             throw new AuthException("数据库异常");
         }
     }
+
+    @Override
+    public void studentGetVerifyCodeForRegister(String username, String email) throws AuthException{
+        try{
+            if (studentDao.selectStudent(username) != null) {
+                throw new AuthException( RegisterEnum.REPETE_USERNAME.getMessage());}
+            if (studentDao.queryEmail(email) != null) {
+                throw new AuthException(RegisterEnum.REPEATE_EMAIL.getMessage()); }
+            eventProducer.fireEvent(new EventModel(EventType.MAIL)
+                         .setExts("username", username)
+                         .setExts("email", email)
+                         .setExts("status", "register"));
+        }catch (Exception e){
+            throw e;
+        }
+    }
+
+    @Override
+    public void teacherGetVerifyCodeForRegister(String username, String email) throws AuthException{
+        try{
+            if (teacherDao.queryByName(username) != null) {
+                throw new AuthException( RegisterEnum.REPETE_USERNAME.getMessage());}
+            if (teacherDao.queryEamil(email) != null) {
+                throw new AuthException(RegisterEnum.REPEATE_EMAIL.getMessage()); }
+            eventProducer.fireEvent(new EventModel(EventType.MAIL)
+                         .setExts("username", username)
+                         .setExts("email", email)
+                         .setExts("status", "register"));
+        }catch (Exception e){
+            throw e;
+        }
+    }
 }
+

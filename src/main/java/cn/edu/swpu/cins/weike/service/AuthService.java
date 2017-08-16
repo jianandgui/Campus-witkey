@@ -38,4 +38,8 @@ public interface AuthService {
 
   //  String getVerifyCodeForLogin() throws AuthException;
 
+    void studentGetVerifyCodeForRegister(String username,String email) throws AuthException;
+
+    void teacherGetVerifyCodeForRegister(String username,String email) throws AuthException;
+
 }
