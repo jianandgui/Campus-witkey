@@ -263,8 +263,7 @@ public class AuthServiceImpl implements AuthService {
                             throw new AuthException(UpdatePwdEnum.UPDATE_PWD_WRONG.getMsg());
                         }
                         return 1;
-                    }
-                    else {
+                    } else {
                         if (teacherDao.updatePassword(username, UpdatePwd.updatePwd(updatePassword.getPassword())) != 1) {
                             throw  new AuthException(UpdatePwdEnum.UPDATE_PWD_WRONG.getMsg()); }
                         return  1; }
@@ -324,7 +323,7 @@ public class AuthServiceImpl implements AuthService {
                 throw new AuthException( RegisterEnum.REPETE_USERNAME.getMessage());}
             if (studentDao.queryEmail(email) != null) {
                 throw new AuthException(RegisterEnum.REPEATE_EMAIL.getMessage()); }
-            eventProducerUtils(username,email);
+            eventProducerUtils(username,email,"register");
         }catch (Exception e){
             throw e;
         }
@@ -337,7 +336,7 @@ public class AuthServiceImpl implements AuthService {
                 throw new AuthException( RegisterEnum.REPETE_USERNAME.getMessage());}
             if (teacherDao.queryEamil(email) != null) {
                 throw new AuthException(RegisterEnum.REPEATE_EMAIL.getMessage()); }
-            eventProducerUtils(username,email);
+            eventProducerUtils(username,email,"register");
         }catch (Exception e){
             throw e;
         }
@@ -348,12 +347,25 @@ public class AuthServiceImpl implements AuthService {
      * @param username
      * @param email
      */
-    public void eventProducerUtils(String username, String email){
+    public void eventProducerUtils(String username, String email,String status) throws AuthException{
         try{
-            eventProducer.fireEvent(new EventModel(EventType.MAIL)
-                    .setExts("username", username)
-                    .setExts("email", email)
-                    .setExts("status", "register"));
+            switch (status){
+                case "register" : eventProducer.fireEvent(new EventModel(EventType.MAIL)
+                        .setExts("username", username)
+                        .setExts("email", email)
+                        .setExts("status", "register"));
+                break;
+
+                case "findPwd" : eventProducer.fireEvent(new EventModel(EventType.MAIL)
+                        .setExts("username", username)
+                        .setExts("email", email)
+                        .setExts("status", "updatePwd"));
+                break;
+
+                default:
+                    throw new AuthException("服务器内部异常");
+            }
+
         }catch (Exception e){
             throw e;
         }
@@ -368,11 +380,7 @@ public class AuthServiceImpl implements AuthService {
                 throw  new AuthException(UpdatePwdEnum.NO_USER.getMsg());}
             if (!email.equals(studentinfo.getEmail())) {
                 throw  new AuthException(UpdatePwdEnum.WRONG_EMALI.getMsg()); }
-            eventProducer.fireEvent(new EventModel(EventType.MAIL)
-                    .setExts("username", username)
-                    .setExts("email", email)
-                    .setExts("updatePwd", "UPDATE_PWD")
-                    .setExts("status", "updatePwd"));
+            eventProducerUtils(username,email,"findPwd");
         }catch (Exception e){
             throw e;
         }
@@ -387,10 +395,7 @@ public class AuthServiceImpl implements AuthService {
             if (!email.equals(teacherinfo.getEmail())) {
                 throw  new AuthException( UpdatePwdEnum.WRONG_EMALI.getMsg()); }
             //return new ResultData(true, mailService.sendMailForUpdatePwd(teacherinfo.getEmail()));
-            eventProducer.fireEvent(new EventModel(EventType.MAIL)
-                    .setExts("username", username)
-                    .setExts("email", email)
-                    .setExts("status", "updatePwd"));
+            eventProducerUtils(username,email,"findPwd");
         }catch (Exception e){
             throw e;
         }

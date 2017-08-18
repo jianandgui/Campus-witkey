@@ -27,7 +27,7 @@ public class MailHandler implements EventHandler {
 
 
     @Override
-    public void doHandle(EventModel model){
+    public void doHandle(EventModel model) throws Exception{
         try{
             String status=model.getExts().get("status");
             String verifyCode;
@@ -48,7 +48,7 @@ public class MailHandler implements EventHandler {
                     jedisAdapter.setex(RedisKey.getBizRegisterKey(username),1800,verifyCode);
                     break;
                 default:
-                    return;
+                    throw new Exception("服务器内部异常");
         }
         }catch (Exception e){
             logger.info(e.getMessage());
