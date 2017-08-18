@@ -62,24 +62,28 @@ public class AuthServiceImpl implements AuthService {
     }
 
     @Override
-    public int studentRegister(RegisterStudentVO registerStudentVO) throws AuthException{
+    public int studentRegister(RegisterStudentVO registerStudentVO) throws AuthException {
         try {
             final String username = registerStudentVO.getStudentInfo().getUsername();
-            if (studentDao.selectStudent(username) != null&& teacherDao.queryByName(username)!=null) {
-                return 0; }
+            if (studentDao.selectStudent(username) != null && teacherDao.queryByName(username) != null) {
+                return 0;
+            }
             String redisKey = RedisKey.getBizRegisterKey(username);
             if (jedisAdapter.exists(redisKey)) {
                 if (jedisAdapter.get(redisKey).equals(registerStudentVO.getVerifyCode())) {
-                    StudentInfo studentInfo=registerStudentVO.getStudentInfo();
+                    StudentInfo studentInfo = registerStudentVO.getStudentInfo();
                     BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
                     final String rawPassword = studentInfo.getPassword();
                     studentInfo.setPassword(encoder.encode(rawPassword));
                     studentInfo.setLastPasswordResetDate(new Date().getTime());
                     studentInfo.setRole("ROLE_STUDENT");
                     if (studentDao.studntRegister(studentInfo) == 1) {
-                        return 1; }
-                    throw new AuthException(RegisterEnum.FAIL_SAVE.getMessage()); }
-                throw new AuthException( "验证码错误"); }
+                        return 1;
+                    }
+                    throw new AuthException(RegisterEnum.FAIL_SAVE.getMessage());
+                }
+                throw new AuthException("验证码错误");
+            }
             throw new AuthException("请重新获取验证码");
         } catch (Exception e) {
             throw new AuthException(ExceptionEnum.INNER_ERROR.getMsg());
@@ -87,30 +91,34 @@ public class AuthServiceImpl implements AuthService {
     }
 
     @Override
-    public JwtAuthenticationResponse studentLogin(JwtAuthenticationRequest authenticationRequest,String captchaCode) throws AuthException{
+    public JwtAuthenticationResponse studentLogin(JwtAuthenticationRequest authenticationRequest, String captchaCode) throws AuthException {
 
         UsernamePasswordAuthenticationToken upToken = new UsernamePasswordAuthenticationToken(authenticationRequest.getUsername(), authenticationRequest.getPassword());
         try {
-            String loginKey=captchaCode;
-            if(jedisAdapter.exists(loginKey)){
-                throw new AuthException("请重新获取验证码"); }
-            String code=jedisAdapter.get(loginKey);
-            if(!code.equals(authenticationRequest.getVerifyCode())){
-                throw new AuthException("请重新输入验证码");}
+            String loginKey = captchaCode;
+            if (jedisAdapter.exists(loginKey)) {
+                throw new AuthException("请重新获取验证码");
+            }
+            String code = jedisAdapter.get(loginKey);
+            if (!code.equals(authenticationRequest.getVerifyCode())) {
+                throw new AuthException("请重新输入验证码");
+            }
             StudentInfo studentInfo = studentDao.selectStudent(authenticationRequest.getUsername());
 
             if (studentInfo == null) {
-                throw new AuthException("没有该用户"); }
+                throw new AuthException("没有该用户");
+            }
             StudentDetail studentDetail = studentDao.queryForStudentPhone(authenticationRequest.getUsername());
             JoinProject joinProject = loginUtils(authenticationRequest);
             joinProject.setReleased(studentDao.queryAllProject(authenticationRequest.getUsername()));
-            String image=null;
+            String image = null;
             boolean isCompleted;
             if (studentDetail != null) {
                 image = studentDetail.getImage();
                 isCompleted = true;
             } else {
-                isCompleted = false; }
+                isCompleted = false;
+            }
             String username = studentInfo.getUsername();
             String role = studentInfo.getRole();
             // Perform the security
@@ -120,7 +128,7 @@ public class AuthServiceImpl implements AuthService {
             final UserDetails userDetails = JwtUserFactory.createStudent(studentDao.selectStudent(username));
             final String token = jwtTokenUtil.generateToken(userDetails);
 
-            JwtAuthenticationResponse response =new JwtAuthenticationResponse(token,username,role,image,isCompleted,joinProject);
+            JwtAuthenticationResponse response = new JwtAuthenticationResponse(token, username, role, image, isCompleted, joinProject);
             return response;
         } catch (Exception e) {
             throw e;
@@ -134,20 +142,21 @@ public class AuthServiceImpl implements AuthService {
         String redisKey = RedisKey.getBizRegisterKey(username);
         try {
             if (jedisAdapter.exists(redisKey)) {
-            if (jedisAdapter.get(redisKey).equals(registerTeacherVO.getVerifyCode())) {
-                TeacherInfo teacherInfo=registerTeacherVO.getTeacherInfo();
-                BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
-                final String rawPassword = registerTeacherVO.getTeacherInfo().getPassword();
-                teacherInfo.setPassword(encoder.encode(rawPassword));
-                teacherInfo.setLastPasswordResetDate(new Date().getTime());
-                teacherInfo.setRole("ROLE_TEACHER");
-                if (teacherDao.teacherRegister(teacherInfo) == 1) {
-                    return 1; }
-                throw  new AuthException( RegisterEnum.FAIL_SAVE.getMessage());
+                if (jedisAdapter.get(redisKey).equals(registerTeacherVO.getVerifyCode())) {
+                    TeacherInfo teacherInfo = registerTeacherVO.getTeacherInfo();
+                    BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
+                    final String rawPassword = registerTeacherVO.getTeacherInfo().getPassword();
+                    teacherInfo.setPassword(encoder.encode(rawPassword));
+                    teacherInfo.setLastPasswordResetDate(new Date().getTime());
+                    teacherInfo.setRole("ROLE_TEACHER");
+                    if (teacherDao.teacherRegister(teacherInfo) == 1) {
+                        return 1;
+                    }
+                    throw new AuthException(RegisterEnum.FAIL_SAVE.getMessage());
+                }
+                throw new AuthException("验证码错误");
             }
-            throw  new AuthException( "验证码错误");
-            }
-            throw  new AuthException( "请重新获取验证码");
+            throw new AuthException("请重新获取验证码");
         } catch (Exception e) {
             throw e;
         }
@@ -155,10 +164,11 @@ public class AuthServiceImpl implements AuthService {
 
     /**
      * 工具类方法用去去除重复代码
+     *
      * @param authenticationRequest
      * @return
      */
-    public JoinProject loginUtils(JwtAuthenticationRequest authenticationRequest){
+    public JoinProject loginUtils(JwtAuthenticationRequest authenticationRequest) {
         JoinProject joinProject = new JoinProject();
         String applyingProKey = RedisKey.getBizApplyingPro(authenticationRequest.getUsername());
         String applySuccessKey = RedisKey.getBizJoinSuccess(authenticationRequest.getUsername());
@@ -172,31 +182,34 @@ public class AuthServiceImpl implements AuthService {
     }
 
     @Override
-    public JwtAuthenticationResponse teacherLogin(JwtAuthenticationRequest authenticationRequest,String captchaCode) throws AuthException{
-        UsernamePasswordAuthenticationToken upToken = new UsernamePasswordAuthenticationToken(authenticationRequest.getUsername(),authenticationRequest.getPassword());
+    public JwtAuthenticationResponse teacherLogin(JwtAuthenticationRequest authenticationRequest, String captchaCode) throws AuthException {
+        UsernamePasswordAuthenticationToken upToken = new UsernamePasswordAuthenticationToken(authenticationRequest.getUsername(), authenticationRequest.getPassword());
         try {
-            String loginKey=captchaCode;
-            if(jedisAdapter.exists(loginKey)){
+            String loginKey = captchaCode;
+            if (jedisAdapter.exists(loginKey)) {
                 throw new AuthException("请重新获取验证码");
             }
-            String code=jedisAdapter.get(loginKey);
-            if(!code.equals(authenticationRequest.getVerifyCode())){
-                throw new AuthException("请重新输入验证码");}
+            String code = jedisAdapter.get(loginKey);
+            if (!code.equals(authenticationRequest.getVerifyCode())) {
+                throw new AuthException("请重新输入验证码");
+            }
 
             TeacherDetail teacherDetail = teacherDao.queryForPhone(authenticationRequest.getUsername());
             TeacherInfo teacherInfo = teacherDao.queryByName(authenticationRequest.getUsername());
             if (teacherInfo == null) {
-                throw new AuthException("没有该用户，请确认后登录"); }
+                throw new AuthException("没有该用户，请确认后登录");
+            }
             JoinProject joinProject = loginUtils(authenticationRequest);
             joinProject.setReleased(teacherDao.queryAllProject(authenticationRequest.getUsername()));
-            String image=null;
+            String image = null;
             //判断个人信息是否完整
             boolean isCompleted;
             if (teacherDetail != null) {
                 image = teacherDetail.getImage();
                 isCompleted = true;
             } else {
-                isCompleted = false; }
+                isCompleted = false;
+            }
             String username = teacherInfo.getUsername();
             String role = teacherInfo.getRole();
 
@@ -206,7 +219,7 @@ public class AuthServiceImpl implements AuthService {
             final UserDetails userDetails = JwtUserFactory.createTeacher(teacherDao.queryByName(username));
             final String token = jwtTokenUtil.generateToken(userDetails);
 
-            JwtAuthenticationResponse response =new JwtAuthenticationResponse(token,username,role,image,isCompleted,joinProject);
+            JwtAuthenticationResponse response = new JwtAuthenticationResponse(token, username, role, image, isCompleted, joinProject);
             return response;
         } catch (Exception e) {
             throw e;
@@ -233,15 +246,16 @@ public class AuthServiceImpl implements AuthService {
     @Override
     public int studentUpdatePassword(UpdatePassword updatePassword) throws AuthException {
         try {
-            return updateUtils(updatePassword,"student");
+            return updateUtils(updatePassword, "student");
         } catch (Exception e) {
-            throw e; }
+            throw e;
+        }
     }
 
     @Override
     public int teacherUpdatePassword(UpdatePassword updatePassword) throws AuthException {
         try {
-            return updateUtils(updatePassword,"teacher");
+            return updateUtils(updatePassword, "teacher");
         } catch (Exception e) {
             throw e;
         }
@@ -249,29 +263,32 @@ public class AuthServiceImpl implements AuthService {
 
     /**
      * 工具类方法 去掉修改密码的重复代码
+     *
      * @param
      * @return
      */
-    public  int updateUtils(UpdatePassword updatePassword,String role) throws AuthException{
+    public int updateUtils(UpdatePassword updatePassword, String role) throws AuthException {
         try {
             String username = updatePassword.getUsername();
             String redisKey = RedisKey.getBizFindPassword(username);
             if (jedisAdapter.exists(redisKey)) {
                 if (jedisAdapter.get(redisKey).equals(updatePassword.getVerifyCode())) {
-                    if(role.equals("student")){
-                        if(studentDao.updatePassword(username,updatePassword.getPassword()) !=1){
+                    if (role.equals("student")) {
+                        if (studentDao.updatePassword(username, updatePassword.getPassword()) != 1) {
                             throw new AuthException(UpdatePwdEnum.UPDATE_PWD_WRONG.getMsg());
                         }
                         return 1;
                     } else {
                         if (teacherDao.updatePassword(username, UpdatePwd.updatePwd(updatePassword.getPassword())) != 1) {
-                            throw  new AuthException(UpdatePwdEnum.UPDATE_PWD_WRONG.getMsg()); }
-                        return  1; }
-                     }
-                throw  new AuthException("验证码错误");
+                            throw new AuthException(UpdatePwdEnum.UPDATE_PWD_WRONG.getMsg());
+                        }
+                        return 1;
+                    }
+                }
+                throw new AuthException("验证码错误");
             }
-            throw  new AuthException("请重新获取验证码");
-        }catch (Exception e){
+            throw new AuthException("请重新获取验证码");
+        } catch (Exception e) {
             throw e;
         }
     }
@@ -304,7 +321,8 @@ public class AuthServiceImpl implements AuthService {
         try {
             final String username = adminInfo.getUsername();
             if (adminDao.queryByName(username) != null) {
-                return null;}
+                return null;
+            }
             BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
             final String rawPassword = adminInfo.getPassword();
             adminInfo.setPassword(encoder.encode(rawPassword));
@@ -317,56 +335,63 @@ public class AuthServiceImpl implements AuthService {
     }
 
     @Override
-    public void studentGetVerifyCodeForRegister(String username, String email) throws AuthException{
-        try{
+    public void studentGetVerifyCodeForRegister(String username, String email) throws AuthException {
+        try {
             if (studentDao.selectStudent(username) != null) {
-                throw new AuthException( RegisterEnum.REPETE_USERNAME.getMessage());}
+                throw new AuthException(RegisterEnum.REPETE_USERNAME.getMessage());
+            }
             if (studentDao.queryEmail(email) != null) {
-                throw new AuthException(RegisterEnum.REPEATE_EMAIL.getMessage()); }
-            eventProducerUtils(username,email,"register");
-        }catch (Exception e){
+                throw new AuthException(RegisterEnum.REPEATE_EMAIL.getMessage());
+            }
+            eventProducerUtils(username, email, "register");
+        } catch (Exception e) {
             throw e;
         }
     }
 
     @Override
-    public void teacherGetVerifyCodeForRegister(String username, String email) throws AuthException{
-        try{
+    public void teacherGetVerifyCodeForRegister(String username, String email) throws AuthException {
+        try {
             if (teacherDao.queryByName(username) != null) {
-                throw new AuthException( RegisterEnum.REPETE_USERNAME.getMessage());}
+                throw new AuthException(RegisterEnum.REPETE_USERNAME.getMessage());
+            }
             if (teacherDao.queryEamil(email) != null) {
-                throw new AuthException(RegisterEnum.REPEATE_EMAIL.getMessage()); }
-            eventProducerUtils(username,email,"register");
-        }catch (Exception e){
+                throw new AuthException(RegisterEnum.REPEATE_EMAIL.getMessage());
+            }
+            eventProducerUtils(username, email, "register");
+        } catch (Exception e) {
             throw e;
         }
     }
 
     /**
      * 发送邮件工具方法 去除重复代码
+     *
      * @param username
      * @param email
      */
-    public void eventProducerUtils(String username, String email,String status) throws AuthException{
-        try{
-            switch (status){
-                case "register" : eventProducer.fireEvent(new EventModel(EventType.MAIL)
-                        .setExts("username", username)
-                        .setExts("email", email)
-                        .setExts("status", "register"));
-                break;
+    public void eventProducerUtils(String username, String email, String status) throws AuthException {
+        try {
+            switch (status) {
+                case "register":
+                    eventProducer.fireEvent(new EventModel(EventType.MAIL)
+                            .setExts("username", username)
+                            .setExts("email", email)
+                            .setExts("status", "register"));
+                    break;
 
-                case "findPwd" : eventProducer.fireEvent(new EventModel(EventType.MAIL)
-                        .setExts("username", username)
-                        .setExts("email", email)
-                        .setExts("status", "updatePwd"));
-                break;
+                case "findPwd":
+                    eventProducer.fireEvent(new EventModel(EventType.MAIL)
+                            .setExts("username", username)
+                            .setExts("email", email)
+                            .setExts("status", "updatePwd"));
+                    break;
 
                 default:
                     throw new AuthException("服务器内部异常");
             }
 
-        }catch (Exception e){
+        } catch (Exception e) {
             throw e;
         }
 
@@ -377,26 +402,30 @@ public class AuthServiceImpl implements AuthService {
         try {
             StudentInfo studentinfo = studentDao.selectStudent(username);
             if (studentinfo == null) {
-                throw  new AuthException(UpdatePwdEnum.NO_USER.getMsg());}
+                throw new AuthException(UpdatePwdEnum.NO_USER.getMsg());
+            }
             if (!email.equals(studentinfo.getEmail())) {
-                throw  new AuthException(UpdatePwdEnum.WRONG_EMALI.getMsg()); }
-            eventProducerUtils(username,email,"findPwd");
-        }catch (Exception e){
+                throw new AuthException(UpdatePwdEnum.WRONG_EMALI.getMsg());
+            }
+            eventProducerUtils(username, email, "findPwd");
+        } catch (Exception e) {
             throw e;
         }
     }
 
     @Override
     public void teacherGetVerifyCodeForFindPassword(String username, String email) throws AuthException {
-        try{
+        try {
             TeacherInfo teacherinfo = teacherDao.queryByName(username);
             if (teacherinfo == null) {
-                throw  new AuthException(UpdatePwdEnum.NO_USER.getMsg()); }
+                throw new AuthException(UpdatePwdEnum.NO_USER.getMsg());
+            }
             if (!email.equals(teacherinfo.getEmail())) {
-                throw  new AuthException( UpdatePwdEnum.WRONG_EMALI.getMsg()); }
+                throw new AuthException(UpdatePwdEnum.WRONG_EMALI.getMsg());
+            }
             //return new ResultData(true, mailService.sendMailForUpdatePwd(teacherinfo.getEmail()));
-            eventProducerUtils(username,email,"findPwd");
-        }catch (Exception e){
+            eventProducerUtils(username, email, "findPwd");
+        } catch (Exception e) {
             throw e;
         }
     }

@@ -18,6 +18,7 @@ import cn.edu.swpu.cins.weike.dao.StudentDao;
 import cn.edu.swpu.cins.weike.dao.TeacherDao;
 import cn.edu.swpu.cins.weike.enums.RegisterEnum;
 import cn.edu.swpu.cins.weike.service.AuthService;
+
 import javax.imageio.ImageIO;
 import javax.servlet.http.HttpServletResponse;
 import java.awt.*;
@@ -56,7 +57,7 @@ public class AuthController {
         this.adminDao = adminDao;
     }
 
-    private static int captchaExpires = 3*60; //超时时间3min
+    private static int captchaExpires = 3 * 60; //超时时间3min
     private static int captchaW = 200;
     private static int captchaH = 60;
 
@@ -205,9 +206,9 @@ public class AuthController {
         try {
             authService.teacherGetVerifyCodeForFindPassword(username, email);
             return new ResultData(true, "邮件发送成功");
-        } catch(Exception e) {
-        return new ResultData(false, e.getMessage());
-    }
+        } catch (Exception e) {
+            return new ResultData(false, e.getMessage());
+        }
     }
 
     @PostMapping("/student/FindPassword")
@@ -216,7 +217,8 @@ public class AuthController {
             authService.studentUpdatePassword(updatePassword);
             return new ResultData(true, UpdatePwdEnum.UPDATE_PWD_SUCCESS.getMsg());
         } catch (Exception e) {
-            return new ResultData(false, e.getMessage()); }
+            return new ResultData(false, e.getMessage());
+        }
     }
 
     @PostMapping("/teacher/FindPassword")
@@ -225,7 +227,8 @@ public class AuthController {
             authService.teacherUpdatePassword(updatePassword);
             return new ResultData(true, UpdatePwdEnum.UPDATE_PWD_SUCCESS.getMsg());
         } catch (Exception e) {
-            return new ResultData(false, e.getMessage()); }
+            return new ResultData(false, e.getMessage());
+        }
     }
 
 
@@ -239,10 +242,12 @@ public class AuthController {
             String username = authenticationRequest.getUsername();
             String role = adminDao.queryByName(username).getRole();
             if (role == null) {
-                return new ResultData(false, LoginEnum.NO_USER.getMessage()); }
+                return new ResultData(false, LoginEnum.NO_USER.getMessage());
+            }
             return new ResultData(true, new JwtAuthenticationResponse(token, username, role, null, false, joinProject));
         } catch (Exception e) {
-            return new ResultData(false, e.getMessage()); }
+            return new ResultData(false, e.getMessage());
+        }
     }
 
 /*

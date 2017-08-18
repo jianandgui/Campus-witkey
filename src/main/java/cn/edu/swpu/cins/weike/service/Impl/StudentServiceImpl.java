@@ -49,39 +49,44 @@ public class StudentServiceImpl implements StudentService {
 
     //学生发布项目
     @Override
-    public int issueProject(ProjectInfo projectInfo,String username) throws StudentException {
+    public int issueProject(ProjectInfo projectInfo, String username) throws StudentException {
 
         try {
             projectInfo.setProjectName(sensitiveWordsFilter.Filter(projectInfo.getProjectName()));
             StudentInfo studentinfo = studentDao.selectStudent(username);
             StudentDetail studentDetail = studentDao.queryForStudentPhone(username);
-                if (projectDao.queryProjectDetail(projectInfo.getProjectName()) == null) {
-                    projectInfo.setProjectConnector(username);
-                    projectInfo.setEmail(studentinfo.getEmail());
-                    projectInfo.setQq(studentDetail.getQq());
-                    int num = projectDao.addProject(projectInfo);
-                    if (num != 1) {
-                        throw  new StudentException(ProjectEnum.PUBLISH_PROJECT_FAILD.getMsg());
-                    }
-                    return 1;
+            if (projectDao.queryProjectDetail(projectInfo.getProjectName()) == null) {
+                projectInfo.setProjectConnector(username);
+                projectInfo.setEmail(studentinfo.getEmail());
+                projectInfo.setQq(studentDetail.getQq());
+                int num = projectDao.addProject(projectInfo);
+                if (num != 1) {
+                    throw new StudentException(ProjectEnum.PUBLISH_PROJECT_FAILD.getMsg());
                 }
-                throw  new StudentException(ProjectEnum.REPEATE_PROJECT.getMsg());
+                return 1;
+            }
+            throw new StudentException(ProjectEnum.REPEATE_PROJECT.getMsg());
 
         } catch (Exception e) {
-            throw new StudentException("数据库学生添加异常"); }
+            throw new StudentException("数据库学生添加异常");
+        }
     }
 
     @Override
-    public int addPersonal(StudentDetail studentDetail,String username) throws StudentException {
+    public int addPersonal(StudentDetail studentDetail, String username) throws StudentException {
         int rate = studentDetail.getSkills().toArray().length;
         if (rate == 2 || rate == 0) {
-            studentDetail.setLevel("D"); }
+            studentDetail.setLevel("D");
+        }
         if (rate == 3) {
-            studentDetail.setLevel("C"); }
+            studentDetail.setLevel("C");
+        }
         if (rate == 4) {
-            studentDetail.setLevel("B"); }
+            studentDetail.setLevel("B");
+        }
         if (rate > 5) {
-            studentDetail.setLevel("A"); }
+            studentDetail.setLevel("A");
+        }
         try {
             if (studentDao.queryForStudentPhone(username) == null) {
                 studentDetail.setUsername(username);
@@ -89,24 +94,26 @@ public class StudentServiceImpl implements StudentService {
                 if (num == 1) {
                     return 1;
                 }
-                throw  new StudentException(UserEnum.ADD_PERSONAL_FAILD.getMsg());
+                throw new StudentException(UserEnum.ADD_PERSONAL_FAILD.getMsg());
             } else
-                throw  new StudentException(UserEnum.REPEATE_ADD.getMsg());
+                throw new StudentException(UserEnum.REPEATE_ADD.getMsg());
         } catch (Exception e) {
-            throw new StudentException("数据库学生添加个人信息异常"); }
+            throw new StudentException("数据库学生添加个人信息异常");
+        }
     }
 
     //重新抽离出一个方法
     @Override
     public List<ProjectRecommend> queryForReCommod(List<String> skills, String username) throws StudentException {
         try {
-            List<ProjectRecommend> projectRecommends=reduceRepeate.reduceStudentRepeat(skills, username);
-            if(projectRecommends.isEmpty()){
+            List<ProjectRecommend> projectRecommends = reduceRepeate.reduceStudentRepeat(skills, username);
+            if (projectRecommends.isEmpty()) {
                 throw new StudentException(ProjectEnum.NO_PROJECTS.getMsg());
             }
             return projectRecommends;
         } catch (Exception e) {
-            throw new StudentException("数据库学生发布项目推荐人选异常"); }
+            throw new StudentException("数据库学生发布项目推荐人选异常");
+        }
     }
 
     @Override
@@ -114,12 +121,13 @@ public class StudentServiceImpl implements StudentService {
         studentDetail.setUsername(username);
         try {
             int num = studentDao.updateInfo(studentDetail);
-            if(num !=1){
+            if (num != 1) {
                 throw new StudentException(UserEnum.UPDATE_FAILD.getMsg());
             }
             return num;
         } catch (Exception e) {
-            throw new StudentException("服务器异常！"); }
+            throw new StudentException("服务器异常！");
+        }
     }
 
     @Override
@@ -127,11 +135,12 @@ public class StudentServiceImpl implements StudentService {
         try {
             List<String> list = studentDao.queryAllProject(projectConnector);
             if (list.isEmpty()) {
-                throw  new StudentException(UserEnum.NO_PROJECTS.getMsg());
+                throw new StudentException(UserEnum.NO_PROJECTS.getMsg());
             }
             return list;
         } catch (Exception e) {
-            throw new StudentException("服务器异常"); }
+            throw new StudentException("服务器异常");
+        }
     }
 
     @Override
@@ -141,15 +150,16 @@ public class StudentServiceImpl implements StudentService {
             personData.setEmail(studentDao.selectStudent(username).getEmail());
             return personData;
         } catch (Exception e) {
-            throw new StudentException("服务器异常"); }
+            throw new StudentException("服务器异常");
+        }
     }
 
     @Override
-    public List<String> queryProFollower(String projectName) throws StudentException{
+    public List<String> queryProFollower(String projectName) throws StudentException {
         String projectFollowerKey = RedisKey.getBizProFollower(projectName);
-        try{
+        try {
             return jedisAdapter.smenber(projectFollowerKey).stream().collect(Collectors.toList());
-        }catch (Exception e){
+        } catch (Exception e) {
             throw e;
         }
     }

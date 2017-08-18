@@ -40,14 +40,15 @@ public class TeacherServiceImpl implements TeacherService {
     }
 
     @Override
-    public int teacherAddPersonal(TeacherDetail teacherDetail,String username) throws TeacherException { try {
+    public int teacherAddPersonal(TeacherDetail teacherDetail, String username) throws TeacherException {
+        try {
             if (teacherDao.queryForPhone(username) == null) {
                 teacherDetail.setUsername(username);
                 int num = teacherDao.teacherAddPersonal(teacherDetail);
                 if (num == 1) {
                     return 1;
                 }
-                throw new TeacherException( UserEnum.ADD_PERSONAL_FAILD.getMsg());
+                throw new TeacherException(UserEnum.ADD_PERSONAL_FAILD.getMsg());
             }
             throw new TeacherException(UserEnum.REPEATE_ADD.getMsg());
         } catch (Exception e) {
@@ -57,7 +58,7 @@ public class TeacherServiceImpl implements TeacherService {
 
     //老师发布项目
     @Override
-    public int issueProject(ProjectInfo projectInfo,String username) throws TeacherException {
+    public int issueProject(ProjectInfo projectInfo, String username) throws TeacherException {
         try {
             TeacherInfo teacherinfo = teacherDao.queryByName(username);
             TeacherDetail teacherDetail = teacherDao.queryForPhone(username);
@@ -66,62 +67,58 @@ public class TeacherServiceImpl implements TeacherService {
                 projectInfo.setEmail(teacherinfo.getEmail());
                 projectInfo.setQq(teacherDetail.getQq());
                 if (projectDao.addProject(projectInfo) != 1) {
-                    throw  new TeacherException(ProjectEnum.PUBLISH_PROJECT_FAILD.getMsg());
+                    throw new TeacherException(ProjectEnum.PUBLISH_PROJECT_FAILD.getMsg());
                 }
                 return 1;
             }
-            throw  new TeacherException(ProjectEnum.REPEATE_PROJECT.getMsg());
+            throw new TeacherException(ProjectEnum.REPEATE_PROJECT.getMsg());
         } catch (Exception e) {
             throw new TeacherException(ExceptionEnum.INNER_ERROR.getMsg());
         }
     }
 
     @Override
-    public List<ProjectRecommend> queryStudentForReCommod(List<String> skills,String username) throws TeacherException {
+    public List<ProjectRecommend> queryStudentForReCommod(List<String> skills, String username) throws TeacherException {
         try {
-            return reduceRepeate.reduceStudentRepeat(skills,username);
+            return reduceRepeate.reduceStudentRepeat(skills, username);
         } catch (Exception e) {
             throw new TeacherException(ExceptionEnum.INNER_ERROR.getMsg());
         }
     }
 
     @Override
-    public int updateInfo(TeacherDetail teacherDetail, String username) throws TeacherException{
-        try{
-
+    public int updateInfo(TeacherDetail teacherDetail, String username) throws TeacherException {
+        try {
             int num = teacherDao.updateInfo(teacherDetail);
             if (num != 1) {
-                throw  new TeacherException(UserEnum.UPDATE_FAILD.getMsg());
+                throw new TeacherException(UserEnum.UPDATE_FAILD.getMsg());
             }
             return 1;
-        }catch (Exception e){
+        } catch (Exception e) {
             throw new TeacherException(ExceptionEnum.INNER_ERROR.getMsg());
         }
-
     }
 
     @Override
-    public List<String> queryAllProject(String projectConnector) throws TeacherException{
-        try{
+    public List<String> queryAllProject(String projectConnector) throws TeacherException {
+        try {
             List<String> list = teacherDao.queryAllProject(projectConnector);
             if (list.isEmpty()) {
-                throw  new TeacherException(UserEnum.NO_PROJECTS.getMsg());
+                throw new TeacherException(UserEnum.NO_PROJECTS.getMsg());
             }
             return list;
-        }catch (Exception e){
+        } catch (Exception e) {
             throw new TeacherException(ExceptionEnum.INNER_ERROR.getMsg());
         }
-
     }
 
-    public TeacherPersonData queryForData(String username) throws TeacherException{
-        try{
-            TeacherPersonData teacherPersonData=teacherDao.queryForData(username);
+    public TeacherPersonData queryForData(String username) throws TeacherException {
+        try {
+            TeacherPersonData teacherPersonData = teacherDao.queryForData(username);
             teacherPersonData.setEmail(teacherDao.queryByName(username).getEmail());
             return teacherPersonData;
-        }catch (Exception e){
+        } catch (Exception e) {
             throw new TeacherException(ExceptionEnum.INNER_ERROR.getMsg());
         }
-
     }
 }

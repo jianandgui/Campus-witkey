@@ -72,7 +72,7 @@ public class StudentController {
     public ResultData publishProject(@RequestBody ProjectInfo projectInfo, HttpServletRequest request) {
         try {
             String username = getUsrName.AllProjects(request);
-            studentService.issueProject(projectInfo,username);
+            studentService.issueProject(projectInfo, username);
             List<ProjectRecommend> projectRecommends = studentService.queryForReCommod(projectInfo.getProjectNeed(), username);
             return new ResultData(true, projectRecommends);
         } catch (Exception e) {
@@ -92,7 +92,7 @@ public class StudentController {
     public ResultData addPersonalDetail(@RequestBody StudentDetail studentDetail, HttpServletRequest request) {
         try {
             String username = getUsrName.AllProjects(request);
-            studentService.addPersonal(studentDetail,username);
+            studentService.addPersonal(studentDetail, username);
             return new ResultData(true, UserEnum.ADD_PERSONAL_SUCCESS.getMsg());
         } catch (Exception e) {
             return new ResultData(false, e.getMessage());
@@ -158,10 +158,10 @@ public class StudentController {
      */
     @GetMapping("/projetName")
     public ResultData queryApplyInfo(@RequestParam String projectName) {
-        try{
+        try {
             return new ResultData(true, projectService.queryProApplyInfoByName(projectName));
-        }catch (Exception e){
-            return new ResultData(false,"服务器内部异常，操作失败");
+        } catch (Exception e) {
+            return new ResultData(false, "服务器内部异常，操作失败");
         }
     }
 }

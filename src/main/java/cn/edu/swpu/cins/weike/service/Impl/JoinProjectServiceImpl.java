@@ -21,7 +21,7 @@ import javax.servlet.http.HttpServletRequest;
 import java.util.Date;
 
 @Service
-public class JoinProjectServiceImpl implements JoinProjectService{
+public class JoinProjectServiceImpl implements JoinProjectService {
 
     JedisAdapter jedisAdapter;
     MailService mailService;
@@ -45,17 +45,18 @@ public class JoinProjectServiceImpl implements JoinProjectService{
     /**
      * 同意或者拒绝申请，发送邮件和站内信（失败就不发送站内信了）
      * 同时完成redis中的操作
+     *
      * @param joinMessage
      * @param request
      * @return
      */
     @Override
-    public int acceptJoin(JoinMessage joinMessage,HttpServletRequest request) throws Exception{
-        String projectName=joinMessage.getProjectAbout();
-        String saver=joinMessage.getProjectApplicant();
-        String sender=getName.AllProjects(request);
-        Message message=new Message();
-        String content="尊敬的"+saver+"您好,"+"您在威客平台申请参与的项目"+projectName+"已经成功通过申请,请登录平台查看详情！";
+    public int acceptJoin(JoinMessage joinMessage, HttpServletRequest request) throws Exception {
+        String projectName = joinMessage.getProjectAbout();
+        String saver = joinMessage.getProjectApplicant();
+        String sender = getName.AllProjects(request);
+        Message message = new Message();
+        String content = "尊敬的" + saver + "您好," + "您在威客平台申请参与的项目" + projectName + "已经成功通过申请,请登录平台查看详情！";
         message.setContent(content);
         message.setProjectAbout(projectName);
         message.setCreateDate(new Date());
@@ -63,50 +64,50 @@ public class JoinProjectServiceImpl implements JoinProjectService{
         message.setHasRead(0);
         message.setToName(saver);
 
-        try{
-            StudentInfo studentInfo=studentDao.selectStudent(saver);
-            String email=studentInfo.getEmail();
-            mailService.sendMailForJoinPro(email,saver,projectName);
+        try {
+            StudentInfo studentInfo = studentDao.selectStudent(saver);
+            String email = studentInfo.getEmail();
+            mailService.sendMailForJoinPro(email, saver, projectName);
             //正在申请
-            String joiningProjectKey= RedisKey.getBizApplyingPro(saver);
+            String joiningProjectKey = RedisKey.getBizApplyingPro(saver);
             //项目正在申请人
-            String projectApplyingKey=RedisKey.getBizProApplying(projectName);
+            String projectApplyingKey = RedisKey.getBizProApplying(projectName);
             //申请成功
             String joinProjectSuccessKey = RedisKey.getBizJoinSuccess(saver);
             //项目团队人员（成功通过申请）
             String projectApplySuccessKey = RedisKey.getBizProApplicant(projectName);
-            jedisAdapter.srem(joiningProjectKey,projectName);
-            jedisAdapter.sadd(joinProjectSuccessKey,projectName);
-            jedisAdapter.srem(projectApplyingKey,saver);
-            jedisAdapter.sadd(projectApplySuccessKey,saver);
+            jedisAdapter.srem(joiningProjectKey, projectName);
+            jedisAdapter.sadd(joinProjectSuccessKey, projectName);
+            jedisAdapter.srem(projectApplyingKey, saver);
+            jedisAdapter.sadd(projectApplySuccessKey, saver);
             return messageDao.addMessage(message);
-        }catch (WeiKeException e){
+        } catch (WeiKeException e) {
             throw e;
         }
     }
 
     @Override
-    public void refuseJoin(JoinMessage joinMessage,HttpServletRequest request) throws Exception {
-        String projectName=joinMessage.getProjectAbout();
-        String saver=joinMessage.getProjectApplicant();
-        try{
+    public void refuseJoin(JoinMessage joinMessage, HttpServletRequest request) throws Exception {
+        String projectName = joinMessage.getProjectAbout();
+        String saver = joinMessage.getProjectApplicant();
+        try {
 //            String sender=getName.AllProjects(request);
-            StudentInfo studentInfo=studentDao.selectStudent(saver);
-            String email=studentInfo.getEmail();
-            mailService.sendMailForJoinPro(email,saver,projectName);
+            StudentInfo studentInfo = studentDao.selectStudent(saver);
+            String email = studentInfo.getEmail();
+            mailService.sendMailForJoinPro(email, saver, projectName);
             //正在申请
-            String joiningProjectKey= RedisKey.getBizApplyingPro(saver);
+            String joiningProjectKey = RedisKey.getBizApplyingPro(saver);
             //项目正在申请人
-            String projectApplyingKey=RedisKey.getBizProApplying(projectName);
+            String projectApplyingKey = RedisKey.getBizProApplying(projectName);
             //申请失败
             String joinProjectFailedKey = RedisKey.getBizJoinFail(saver);
             //项目团队人员（没有通过申请）
             String projectApplyFailKey = RedisKey.getBizProApplyFail(projectName);
-            jedisAdapter.srem(joiningProjectKey,projectName);
-            jedisAdapter.sadd(joinProjectFailedKey,projectName);
-            jedisAdapter.srem(projectApplyingKey,saver);
-            jedisAdapter.sadd(projectApplyFailKey,saver);
-        }catch (WeiKeException e){
+            jedisAdapter.srem(joiningProjectKey, projectName);
+            jedisAdapter.sadd(joinProjectFailedKey, projectName);
+            jedisAdapter.srem(projectApplyingKey, saver);
+            jedisAdapter.sadd(projectApplyFailKey, saver);
+        } catch (WeiKeException e) {
             throw e;
         }
     }

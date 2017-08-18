@@ -39,7 +39,8 @@ public class ProjectServiceImpl implements ProjectService {
         try {
             return projectDao.queryAll(offset * pageCount, pageCount);
         } catch (Exception e) {
-            throw new ProjectException(ExceptionEnum.INNER_ERROR.getMsg()); }
+            throw new ProjectException(ExceptionEnum.INNER_ERROR.getMsg());
+        }
     }
 
     @Override
@@ -51,7 +52,8 @@ public class ProjectServiceImpl implements ProjectService {
             projectDetail.setProHits(hitsNum);
             return projectDetail;
         } catch (Exception e) {
-            throw new ProjectException(ExceptionEnum.INNER_ERROR.getMsg()); }
+            throw new ProjectException(ExceptionEnum.INNER_ERROR.getMsg());
+        }
     }
 
     @Override
@@ -59,7 +61,8 @@ public class ProjectServiceImpl implements ProjectService {
         try {
             return projectDao.queryByKeywords(keyWords);
         } catch (Exception e) {
-            throw new ProjectException(ExceptionEnum.INNER_ERROR.getMsg()); }
+            throw new ProjectException(ExceptionEnum.INNER_ERROR.getMsg());
+        }
     }
 
     @Override
@@ -67,21 +70,22 @@ public class ProjectServiceImpl implements ProjectService {
         try {
             return projectDao.queryForIndex();
         } catch (Exception e) {
-            throw new ProjectException(ExceptionEnum.INNER_ERROR.getMsg()); }
+            throw new ProjectException(ExceptionEnum.INNER_ERROR.getMsg());
+        }
     }
 
     @Override
-    public ProApplyInfo queryProApplyInfoByName(String projectName) throws ProjectException{
+    public ProApplyInfo queryProApplyInfoByName(String projectName) throws ProjectException {
         String proApplySuccess = RedisKey.getBizProApplicant(projectName);
         String proApplyFailed = RedisKey.getBizProApplyFail(projectName);
         String proApplying = RedisKey.getBizProApplying(projectName);
         ProApplyInfo proApplyInfo = new ProApplyInfo();
-        try{
+        try {
             proApplyInfo.setApplySuccess(jedisAdapter.smenber(proApplySuccess).stream().collect(Collectors.toList()));
             proApplyInfo.setApplyFailed(jedisAdapter.smenber(proApplyFailed).stream().collect(Collectors.toList()));
             proApplyInfo.setApplying(jedisAdapter.smenber(proApplying).stream().collect(Collectors.toList()));
             return proApplyInfo;
-        }catch (Exception e){
+        } catch (Exception e) {
             throw e;
         }
     }

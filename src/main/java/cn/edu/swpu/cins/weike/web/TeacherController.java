@@ -116,7 +116,7 @@ public class TeacherController {
     public ResultData queryAllProject(HttpServletRequest request) {
         try {
             List<String> list = teacherService.queryAllProject(getUsrName.AllProjects(request));
-            return new ResultData(true,list);
+            return new ResultData(true, list);
         } catch (Exception e) {
             return new ResultData(false, e.getMessage());
         }

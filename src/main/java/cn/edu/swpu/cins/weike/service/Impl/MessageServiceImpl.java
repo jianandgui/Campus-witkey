@@ -165,11 +165,11 @@ public class MessageServiceImpl implements MessageService {
         message.setCreateDate(new Date());
         message.setProjectAbout(projectName);
         message.setContent("尊敬的" + toName + "你好，" + username + "关注了你的项目 : " + projectName + "去看看吧！");
-        try{
+        try {
             messageDao.addMessage(message);
             jedisAdapter.sadd(followProKey, projectName);
             jedisAdapter.sadd(proFollower, username);
-        }catch (Exception e){
+        } catch (Exception e) {
             throw e;
         }
     }
@@ -178,20 +178,20 @@ public class MessageServiceImpl implements MessageService {
     public void unFollowPro(String projectName, String username, String toName) {
         String followProKey = RedisKey.getBizAttentionPro(username);
         String proFollower = RedisKey.getBizProFollower(projectName);
-        try{
+        try {
             jedisAdapter.srem(followProKey, projectName);
             jedisAdapter.srem(proFollower, username);
-        }catch (Exception e){
-         throw e;
+        } catch (Exception e) {
+            throw e;
         }
     }
 
     @Override
     public List<String> queryFollower(String projectName) {
         String proFollowerKeys = RedisKey.getBizProFollower(projectName);
-        try{
+        try {
             return jedisAdapter.smenber(proFollowerKeys).stream().collect(Collectors.toList());
-        }catch (Exception e){
+        } catch (Exception e) {
             throw e;
         }
     }

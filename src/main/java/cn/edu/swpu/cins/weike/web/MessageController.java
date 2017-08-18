@@ -48,47 +48,48 @@ public class MessageController {
 
     /**
      * 用户申请项目 发送消息和站内信
+     *
      * @param messageView
      * @param request
      * @return
      */
     @PostMapping("/sendMessage")
-    public ResultData sendMessage(@RequestBody MessageView messageView, HttpServletRequest request){
-        try{
+    public ResultData sendMessage(@RequestBody MessageView messageView, HttpServletRequest request) {
+        try {
             String userSender = getUsrName.AllProjects(request);
-            messageService.addMessage(messageView.getContent(),messageView.getProjectName(),userSender);
+            messageService.addMessage(messageView.getContent(), messageView.getProjectName(), userSender);
             return new ResultData(true, MessageEnum.SEND_MESSAGE_SUCCESS.getMsg());
-        }catch (Exception e){
-            return new ResultData(false,e.getMessage());
+        } catch (Exception e) {
+            return new ResultData(false, e.getMessage());
         }
     }
 
     /**
-     *
      * 增加这个接口用来接受项目参加的请求，此时我们需要给他发送一条站内信和邮件，通知他被同意参加项目
      * 并且在他申请项目的列表中删除这个项目，并在他申请成功项目列表中加入这个项目
      * 对于发布项目的人我们需要在他项目的申请人列表中删除这个人，并且在项目团队名单中加入这个人。
+     *
      * @param joinMessage
      * @return
      */
     @PostMapping("/acceptApply")
-    public ResultData acceptJoin(@RequestBody JoinMessage joinMessage, HttpServletRequest request){
-        try{
-            joinProjectService.acceptJoin(joinMessage,request);
+    public ResultData acceptJoin(@RequestBody JoinMessage joinMessage, HttpServletRequest request) {
+        try {
+            joinProjectService.acceptJoin(joinMessage, request);
             return new ResultData(true);
-        }catch (Exception e){
-            return new ResultData(false,"服务器内部异常");
+        } catch (Exception e) {
+            return new ResultData(false, "服务器内部异常");
         }
     }
 
 
     @PostMapping("/refuseApply")
-    public ResultData refuseJoin(@RequestBody JoinMessage joinMessage, HttpServletRequest request){
+    public ResultData refuseJoin(@RequestBody JoinMessage joinMessage, HttpServletRequest request) {
         try {
-            joinProjectService.refuseJoin(joinMessage,request);
-            return new ResultData(true,"拒绝申请成功");
-        }catch (Exception e){
-            return new ResultData(false,"服务器内部异常");
+            joinProjectService.refuseJoin(joinMessage, request);
+            return new ResultData(true, "拒绝申请成功");
+        } catch (Exception e) {
+            return new ResultData(false, "服务器内部异常");
         }
     }
 
@@ -106,68 +107,73 @@ public class MessageController {
     }*/
 
     @GetMapping("/messageList")
-    public ResultData getConversationDetail(HttpServletRequest request){
-        try{
+    public ResultData getConversationDetail(HttpServletRequest request) {
+        try {
             String username = getUsrName.AllProjects(request);
-            MessageList list=messageService.getConversationList(username);
-            if(list==null){
-                return new ResultData(MessageEnum.NO_MESSAGE.getMsg());}
-            return new ResultData(true,list);
-        }catch (Exception e){
-            return new ResultData(false,e.getMessage());
+            MessageList list = messageService.getConversationList(username);
+            if (list == null) {
+                return new ResultData(MessageEnum.NO_MESSAGE.getMsg());
+            }
+            return new ResultData(true, list);
+        } catch (Exception e) {
+            return new ResultData(false, e.getMessage());
         }
     }
 
     /**
      * 根据id删除一条信息
+     *
      * @param id
      * @return
      */
     @PostMapping("/deleteMessage")
-    public ResultData deleteMessage(@RequestBody MessageDelete id){
-        try{
+    public ResultData deleteMessage(@RequestBody MessageDelete id) {
+        try {
             messageService.deleteMessage(id.getId());
-            return new ResultData(true,"信息删除成功");
-        }catch (Exception e){
-            return new ResultData(false,e.getMessage());
+            return new ResultData(true, "信息删除成功");
+        } catch (Exception e) {
+            return new ResultData(false, e.getMessage());
         }
     }
 
-    /** 用户关注一个项目
+    /**
+     * 用户关注一个项目
+     *
      * @param followPro
      * @param request
      * @return
      */
     @PostMapping("/followPro")
-    public ResultData attentionPro(@RequestBody FollowPro followPro,HttpServletRequest request){
+    public ResultData attentionPro(@RequestBody FollowPro followPro, HttpServletRequest request) {
         try {
-            messageService.followPro(followPro.getProjectName(),getUsrName.AllProjects(request),followPro.getProjectConnector());
-            return new ResultData(true,"关注项目成功");
-        }catch (Exception e){
+            messageService.followPro(followPro.getProjectName(), getUsrName.AllProjects(request), followPro.getProjectConnector());
+            return new ResultData(true, "关注项目成功");
+        } catch (Exception e) {
             return new ResultData(false, e.getMessage());
         }
     }
 
     @PostMapping("/unFollowPro")
-    public ResultData unAttentionPro(@RequestBody FollowPro followPro,HttpServletRequest request){
-        try{
-            messageService.unFollowPro(followPro.getProjectName(),getUsrName.AllProjects(request),followPro.getProjectConnector());
-            return new ResultData(true,"取消关注项目成功");
-        }catch (Exception e){
+    public ResultData unAttentionPro(@RequestBody FollowPro followPro, HttpServletRequest request) {
+        try {
+            messageService.unFollowPro(followPro.getProjectName(), getUsrName.AllProjects(request), followPro.getProjectConnector());
+            return new ResultData(true, "取消关注项目成功");
+        } catch (Exception e) {
             return new ResultData(false, e.getMessage());
         }
     }
 
     /**
      * 查看项目关注列表
+     *
      * @param projectName
      * @return
      */
     @GetMapping("/proFollower")
-    public ResultData queryProFollower (@RequestParam String projectName){
-        try{
+    public ResultData queryProFollower(@RequestParam String projectName) {
+        try {
             return new ResultData(true, messageService.queryFollower(projectName));
-        }catch (Exception e){
+        } catch (Exception e) {
             return new ResultData(false, e.getMessage());
         }
     }
