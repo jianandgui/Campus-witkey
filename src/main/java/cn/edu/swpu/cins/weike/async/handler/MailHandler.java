@@ -27,7 +27,7 @@ public class MailHandler implements EventHandler {
 
 
     @Override
-    public void doHandle(EventModel model) throws Exception{
+    public void doHandle(EventModel model) {
         try{
             String status=model.getExts().get("status");
             String verifyCode;

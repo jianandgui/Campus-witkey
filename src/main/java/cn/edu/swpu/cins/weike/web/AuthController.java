@@ -3,7 +3,6 @@ package cn.edu.swpu.cins.weike.web;
 import cn.apiclub.captcha.Captcha;
 import cn.apiclub.captcha.backgrounds.GradiatedBackgroundProducer;
 import cn.apiclub.captcha.gimpy.FishEyeGimpyRenderer;
-import cn.edu.swpu.cins.weike.async.EventProducer;
 import cn.edu.swpu.cins.weike.entity.persistence.*;
 import cn.edu.swpu.cins.weike.entity.view.*;
 import cn.edu.swpu.cins.weike.enums.LoginEnum;
@@ -49,9 +48,6 @@ public class AuthController {
 
 
     @Autowired
-    EventProducer eventProducer;
-
-    @Autowired
     public AuthController(AuthService authService, StudentDao studentDao, MailService mailService, TeacherDao teacherDao, AdminDao adminDao) {
         this.authService = authService;
         this.studentDao = studentDao;
@@ -60,7 +56,7 @@ public class AuthController {
         this.adminDao = adminDao;
     }
 
-    private static int captchaExpires = 60; //超时时间3min
+    private static int captchaExpires = 3*60; //超时时间3min
     private static int captchaW = 200;
     private static int captchaH = 60;
 

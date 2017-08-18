@@ -106,7 +106,7 @@ public class MessageServiceImpl implements MessageService {
             jedisAdapter.sadd(joiningProjectKey, projectName);
             return num;
         } catch (Exception e) {
-            throw new MessageException(ExceptionEnum.INNER_ERROR.getMsg());
+            throw e;
         }
     }
 
@@ -129,17 +129,6 @@ public class MessageServiceImpl implements MessageService {
     @Override
     public MessageList getConversationList(String username) throws MessageException {
         try {
-            StudentDetail studentDetail;
-            studentDetail = studentDao.queryForStudentPhone(username);
-            TeacherDetail teacherDetail;
-            teacherDetail = teacherDao.queryForPhone(username);
-            int userId;
-            if (studentDetail != null) {
-                userId = studentDetail.getId();
-
-            } else {
-                userId = teacherDetail.getId();
-            }
             List<Message> fromMessages = new ArrayList<Message>();
             List<Message> toMessages = new ArrayList<Message>();
             for (Message message : messageDao.getConversationList(username)) {
@@ -176,22 +165,34 @@ public class MessageServiceImpl implements MessageService {
         message.setCreateDate(new Date());
         message.setProjectAbout(projectName);
         message.setContent("尊敬的" + toName + "你好，" + username + "关注了你的项目 : " + projectName + "去看看吧！");
-        messageDao.addMessage(message);
-        jedisAdapter.sadd(followProKey, projectName);
-        jedisAdapter.sadd(proFollower, username);
+        try{
+            messageDao.addMessage(message);
+            jedisAdapter.sadd(followProKey, projectName);
+            jedisAdapter.sadd(proFollower, username);
+        }catch (Exception e){
+            throw e;
+        }
     }
 
     @Override
     public void unFollowPro(String projectName, String username, String toName) {
         String followProKey = RedisKey.getBizAttentionPro(username);
         String proFollower = RedisKey.getBizProFollower(projectName);
-        jedisAdapter.srem(followProKey, projectName);
-        jedisAdapter.srem(proFollower, username);
+        try{
+            jedisAdapter.srem(followProKey, projectName);
+            jedisAdapter.srem(proFollower, username);
+        }catch (Exception e){
+         throw e;
+        }
     }
 
     @Override
     public List<String> queryFollower(String projectName) {
         String proFollowerKeys = RedisKey.getBizProFollower(projectName);
-        return jedisAdapter.smenber(proFollowerKeys).stream().collect(Collectors.toList());
+        try{
+            return jedisAdapter.smenber(proFollowerKeys).stream().collect(Collectors.toList());
+        }catch (Exception e){
+            throw e;
+        }
     }
 }

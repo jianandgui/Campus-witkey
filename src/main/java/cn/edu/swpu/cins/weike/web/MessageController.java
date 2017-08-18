@@ -21,7 +21,6 @@ import java.util.List;
 /**
  * Created by muyi on 17-6-12.
  */
-//@CrossOrigin(maxAge = 3600)
 @RestController
 @RequestMapping("/WeiKe")
 public class MessageController {
@@ -57,11 +56,8 @@ public class MessageController {
     public ResultData sendMessage(@RequestBody MessageView messageView, HttpServletRequest request){
         try{
             String userSender = getUsrName.AllProjects(request);
-            int num=messageService.addMessage(messageView.getContent(),messageView.getProjectName(),userSender);
-            if(num==1){
-                return new ResultData(true, MessageEnum.SEND_MESSAGE_SUCCESS.getMsg());}
-            else
-                return new ResultData(false,MessageEnum.SEND_MESSAGE_FAILD.getMsg());
+            messageService.addMessage(messageView.getContent(),messageView.getProjectName(),userSender);
+            return new ResultData(true, MessageEnum.SEND_MESSAGE_SUCCESS.getMsg());
         }catch (Exception e){
             return new ResultData(false,e.getMessage());
         }
@@ -120,7 +116,6 @@ public class MessageController {
         }catch (Exception e){
             return new ResultData(false,e.getMessage());
         }
-
     }
 
     /**
@@ -145,14 +140,22 @@ public class MessageController {
      */
     @PostMapping("/followPro")
     public ResultData attentionPro(@RequestBody FollowPro followPro,HttpServletRequest request){
-        messageService.followPro(followPro.getProjectName(),getUsrName.AllProjects(request),followPro.getProjectConnector());
-        return new ResultData(true,"关注项目成功");
+        try {
+            messageService.followPro(followPro.getProjectName(),getUsrName.AllProjects(request),followPro.getProjectConnector());
+            return new ResultData(true,"关注项目成功");
+        }catch (Exception e){
+            return new ResultData(false, e.getMessage());
+        }
     }
 
     @PostMapping("/unFollowPro")
     public ResultData unAttentionPro(@RequestBody FollowPro followPro,HttpServletRequest request){
-        messageService.unFollowPro(followPro.getProjectName(),getUsrName.AllProjects(request),followPro.getProjectConnector());
-        return new ResultData(true,"取消关注项目成功");
+        try{
+            messageService.unFollowPro(followPro.getProjectName(),getUsrName.AllProjects(request),followPro.getProjectConnector());
+            return new ResultData(true,"取消关注项目成功");
+        }catch (Exception e){
+            return new ResultData(false, e.getMessage());
+        }
     }
 
     /**
@@ -162,6 +165,10 @@ public class MessageController {
      */
     @GetMapping("/proFollower")
     public ResultData queryProFollower (@RequestParam String projectName){
-        return new ResultData(true, messageService.queryFollower(projectName));
+        try{
+            return new ResultData(true, messageService.queryFollower(projectName));
+        }catch (Exception e){
+            return new ResultData(false, e.getMessage());
+        }
     }
 }
