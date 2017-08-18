@@ -3,7 +3,7 @@ package cn.edu.swpu.cins.weike.enums;
 /**
  * Created by muyi on 17-6-15.
  */
-public enum UpdatePwd {
+public enum UpdatePwdEnum {
     NO_USER("没有该用户的信息"),
     WRONG_EMALI("非本人邮箱"),
     UPDATE_PWD_WRONG("密码修改失败"),
@@ -11,7 +11,7 @@ public enum UpdatePwd {
 
     private String msg;
 
-    UpdatePwd(String msg) {
+    UpdatePwdEnum(String msg) {
         this.msg = msg;
     }
 

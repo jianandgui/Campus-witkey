@@ -3,17 +3,13 @@ package cn.edu.swpu.cins.weike.web;
 import cn.apiclub.captcha.Captcha;
 import cn.apiclub.captcha.backgrounds.GradiatedBackgroundProducer;
 import cn.apiclub.captcha.gimpy.FishEyeGimpyRenderer;
-import cn.edu.swpu.cins.weike.async.EventModel;
 import cn.edu.swpu.cins.weike.async.EventProducer;
-import cn.edu.swpu.cins.weike.async.EventType;
 import cn.edu.swpu.cins.weike.entity.persistence.*;
 import cn.edu.swpu.cins.weike.entity.view.*;
 import cn.edu.swpu.cins.weike.enums.LoginEnum;
-import cn.edu.swpu.cins.weike.enums.UpdatePwd;
-import cn.edu.swpu.cins.weike.exception.AuthException;
+import cn.edu.swpu.cins.weike.enums.UpdatePwdEnum;
 import cn.edu.swpu.cins.weike.service.MailService;
 import cn.edu.swpu.cins.weike.util.JedisAdapter;
-import cn.edu.swpu.cins.weike.util.RedisKey;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.MediaType;
@@ -29,7 +25,6 @@ import java.awt.*;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.util.UUID;
-import java.util.stream.Collectors;
 
 
 /**
@@ -223,7 +218,7 @@ public class AuthController {
     public ResultData studentUpdatePassword(@RequestBody UpdatePassword updatePassword) {
         try {
             authService.studentUpdatePassword(updatePassword);
-            return new ResultData(true, cn.edu.swpu.cins.weike.enums.UpdatePwd.UPDATE_PWD_SUCCESS.getMsg());
+            return new ResultData(true, UpdatePwdEnum.UPDATE_PWD_SUCCESS.getMsg());
         } catch (Exception e) {
             return new ResultData(false, e.getMessage()); }
     }
@@ -232,7 +227,7 @@ public class AuthController {
     public ResultData teacherUpdatePassword(@RequestBody UpdatePassword updatePassword) {
         try {
             authService.teacherUpdatePassword(updatePassword);
-            return new ResultData(true, cn.edu.swpu.cins.weike.enums.UpdatePwd.UPDATE_PWD_SUCCESS.getMsg());
+            return new ResultData(true, UpdatePwdEnum.UPDATE_PWD_SUCCESS.getMsg());
         } catch (Exception e) {
             return new ResultData(false, e.getMessage()); }
     }
@@ -247,7 +242,6 @@ public class AuthController {
             // Return the token
             String username = authenticationRequest.getUsername();
             String role = adminDao.queryByName(username).getRole();
-            boolean isCompleted = false;
             if (role == null) {
                 return new ResultData(false, LoginEnum.NO_USER.getMessage()); }
             return new ResultData(true, new JwtAuthenticationResponse(token, username, role, null, false, joinProject));

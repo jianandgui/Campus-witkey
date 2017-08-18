@@ -6,6 +6,7 @@ public class RedisKey {
     private static String BIZ_EVENTQUEUE = "EVENT_QUEUE";
     //注册
     private static String BIZ_REGISTER = "REGISTER";
+
     private static String SPLIT = ":";
     //找回密码
     private static String BIZ_FIND_PASSWORD = "FIND_PWD";
@@ -36,8 +37,6 @@ public class RedisKey {
 
     //项目有哪些人关注
     private static String BIZ_PRO_FOLLOWER = "PRO_FOLLOWER";
-
-    private static String BIZ_LOGIN = "LOGIN";
 
 
 
