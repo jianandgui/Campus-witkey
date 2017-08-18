@@ -143,9 +143,9 @@ public class AuthServiceImpl implements AuthService {
         try {
             if (jedisAdapter.exists(redisKey)) {
             if (jedisAdapter.get(redisKey).equals(registerTeacherVO.getVerifyCode())) {
-                TeacherInfo teacherInfo=new TeacherInfo();
+                TeacherInfo teacherInfo=registerTeacherVO.getTeacherInfo();
                 BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
-                final String rawPassword = teacherInfo.getPassword();
+                final String rawPassword = registerTeacherVO.getTeacherInfo().getPassword();
                 teacherInfo.setPassword(encoder.encode(rawPassword));
                 teacherInfo.setLastPasswordResetDate(new Date().getTime());
                 teacherInfo.setRole("ROLE_TEACHER");
@@ -157,7 +157,7 @@ public class AuthServiceImpl implements AuthService {
             }
             throw  new AuthException( "请重新获取验证码");
         } catch (Exception e) {
-            throw new AuthException("数据库异常");
+            throw e;
         }
     }
 

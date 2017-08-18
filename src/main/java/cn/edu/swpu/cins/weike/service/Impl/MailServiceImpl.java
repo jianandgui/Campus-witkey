@@ -67,7 +67,7 @@ public class MailServiceImpl implements MailService {
             sender.send(message);
             return verifyCode;
         } catch (Exception e) {
-            throw new Exception("邮件发送失败");
+            throw e;
         }
     }
 
@@ -83,7 +83,7 @@ public class MailServiceImpl implements MailService {
             sender.send(message);
             return verifyCode;
         } catch (Exception e) {
-            throw new Exception("邮件发送失败");
+            throw e;
         }
     }
 
@@ -97,7 +97,7 @@ public class MailServiceImpl implements MailService {
         try {
             sender.send(message);
         } catch (Exception e) {
-            throw new Exception("邮件发送失败");
+            throw e;
         }
     }
 
@@ -111,7 +111,7 @@ public class MailServiceImpl implements MailService {
         try {
             sender.send(message);
         } catch (Exception e) {
-            throw new Exception("邮件发送失败");
+            throw e;
         }
     }
 

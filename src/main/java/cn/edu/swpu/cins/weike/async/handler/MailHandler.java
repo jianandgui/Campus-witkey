@@ -51,7 +51,7 @@ public class MailHandler implements EventHandler {
                     return;
         }
         }catch (Exception e){
-            logger.info("出现错误咯！");
+            logger.info(e.getMessage());
         }
     }
 
