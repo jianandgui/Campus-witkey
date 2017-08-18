@@ -128,14 +128,10 @@ public class StudentController {
     public ResultData queryAllProject(HttpServletRequest request) {
         try {
             List<String> list = studentService.queryAllProject(getUsrName.AllProjects(request));
-            if (list.isEmpty()) {
-                return new ResultData(false, UserEnum.NO_PROJECTS.getMsg());
-            }
             return new ResultData(true, list);
         } catch (Exception e) {
             return new ResultData(false, e.getMessage());
         }
-
     }
 
     /**

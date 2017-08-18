@@ -125,7 +125,11 @@ public class StudentServiceImpl implements StudentService {
     @Override
     public List<String> queryAllProject(String projectConnector) throws StudentException {
         try {
-            return studentDao.queryAllProject(projectConnector);
+            List<String> list = studentDao.queryAllProject(projectConnector);
+            if (list.isEmpty()) {
+                throw  new StudentException(UserEnum.NO_PROJECTS.getMsg());
+            }
+            return list;
         } catch (Exception e) {
             throw new StudentException("服务器异常"); }
     }
