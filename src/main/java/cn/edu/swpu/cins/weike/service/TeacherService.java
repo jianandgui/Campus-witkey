@@ -15,9 +15,9 @@ import java.util.List;
 public interface TeacherService {
 
 
-    int teacherAddPersonal(TeacherDetail teacherDetail) throws TeacherException;
+    int teacherAddPersonal(TeacherDetail teacherDetail,String username) throws TeacherException;
 
-    int issueProject(ProjectInfo projectInfo) throws TeacherException;
+    int issueProject(ProjectInfo projectInfo,String username) throws TeacherException;
 
     List<ProjectRecommend> queryStudentForReCommod(List<String> skills,String username) throws TeacherException;
 

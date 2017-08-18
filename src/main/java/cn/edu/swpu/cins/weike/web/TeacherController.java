@@ -2,6 +2,7 @@ package cn.edu.swpu.cins.weike.web;
 
 import cn.edu.swpu.cins.weike.config.filter.JwtTokenUtil;
 import cn.edu.swpu.cins.weike.entity.persistence.TeacherDetail;
+import cn.edu.swpu.cins.weike.entity.view.ProjectRecommend;
 import cn.edu.swpu.cins.weike.entity.view.ResultData;
 import cn.edu.swpu.cins.weike.entity.view.TeacherPersonData;
 import cn.edu.swpu.cins.weike.enums.ProjectEnum;
@@ -60,24 +61,9 @@ public class TeacherController {
     public ResultData publishProject(@RequestBody ProjectInfo projectInfo, HttpServletRequest request) {
         try {
             String username = getUsrName.AllProjects(request);
-            TeacherInfo teacherinfo = teacherDao.queryByName(username);
-            TeacherDetail teacherDetail = teacherDao.queryForPhone(username);
-            if (projectDao.queryProjectDetail(projectInfo.getProjectName()) == null) {
-                if (teacherDetail != null) {
-                    projectInfo.setProjectConnector(username);
-                    projectInfo.setEmail(teacherinfo.getEmail());
-                    projectInfo.setQq(teacherDetail.getQq());
-                    if (teacherService.issueProject(projectInfo) != 1) {
-                        return new ResultData(false, ProjectEnum.PUBLISH_PROJECT_FAILD.getMsg());
-                    }
-                    if (teacherService.queryStudentForReCommod(projectInfo.getProjectNeed(), username).isEmpty()) {
-                        return new ResultData(true, ProjectEnum.NO_SUITBLE_PERSON.getMsg());
-                    }
-                    return new ResultData(true, teacherService.queryStudentForReCommod(projectInfo.getProjectNeed(), username));
-                }
-                return new ResultData(false, ProjectEnum.ADD_PERSONNAL.getMsg());
-            }
-            return new ResultData(false, ProjectEnum.REPEATE_PROJECT.getMsg());
+            teacherService.issueProject(projectInfo, username);
+            List<ProjectRecommend> projectRecommends = teacherService.queryStudentForReCommod(projectInfo.getProjectNeed(), username);
+            return new ResultData(true, projectRecommends);
         } catch (Exception e) {
             return new ResultData(false, e.getMessage());
         }
@@ -95,15 +81,8 @@ public class TeacherController {
     public ResultData addTeacherPersonal(@RequestBody TeacherDetail teacherDetail, HttpServletRequest request) {
         try {
             String username = getUsrName.AllProjects(request);
-            if (teacherDao.queryForPhone(username) == null) {
-                teacherDetail.setUsername(username);
-                int num = teacherDao.teacherAddPersonal(teacherDetail);
-                if (num == 1) {
-                    return new ResultData(true, UserEnum.ADD_PERSONAL_SUCCESS.getMsg());
-                }
-                return new ResultData(false, UserEnum.ADD_PERSONAL_FAILD.getMsg());
-            }
-            return new ResultData(false, UserEnum.REPEATE_ADD.getMsg());
+            teacherService.teacherAddPersonal(teacherDetail, username);
+            return new ResultData(true, UserEnum.ADD_PERSONAL_SUCCESS);
         } catch (Exception e) {
             return new ResultData(false, e.getMessage());
         }
@@ -120,11 +99,8 @@ public class TeacherController {
     public ResultData updateInfo(@RequestBody TeacherDetail teacherDetail, HttpServletRequest request) {
         try {
             String username = getUsrName.AllProjects(request);
-            int num = teacherService.updateInfo(teacherDetail, username);
-            if (num == 1) {
-                return new ResultData(true, UserEnum.UPDATE_SUCCESS.getMsg());
-            }
-            return new ResultData(false, UserEnum.UPDATE_FAILD.getMsg());
+            teacherService.updateInfo(teacherDetail, username);
+            return new ResultData(true, UserEnum.UPDATE_SUCCESS.getMsg());
         } catch (Exception e) {
             return new ResultData(false, e.getMessage());
         }
@@ -140,10 +116,7 @@ public class TeacherController {
     public ResultData queryAllProject(HttpServletRequest request) {
         try {
             List<String> list = teacherService.queryAllProject(getUsrName.AllProjects(request));
-            if (!list.isEmpty()) {
-                return new ResultData(true, list);
-            }
-            return new ResultData(false, UserEnum.NO_PROJECTS.getMsg());
+            return new ResultData(true,list);
         } catch (Exception e) {
             return new ResultData(false, e.getMessage());
         }
