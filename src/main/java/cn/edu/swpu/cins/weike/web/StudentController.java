@@ -2,6 +2,7 @@ package cn.edu.swpu.cins.weike.web;
 
 import cn.edu.swpu.cins.weike.entity.view.PersonData;
 import cn.edu.swpu.cins.weike.entity.view.ProApplyInfo;
+import cn.edu.swpu.cins.weike.entity.view.ProjectRecommend;
 import cn.edu.swpu.cins.weike.enums.ProjectEnum;
 import cn.edu.swpu.cins.weike.enums.UserEnum;
 import cn.edu.swpu.cins.weike.service.MailService;
@@ -71,26 +72,9 @@ public class StudentController {
     public ResultData publishProject(@RequestBody ProjectInfo projectInfo, HttpServletRequest request) {
         try {
             String username = getUsrName.AllProjects(request);
-            StudentInfo studentinfo = studentDao.selectStudent(username);
-            StudentDetail studentDetail = studentDao.queryForStudentPhone(username);
-            if (studentDetail != null) {
-                if (projectDao.queryProjectDetail(projectInfo.getProjectName()) == null) {
-                    projectInfo.setProjectConnector(username);
-                    projectInfo.setEmail(studentinfo.getEmail());
-                    projectInfo.setQq(studentDetail.getQq());
-                    int num = studentService.issueProject(projectInfo);
-                    if (num != 1) {
-                        return new ResultData(false, ProjectEnum.PUBLISH_PROJECT_FAILD.getMsg());
-                    }
-                    if (studentService.queryForReCommod(projectInfo.getProjectNeed(), username).isEmpty()) {
-                        return new ResultData(true, ProjectEnum.NO_SUITBLE_PERSON.getMsg());
-                    }
-                    return new ResultData(true, studentService.queryForReCommod(projectInfo.getProjectNeed(), username));
-                }
-                return new ResultData(false, ProjectEnum.REPEATE_PROJECT.getMsg());
-            } else {
-                return new ResultData(false, UserEnum.ADD_PERSONNAL.getMsg());
-            }
+            studentService.issueProject(projectInfo,username);
+            List<ProjectRecommend> projectRecommends = studentService.queryForReCommod(projectInfo.getProjectNeed(), username);
+            return new ResultData(true, projectRecommends);
         } catch (Exception e) {
             return new ResultData(false, e.getMessage());
         }
@@ -108,15 +92,8 @@ public class StudentController {
     public ResultData addPersonalDetail(@RequestBody StudentDetail studentDetail, HttpServletRequest request) {
         try {
             String username = getUsrName.AllProjects(request);
-            if (studentDao.queryForStudentPhone(username) == null) {
-                studentDetail.setUsername(username);
-                int num = studentService.addPersonal(studentDetail);
-                if (num == 1) {
-                    return new ResultData(true, UserEnum.ADD_PERSONAL_SUCCESS.getMsg());
-                }
-                return new ResultData(false, UserEnum.ADD_PERSONAL_FAILD.getMsg());
-            } else
-                return new ResultData(false, UserEnum.REPEATE_ADD.getMsg());
+            studentService.addPersonal(studentDetail,username);
+            return new ResultData(true, UserEnum.ADD_PERSONAL_SUCCESS.getMsg());
         } catch (Exception e) {
             return new ResultData(false, e.getMessage());
         }
@@ -134,11 +111,8 @@ public class StudentController {
 
         try {
             String username = getUsrName.AllProjects(request);
-            int num = studentService.updateInfo(studentDetail, username);
-            if (num == 1) {
-                return new ResultData(true, UserEnum.UPDATE_SUCCESS.getMsg());
-            } else
-                return new ResultData(false, UserEnum.UPDATE_FAILD.getMsg());
+            studentService.updateInfo(studentDetail, username);
+            return new ResultData(true, UserEnum.UPDATE_SUCCESS.getMsg());
         } catch (Exception e) {
             return new ResultData(false, e.getMessage());
         }
@@ -172,7 +146,6 @@ public class StudentController {
      */
     @GetMapping("/personalData")
     public ResultData queryForData(HttpServletRequest request) {
-
         try {
             PersonData personData = studentService.queryForData(getUsrName.AllProjects(request));
             return new ResultData(true, personData);

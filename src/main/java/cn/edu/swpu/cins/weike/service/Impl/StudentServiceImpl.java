@@ -1,8 +1,11 @@
 package cn.edu.swpu.cins.weike.service.Impl;
 
 import cn.edu.swpu.cins.weike.entity.persistence.StudentDetail;
+import cn.edu.swpu.cins.weike.entity.persistence.StudentInfo;
 import cn.edu.swpu.cins.weike.entity.view.PersonData;
 import cn.edu.swpu.cins.weike.entity.view.ProjectRecommend;
+import cn.edu.swpu.cins.weike.enums.ProjectEnum;
+import cn.edu.swpu.cins.weike.enums.UserEnum;
 import cn.edu.swpu.cins.weike.exception.StudentException;
 import cn.edu.swpu.cins.weike.util.JedisAdapter;
 import cn.edu.swpu.cins.weike.util.RedisKey;
@@ -46,16 +49,30 @@ public class StudentServiceImpl implements StudentService {
 
     //学生发布项目
     @Override
-    public int issueProject(ProjectInfo projectInfo) throws StudentException {
-        projectInfo.setProjectName(sensitiveWordsFilter.Filter(projectInfo.getProjectName()));
+    public int issueProject(ProjectInfo projectInfo,String username) throws StudentException {
+
         try {
-            return projectDao.addProject(projectInfo);
+            projectInfo.setProjectName(sensitiveWordsFilter.Filter(projectInfo.getProjectName()));
+            StudentInfo studentinfo = studentDao.selectStudent(username);
+            StudentDetail studentDetail = studentDao.queryForStudentPhone(username);
+                if (projectDao.queryProjectDetail(projectInfo.getProjectName()) == null) {
+                    projectInfo.setProjectConnector(username);
+                    projectInfo.setEmail(studentinfo.getEmail());
+                    projectInfo.setQq(studentDetail.getQq());
+                    int num = projectDao.addProject(projectInfo);
+                    if (num != 1) {
+                        throw  new StudentException(ProjectEnum.PUBLISH_PROJECT_FAILD.getMsg());
+                    }
+                    return 1;
+                }
+                throw  new StudentException(ProjectEnum.REPEATE_PROJECT.getMsg());
+
         } catch (Exception e) {
             throw new StudentException("数据库学生添加异常"); }
     }
 
     @Override
-    public int addPersonal(StudentDetail studentDetail) throws StudentException {
+    public int addPersonal(StudentDetail studentDetail,String username) throws StudentException {
         int rate = studentDetail.getSkills().toArray().length;
         if (rate == 2 || rate == 0) {
             studentDetail.setLevel("D"); }
@@ -66,7 +83,15 @@ public class StudentServiceImpl implements StudentService {
         if (rate > 5) {
             studentDetail.setLevel("A"); }
         try {
-            return studentDao.studentAddPersonal(studentDetail);
+            if (studentDao.queryForStudentPhone(username) == null) {
+                studentDetail.setUsername(username);
+                int num = studentDao.studentAddPersonal(studentDetail);
+                if (num == 1) {
+                    return 1;
+                }
+                throw  new StudentException(UserEnum.ADD_PERSONAL_FAILD.getMsg());
+            } else
+                throw  new StudentException(UserEnum.REPEATE_ADD.getMsg());
         } catch (Exception e) {
             throw new StudentException("数据库学生添加个人信息异常"); }
     }
@@ -75,7 +100,11 @@ public class StudentServiceImpl implements StudentService {
     @Override
     public List<ProjectRecommend> queryForReCommod(List<String> skills, String username) throws StudentException {
         try {
-            return reduceRepeate.reduceStudentRepeat(skills, username);
+            List<ProjectRecommend> projectRecommends=reduceRepeate.reduceStudentRepeat(skills, username);
+            if(projectRecommends.isEmpty()){
+                throw new StudentException(ProjectEnum.NO_PROJECTS.getMsg());
+            }
+            return projectRecommends;
         } catch (Exception e) {
             throw new StudentException("数据库学生发布项目推荐人选异常"); }
     }
@@ -84,7 +113,11 @@ public class StudentServiceImpl implements StudentService {
     public int updateInfo(StudentDetail studentDetail, String username) throws StudentException {
         studentDetail.setUsername(username);
         try {
-            return studentDao.updateInfo(studentDetail) > 0 ? 1 : 0;
+            int num = studentDao.updateInfo(studentDetail);
+            if(num !=1){
+                throw new StudentException(UserEnum.UPDATE_FAILD.getMsg());
+            }
+            return num;
         } catch (Exception e) {
             throw new StudentException("服务器异常！"); }
     }
