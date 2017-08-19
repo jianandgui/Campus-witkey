@@ -19,7 +19,6 @@ import static org.junit.Assert.*;
 @Slf4j
 @SpringBootTest
 @RunWith(SpringRunner.class)
-@Transactional
 public class StudentDaoTest {
 
     @Autowired
@@ -75,26 +74,50 @@ public class StudentDaoTest {
 
     @Test
     public void queryForStudentPhone() throws Exception {
+        log.info(studentDao.queryForStudentPhone("muyi").toString());
     }
 
     @Test
     public void updatePassword() throws Exception {
+        assertEquals(1,studentDao.updatePassword("test","test"));
     }
 
     @Test
     public void queryAllRecommod() throws Exception {
+
+        log.info(studentDao.queryAllRecommod("spring").toString());
     }
 
     @Test
     public void updateInfo() throws Exception {
+        List<String> skills =new ArrayList<>();
+        skills.add("test3");
+        skills.add("test4");
+        StudentDetail studentDetail = new StudentDetail();
+        studentDetail.setEduBackgroud("test");
+        studentDetail.setEntryUniversity(123123);
+        studentDetail.setExperience("asdas");
+        studentDetail.setImage("asdada");
+        studentDetail.setLeaveUniversity(123123);
+        studentDetail.setLevel("a");
+        studentDetail.setMajorAndGrade("asdasd");
+        studentDetail.setQq(123123);
+        studentDetail.setSelfFeel("asdasdad");
+        studentDetail.setSex("asdasdasd");
+        studentDetail.setUsername("asdasd");
+        studentDetail.setUniversity("saasdasdasdada");
+        studentDetail.setSkills(skills);
+        studentDao.updateInfo(studentDetail);
     }
 
     @Test
     public void queryAllProject() throws Exception {
+        log.info(studentDao.queryAllProject("fangdiao").toString());
     }
 
     @Test
     public void queryPerson() throws Exception {
+        log.info(studentDao.queryPerson("fangdiao").toString());
     }
 
 }
