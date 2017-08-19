@@ -4,12 +4,28 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="cn.edu.swpu.cins.weike.dao.StudentDao">
 
+    <sql id="registerTable">
+       student_register_info
+    </sql>
+
+    <sql id="detailTable">
+        student_detail_info
+    </sql>
+
+    <sql id="selectFields">
+        username,sex,image,edu_backgroud,university,major_and_grade,entry_university,leave_university,qq,skills,experience,self_feel,level
+    </sql>
+
+    <sql id="recommendFields">
+        username,image,sex,university,major_and_grade,experience,skills,qq
+    </sql>
+
     <!--根据用户名查询学生信息 用于注册-->
     <select id="selectStudent" resultType="cn.edu.swpu.cins.weike.entity.persistence.StudentInfo"
             parameterType="String">
 
         SELECT * FROM
-        StudentRegisterInfo
+        <include refid="registerTable"/>
         WHERE
         username=#{username} limit 1
     </select>
@@ -17,7 +33,7 @@
     <select id="queryEmail" parameterType="String" resultType="cn.edu.swpu.cins.weike.entity.persistence.StudentInfo">
 
         SELECT * FROM
-        StudentRegisterInfo
+        <include refid="registerTable"/>
         WHERE
         email=#{email} limit 1
     </select>
@@ -25,20 +41,9 @@
     <!--添加一个学生信息-->
     <insert id="studentAddPersonal" parameterType="cn.edu.swpu.cins.weike.entity.persistence.StudentDetail">
 
-    INSERT INTO StudentDetailInfo
-    (username,
-    image,
-    sex,
-    eduBackgroud,
-    university,
-    majorAndGrade,
-    entryUniversity,
-    leaveUniversity,
-    qq,
-    skills,
-    experience,
-    selfFeel,
-    level)
+    INSERT INTO
+         <include refid="detailTable"/>
+        (<include refid="selectFields"/>)
     VALUES
     (#{username},
     #{image},
@@ -56,11 +61,12 @@
     </insert>
 
     <insert id="studntRegister" parameterType="cn.edu.swpu.cins.weike.entity.persistence.StudentInfo">
-INSERT INTO StudentRegisterInfo
+INSERT INTO
+        <include refid="registerTable"/>
     (username,
     password,
     email,
-    lastPasswordResetDate,
+    last_password_reset_date,
     role)
     VALUES
     (#{username},
@@ -76,14 +82,16 @@ INSERT INTO StudentRegisterInfo
     <select id="queryForStudentPhone" parameterType="String"
             resultType="cn.edu.swpu.cins.weike.entity.persistence.StudentDetail">
 
-    SELECT * FROM StudentDetailInfo
+    SELECT * FROM
+        <include refid="detailTable"/>
     WHERE
     username=#{username} limit 1
 </select>
 
     <update id="updatePassword" parameterType="String">
 
-    UPDATE StudentRegisterInfo
+    UPDATE
+    <include refid="registerTable"/>
     SET password=#{password}
     WHERE
     username=#{username}
@@ -98,16 +106,9 @@ INSERT INTO StudentRegisterInfo
     <select id="queryAllRecommod" parameterType="String" resultMap="studentResultMap">
 
     SELECT
-    username,
-    image,
-    sex,
-    university,
-    majorAndGrade,
-    experience,
-    skills,
-    qq
+    <include refid="recommendFields"/>
     FROM
-    StudentDetailInfo
+    <include refid="detailTable"/>
     WHERE
     skills like "%"#{skills}"%"
 
@@ -115,26 +116,27 @@ INSERT INTO StudentRegisterInfo
 
 
     <update id="updateInfo" parameterType="cn.edu.swpu.cins.weike.entity.persistence.StudentDetail">
-    UPDATE StudentDetailInfo
+    UPDATE
+    <include refid="detailTable"/>
     SET
     image=#{image},
     sex=#{sex},
-    eduBackgroud=#{eduBackgroud},
+    edu_backgroud=#{eduBackgroud},
     university=#{university},
-    majorAndGrade=#{majorAndGrade},
-    entryUniversity=#{entryUniversity},
-    leaveUniversity=#{leaveUniversity},
+    major_and_grade=#{majorAndGrade},
+    entry_university=#{entryUniversity},
+    leave_university=#{leaveUniversity},
     qq=#{qq},
     skills=#{skills , javaType = List , jdbcType = VARCHAR,typeHandler=cn.edu.swpu.cins.weike.typehandler.StringArrayTypeHandler},
     experience=#{experience},
-    selfFeel=#{selfFeel}
+    self_feel=#{selfFeel}
     WHERE username=#{username}
 
     </update>
 
     <select id="queryAllProject" parameterType="String" resultType="String">
-        SELECT projectName from ProjectInfo
-        WHERE projectConnector=#{projectConnector}
+        SELECT project_name from project_info
+        WHERE project_connector=#{projectConnector}
     </select>
 
     <resultMap id="studentDetailResultMap" type="cn.edu.swpu.cins.weike.entity.view.PersonData">
@@ -144,22 +146,9 @@ INSERT INTO StudentRegisterInfo
     </resultMap>
     <select id="queryPerson" parameterType="String" resultMap="studentDetailResultMap">
         SELECT
-         id,
-         username,
-         sex,
-         image,
-         eduBackgroud,
-         university,
-         majorAndGrade,
-         entryUniversity,
-         leaveUniversity,
-         qq,
-         skills,
-         experience,
-         selfFeel,
-         level
-        from StudentDetailInfo
+         <include refid="selectFields"/>
+        from
+        <include refid="detailTable"/>
         WHERE username=#{username} limit 1
-
     </select>
 </mapper>
