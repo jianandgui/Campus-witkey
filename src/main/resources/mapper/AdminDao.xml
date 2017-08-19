@@ -6,7 +6,7 @@
 
     <select id="queryByName" parameterType="String" resultType="cn.edu.swpu.cins.weike.entity.persistence.AdminInfo">
 
-        SELECT * FROM AdminInfo
+        SELECT * FROM admin_info
          WHERE
          username=#{username}
 
@@ -15,7 +15,7 @@
     <insert id="addAdmin" parameterType="cn.edu.swpu.cins.weike.entity.persistence.AdminInfo">
 
         INSERT INTO
-        AdminInfo (username,password,role,email,lastPasswordResetDate)
+        admin_info (username,password,role,email,last_password_reset_date)
         VALUES
         (#{username},#{password},#{role},#{email},#{lastPasswordResetDate})
     </insert>

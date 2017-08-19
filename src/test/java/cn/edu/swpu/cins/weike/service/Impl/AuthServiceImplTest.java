@@ -88,12 +88,12 @@ public class AuthServiceImplTest {
     @Test
     public void getRandomString() throws Exception {
 
-        System.out.println(service.getVerifyCodeForLogin());
+//        System.out.println(service.getVerifyCodeForLogin());
     }
 
     @Test
     public void getVerifyCodeForLogin() throws Exception {
-        System.out.println(service.getVerifyCodeForLogin());
+//        System.out.println(service.getVerifyCodeForLogin());
     }
 
     @Test

@@ -34,7 +34,7 @@ public class MessageDaoTest {
         Message message=new Message();
         message.setCreateDate(new Date());
         message.setToName("test");
-        message.setConversationId("asda");
+//        message.setConversationId("asda");
         message.setHasRead(1);
         message.setFromName("test");
         message.setContent("testMessage");

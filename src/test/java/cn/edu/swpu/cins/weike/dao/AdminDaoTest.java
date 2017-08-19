@@ -15,7 +15,6 @@ import static org.junit.Assert.*;
  */
 @RunWith(SpringRunner.class)
 @SpringBootTest
-@Transactional
 public class AdminDaoTest {
 
     @Autowired
@@ -23,7 +22,7 @@ public class AdminDaoTest {
     @Test
     public void queryByName() throws Exception {
 
-        System.out.println(adminDao.queryByName("Admin"));
+        System.out.println(adminDao.queryByName("test"));
     }
 
     @Test

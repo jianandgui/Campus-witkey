@@ -35,7 +35,7 @@ public class ReduceRepeateTest {
         list.add("springmvc");
         list.add("\"Java\"");
         list.add("struct2");
-        System.out.println(reduceRepeate.reduceStudentRepeate(list));
+//        System.out.println(reduceRepeate.reduceStudentRepeate(list,"test"));
     }
 
 }
