@@ -92,7 +92,7 @@ assertEquals(1,teacherDao.teacherRegister(teacherInfo));
 
     @Test
     public void queryForData() throws Exception {
-       log.info( teacherDao.queryForData("muyi").toString());
+       log.info( teacherDao.queryForData("木易").toString());
     }
 
 }

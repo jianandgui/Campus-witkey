@@ -4,19 +4,25 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="cn.edu.swpu.cins.weike.dao.AdminDao">
 
+    <sql id="allFields">
+        id,username,password,role,email,last_password_reset_date
+    </sql>
     <select id="queryByName" parameterType="String" resultType="cn.edu.swpu.cins.weike.entity.persistence.AdminInfo">
 
-        SELECT * FROM admin_info
-         WHERE
-         username=#{username}
+        SELECT
+          <include refid="allFields"/>
+        FROM
+          admin_info
+        WHERE
+          username=#{username}
 
     </select>
 
     <insert id="addAdmin" parameterType="cn.edu.swpu.cins.weike.entity.persistence.AdminInfo">
 
         INSERT INTO
-        admin_info (username,password,role,email,last_password_reset_date)
+          admin_info (username,password,role,email,last_password_reset_date)
         VALUES
-        (#{username},#{password},#{role},#{email},#{lastPasswordResetDate})
+          (#{username},#{password},#{role},#{email},#{lastPasswordResetDate})
     </insert>
 </mapper>

@@ -11,29 +11,39 @@
     <sql id="detailTable">
         teacher_detail_info
     </sql>
+
+    <sql id="allDetailFields">
+
+       id,username,image,sex,university,academy,rank,qq
+    </sql>
+
+    <sql id="allRegisterFields">
+       id,username,password,email,role,lastPasswordResetDate
+    </sql>
     <!--添加注册老师信息-->
     <insert id="teacherRegister" parameterType="cn.edu.swpu.cins.weike.entity.persistence.TeacherInfo">
 
         INSERT INTO
-        <include refid="registerTable"/>
-        (username,
-        password,
-        email,
-        role,
-        lastPasswordResetDate)
+            <include refid="registerTable"/>
+            (username,
+            password,
+            email,
+            role,
+            lastPasswordResetDate)
         VALUES
-        (#{username},
-        #{password},
-        #{email},
-        #{role},
-        #{lastPasswordResetDate})
+            (#{username},
+            #{password},
+            #{email},
+            #{role},
+            #{lastPasswordResetDate})
 
     </insert>
 
     <!--添加个人详细信息-->
     <insert id="teacherAddPersonal" parameterType="cn.edu.swpu.cins.weike.entity.persistence.TeacherDetail">
 
-    INSERT INTO <include refid="detailTable"/>
+    INSERT INTO
+        <include refid="detailTable"/>
         (username,
         image,
         sex,
@@ -41,7 +51,7 @@
         academy,
         rank,
         qq)
-        VALUES
+    VALUES
         (#{username},
         #{image},
         #{sex},
@@ -55,56 +65,77 @@
     <select id="queryForPhone" resultType="cn.edu.swpu.cins.weike.entity.persistence.TeacherDetail"
             parameterType="String">
 
-        SELECT * FROM <include refid="detailTable"/>
+        SELECT
+          <include refid="allDetailFields"/>
+        FROM
+          <include refid="detailTable"/>
         WHERE
-        username=#{username} limit 1
+          username=#{username} limit 1
     </select>
 
     <select id="queryByName" parameterType="String" resultType="cn.edu.swpu.cins.weike.entity.persistence.TeacherInfo">
 
-        SELECT * FROM <include refid="registerTable"/>
+        SELECT
+          <include refid="allRegisterFields"/>
+        FROM
+          <include refid="registerTable"/>
         WHERE
-        username=#{username} limit 1
+          username=#{username} limit 1
     </select>
 
 
     <select id="queryEamil" resultType="cn.edu.swpu.cins.weike.entity.persistence.TeacherInfo" parameterType="String">
 
-        SELECT * FROM
-        <include refid="registerTable"/>
+        SELECT
+            <include refid="allRegisterFields"/>
+        FROM
+            <include refid="registerTable"/>
         WHERE
-        email=#{email} limit 1
+            email=#{email} limit 1
     </select>
 
     <update id="updatePassword" parameterType="String">
 
-        UPDATE <include refid="registerTable"/>
-        SET password=#{password}
+        UPDATE
+            <include refid="registerTable"/>
+        SET
+            password=#{password}
         WHERE
-        username=#{username}
+            username=#{username}
     </update>
 
     <update id="updateInfo" parameterType="cn.edu.swpu.cins.weike.entity.persistence.TeacherDetail">
-        UPDATE <include refid="detailTable"/>
-        SET image=#{image},
-        sex=#{sex},
-        university=#{university},
-        academy=#{academy},
-        rank=#{rank},
-        qq=#{qq}
-        WHERE username=#{username}
+        UPDATE
+            <include refid="detailTable"/>
+        SET
+            image=#{image},
+            sex=#{sex},
+            university=#{university},
+            academy=#{academy},
+            rank=#{rank},
+            qq=#{qq}
+        WHERE
+            username=#{username}
 
     </update>
 
     <select id="queryAllProject" parameterType="String" resultType="String">
-        SELECT project_name from project_info
-        WHERE project_connector=#{projectConnector}
+        SELECT
+          project_name
+        from
+          project_info
+        WHERE
+          project_connector=#{projectConnector}
 
     </select>
 
     <select id="queryForData" resultType="cn.edu.swpu.cins.weike.entity.view.TeacherPersonData" parameterType="String">
-        SELECT * from <include refid="detailTable"/>
-        WHERE username=#{username} limit 1
+        SELECT
+          <include refid="allDetailFields"/>
+        from
+          <include refid="detailTable"/>
+        WHERE
+          username=#{username} limit 1
     </select>
 
 </mapper>
