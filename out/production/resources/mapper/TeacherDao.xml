@@ -4,11 +4,18 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="cn.edu.swpu.cins.weike.dao.TeacherDao">
 
+    <sql id="registerTable">
+        teacher_register_info
+    </sql>
+
+    <sql id="detailTable">
+        teacher_detail_info
+    </sql>
     <!--添加注册老师信息-->
     <insert id="teacherRegister" parameterType="cn.edu.swpu.cins.weike.entity.persistence.TeacherInfo">
 
         INSERT INTO
-        TeacherRegisterInfo
+        <include refid="registerTable"/>
         (username,
         password,
         email,
@@ -26,7 +33,7 @@
     <!--添加个人详细信息-->
     <insert id="teacherAddPersonal" parameterType="cn.edu.swpu.cins.weike.entity.persistence.TeacherDetail">
 
-    INSERT INTO TeacherDetailInfo
+    INSERT INTO <include refid="detailTable"/>
         (username,
         image,
         sex,
@@ -48,14 +55,14 @@
     <select id="queryForPhone" resultType="cn.edu.swpu.cins.weike.entity.persistence.TeacherDetail"
             parameterType="String">
 
-        SELECT * FROM TeacherDetailInfo
+        SELECT * FROM <include refid="detailTable"/>
         WHERE
         username=#{username} limit 1
     </select>
 
     <select id="queryByName" parameterType="String" resultType="cn.edu.swpu.cins.weike.entity.persistence.TeacherInfo">
 
-        SELECT * FROM TeacherRegisterInfo
+        SELECT * FROM <include refid="registerTable"/>
         WHERE
         username=#{username} limit 1
     </select>
@@ -64,21 +71,21 @@
     <select id="queryEamil" resultType="cn.edu.swpu.cins.weike.entity.persistence.TeacherInfo" parameterType="String">
 
         SELECT * FROM
-        TeacherRegisterInfo
+        <include refid="registerTable"/>
         WHERE
         email=#{email} limit 1
     </select>
 
     <update id="updatePassword" parameterType="String">
 
-        UPDATE TeacherRegisterInfo
+        UPDATE <include refid="registerTable"/>
         SET password=#{password}
         WHERE
         username=#{username}
     </update>
 
     <update id="updateInfo" parameterType="cn.edu.swpu.cins.weike.entity.persistence.TeacherDetail">
-        UPDATE TeacherDetailInfo
+        UPDATE <include refid="detailTable"/>
         SET image=#{image},
         sex=#{sex},
         university=#{university},
@@ -96,7 +103,7 @@
     </select>
 
     <select id="queryForData" resultType="cn.edu.swpu.cins.weike.entity.view.TeacherPersonData" parameterType="String">
-        SELECT * from TeacherDetailInfo
+        SELECT * from <include refid="detailTable"/>
         WHERE username=#{username} limit 1
     </select>
 
