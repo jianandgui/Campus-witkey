@@ -5,21 +5,20 @@
 
 <mapper namespace="cn.edu.swpu.cins.weike.dao.ProjectDao">
 
+
+    <sql id="table">project_info</sql>
+
+    <sql id="selectFields">
+    project_name,project_kind,project_connector,qq,email,num_need,project_need,project_start,project_end,project_profile
+    </sql>
+    <sql id="selectForQuery">
+        project_name,project_profile,project_connector,qq,email
+    </sql>
     <!--新添加一个项目-->
     <insert id="addProject" parameterType="cn.edu.swpu.cins.weike.entity.persistence.ProjectInfo">
 
-    INSERT INTO ProjectInfo
-
-    (projectName,
-    projectKind,
-    projectConnector,
-    qq,
-    email,
-    numNeed,
-    projectNeed,
-    projectStart,
-    projectEnd,
-    projectProfile)
+    INSERT INTO <include refid="table"/>
+        (<include refid="selectFields" />)
     VALUES
     (#{projectName},
     #{projectKind},
@@ -38,12 +37,12 @@
     <!--根据项目名字删除一个项目（管理员权限或发布项目本人）-->
     <delete id="deleteByName" parameterType="String">
 
-      DELETE FROM ProjectInfo where projectName=#{projectName}
+      DELETE FROM ProjectInfo WHERE project_name=#{projectName}
         
     </delete>
 
     <resultMap id="projectResultMap" type="cn.edu.swpu.cins.weike.entity.view.ProjectDetail">
-        <result typeHandler="cn.edu.swpu.cins.weike.typehandler.StringArrayTypeHandler" column="projectNeed" javaType="list"
+        <result typeHandler="cn.edu.swpu.cins.weike.typehandler.StringArrayTypeHandler" column="project_need" javaType="list"
                 jdbcType="VARCHAR"
                 property="projectNeed"/>
     </resultMap>
@@ -53,40 +52,29 @@
             resultMap="projectResultMap">
 
         SELECT
-        projectName,
-        projectKind,
-        projectConnector,
-        qq,
-        email,
-        numNeed,
-        projectNeed,
-        projectStart,
-        projectEnd,
-        projectProfile
-        FROM ProjectInfo where projectName=#{projectName} limit 1
+        <include refid="selectFields"/>
+        FROM
+        <include refid="table"/>
+        WHERE project_name=#{projectName} limit 1
 
     </select>
 
     <select id="queryAll" resultType="cn.edu.swpu.cins.weike.entity.view.ProjectView">
         SELECT
-        projectName,
-        projectProfile,
-        projectConnector,
-        qq,
-        email
-        FROM ProjectInfo
+        <include refid="selectForQuery"/>
+        FROM
+        <include refid="table"/>
         LIMIT #{offset},#{limit};
 
     </select>
 
     <!--首页显示八个项目-->
     <select id="queryForIndex" resultType="cn.edu.swpu.cins.weike.entity.view.ProjectView">
-        SELECT projectName,
-        projectProfile,
-        projectConnector,
-        qq,
-        email
-        FROM ProjectInfo ORDER BY projectStart
+        SELECT
+        <include refid="selectForQuery"/>
+        FROM
+        <include refid="table"/>
+        ORDER BY project_start
         LIMIT 0,16;
 
     </select>
@@ -94,8 +82,8 @@
     <select id="queryByKeywords" resultType="cn.edu.swpu.cins.weike.entity.view.ProjectView">
         SELECT *
         FROM
-        ProjectInfo
-        WHERE projectProfile LIKE "%"#{keywords}"%"
+        <include refid="table"/>
+        WHERE project_profile LIKE "%"#{keywords}"%"
 
     </select>
 

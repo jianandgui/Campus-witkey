@@ -1,6 +1,7 @@
 package cn.edu.swpu.cins.weike.dao;
 
 import cn.edu.swpu.cins.weike.entity.persistence.ProjectInfo;
+import lombok.extern.slf4j.Slf4j;
 import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -19,7 +20,7 @@ import static org.junit.Assert.*;
  */
 @RunWith(SpringRunner.class)
 @SpringBootTest
-@Transactional
+@Slf4j
 public class ProjectDaoTest {
 
     @Autowired
@@ -48,27 +49,32 @@ public class ProjectDaoTest {
 
     @Test
     public void queryAll() throws Exception {
+
         System.out.println(projectDao.queryAll(0,10));
     }
 
     @Test
     public void queryProjectDetail() throws Exception {
+        log.info(projectDao.queryProjectDetail("CINS").toString());
 
     }
 
     @Test
     public void deleteByName() throws Exception {
-
+//        assert(1,projectDao.deleteByName("teste55555"))
+    assertEquals(1,projectDao.deleteByName(57));
     }
+
 
     @Test
     public void queryByKeywords() throws Exception {
 
+        log.info(projectDao.queryByKeywords("Just").toString());
     }
 
     @Test
     public void queryForIndex() throws Exception {
+        log.info(projectDao.queryForIndex().toString());
 
     }
-
 }

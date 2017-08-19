@@ -90,8 +90,8 @@
     </update>
 
     <select id="queryAllProject" parameterType="String" resultType="String">
-        SELECT projectName from ProjectInfo
-        WHERE projectConnector=#{projectConnector}
+        SELECT project_name from project_info
+        WHERE project_connector=#{projectConnector}
 
     </select>
 
