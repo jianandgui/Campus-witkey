@@ -9,7 +9,7 @@
 
       INSERT INTO
       message
-      (fromName,toName,content,createDate,hasRead,projectAbout)
+      (from_name,to_name,content,create_date,has_read,project_about)
       VALUES (#{fromName},#{toName},#{content},#{createDate},#{hasRead},#{projectAbout})
 
 
@@ -26,7 +26,7 @@
     <!--GROUP BY conversationId ORDER BY createDate DESC-->
     <select id="getConversationList" resultType="cn.edu.swpu.cins.weike.entity.persistence.Message" parameterType="String">
 
-        SELECT * from message WHERE fromName=#{userName} OR toName=#{userName} ORDER BY createDate
+        SELECT * from message WHERE from_name=#{userName} OR to_name=#{userName} ORDER BY create_date
 
     </select>
 

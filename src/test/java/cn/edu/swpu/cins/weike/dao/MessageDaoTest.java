@@ -20,7 +20,7 @@ import static org.junit.Assert.*;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest
-
+@Transactional
 public class MessageDaoTest {
 
     @Autowired
@@ -49,28 +49,14 @@ public class MessageDaoTest {
     @Test
     public void getConversationList1() throws Exception {
 
-        System.out.println(messageDao.getConversationList("muyi"));
+        System.out.println(messageDao.getConversationList("test"));
     }
 
     @Test
     public void deleteMessage1() throws Exception {
-        assertEquals(1,messageDao.deleteMessage(5));
+        assertEquals(1,messageDao.deleteMessage(16));
     }
 
-    @Test
-    public void addMessage() throws Exception {
-    }
-
-    @Test
-    public void getConversationDetail() throws Exception {
-    }
-
-    @Test
-    public void getConversationList() throws Exception {
-    }
-
-    @Test
-    public void deleteMessage() throws Exception {
-    }
+   
 
 }
