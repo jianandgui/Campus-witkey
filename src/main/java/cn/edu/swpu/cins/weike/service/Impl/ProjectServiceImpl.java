@@ -6,6 +6,8 @@ import cn.edu.swpu.cins.weike.entity.view.ProjectDetail;
 import cn.edu.swpu.cins.weike.entity.view.ProjectView;
 import cn.edu.swpu.cins.weike.enums.ExceptionEnum;
 import cn.edu.swpu.cins.weike.exception.ProjectException;
+import cn.edu.swpu.cins.weike.exception.StudentException;
+import cn.edu.swpu.cins.weike.exception.TeacherException;
 import cn.edu.swpu.cins.weike.service.ProjectService;
 import cn.edu.swpu.cins.weike.service.StudentService;
 import cn.edu.swpu.cins.weike.service.TeacherService;
@@ -81,7 +83,7 @@ public class ProjectServiceImpl implements ProjectService {
      * @throws ProjectException
      */
     @Override
-    public List<IndexVO> queryForIndex() throws ProjectException {
+    public List<IndexVO> queryForIndex() throws ProjectException{
         try {
             List<ProjectDetail> projectDetails=projectDao.queryForIndex();
             List<IndexVO> indexVOList=projectDetails
@@ -106,19 +108,29 @@ public class ProjectServiceImpl implements ProjectService {
                 indexVO.setFollowNum(proFollowers.size());
                 //项目发布人详细信息
                         String projectConnector = indexVO.getProjectDetails().getProjectConnector();
+                        try {
+                            if (studentService.queryForData(projectConnector) == null) {
+                                indexVO.setPersonData(teacherService.queryForData(projectConnector));
+                            }
+                            else {
+                                indexVO.setPersonData(studentService.queryForData(projectConnector));
+                            }
+                        }
+                        catch (Exception e){
+                            try {
+                                throw new ProjectException(ExceptionEnum.INNER_ERROR.getMsg());
+                            } catch (ProjectException e1) {
+                                e1.printStackTrace();
+                            }
+
+                        }
 
                 return indexVO;
             }).collect(Collectors.toList());
 
-
-//                          .forEach(projectDetail -> {
-//                String proClickNum = RedisKey.getBizProClickNum(projectDetail.getProjectName());
-//                long hitsNum = jedisAdapter.incr(proClickNum);
-//                projectDetail.setProHits(hitsNum);
-//
-//            });
             return indexVOList;
-        } catch (Exception e) {
+        }
+        catch (Exception e) {
             throw new ProjectException(ExceptionEnum.INNER_ERROR.getMsg());
         }
     }
