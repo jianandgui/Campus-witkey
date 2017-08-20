@@ -33,7 +33,7 @@ public interface ProjectDao {
     List<ProjectView> queryByKeywords(String keywords);
 
 
-    List<ProjectView> queryForIndex();
+    List<ProjectDetail> queryForIndex();
 
 
 

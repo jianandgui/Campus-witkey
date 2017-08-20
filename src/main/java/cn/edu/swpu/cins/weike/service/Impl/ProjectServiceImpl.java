@@ -21,6 +21,7 @@ import java.util.stream.Collectors;
  */
 @Service
 public class ProjectServiceImpl implements ProjectService {
+
     private ProjectDao projectDao;
     @Autowired
     JedisAdapter jedisAdapter;
@@ -66,9 +67,16 @@ public class ProjectServiceImpl implements ProjectService {
     }
 
     @Override
-    public List<ProjectView> queryForIndex() throws ProjectException {
+    public List<ProjectDetail> queryForIndex() throws ProjectException {
         try {
-            return projectDao.queryForIndex();
+            List<ProjectDetail> projectDetails=projectDao.queryForIndex();
+            projectDetails.forEach(projectDetail -> {
+                String proClickNum = RedisKey.getBizProClickNum(projectDetail.getProjectName());
+                long hitsNum = jedisAdapter.incr(proClickNum);
+                projectDetail.setProHits(hitsNum);
+
+            });
+            return projectDetails;
         } catch (Exception e) {
             throw new ProjectException(ExceptionEnum.INNER_ERROR.getMsg());
         }

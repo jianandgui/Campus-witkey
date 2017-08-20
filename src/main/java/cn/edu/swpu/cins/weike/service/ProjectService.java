@@ -19,7 +19,7 @@ public interface ProjectService {
 
     List<ProjectView> queryByKeyWords(String keyWords) throws ProjectException;
 
-    List<ProjectView> queryForIndex() throws ProjectException;
+    List<ProjectDetail> queryForIndex() throws ProjectException;
 
     ProApplyInfo queryProApplyInfoByName(String projectName) throws ProjectException;
 

@@ -77,9 +77,9 @@
     </select>
 
     <!--首页显示八个项目-->
-    <select id="queryForIndex" resultType="cn.edu.swpu.cins.weike.entity.view.ProjectView">
+    <select id="queryForIndex" resultType="cn.edu.swpu.cins.weike.entity.view.ProjectDetail">
         SELECT
-          <include refid="selectForQuery"/>
+          <include refid="selectFields"/>
         FROM
           <include refid="table"/>
         ORDER BY project_start

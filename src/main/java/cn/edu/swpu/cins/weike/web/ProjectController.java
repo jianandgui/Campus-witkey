@@ -46,7 +46,7 @@ public class ProjectController {
     @GetMapping("/index")
     public ResultData queryForIndex() {
         try {
-            List<ProjectView> list = projectService.queryForIndex();
+            List<ProjectDetail> list = projectService.queryForIndex();
             return new ResultData(true, list);
         } catch (Exception e) {
             return new ResultData(false, e.getMessage());
