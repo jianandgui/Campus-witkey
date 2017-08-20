@@ -149,6 +149,7 @@ public class StudentServiceImpl implements StudentService {
         try {
             PersonData personData = studentDao.queryPerson(username);
             personData.setEmail(studentDao.selectStudent(username).getEmail());
+            personData.setRole("Student");
             return personData;
         } catch (Exception e) {
             throw new StudentException(ExceptionEnum.INNER_ERROR.getMsg());

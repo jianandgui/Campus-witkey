@@ -20,6 +20,7 @@ public class TeacherPersonData {
     private String rank;
     private long qq;
     private String email;
+    private String role;
 
     public TeacherPersonData(int id, String username, String image, String sex, String university, String academy, String rank, long qq, String email) {
         this.id = id;

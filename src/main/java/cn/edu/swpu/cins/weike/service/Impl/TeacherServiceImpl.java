@@ -115,6 +115,7 @@ public class TeacherServiceImpl implements TeacherService {
         try {
             TeacherPersonData teacherPersonData = teacherDao.queryForData(username);
             teacherPersonData.setEmail(teacherDao.queryByName(username).getEmail());
+            teacherPersonData.setRole("Teacher");
             return teacherPersonData;
         } catch (Exception e) {
             throw new TeacherException(ExceptionEnum.INNER_ERROR.getMsg());

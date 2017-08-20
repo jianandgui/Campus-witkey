@@ -34,8 +34,9 @@ public class PersonData {
     //学生等级
     private String level;
     private String email;
+    private String role;
 
-    public PersonData(int id, String username, String image, String sex, String eduBackgroud, String university, String majorAndGrade, long entryUniversity, long leaveUniversity, long qq, List<String> skills, String experience, String selfFeel, String level, String email) {
+    public PersonData(int id, String username, String image, String sex, String eduBackgroud, String university, String majorAndGrade, long entryUniversity, long leaveUniversity, long qq, List<String> skills, String experience, String selfFeel, String level, String email, String role) {
         this.id = id;
         this.username = username;
         this.image = image;
@@ -51,6 +52,7 @@ public class PersonData {
         this.selfFeel = selfFeel;
         this.level = level;
         this.email = email;
+        this.role = role;
     }
 
     public PersonData() {
