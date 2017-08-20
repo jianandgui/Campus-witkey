@@ -18,7 +18,7 @@ import cn.edu.swpu.cins.weike.dao.ProjectDao;
 import cn.edu.swpu.cins.weike.dao.StudentDao;
 import cn.edu.swpu.cins.weike.entity.persistence.ProjectInfo;
 import cn.edu.swpu.cins.weike.service.StudentService;
-import cn.edu.swpu.cins.weike.util.ReduceRepeate;
+import cn.edu.swpu.cins.weike.util.ReduceRepeat;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -33,7 +33,7 @@ public class StudentServiceImpl implements StudentService {
     private ProjectDao projectDao;
     @Value("${event.service.pageCount}")
     private int pageCount;
-    private ReduceRepeate reduceRepeate;
+    private ReduceRepeat reduceRepeat;
 
     @Autowired
     private JedisAdapter jedisAdapter;
@@ -42,10 +42,10 @@ public class StudentServiceImpl implements StudentService {
     private SensitiveWordsFilter sensitiveWordsFilter;
 
     @Autowired
-    public StudentServiceImpl(StudentDao studentDao, ProjectDao projectDao, ReduceRepeate reduceRepeate) {
+    public StudentServiceImpl(StudentDao studentDao, ProjectDao projectDao, ReduceRepeat reduceRepeat) {
         this.studentDao = studentDao;
         this.projectDao = projectDao;
-        this.reduceRepeate = reduceRepeate;
+        this.reduceRepeat = reduceRepeat;
     }
 
     //学生发布项目
@@ -107,7 +107,7 @@ public class StudentServiceImpl implements StudentService {
     @Override
     public List<ProjectRecommend> queryForReCommod(List<String> skills, String username) throws StudentException {
         try {
-            List<ProjectRecommend> projectRecommends = reduceRepeate.reduceStudentRepeat(skills, username);
+            List<ProjectRecommend> projectRecommends = reduceRepeat.reduceStudentRepeat(skills, username);
             if (projectRecommends.isEmpty()) {
                 throw new StudentException(ProjectEnum.NO_PROJECTS.getMsg());
             }

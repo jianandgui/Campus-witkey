@@ -86,7 +86,7 @@ public class ProjectServiceImpl implements ProjectService {
             proApplyInfo.setApplying(jedisAdapter.smenber(proApplying).stream().collect(Collectors.toList()));
             return proApplyInfo;
         } catch (Exception e) {
-            throw e;
+            throw new ProjectException(ExceptionEnum.INNER_ERROR.getMsg());
         }
     }
 }

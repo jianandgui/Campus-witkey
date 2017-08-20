@@ -7,6 +7,8 @@ import cn.edu.swpu.cins.weike.dao.TeacherDao;
 import cn.edu.swpu.cins.weike.entity.persistence.Message;
 import cn.edu.swpu.cins.weike.entity.persistence.StudentInfo;
 import cn.edu.swpu.cins.weike.entity.view.JoinMessage;
+import cn.edu.swpu.cins.weike.enums.ExceptionEnum;
+import cn.edu.swpu.cins.weike.exception.AuthException;
 import cn.edu.swpu.cins.weike.exception.MessageException;
 import cn.edu.swpu.cins.weike.exception.WeiKeException;
 import cn.edu.swpu.cins.weike.service.JoinProjectService;
@@ -81,8 +83,8 @@ public class JoinProjectServiceImpl implements JoinProjectService {
             jedisAdapter.srem(projectApplyingKey, saver);
             jedisAdapter.sadd(projectApplySuccessKey, saver);
             return messageDao.addMessage(message);
-        } catch (WeiKeException e) {
-            throw e;
+        } catch (Exception e) {
+            throw new AuthException(ExceptionEnum.INNER_ERROR.getMsg());
         }
     }
 
@@ -107,8 +109,8 @@ public class JoinProjectServiceImpl implements JoinProjectService {
             jedisAdapter.sadd(joinProjectFailedKey, projectName);
             jedisAdapter.srem(projectApplyingKey, saver);
             jedisAdapter.sadd(projectApplyFailKey, saver);
-        } catch (WeiKeException e) {
-            throw e;
+        } catch (Exception e) {
+            throw new AuthException(ExceptionEnum.INNER_ERROR.getMsg());
         }
     }
 }

@@ -12,21 +12,19 @@ import javax.annotation.Resource;
 import java.util.ArrayList;
 import java.util.List;
 
-import static org.junit.Assert.*;
-
 /**
  * Created by muyi on 17-7-20.
  */
 @RunWith(SpringRunner.class)
 @SpringBootTest
-public class ReduceRepeateTest {
+public class ReduceRepeatTest {
 
     @Autowired
     private StudentDao studentDao;
 
 
     @Resource
-    private ReduceRepeate reduceRepeate;
+    private ReduceRepeat reduceRepeat;
 
     @Test
     public void reduceStudentRepeate() throws Exception {

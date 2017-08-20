@@ -4,13 +4,17 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="cn.edu.swpu.cins.weike.dao.MessageDao">
 
+    <sql id="allFields">
+        id,from_name,to_name,content,create_date,has_read,project_about
+    </sql>
 
     <insert id="addMessage" parameterType="cn.edu.swpu.cins.weike.entity.persistence.Message">
 
       INSERT INTO
-      message
-      (from_name,to_name,content,create_date,has_read,project_about)
-      VALUES (#{fromName},#{toName},#{content},#{createDate},#{hasRead},#{projectAbout})
+        message
+        (from_name,to_name,content,create_date,has_read,project_about)
+      VALUES
+        (#{fromName},#{toName},#{content},#{createDate},#{hasRead},#{projectAbout})
 
 
     </insert>
@@ -26,11 +30,19 @@
     <!--GROUP BY conversationId ORDER BY createDate DESC-->
     <select id="getConversationList" resultType="cn.edu.swpu.cins.weike.entity.persistence.Message" parameterType="String">
 
-        SELECT * from message WHERE from_name=#{userName} OR to_name=#{userName} ORDER BY create_date
+        SELECT
+          <include refid="allFields"/>
+        from
+          message
+        WHERE
+         from_name=#{userName} OR to_name=#{userName} ORDER BY create_date
 
     </select>
 
     <delete id="deleteMessage" parameterType="int">
-        DELETE FROM message where id=#{id}
+        DELETE FROM
+          message
+        where
+          id=#{id}
     </delete>
 </mapper>

@@ -16,7 +16,7 @@ import java.util.stream.Collectors;
  */
 
 @Component
-public class ReduceRepeate {
+public class ReduceRepeat {
 
 
     //用来去出查询时的重复

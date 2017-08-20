@@ -1,5 +1,7 @@
 package cn.edu.swpu.cins.weike.service.Impl;
 
+import cn.edu.swpu.cins.weike.enums.ExceptionEnum;
+import cn.edu.swpu.cins.weike.exception.AuthException;
 import cn.edu.swpu.cins.weike.service.MailService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -67,7 +69,7 @@ public class MailServiceImpl implements MailService {
             sender.send(message);
             return verifyCode;
         } catch (Exception e) {
-            throw e;
+            throw new AuthException(ExceptionEnum.INNER_ERROR.getMsg());
         }
     }
 
@@ -83,7 +85,7 @@ public class MailServiceImpl implements MailService {
             sender.send(message);
             return verifyCode;
         } catch (Exception e) {
-            throw e;
+            throw new AuthException(ExceptionEnum.INNER_ERROR.getMsg());
         }
     }
 
@@ -97,7 +99,7 @@ public class MailServiceImpl implements MailService {
         try {
             sender.send(message);
         } catch (Exception e) {
-            throw e;
+            throw new AuthException(ExceptionEnum.INNER_ERROR.getMsg());
         }
     }
 
@@ -111,7 +113,7 @@ public class MailServiceImpl implements MailService {
         try {
             sender.send(message);
         } catch (Exception e) {
-            throw e;
+            throw new AuthException(ExceptionEnum.INNER_ERROR.getMsg());
         }
     }
 

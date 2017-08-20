@@ -78,7 +78,7 @@ public class AuthController {
         //将验证码以<key,value>形式缓存到redis
         jedisAdapter.setex(uuid, captchaExpires, captcha.getAnswer());
         //将验证码key，及验证码的图片返回
-        response.addHeader("captchaCode", uuid);
+        response.addHeader("captcha-code", uuid);
         ByteArrayOutputStream bao = new ByteArrayOutputStream();
         try {
             ImageIO.write(captcha.getImage(), "png", bao);
@@ -97,7 +97,7 @@ public class AuthController {
      */
     @RequestMapping(value = "/student/login", method = RequestMethod.POST)
     public ResultData createStudentAuthenticationToken(
-            @RequestBody JwtAuthenticationRequest authenticationRequest, @RequestHeader("captchaCode") String captchaCode) {
+            @RequestBody JwtAuthenticationRequest authenticationRequest, @RequestHeader("captcha-code") String captchaCode) {
         try {
             JwtAuthenticationResponse response = authService.studentLogin(authenticationRequest, captchaCode);
             return new ResultData(true, response);
@@ -115,7 +115,7 @@ public class AuthController {
      */
     @RequestMapping(value = "/teacher/login", method = RequestMethod.POST)
     public ResultData createTeacherAuthenticationToken(
-            @RequestBody JwtAuthenticationRequest authenticationRequest, @RequestHeader("captchaCode") String captchaCode) {
+            @RequestBody JwtAuthenticationRequest authenticationRequest, @RequestHeader("captcha-code") String captchaCode) {
         try {
             // Return the token
             JwtAuthenticationResponse response = authService.teacherLogin(authenticationRequest, captchaCode);

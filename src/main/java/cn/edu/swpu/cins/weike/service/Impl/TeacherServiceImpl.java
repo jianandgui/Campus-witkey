@@ -5,7 +5,6 @@ import cn.edu.swpu.cins.weike.entity.persistence.ProjectInfo;
 import cn.edu.swpu.cins.weike.entity.persistence.TeacherDetail;
 import cn.edu.swpu.cins.weike.entity.persistence.TeacherInfo;
 import cn.edu.swpu.cins.weike.entity.view.ProjectRecommend;
-import cn.edu.swpu.cins.weike.entity.view.ResultData;
 import cn.edu.swpu.cins.weike.entity.view.TeacherPersonData;
 import cn.edu.swpu.cins.weike.enums.ExceptionEnum;
 import cn.edu.swpu.cins.weike.enums.ProjectEnum;
@@ -16,7 +15,7 @@ import org.springframework.stereotype.Service;
 import cn.edu.swpu.cins.weike.dao.ProjectDao;
 import cn.edu.swpu.cins.weike.dao.TeacherDao;
 import cn.edu.swpu.cins.weike.service.TeacherService;
-import cn.edu.swpu.cins.weike.util.ReduceRepeate;
+import cn.edu.swpu.cins.weike.util.ReduceRepeat;
 
 import java.util.List;
 
@@ -29,14 +28,14 @@ public class TeacherServiceImpl implements TeacherService {
     private TeacherDao teacherDao;
     private ProjectDao projectDao;
     private StudentDao studentDao;
-    private ReduceRepeate reduceRepeate;
+    private ReduceRepeat reduceRepeat;
 
     @Autowired
-    public TeacherServiceImpl(TeacherDao teacherDao, ProjectDao projectDao, StudentDao studentDao, ReduceRepeate reduceRepeate) {
+    public TeacherServiceImpl(TeacherDao teacherDao, ProjectDao projectDao, StudentDao studentDao, ReduceRepeat reduceRepeat) {
         this.teacherDao = teacherDao;
         this.projectDao = projectDao;
         this.studentDao = studentDao;
-        this.reduceRepeate = reduceRepeate;
+        this.reduceRepeat = reduceRepeat;
     }
 
     @Override
@@ -80,7 +79,7 @@ public class TeacherServiceImpl implements TeacherService {
     @Override
     public List<ProjectRecommend> queryStudentForReCommod(List<String> skills, String username) throws TeacherException {
         try {
-            return reduceRepeate.reduceStudentRepeat(skills, username);
+            return reduceRepeat.reduceStudentRepeat(skills, username);
         } catch (Exception e) {
             throw new TeacherException(ExceptionEnum.INNER_ERROR.getMsg());
         }

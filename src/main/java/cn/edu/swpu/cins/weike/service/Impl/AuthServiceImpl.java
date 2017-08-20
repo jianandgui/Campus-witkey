@@ -80,9 +80,9 @@ public class AuthServiceImpl implements AuthService {
                     }
                     throw new AuthException(RegisterEnum.FAIL_SAVE.getMessage());
                 }
-                throw new AuthException("验证码错误");
+                throw new AuthException(VerifyCodeEnum.CODE_ERROR.getMsg());
             }
-            throw new AuthException("请重新获取验证码");
+            throw new AuthException(VerifyCodeEnum.GET_CODE_AGAIN.getMsg());
         } catch (Exception e) {
             throw new AuthException(ExceptionEnum.INNER_ERROR.getMsg());
         }
@@ -94,12 +94,12 @@ public class AuthServiceImpl implements AuthService {
         UsernamePasswordAuthenticationToken upToken = new UsernamePasswordAuthenticationToken(authenticationRequest.getUsername(), authenticationRequest.getPassword());
         try {
             String loginKey = captchaCode;
-            if (jedisAdapter.exists(loginKey)) {
-                throw new AuthException("请重新获取验证码");
+            if (!jedisAdapter.exists(loginKey)) {
+                throw new AuthException(VerifyCodeEnum.GET_CODE_AGAIN.getMsg());
             }
             String code = jedisAdapter.get(loginKey);
             if (!code.equals(authenticationRequest.getVerifyCode())) {
-                throw new AuthException("请重新输入验证码");
+                throw new AuthException(VerifyCodeEnum.CODE_ERROR.getMsg());
             }
             StudentInfo studentInfo = studentDao.selectStudent(authenticationRequest.getUsername());
 
@@ -184,12 +184,12 @@ public class AuthServiceImpl implements AuthService {
         UsernamePasswordAuthenticationToken upToken = new UsernamePasswordAuthenticationToken(authenticationRequest.getUsername(), authenticationRequest.getPassword());
         try {
             String loginKey = captchaCode;
-            if (jedisAdapter.exists(loginKey)) {
+            if (!jedisAdapter.exists(loginKey)) {
                 throw new AuthException(VerifyCodeEnum.GET_CODE_AGAIN.getMsg());
             }
             String code = jedisAdapter.get(loginKey);
             if (!code.equals(authenticationRequest.getVerifyCode())) {
-                throw new AuthException(VerifyCodeEnum.GET_CODE_AGAIN.getMsg());
+                throw new AuthException(VerifyCodeEnum.CODE_ERROR.getMsg());
             }
 
             TeacherDetail teacherDetail = teacherDao.queryForPhone(authenticationRequest.getUsername());
@@ -267,12 +267,13 @@ public class AuthServiceImpl implements AuthService {
      */
     public int updateUtils(UpdatePassword updatePassword, String role) throws AuthException {
         try {
+
             String username = updatePassword.getUsername();
             String redisKey = RedisKey.getBizFindPassword(username);
             if (jedisAdapter.exists(redisKey)) {
                 if (jedisAdapter.get(redisKey).equals(updatePassword.getVerifyCode())) {
                     if (role.equals("student")) {
-                        if (studentDao.updatePassword(username, updatePassword.getPassword()) != 1) {
+                        if (studentDao.updatePassword(username, UpdatePwd.updatePwd(updatePassword.getPassword())) != 1) {
                             throw new AuthException(UpdatePwdEnum.UPDATE_PWD_WRONG.getMsg());
                         }
                         return 1;
