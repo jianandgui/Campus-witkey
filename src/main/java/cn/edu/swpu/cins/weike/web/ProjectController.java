@@ -1,5 +1,6 @@
 package cn.edu.swpu.cins.weike.web;
 
+import cn.edu.swpu.cins.weike.entity.view.IndexVO;
 import cn.edu.swpu.cins.weike.entity.view.ProjectDetail;
 import cn.edu.swpu.cins.weike.entity.view.ResultData;
 import cn.edu.swpu.cins.weike.enums.ProjectEnum;
@@ -39,15 +40,15 @@ public class ProjectController {
     }
 
     /**
-     * 首页显示项目
+     * 首页显示项目详情 发布人详情 项目关注人 人数和成功通过申请人数
      *
      * @return
      */
     @GetMapping("/index")
     public ResultData queryForIndex() {
         try {
-            List<ProjectDetail> list = projectService.queryForIndex();
-            return new ResultData(true, list);
+            List<IndexVO> indexVOList= projectService.queryForIndex();
+            return new ResultData(true, indexVOList);
         } catch (Exception e) {
             return new ResultData(false, e.getMessage());
         }

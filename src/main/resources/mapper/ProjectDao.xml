@@ -77,12 +77,13 @@
     </select>
 
     <!--首页显示八个项目-->
-    <select id="queryForIndex" resultType="cn.edu.swpu.cins.weike.entity.view.ProjectDetail">
+    <select id="queryForIndex" resultMap="projectResultMap">
         SELECT
           <include refid="selectFields"/>
         FROM
           <include refid="table"/>
         ORDER BY project_start
+--         WHERE project_connector='manong'
         LIMIT 0,16;
 
     </select>

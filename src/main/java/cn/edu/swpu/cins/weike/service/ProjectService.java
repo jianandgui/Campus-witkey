@@ -1,5 +1,6 @@
 package cn.edu.swpu.cins.weike.service;
 
+import cn.edu.swpu.cins.weike.entity.view.IndexVO;
 import cn.edu.swpu.cins.weike.entity.view.ProApplyInfo;
 import cn.edu.swpu.cins.weike.entity.view.ProjectDetail;
 import cn.edu.swpu.cins.weike.entity.view.ProjectView;
@@ -19,7 +20,7 @@ public interface ProjectService {
 
     List<ProjectView> queryByKeyWords(String keyWords) throws ProjectException;
 
-    List<ProjectDetail> queryForIndex() throws ProjectException;
+    List<IndexVO>  queryForIndex() throws ProjectException;
 
     ProApplyInfo queryProApplyInfoByName(String projectName) throws ProjectException;
 
