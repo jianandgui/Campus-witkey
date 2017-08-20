@@ -3,7 +3,9 @@ package cn.edu.swpu.cins.weike.web;
 import cn.edu.swpu.cins.weike.config.filter.JwtTokenUtil;
 import cn.edu.swpu.cins.weike.entity.persistence.Message;
 import cn.edu.swpu.cins.weike.entity.view.*;
+import cn.edu.swpu.cins.weike.enums.JoinProEnum;
 import cn.edu.swpu.cins.weike.enums.MessageEnum;
+import cn.edu.swpu.cins.weike.enums.ProjectEnum;
 import cn.edu.swpu.cins.weike.service.JoinProjectService;
 import cn.edu.swpu.cins.weike.service.MailService;
 import cn.edu.swpu.cins.weike.service.MessageService;
@@ -30,20 +32,16 @@ public class MessageController {
 
     private String tokenHead;
     private MessageService messageService;
-    private JwtTokenUtil jwtTokenUtil;
     private GetUsrName getUsrName;
-    private MailService service;
 
     @Autowired
     JoinProjectService joinProjectService;
 
 
     @Autowired
-    public MessageController(MessageService messageService, JwtTokenUtil jwtTokenUtil, GetUsrName getUsrName, MailService service) {
+    public MessageController(MessageService messageService, GetUsrName getUsrName) {
         this.messageService = messageService;
-        this.jwtTokenUtil = jwtTokenUtil;
         this.getUsrName = getUsrName;
-        this.service = service;
     }
 
     /**
@@ -76,9 +74,9 @@ public class MessageController {
     public ResultData acceptJoin(@RequestBody JoinMessage joinMessage, HttpServletRequest request) {
         try {
             joinProjectService.acceptJoin(joinMessage, request);
-            return new ResultData(true);
+            return new ResultData(true,JoinProEnum.ACCEPT_SUCCESS.getMsg());
         } catch (Exception e) {
-            return new ResultData(false, "服务器内部异常");
+            return new ResultData(false, e.getMessage());
         }
     }
 
@@ -87,9 +85,9 @@ public class MessageController {
     public ResultData refuseJoin(@RequestBody JoinMessage joinMessage, HttpServletRequest request) {
         try {
             joinProjectService.refuseJoin(joinMessage, request);
-            return new ResultData(true, "拒绝申请成功");
+            return new ResultData(true, JoinProEnum.REFUCE_SUCCESS.getMsg());
         } catch (Exception e) {
-            return new ResultData(false, "服务器内部异常");
+            return new ResultData(false, e.getMessage());
         }
     }
 
@@ -130,7 +128,7 @@ public class MessageController {
     public ResultData deleteMessage(@RequestBody MessageDelete id) {
         try {
             messageService.deleteMessage(id.getId());
-            return new ResultData(true, "信息删除成功");
+            return new ResultData(true, MessageEnum.MSG_DELETE.getMsg());
         } catch (Exception e) {
             return new ResultData(false, e.getMessage());
         }
@@ -147,7 +145,7 @@ public class MessageController {
     public ResultData attentionPro(@RequestBody FollowPro followPro, HttpServletRequest request) {
         try {
             messageService.followPro(followPro.getProjectName(), getUsrName.AllProjects(request), followPro.getProjectConnector());
-            return new ResultData(true, "关注项目成功");
+            return new ResultData(true, ProjectEnum.FOLLOW_PRO_SUCCESS.getMsg());
         } catch (Exception e) {
             return new ResultData(false, e.getMessage());
         }
@@ -157,7 +155,7 @@ public class MessageController {
     public ResultData unAttentionPro(@RequestBody FollowPro followPro, HttpServletRequest request) {
         try {
             messageService.unFollowPro(followPro.getProjectName(), getUsrName.AllProjects(request), followPro.getProjectConnector());
-            return new ResultData(true, "取消关注项目成功");
+            return new ResultData(true, ProjectEnum.FOLLOW_PRO_FAILD.getMsg());
         } catch (Exception e) {
             return new ResultData(false, e.getMessage());
         }

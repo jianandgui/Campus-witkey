@@ -161,7 +161,7 @@ public class StudentController {
         try {
             return new ResultData(true, projectService.queryProApplyInfoByName(projectName));
         } catch (Exception e) {
-            return new ResultData(false, "服务器内部异常，操作失败");
+            return new ResultData(false, e.getMessage());
         }
     }
 }

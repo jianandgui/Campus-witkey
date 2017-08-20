@@ -7,6 +7,7 @@ public enum UpdatePwdEnum {
     NO_USER("没有该用户的信息"),
     WRONG_EMALI("非本人邮箱"),
     UPDATE_PWD_WRONG("密码修改失败"),
+    MAIL_SEND_SUCCESS("邮件发送成功"),
     UPDATE_PWD_SUCCESS("密码修改成功");
 
     private String msg;

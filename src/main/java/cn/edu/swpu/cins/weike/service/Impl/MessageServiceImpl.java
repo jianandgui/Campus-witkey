@@ -13,6 +13,7 @@ import cn.edu.swpu.cins.weike.entity.persistence.StudentInfo;
 import cn.edu.swpu.cins.weike.entity.persistence.TeacherDetail;
 import cn.edu.swpu.cins.weike.entity.view.MessageList;
 import cn.edu.swpu.cins.weike.enums.ExceptionEnum;
+import cn.edu.swpu.cins.weike.enums.MessageEnum;
 import cn.edu.swpu.cins.weike.exception.MessageException;
 import cn.edu.swpu.cins.weike.service.MailService;
 import cn.edu.swpu.cins.weike.service.MessageService;
@@ -96,7 +97,7 @@ public class MessageServiceImpl implements MessageService {
 
             int num = messageDao.addMessage(message);
             if (num != 1) {
-                throw new MessageException("发送信息失败");
+                throw new MessageException(MessageEnum.SEND_MESSAGE_FAILD.getMsg());
             }
             //申请项目
             String joiningProjectKey = RedisKey.getBizApplyingPro(sender);

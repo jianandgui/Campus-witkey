@@ -5,6 +5,7 @@ package cn.edu.swpu.cins.weike.enums;
  */
 public enum LoginEnum {
 
+    ERROR_LOGIN("用户名或密码错误"),
     NO_USER("没有该用户信息，请确认信息后登录");
 
     private String message;

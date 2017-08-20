@@ -7,9 +7,7 @@ import cn.edu.swpu.cins.weike.config.filter.JwtTokenUtil;
 import cn.edu.swpu.cins.weike.dao.StudentDao;
 import cn.edu.swpu.cins.weike.entity.persistence.*;
 import cn.edu.swpu.cins.weike.entity.view.*;
-import cn.edu.swpu.cins.weike.enums.ExceptionEnum;
-import cn.edu.swpu.cins.weike.enums.RegisterEnum;
-import cn.edu.swpu.cins.weike.enums.UpdatePwdEnum;
+import cn.edu.swpu.cins.weike.enums.*;
 import cn.edu.swpu.cins.weike.exception.AuthException;
 import cn.edu.swpu.cins.weike.util.JedisAdapter;
 import cn.edu.swpu.cins.weike.util.RedisKey;
@@ -106,7 +104,7 @@ public class AuthServiceImpl implements AuthService {
             StudentInfo studentInfo = studentDao.selectStudent(authenticationRequest.getUsername());
 
             if (studentInfo == null) {
-                throw new AuthException("没有该用户");
+                throw new AuthException(LoginEnum.NO_USER.getMessage());
             }
             StudentDetail studentDetail = studentDao.queryForStudentPhone(authenticationRequest.getUsername());
             JoinProject joinProject = loginUtils(authenticationRequest);
@@ -154,9 +152,9 @@ public class AuthServiceImpl implements AuthService {
                     }
                     throw new AuthException(RegisterEnum.FAIL_SAVE.getMessage());
                 }
-                throw new AuthException("验证码错误");
+                throw new AuthException(VerifyCodeEnum.CODE_ERROR.getMsg());
             }
-            throw new AuthException("请重新获取验证码");
+            throw new AuthException(VerifyCodeEnum.GET_CODE_AGAIN.getMsg());
         } catch (Exception e) {
             throw e;
         }
@@ -187,17 +185,17 @@ public class AuthServiceImpl implements AuthService {
         try {
             String loginKey = captchaCode;
             if (jedisAdapter.exists(loginKey)) {
-                throw new AuthException("请重新获取验证码");
+                throw new AuthException(VerifyCodeEnum.GET_CODE_AGAIN.getMsg());
             }
             String code = jedisAdapter.get(loginKey);
             if (!code.equals(authenticationRequest.getVerifyCode())) {
-                throw new AuthException("请重新输入验证码");
+                throw new AuthException(VerifyCodeEnum.GET_CODE_AGAIN.getMsg());
             }
 
             TeacherDetail teacherDetail = teacherDao.queryForPhone(authenticationRequest.getUsername());
             TeacherInfo teacherInfo = teacherDao.queryByName(authenticationRequest.getUsername());
             if (teacherInfo == null) {
-                throw new AuthException("没有该用户，请确认后登录");
+                throw new AuthException(LoginEnum.NO_USER.getMessage());
             }
             JoinProject joinProject = loginUtils(authenticationRequest);
             joinProject.setReleased(teacherDao.queryAllProject(authenticationRequest.getUsername()));
@@ -239,7 +237,7 @@ public class AuthServiceImpl implements AuthService {
             return token;
         } catch (Exception e) {
 
-            throw new AuthException("获取token失败");
+            throw new AuthException(LoginEnum.ERROR_LOGIN.getMessage());
         }
     }
 
@@ -285,9 +283,9 @@ public class AuthServiceImpl implements AuthService {
                         return 1;
                     }
                 }
-                throw new AuthException("验证码错误");
+                throw new AuthException(VerifyCodeEnum.CODE_ERROR.getMsg());
             }
-            throw new AuthException("请重新获取验证码");
+            throw new AuthException(VerifyCodeEnum.GET_CODE_AGAIN.getMsg());
         } catch (Exception e) {
             throw e;
         }
@@ -330,7 +328,7 @@ public class AuthServiceImpl implements AuthService {
             adminInfo.setRole("ROLE_ADMIN");
             return adminDao.addAdmin(adminInfo) == 0 ? null : adminInfo;
         } catch (Exception e) {
-            throw new AuthException("数据库异常");
+            throw new AuthException(ExceptionEnum.INNER_ERROR.getMsg());
         }
     }
 
@@ -388,7 +386,7 @@ public class AuthServiceImpl implements AuthService {
                     break;
 
                 default:
-                    throw new AuthException("服务器内部异常");
+                    throw new AuthException(ExceptionEnum.INNER_ERROR.getMsg());
             }
 
         } catch (Exception e) {
@@ -423,7 +421,6 @@ public class AuthServiceImpl implements AuthService {
             if (!email.equals(teacherinfo.getEmail())) {
                 throw new AuthException(UpdatePwdEnum.WRONG_EMALI.getMsg());
             }
-            //return new ResultData(true, mailService.sendMailForUpdatePwd(teacherinfo.getEmail()));
             eventProducerUtils(username, email, "findPwd");
         } catch (Exception e) {
             throw e;

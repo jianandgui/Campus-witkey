@@ -137,7 +137,7 @@ public class AuthController {
     public ResultData studentGetVerifyCode(@RequestParam String username, @RequestParam String email) {
         try {
             authService.studentGetVerifyCodeForRegister(username, email);
-            return new ResultData<StudentInfo>(true, "请到您的邮箱查看验证码");
+            return new ResultData<StudentInfo>(true, RegisterEnum.MAIL_CODE.getMessage());
         } catch (Exception e) {
             return new ResultData(false, e.getMessage());
         }
@@ -155,7 +155,7 @@ public class AuthController {
     public ResultData teacherGetVerifyCode(@RequestParam String username, @RequestParam String email) {
         try {
             authService.teacherGetVerifyCodeForRegister(username, email);
-            return new ResultData<StudentInfo>(true, "请到您的邮箱查看验证码");
+            return new ResultData<StudentInfo>(true, RegisterEnum.MAIL_CODE.getMessage());
         } catch (Exception e) {
             return new ResultData(false, e.getMessage());
         }
@@ -194,7 +194,7 @@ public class AuthController {
     public ResultData studentGetVerifyForUpdate(@RequestParam String username, @RequestParam String email) {
         try {
             authService.studentGetVerifyCodeForFindPassword(username, email);
-            return new ResultData(true, "邮件发送成功");
+            return new ResultData(true, UpdatePwdEnum.MAIL_SEND_SUCCESS.getMsg());
         } catch (Exception e) {
             return new ResultData(false, e.getMessage());
         }
@@ -205,7 +205,7 @@ public class AuthController {
     public ResultData teacherGetVerifyForUpdatePassword(@RequestParam String username, @RequestParam String email) {
         try {
             authService.teacherGetVerifyCodeForFindPassword(username, email);
-            return new ResultData(true, "邮件发送成功");
+            return new ResultData(true, UpdatePwdEnum.MAIL_SEND_SUCCESS.getMsg());
         } catch (Exception e) {
             return new ResultData(false, e.getMessage());
         }

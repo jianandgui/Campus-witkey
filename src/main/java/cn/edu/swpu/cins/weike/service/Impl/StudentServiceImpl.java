@@ -4,6 +4,7 @@ import cn.edu.swpu.cins.weike.entity.persistence.StudentDetail;
 import cn.edu.swpu.cins.weike.entity.persistence.StudentInfo;
 import cn.edu.swpu.cins.weike.entity.view.PersonData;
 import cn.edu.swpu.cins.weike.entity.view.ProjectRecommend;
+import cn.edu.swpu.cins.weike.enums.ExceptionEnum;
 import cn.edu.swpu.cins.weike.enums.ProjectEnum;
 import cn.edu.swpu.cins.weike.enums.UserEnum;
 import cn.edu.swpu.cins.weike.exception.StudentException;
@@ -98,7 +99,7 @@ public class StudentServiceImpl implements StudentService {
             } else
                 throw new StudentException(UserEnum.REPEATE_ADD.getMsg());
         } catch (Exception e) {
-            throw new StudentException("数据库学生添加个人信息异常");
+            throw new StudentException(ExceptionEnum.INNER_ERROR.getMsg());
         }
     }
 
@@ -112,7 +113,7 @@ public class StudentServiceImpl implements StudentService {
             }
             return projectRecommends;
         } catch (Exception e) {
-            throw new StudentException("数据库学生发布项目推荐人选异常");
+            throw new StudentException(ExceptionEnum.INNER_ERROR.getMsg());
         }
     }
 
@@ -126,7 +127,7 @@ public class StudentServiceImpl implements StudentService {
             }
             return num;
         } catch (Exception e) {
-            throw new StudentException("服务器异常！");
+            throw new StudentException(ExceptionEnum.INNER_ERROR.getMsg());
         }
     }
 
@@ -139,7 +140,7 @@ public class StudentServiceImpl implements StudentService {
             }
             return list;
         } catch (Exception e) {
-            throw new StudentException("服务器异常");
+            throw new StudentException(ExceptionEnum.INNER_ERROR.getMsg());
         }
     }
 
@@ -150,7 +151,7 @@ public class StudentServiceImpl implements StudentService {
             personData.setEmail(studentDao.selectStudent(username).getEmail());
             return personData;
         } catch (Exception e) {
-            throw new StudentException("服务器异常");
+            throw new StudentException(ExceptionEnum.INNER_ERROR.getMsg());
         }
     }
 
@@ -160,7 +161,7 @@ public class StudentServiceImpl implements StudentService {
         try {
             return jedisAdapter.smenber(projectFollowerKey).stream().collect(Collectors.toList());
         } catch (Exception e) {
-            throw e;
+            throw new StudentException(ExceptionEnum.INNER_ERROR.getMsg());
         }
     }
 }

@@ -8,7 +8,8 @@ public enum ProjectEnum {
     NO_SUITBLE_PERSON("很遗憾，没有为您的项目匹配到合适的人"),
     PUBLISH_PROJECT_FAILD("发布项目失败"),
     REPEATE_PROJECT("请不要重复发布项目"),
-    ADD_PERSONNAL("个人信息未填完整");
+    FOLLOW_PRO_FAILD("取消关注项目成功"),
+    FOLLOW_PRO_SUCCESS("关注项目成功");
     private String msg;
 
     ProjectEnum(String msg) {
