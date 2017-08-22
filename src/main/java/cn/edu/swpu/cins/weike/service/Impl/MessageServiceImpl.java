@@ -162,11 +162,17 @@ public class MessageServiceImpl implements MessageService {
         Message message = new Message();
         message.setToName(toName);
         message.setHasRead(0);
+        message.setToName("系统消息");
         message.setFromName(username);
         message.setCreateDate(new Date());
         message.setProjectAbout(projectName);
         message.setContent("尊敬的" + toName + "你好，" + username + "关注了你的项目 : " + projectName + "去看看吧！");
         try {
+            /*eventProducer.fireEvent(new EventModel(EventType.MAIL)
+                    .setExts("email",)
+                    .setExts("username",)
+                    .setExts("projectName",)
+                    .setExts("status"))*/
             messageDao.addMessage(message);
             jedisAdapter.sadd(followProKey, projectName);
             jedisAdapter.sadd(proFollower, username);
