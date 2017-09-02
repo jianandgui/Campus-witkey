@@ -18,12 +18,15 @@ import cn.edu.swpu.cins.weike.dao.StudentDao;
 import cn.edu.swpu.cins.weike.dao.TeacherDao;
 import cn.edu.swpu.cins.weike.enums.RegisterEnum;
 import cn.edu.swpu.cins.weike.service.AuthService;
+import sun.misc.BASE64Encoder;
 
 import javax.imageio.ImageIO;
 import javax.servlet.http.HttpServletResponse;
 import java.awt.*;
+import java.beans.Encoder;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
+import java.util.Base64;
 import java.util.UUID;
 
 
@@ -66,8 +69,11 @@ public class AuthController {
      *
      * @return
      */
-    @GetMapping(value = "/getVerifyCode", produces = MediaType.IMAGE_PNG_VALUE)
-    public byte[] getVerifyCodeForLogin(HttpServletResponse response) {
+    //, produces = MediaType.IMAGE_PNG_VALUE
+    @GetMapping(value = "/getVerifyCode")
+    public void getVerifyCodeForLogin(HttpServletResponse response) {
+
+        BASE64Encoder encoder = new BASE64Encoder();
 
         String uuid = UUID.randomUUID().toString();
         Captcha captcha = new Captcha.Builder(captchaW, captchaH)
@@ -82,9 +88,13 @@ public class AuthController {
         ByteArrayOutputStream bao = new ByteArrayOutputStream();
         try {
             ImageIO.write(captcha.getImage(), "png", bao);
-            return bao.toByteArray();
+
+            byte[] bytes = bao.toByteArray();
+            String result = encoder.encode(bytes);
+            response.getWriter().write(result);
+//            return encoder.;
         } catch (IOException e) {
-            return null;
+//            return null;
         }
     }
 
