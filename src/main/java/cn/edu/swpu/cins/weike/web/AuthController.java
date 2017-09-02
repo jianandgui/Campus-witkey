@@ -71,7 +71,7 @@ public class AuthController {
      */
     //, produces = MediaType.IMAGE_PNG_VALUE
     @GetMapping(value = "/getVerifyCode")
-    public void getVerifyCodeForLogin(HttpServletResponse response) {
+    public ResultData getVerifyCodeForLogin(HttpServletResponse response) {
 
         BASE64Encoder encoder = new BASE64Encoder();
 
@@ -92,9 +92,9 @@ public class AuthController {
             byte[] bytes = bao.toByteArray();
             String result = encoder.encode(bytes);
             response.getWriter().write(result);
-//            return encoder.;
+            return new ResultData(true,result);
         } catch (IOException e) {
-//            return null;
+            return null;
         }
     }
 
