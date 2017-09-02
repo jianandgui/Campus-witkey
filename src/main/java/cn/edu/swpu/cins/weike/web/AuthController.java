@@ -91,7 +91,7 @@ public class AuthController {
 
             byte[] bytes = bao.toByteArray();
             String result = encoder.encode(bytes);
-            response.getWriter().write(result);
+//            response.getWriter().write(result);
             return new ResultData(true,result);
         } catch (IOException e) {
             return null;
