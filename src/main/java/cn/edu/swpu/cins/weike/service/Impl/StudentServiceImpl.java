@@ -76,7 +76,7 @@ public class StudentServiceImpl implements StudentService {
     @Override
     public int addPersonal(StudentDetail studentDetail, String username) throws StudentException {
         int rate = studentDetail.getSkills().toArray().length;
-        if (rate == 2 || rate == 0) {
+        if (rate == 2 || rate == 0 ||rate ==1) {
             studentDetail.setLevel("D");
         }
         if (rate == 3) {

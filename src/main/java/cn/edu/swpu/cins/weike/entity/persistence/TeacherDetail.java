@@ -21,6 +21,7 @@ public class TeacherDetail {
     //老师职称
     private String rank;
     private long qq;
+
     public String getImage() {
         return image;
     }

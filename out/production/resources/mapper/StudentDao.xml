@@ -61,8 +61,8 @@
         (<include refid="selectFields"/>)
     VALUES
         (#{username},
-        #{image},
         #{sex},
+        #{image},
         #{eduBackgroud},
         #{university},
         #{majorAndGrade},
