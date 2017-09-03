@@ -89,7 +89,7 @@ public class StudentController {
      * @return
      */
     @PostMapping("/addPersonalDeail")
-    public ResultData addPersonalDetail(@RequestBody StudentDetail studentDetail, HttpServletRequest request) {
+    public ResultData addPersonalDetail(@RequestBody StudentDetail studentDetail, HttpServletRequest request){
         try {
             String username = getUsrName.AllProjects(request);
             studentService.addPersonal(studentDetail, username);
