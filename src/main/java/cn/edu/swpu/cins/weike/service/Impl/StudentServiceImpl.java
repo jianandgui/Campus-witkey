@@ -98,8 +98,8 @@ public class StudentServiceImpl implements StudentService {
                 throw new StudentException(UserEnum.ADD_PERSONAL_FAILD.getMsg());
             } else
                 throw new StudentException(UserEnum.REPEATE_ADD.getMsg());
-        } catch (Exception e) {
-            throw new StudentException(ExceptionEnum.INNER_ERROR.getMsg());
+        } catch (StudentException e) {
+            throw  e;
         }
     }
 
