@@ -88,6 +88,7 @@ public class TeacherServiceImpl implements TeacherService {
     @Override
     public int updateInfo(TeacherDetail teacherDetail, String username) throws TeacherException {
         try {
+            teacherDetail.setUsername(username);
             int num = teacherDao.updateInfo(teacherDetail);
             if (num != 1) {
                 throw new TeacherException(UserEnum.UPDATE_FAILD.getMsg());
