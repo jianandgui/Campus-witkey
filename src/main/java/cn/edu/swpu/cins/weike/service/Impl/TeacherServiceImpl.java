@@ -94,7 +94,7 @@ public class TeacherServiceImpl implements TeacherService {
             }
             return 1;
         } catch (Exception e) {
-            throw new TeacherException(ExceptionEnum.INNER_ERROR.getMsg());
+            throw e;
         }
     }
 
