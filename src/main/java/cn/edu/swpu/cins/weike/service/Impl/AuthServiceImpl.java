@@ -69,6 +69,9 @@ public class AuthServiceImpl implements AuthService {
             String redisKey = RedisKey.getBizRegisterKey(username);
             if (jedisAdapter.exists(redisKey)) {
                 if (jedisAdapter.get(redisKey).equals(registerStudentVO.getVerifyCode())) {
+                    if(studentDao.selectStudent(username) !=null){
+                        throw new AuthException(UserEnum.REPEATE_REGISTER.getMsg());
+                    }
                     StudentInfo studentInfo = registerStudentVO.getStudentInfo();
                     BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
                     final String rawPassword = studentInfo.getPassword();
@@ -84,7 +87,7 @@ public class AuthServiceImpl implements AuthService {
             }
             throw new AuthException(VerifyCodeEnum.GET_CODE_AGAIN.getMsg());
         } catch (Exception e) {
-            throw new AuthException(ExceptionEnum.INNER_ERROR.getMsg());
+            throw e;
         }
     }
 
@@ -141,6 +144,9 @@ public class AuthServiceImpl implements AuthService {
         try {
             if (jedisAdapter.exists(redisKey)) {
                 if (jedisAdapter.get(redisKey).equals(registerTeacherVO.getVerifyCode())) {
+                    if(teacherDao.queryByName(username) !=null){
+                        throw new AuthException(UserEnum.REPEATE_REGISTER.getMsg());
+                    }
                     TeacherInfo teacherInfo = registerTeacherVO.getTeacherInfo();
                     BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
                     final String rawPassword = registerTeacherVO.getTeacherInfo().getPassword();
@@ -336,7 +342,7 @@ public class AuthServiceImpl implements AuthService {
     @Override
     public void studentGetVerifyCodeForRegister(String username, String email) throws AuthException {
         try {
-            if (studentDao.selectStudent(username) != null) {
+            if (studentDao.selectStudent(username) != null && teacherDao.queryByName(username) != null) {
                 throw new AuthException(RegisterEnum.REPETE_USERNAME.getMessage());
             }
             if (studentDao.queryEmail(email) != null) {
@@ -351,7 +357,7 @@ public class AuthServiceImpl implements AuthService {
     @Override
     public void teacherGetVerifyCodeForRegister(String username, String email) throws AuthException {
         try {
-            if (teacherDao.queryByName(username) != null) {
+            if (teacherDao.queryByName(username) != null && studentDao.selectStudent(username) != null) {
                 throw new AuthException(RegisterEnum.REPETE_USERNAME.getMessage());
             }
             if (teacherDao.queryEamil(email) != null) {

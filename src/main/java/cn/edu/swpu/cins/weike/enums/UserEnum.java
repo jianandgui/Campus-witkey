@@ -10,7 +10,8 @@ public enum UserEnum {
     UPDATE_SUCCESS("信息修改成功"),
     UPDATE_FAILD("修改信息失败"),
     NO_PROJECTS("您还没有发布过任何项目"),
-    ADD_PERSONNAL("个人信息未填完整");
+    ADD_PERSONNAL("个人信息未填完整"),
+    REPEATE_REGISTER("请勿重复注册");
     private String msg;
 
     public String getMsg() {
