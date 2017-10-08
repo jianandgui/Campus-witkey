@@ -3,7 +3,7 @@ package cn.edu.swpu.cins.weike.exception;
 /**
  * Created by muyi on 17-6-8.
  */
-public class WeiKeException extends Exception{
+public class WeiKeException extends RuntimeException{
 
     public WeiKeException() {
     }

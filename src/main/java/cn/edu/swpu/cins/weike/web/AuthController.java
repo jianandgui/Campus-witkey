@@ -69,7 +69,6 @@ public class AuthController {
      *
      * @return
      */
-    //, produces = MediaType.IMAGE_PNG_VALUE
     @GetMapping(value = "/getVerifyCode")
     public ResultData getVerifyCodeForLogin(HttpServletResponse response) {
 

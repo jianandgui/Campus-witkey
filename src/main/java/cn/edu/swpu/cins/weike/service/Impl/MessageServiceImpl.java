@@ -159,6 +159,17 @@ public class MessageServiceImpl implements MessageService {
     public void followPro(String projectName, String username, String toName) {
         String followProKey = RedisKey.getBizAttentionPro(username);
         String proFollower = RedisKey.getBizProFollower(projectName);
+        Message message = createMessage(projectName, username, toName);
+        try {
+            messageDao.addMessage(message);
+            jedisAdapter.sadd(followProKey, projectName);
+            jedisAdapter.sadd(proFollower, username);
+        } catch (Exception e) {
+            throw e;
+        }
+    }
+
+    public Message createMessage(String projectName, String username, String toName) {
         Message message = new Message();
         message.setToName(toName);
         message.setHasRead(0);
@@ -167,18 +178,7 @@ public class MessageServiceImpl implements MessageService {
         message.setCreateDate(new Date());
         message.setProjectAbout(projectName);
         message.setContent("尊敬的" + toName + "你好，" + username + "关注了你的项目 : " + projectName + "去看看吧！");
-        try {
-            /*eventProducer.fireEvent(new EventModel(EventType.MAIL)
-                    .setExts("email",)
-                    .setExts("username",)
-                    .setExts("projectName",)
-                    .setExts("status"))*/
-            messageDao.addMessage(message);
-            jedisAdapter.sadd(followProKey, projectName);
-            jedisAdapter.sadd(proFollower, username);
-        } catch (Exception e) {
-            throw e;
-        }
+        return message;
     }
 
     @Override

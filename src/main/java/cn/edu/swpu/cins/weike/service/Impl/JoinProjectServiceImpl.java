@@ -21,6 +21,7 @@ import org.springframework.stereotype.Service;
 
 import javax.servlet.http.HttpServletRequest;
 import java.util.Date;
+import java.util.HashMap;
 
 @Service
 public class JoinProjectServiceImpl implements JoinProjectService {
@@ -87,6 +88,10 @@ public class JoinProjectServiceImpl implements JoinProjectService {
             throw new AuthException(ExceptionEnum.INNER_ERROR.getMsg());
         }
     }
+
+   /* public HashMap<String,String> createMessage() {
+
+    }*/
 
     @Override
     public void refuseJoin(JoinMessage joinMessage, HttpServletRequest request) throws Exception {

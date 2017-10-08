@@ -56,10 +56,13 @@ public class StudentServiceImpl implements StudentService {
             projectInfo.setProjectName(sensitiveWordsFilter.Filter(projectInfo.getProjectName()));
             StudentInfo studentinfo = studentDao.selectStudent(username);
             StudentDetail studentDetail = studentDao.queryForStudentPhone(username);
+
             if (projectDao.queryProjectDetail(projectInfo.getProjectName()) == null) {
+
                 projectInfo.setProjectConnector(username);
                 projectInfo.setEmail(studentinfo.getEmail());
                 projectInfo.setQq(studentDetail.getQq());
+
                 int num = projectDao.addProject(projectInfo);
                 if (num != 1) {
                     throw new StudentException(ProjectEnum.PUBLISH_PROJECT_FAILD.getMsg());

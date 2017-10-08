@@ -202,6 +202,7 @@ public class JedisAdapter implements InitializingBean {
         }
         return false;
     }
+
     public String get(String key) {
         Jedis jedis = null;
         try {

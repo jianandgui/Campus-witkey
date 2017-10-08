@@ -33,7 +33,6 @@ mybatis:
         use-column-label: true
         map-underscore-to-camel-case: true
 
-
 event:
   service:
     pageCount: 3      #每页展示项目个数
@@ -43,3 +42,15 @@ jwt:
   secret: mySecret
   expiration: 86400
   tokenHead: "Bearer "
+
+logging:
+  file: weike.log
+
+captcha:
+ captchaExpires: 3 * 60
+ captchaW: 200
+ captchaH: 60
+
+
+
+
