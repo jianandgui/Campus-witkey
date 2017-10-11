@@ -278,6 +278,21 @@ public class JedisAdapter implements InitializingBean {
         return false;
     }
 
+    public void add(String key, long value) {
+        Jedis jedis = null;
+        try {
+            jedis = pool.getResource();
+            jedis.set(key, String.valueOf(value));
+        } catch (Exception e) {
+            logger.error("发生异常" + e.getMessage());
+        }finally {
+            if (jedis != null) {
+                jedis.close();
+            }
+        }
+    }
+
+
     public List<String> brpop(int timeout, String key) {
         Jedis jedis = null;
         try {

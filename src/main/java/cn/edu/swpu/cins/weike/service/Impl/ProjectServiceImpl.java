@@ -60,6 +60,7 @@ public class ProjectServiceImpl implements ProjectService {
         String proClickNum = RedisKey.getBizProClickNum(projectName);
         try {
             long hitsNum = jedisAdapter.incr(proClickNum);
+            jedisAdapter.add(proClickNum, hitsNum);
             ProjectDetail projectDetail = projectDao.queryProjectDetail(projectName);
             projectDetail.setProHits(hitsNum);
             return projectDetail;
@@ -92,7 +93,7 @@ public class ProjectServiceImpl implements ProjectService {
                 //项目详细情况
                 String proName=indexVO.getProjectDetails().getProjectName();
                 String proClickNum = RedisKey.getBizProClickNum(proName);
-                long hitsNum = jedisAdapter.incr(proClickNum);
+                long hitsNum = Long.parseLong(jedisAdapter.get(proClickNum));
                 indexVO.getProjectDetails().setProHits(hitsNum);
                 //项目申请成功的人
                 String proApplySuccess = RedisKey.getBizProApplicant(proName);
@@ -122,12 +123,9 @@ public class ProjectServiceImpl implements ProjectService {
                             } catch (ProjectException e1) {
                                 e1.printStackTrace();
                             }
-
                         }
-
                 return indexVO;
             }).collect(Collectors.toList());
-
             return indexVOList;
         }
         catch (Exception e) {
