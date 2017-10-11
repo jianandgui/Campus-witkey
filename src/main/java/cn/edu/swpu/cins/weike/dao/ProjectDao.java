@@ -33,7 +33,7 @@ public interface ProjectDao {
     List<ProjectView> queryByKeywords(String keywords);
 
 
-    List<ProjectDetail> queryForIndex();
+    List<ProjectDetail> queryForIndex(@Param("offset") int offset, @Param("limit") int limit);
 
 
 

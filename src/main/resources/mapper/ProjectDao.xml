@@ -83,7 +83,7 @@
         FROM
           <include refid="table"/>
         ORDER BY project_start
-        LIMIT 0,8;
+        LIMIT #{offset},#{limit};
 
     </select>
 

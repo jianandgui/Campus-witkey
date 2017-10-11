@@ -27,15 +27,16 @@ public class ProjectController {
         this.projectService = projectService;
     }
 
-    //显示所有项目
-    @GetMapping("/projects")
-    public ResultData queryAll(@RequestParam("offset") int offset, @RequestParam("limit") int limit) {
-        try {
-            return new ResultData(projectService.showProjectAll(offset, limit));
-        } catch (Exception e) {
-            return new ResultData(false, e.getMessage());
-        }
-    }
+//    //显示所有项目
+//    @GetMapping("/projects")
+//    public ResultData queryAll(@RequestParam("offset") int offset,
+//                               @RequestParam("limit") int limit) {
+//        try {
+//            return new ResultData(projectService.showProjectAll(offset, limit));
+//        } catch (Exception e) {
+//            return new ResultData(false, e.getMessage());
+//        }
+//    }
 
     /**
      * 首页显示项目详情 发布人详情 项目关注人 人数和成功通过申请人数
@@ -43,9 +44,9 @@ public class ProjectController {
      * @return
      */
     @GetMapping("/index")
-    public ResultData queryForIndex() {
+    public ResultData queryForIndex(@RequestParam(required = false,name = "offset",defaultValue = "1") int offset) {
         try {
-            List<IndexVO> indexVOList= projectService.queryForIndex();
+            List<IndexVO> indexVOList= projectService.queryForIndex(offset);
             return new ResultData(true, indexVOList);
         } catch (Exception e) {
             return new ResultData(false, e.getMessage());

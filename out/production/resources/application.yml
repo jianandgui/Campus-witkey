@@ -15,11 +15,7 @@ spring:
          starttls:
           enable: true
           required: true
-#  redis:
-#      database: 0
-#      host: 127.0.0.1
-#      password:
-#      port: 6379
+
 
 
 server:
@@ -35,7 +31,7 @@ mybatis:
 
 event:
   service:
-    pageCount: 3      #每页展示项目个数
+    pageCount: 8      #每页展示项目个数
 
 jwt:
   header: Authorization

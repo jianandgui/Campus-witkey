@@ -84,9 +84,9 @@ public class ProjectServiceImpl implements ProjectService {
      * @throws ProjectException
      */
     @Override
-    public List<IndexVO> queryForIndex() throws ProjectException{
+    public List<IndexVO> queryForIndex(int offset) throws ProjectException{
         try {
-            List<ProjectDetail> projectDetails=projectDao.queryForIndex();
+            List<ProjectDetail> projectDetails=projectDao.queryForIndex((--offset) * pageCount, pageCount);
             List<IndexVO> indexVOList=projectDetails
                     .stream()
                     .map(IndexVO::new).collect(Collectors.toList()).stream().map(indexVO -> {
