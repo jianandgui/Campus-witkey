@@ -5,8 +5,6 @@ import cn.edu.swpu.cins.weike.entity.view.ProjectDetail;
 import cn.edu.swpu.cins.weike.entity.view.ResultData;
 import cn.edu.swpu.cins.weike.enums.ProjectEnum;
 
-import cn.edu.swpu.cins.weike.util.JedisAdapter;
-import cn.edu.swpu.cins.weike.util.RedisKey;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import cn.edu.swpu.cins.weike.entity.view.ProjectView;

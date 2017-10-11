@@ -84,7 +84,7 @@
           <include refid="table"/>
         ORDER BY project_start
 --         WHERE project_connector='manong'
-        LIMIT 0,16;
+        LIMIT 0,8;
 
     </select>
 

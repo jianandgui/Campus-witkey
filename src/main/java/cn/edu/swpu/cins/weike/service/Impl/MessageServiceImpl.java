@@ -12,11 +12,15 @@ import cn.edu.swpu.cins.weike.entity.persistence.StudentDetail;
 import cn.edu.swpu.cins.weike.entity.persistence.StudentInfo;
 import cn.edu.swpu.cins.weike.entity.persistence.TeacherDetail;
 import cn.edu.swpu.cins.weike.entity.view.MessageList;
+import cn.edu.swpu.cins.weike.entity.view.ProjectDetail;
 import cn.edu.swpu.cins.weike.enums.ExceptionEnum;
 import cn.edu.swpu.cins.weike.enums.MessageEnum;
 import cn.edu.swpu.cins.weike.exception.MessageException;
+import cn.edu.swpu.cins.weike.exception.ProjectException;
 import cn.edu.swpu.cins.weike.service.MailService;
 import cn.edu.swpu.cins.weike.service.MessageService;
+import cn.edu.swpu.cins.weike.service.ProjectService;
+import cn.edu.swpu.cins.weike.util.GetUsrName;
 import cn.edu.swpu.cins.weike.util.JedisAdapter;
 import cn.edu.swpu.cins.weike.util.RedisKey;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,6 +28,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import redis.clients.jedis.Jedis;
 
+import javax.servlet.http.HttpServletRequest;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -42,6 +47,11 @@ public class MessageServiceImpl implements MessageService {
 
     @Autowired
     private JedisAdapter jedisAdapter;
+
+    @Autowired
+    private ProjectService projectService;
+    @Autowired
+    private GetUsrName getUsrName;
 
 
     @Autowired
@@ -201,5 +211,24 @@ public class MessageServiceImpl implements MessageService {
         } catch (Exception e) {
             throw e;
         }
+    }
+
+    @Override
+    public List<ProjectDetail> queryFollowPros(HttpServletRequest request) {
+        String username = getUsrName.AllProjects(request);
+        String key = RedisKey.getBizAttentionPro(username);
+        List<String> proNames;
+        List<ProjectDetail> projectDetailList;
+        try {
+            proNames = jedisAdapter.smenber(key).stream().collect(Collectors.toList());
+            projectDetailList = new ArrayList<>();
+            proNames.stream().forEach(proName ->{
+                projectDetailList.add(projectService.showProject(proName));
+
+            });
+        } catch (ProjectException e) {
+            throw new ProjectException(ExceptionEnum.INNER_ERROR.getMsg());
+        }
+        return projectDetailList;
     }
 }

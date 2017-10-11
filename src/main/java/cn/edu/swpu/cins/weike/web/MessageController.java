@@ -9,10 +9,12 @@ import cn.edu.swpu.cins.weike.enums.ProjectEnum;
 import cn.edu.swpu.cins.weike.service.JoinProjectService;
 import cn.edu.swpu.cins.weike.service.MailService;
 import cn.edu.swpu.cins.weike.service.MessageService;
+import cn.edu.swpu.cins.weike.service.ProjectService;
 import cn.edu.swpu.cins.weike.util.GetUsrName;
 import cn.edu.swpu.cins.weike.util.JedisAdapter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import redis.clients.jedis.Jedis;
 
@@ -36,6 +38,8 @@ public class MessageController {
 
     @Autowired
     JoinProjectService joinProjectService;
+
+
 
 
     @Autowired
@@ -171,6 +175,16 @@ public class MessageController {
     public ResultData queryProFollower(@RequestParam String projectName) {
         try {
             return new ResultData(true, messageService.queryFollower(projectName));
+        } catch (Exception e) {
+            return new ResultData(false, e.getMessage());
+        }
+    }
+
+    @GetMapping("/followPros")
+    public ResultData queryFollowPros(HttpServletRequest request) {
+        try {
+            List<ProjectDetail> projectDetailList = messageService.queryFollowPros(request);
+            return new ResultData(true, projectDetailList);
         } catch (Exception e) {
             return new ResultData(false, e.getMessage());
         }

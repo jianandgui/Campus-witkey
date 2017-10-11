@@ -45,5 +45,12 @@ jwt:
 
 logging:
   file: weike.log
-  level.*: warn
+
+captcha:
+ captchaExpires: 3 * 60
+ captchaW: 200
+ captchaH: 60
+
+
+
 
