@@ -1,13 +1,12 @@
 package cn.edu.swpu.cins.weike.service.Impl;
 
+import cn.edu.swpu.cins.weike.entity.persistence.ProjectInfo;
 import cn.edu.swpu.cins.weike.entity.view.IndexVO;
 import cn.edu.swpu.cins.weike.entity.view.ProApplyInfo;
 import cn.edu.swpu.cins.weike.entity.view.ProjectDetail;
 import cn.edu.swpu.cins.weike.entity.view.ProjectView;
 import cn.edu.swpu.cins.weike.enums.ExceptionEnum;
 import cn.edu.swpu.cins.weike.exception.ProjectException;
-import cn.edu.swpu.cins.weike.exception.StudentException;
-import cn.edu.swpu.cins.weike.exception.TeacherException;
 import cn.edu.swpu.cins.weike.service.ProjectService;
 import cn.edu.swpu.cins.weike.service.StudentService;
 import cn.edu.swpu.cins.weike.service.TeacherService;
@@ -18,6 +17,7 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import cn.edu.swpu.cins.weike.dao.ProjectDao;
 
+import javax.servlet.http.HttpServletRequest;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -44,6 +44,8 @@ public class ProjectServiceImpl implements ProjectService {
 
     @Value("${event.service.pageCount}")
     private int pageCount;
+
+
 
 
     @Override
@@ -148,4 +150,6 @@ public class ProjectServiceImpl implements ProjectService {
             throw new ProjectException(ExceptionEnum.INNER_ERROR.getMsg());
         }
     }
+
+
 }

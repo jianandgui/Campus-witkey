@@ -53,4 +53,21 @@ public class ProjectInfo {
         this.projectEnd = projectEnd;
         this.projectProfile = projectProfile;
     }
+
+    @Override
+    public String toString() {
+        return "ProjectInfo{" +
+                "projectId=" + projectId +
+                ", projectName='" + projectName + '\'' +
+                ", projectKind='" + projectKind + '\'' +
+                ", projectConnector='" + projectConnector + '\'' +
+                ", qq=" + qq +
+                ", email='" + email + '\'' +
+                ", numNeed=" + numNeed +
+                ", projectNeed=" + projectNeed +
+                ", projectStart=" + projectStart +
+                ", projectEnd=" + projectEnd +
+                ", projectProfile='" + projectProfile + '\'' +
+                '}';
+    }
 }

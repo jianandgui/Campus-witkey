@@ -5,8 +5,6 @@ import cn.edu.swpu.cins.weike.entity.view.ProApplyInfo;
 import cn.edu.swpu.cins.weike.entity.view.ProjectDetail;
 import cn.edu.swpu.cins.weike.entity.view.ProjectView;
 import cn.edu.swpu.cins.weike.exception.ProjectException;
-import cn.edu.swpu.cins.weike.exception.StudentException;
-import cn.edu.swpu.cins.weike.exception.TeacherException;
 
 import java.util.List;
 
@@ -25,5 +23,7 @@ public interface ProjectService {
     List<IndexVO>  queryForIndex(int offset) throws ProjectException;
 
     ProApplyInfo queryProApplyInfoByName(String projectName) throws ProjectException;
+
+
 
 }

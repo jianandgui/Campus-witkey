@@ -6,6 +6,7 @@ import cn.edu.swpu.cins.weike.entity.view.PersonData;
 import cn.edu.swpu.cins.weike.entity.view.ProjectRecommend;
 import cn.edu.swpu.cins.weike.exception.StudentException;
 
+import javax.servlet.http.HttpServletRequest;
 import java.util.List;
 
 /**
@@ -27,6 +28,8 @@ public interface StudentService {
     PersonData queryForData(String username) throws StudentException;
 
     List<String> queryProFollower(String projectName) throws StudentException;
+
+    List<ProjectInfo> queryForRecommend(HttpServletRequest request);
 
 
 }

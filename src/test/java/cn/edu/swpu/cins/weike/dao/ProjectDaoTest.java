@@ -72,9 +72,20 @@ public class ProjectDaoTest {
         log.info(projectDao.queryByKeywords("Just").toString());
     }
 
-    @Test
+    /*@Test
     public void queryForIndex() throws Exception {
         log.info(projectDao.queryForIndex().toString());
 
+    }*/
+
+    @Test
+    public void queryForRecommend() throws Exception {
+        List<String> skills = new ArrayList<>();
+        skills.add("spring");
+
+        List<ProjectInfo> projectInfoList = projectDao.selectRecommend(skills);
+        for (ProjectInfo projectInfo : projectInfoList) {
+            System.out.println(projectInfo.toString());
+        }
     }
 }

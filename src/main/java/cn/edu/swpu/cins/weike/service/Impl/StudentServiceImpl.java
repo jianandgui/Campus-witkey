@@ -8,9 +8,7 @@ import cn.edu.swpu.cins.weike.enums.ExceptionEnum;
 import cn.edu.swpu.cins.weike.enums.ProjectEnum;
 import cn.edu.swpu.cins.weike.enums.UserEnum;
 import cn.edu.swpu.cins.weike.exception.StudentException;
-import cn.edu.swpu.cins.weike.util.JedisAdapter;
-import cn.edu.swpu.cins.weike.util.RedisKey;
-import cn.edu.swpu.cins.weike.util.SensitiveWordsFilter;
+import cn.edu.swpu.cins.weike.util.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
@@ -18,8 +16,10 @@ import cn.edu.swpu.cins.weike.dao.ProjectDao;
 import cn.edu.swpu.cins.weike.dao.StudentDao;
 import cn.edu.swpu.cins.weike.entity.persistence.ProjectInfo;
 import cn.edu.swpu.cins.weike.service.StudentService;
-import cn.edu.swpu.cins.weike.util.ReduceRepeat;
+import org.springframework.transaction.annotation.Transactional;
 
+import javax.servlet.http.HttpServletRequest;
+import java.sql.SQLException;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -40,6 +40,9 @@ public class StudentServiceImpl implements StudentService {
 
     @Autowired
     private SensitiveWordsFilter sensitiveWordsFilter;
+
+    @Autowired
+    private GetUsrName getUsrName;
 
     @Autowired
     public StudentServiceImpl(StudentDao studentDao, ProjectDao projectDao, ReduceRepeat reduceRepeat) {
@@ -168,4 +171,18 @@ public class StudentServiceImpl implements StudentService {
             throw new StudentException(ExceptionEnum.INNER_ERROR.getMsg());
         }
     }
+
+    @Override
+    @Transactional(rollbackFor = SQLException.class)
+    public List<ProjectInfo> queryForRecommend(HttpServletRequest request) {
+        String username = getUsrName.AllProjects(request);
+        List<String> skills = studentDao.queryForStudentPhone(username).getSkills();
+        List<ProjectInfo> projectInfoList = projectDao.selectRecommend(skills);
+
+        if (projectInfoList.isEmpty()) {
+            throw new StudentException(ExceptionEnum.NO_SUITBLE_PRO.getMsg());
+        }
+        return projectInfoList;
+    }
+
 }

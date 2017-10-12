@@ -3,6 +3,7 @@ package cn.edu.swpu.cins.weike.web;
 import cn.edu.swpu.cins.weike.entity.view.PersonData;
 import cn.edu.swpu.cins.weike.entity.view.ProApplyInfo;
 import cn.edu.swpu.cins.weike.entity.view.ProjectRecommend;
+import cn.edu.swpu.cins.weike.enums.ExceptionEnum;
 import cn.edu.swpu.cins.weike.enums.ProjectEnum;
 import cn.edu.swpu.cins.weike.enums.UserEnum;
 import cn.edu.swpu.cins.weike.service.MailService;
@@ -156,12 +157,22 @@ public class StudentController {
      * @param projectName
      * @return
      */
-    @GetMapping("/projetName")
+    @GetMapping("/projectName")
     public ResultData queryApplyInfo(@RequestParam String projectName) {
         try {
             return new ResultData(true, projectService.queryProApplyInfoByName(projectName));
         } catch (Exception e) {
             return new ResultData(false, e.getMessage());
+        }
+    }
+
+    @GetMapping("/")
+    public ResultData getRecommend(HttpServletRequest request) {
+        try {
+            List<ProjectInfo> projectInfoList = studentService.queryForRecommend(request);
+            return new ResultData(true,projectInfoList);
+        } catch (Exception e) {
+            return new ResultData(false, ExceptionEnum.INNER_ERROR.getMsg());
         }
     }
 }

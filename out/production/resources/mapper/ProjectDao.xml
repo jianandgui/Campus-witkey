@@ -97,5 +97,15 @@
 
     </select>
 
+    <select id="selectRecommend" resultType="cn.edu.swpu.cins.weike.entity.persistence.ProjectInfo">
+        SELECT
+        <include refid="allFields"/>
+        FROM
+        <include refid="table"/>
+        WHERE 1>2
+        <foreach collection="list" index="index" open="OR" separator="OR" item="item">
+        project_need LIKE  "%"#{item}"%"
+        </foreach>
+    </select>
 
 </mapper>

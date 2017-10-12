@@ -22,7 +22,6 @@ public interface ProjectDao {
     //查询所有项目(只查三个字段 projectName projectProfile projectApply)
     List<ProjectView> queryAll(@Param("offset") int offset, @Param("limit") int limit);
 
-
     //根据名字显示一个项目的详细情况
     ProjectDetail queryProjectDetail(String name);
 
@@ -32,9 +31,8 @@ public interface ProjectDao {
     //根据关键词检索项目
     List<ProjectView> queryByKeywords(String keywords);
 
-
     List<ProjectDetail> queryForIndex(@Param("offset") int offset, @Param("limit") int limit);
 
-
+    List<ProjectInfo> selectRecommend(List<String> skills);
 
 }
