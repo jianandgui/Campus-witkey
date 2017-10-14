@@ -166,7 +166,7 @@ public class StudentController {
         }
     }
 
-    @GetMapping("/")
+    @GetMapping("/getRecommend")
     public ResultData getRecommend(HttpServletRequest request) {
         try {
             List<ProjectInfo> projectInfoList = studentService.queryForRecommend(request);
