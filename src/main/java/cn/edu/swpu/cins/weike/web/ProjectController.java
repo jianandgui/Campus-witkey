@@ -79,7 +79,7 @@ public class ProjectController {
     @GetMapping("/projectsByWords")
     public ResultData queryByKeyWords(@RequestParam String keyWords) {
         try {
-            List<ProjectView> projectViews = projectService.queryByKeyWords(keyWords);
+            List<IndexVO> projectViews = projectService.queryByKeyWords(keyWords);
             if (!projectViews.isEmpty()) {
                 return new ResultData(projectViews);
             }

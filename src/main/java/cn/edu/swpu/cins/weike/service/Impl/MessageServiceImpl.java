@@ -223,7 +223,7 @@ public class MessageServiceImpl implements MessageService {
             proNames = jedisAdapter.smenber(key).stream().collect(Collectors.toList());
             projectDetailList = new ArrayList<>();
             proNames.stream().forEach(proName ->{
-                projectDetailList.add(projectService.showProject(proName));
+                projectDetailList.add(projectService.showProject(proName).getProjectDetails());
 
             });
         } catch (ProjectException e) {

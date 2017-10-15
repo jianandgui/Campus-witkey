@@ -87,7 +87,7 @@
 
     </select>
 
-    <select id="queryByKeywords" resultType="cn.edu.swpu.cins.weike.entity.view.ProjectView">
+    <select id="queryByKeywords" resultMap="projectResultMap">
         SELECT
           <include refid="allFields"/>
         FROM
