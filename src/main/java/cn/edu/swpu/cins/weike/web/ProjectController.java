@@ -92,7 +92,7 @@ public class ProjectController {
         }
     }
 
-    @PostMapping("/{projectName}")
+    @PostMapping("/delete/{projectName}")
     public ResultData deletePro(@PathVariable("projectName") String projectName, HttpServletRequest request) {
         try {
             projectService.deleteProByProName(projectName, request);
@@ -102,7 +102,7 @@ public class ProjectController {
         }
     }
 
-    @PostMapping("/{projectName}")
+    @PostMapping("/update/{projectName}")
     public ResultData updatePro(@PathVariable("projectName") String projectName, @RequestBody ProjectInfo projectInfo, HttpServletRequest request) {
         try {
             projectService.updateProByName(projectName, projectInfo, request);
