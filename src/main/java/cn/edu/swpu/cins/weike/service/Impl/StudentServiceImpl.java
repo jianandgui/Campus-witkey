@@ -153,10 +153,14 @@ public class StudentServiceImpl implements StudentService {
     @Override
     public PersonData queryForData(String username) throws StudentException {
         try {
-            PersonData personData = studentDao.queryPerson(username);
-            personData.setEmail(studentDao.selectStudent(username).getEmail());
-            personData.setRole("ROLE_STUDENT");
-            return personData;
+        PersonData personData = studentDao.queryPerson(username);
+        StudentInfo studentInfo=studentDao.selectStudent(username);
+        if (studentInfo != null) {
+            personData.setEmail(studentInfo.getEmail());
+            personData.setRole("ROLE_STUDENT".toString());
+        }
+        return personData;
+
         } catch (Exception e) {
             throw new StudentException(ExceptionEnum.INNER_ERROR.getMsg());
         }
@@ -177,6 +181,9 @@ public class StudentServiceImpl implements StudentService {
     public List<ProjectInfo> queryForRecommend(HttpServletRequest request) {
         String username = getUsrName.AllProjects(request);
         List<String> skills = studentDao.queryForStudentPhone(username).getSkills();
+        if (skills == null) {
+            throw new StudentException(ExceptionEnum.INNER_ERROR.getMsg());
+        }
         List<ProjectInfo> projectInfoList = projectDao.selectRecommend(skills);
 
         if (projectInfoList.isEmpty()) {

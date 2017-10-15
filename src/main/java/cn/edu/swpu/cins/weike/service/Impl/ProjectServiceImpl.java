@@ -62,6 +62,7 @@ public class ProjectServiceImpl implements ProjectService {
         String proClickNum = RedisKey.getBizProClickNum(projectName);
         try {
             long hitsNum = jedisAdapter.incr(proClickNum);
+            //1、
             jedisAdapter.add(proClickNum, hitsNum);
             IndexVO indexVO = new IndexVO();
             ProjectDetail projectDetail = projectDao.queryProjectDetail(projectName);
@@ -76,11 +77,14 @@ public class ProjectServiceImpl implements ProjectService {
     }
 
     public void getPersonData(IndexVO indexVO,String username,String projectName) {
+
         String proFollowerKeys = RedisKey.getBizProFollower(projectName);
+
         String proApplySuccess = RedisKey.getBizProApplicant(projectName);
         try {
             //项目关注人
             List<String> proFollowers=jedisAdapter.smenber(proFollowerKeys).stream().collect(Collectors.toList());
+
             indexVO.setFollowPros(proFollowers);
             //项目关注人数
             indexVO.setFollowNum(proFollowers.size());
@@ -118,7 +122,7 @@ public class ProjectServiceImpl implements ProjectService {
      * @throws ProjectException
      */
     @Override
-    public List<IndexVO> queryForIndex(int offset) throws ProjectException{
+    public List<IndexVO> queryForIndex(int offset) {
         try {
             List<ProjectDetail> projectDetails=projectDao.queryForIndex((--offset) * pageCount, pageCount);
             List<IndexVO> indexVOList = getProjectDetail(projectDetails);
@@ -130,17 +134,25 @@ public class ProjectServiceImpl implements ProjectService {
     }
 
     public List<IndexVO> getProjectDetail(List<ProjectDetail> projectDetails) {
+
         List<IndexVO> indexVOList=projectDetails
                 .stream()
-                .map(IndexVO::new).collect(Collectors.toList()).stream().map(indexVO -> {
+                .map(IndexVO::new)
+                .collect(Collectors.toList())
+                .stream().map(indexVO -> {
                     //项目详细情况
                     String proName=indexVO.getProjectDetails().getProjectName();
+
                     String proClickNum = RedisKey.getBizProClickNum(proName);
-                    long hitsNum = Long.parseLong(jedisAdapter.get(proClickNum));
-                    indexVO.getProjectDetails().setProHits(hitsNum);
+                    long hitsNum;
+                    if (jedisAdapter.get(proClickNum) != null) {
+                         hitsNum= Long.parseLong(jedisAdapter.get(proClickNum));
+                        indexVO.getProjectDetails().setProHits(hitsNum);
+                    }
                     String projectConnector = indexVO.getProjectDetails().getProjectConnector();
                     getPersonData(indexVO, projectConnector,proName);
                     return indexVO;
+
                 }).collect(Collectors.toList());
         return indexVOList;
     }

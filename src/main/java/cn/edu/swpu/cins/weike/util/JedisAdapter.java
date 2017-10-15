@@ -283,6 +283,7 @@ public class JedisAdapter implements InitializingBean {
         try {
             jedis = pool.getResource();
             jedis.set(key, String.valueOf(value));
+
         } catch (Exception e) {
             logger.error("发生异常" + e.getMessage());
         }finally {

@@ -362,14 +362,18 @@ public class AuthServiceImpl implements AuthService {
     @Override
     public void teacherGetVerifyCodeForRegister(String username, String email) throws AuthException {
         try {
-            if (teacherDao.queryByName(username) != null && studentDao.selectStudent(username) != null) {
-                throw new AuthException(RegisterEnum.REPETE_USERNAME.getMessage()); }
-            if (teacherDao.queryEamil(email) != null) {
-                throw new AuthException(RegisterEnum.REPEATE_EMAIL.getMessage()); }
+
             eventProducerUtils(username, email, "register");
         } catch (Exception e) {
             throw e;
         }
+    }
+
+    public void checkTeacherForRegister(String username, String email) {
+        if (teacherDao.queryByName(username) != null && studentDao.selectStudent(username) != null) {
+            throw new AuthException(RegisterEnum.REPETE_USERNAME.getMessage()); }
+        if (teacherDao.queryEamil(email) != null) {
+            throw new AuthException(RegisterEnum.REPEATE_EMAIL.getMessage()); }
     }
 
     /**

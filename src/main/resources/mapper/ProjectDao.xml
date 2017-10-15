@@ -97,7 +97,12 @@
 
     </select>
 
-    <select id="selectRecommend" resultType="cn.edu.swpu.cins.weike.entity.persistence.ProjectInfo">
+    <resultMap id="projectRecommendResultMap" type="cn.edu.swpu.cins.weike.entity.persistence.ProjectInfo">
+        <result typeHandler="cn.edu.swpu.cins.weike.typehandler.StringArrayTypeHandler" column="project_need" javaType="list"
+                jdbcType="VARCHAR"
+                property="projectNeed"/>
+    </resultMap>
+    <select id="selectRecommend" resultMap="projectRecommendResultMap">
         SELECT
         <include refid="allFields"/>
         FROM

@@ -109,7 +109,6 @@ public class StudentController {
      */
     @PostMapping("/updateInfo")
     public ResultData updateInfo(@RequestBody StudentDetail studentDetail, HttpServletRequest request) {
-
         try {
             String username = getUsrName.AllProjects(request);
             studentService.updateInfo(studentDetail, username);

@@ -94,9 +94,14 @@
 
 </insert>
 
+    <resultMap id="studentSkillsResultMap" type="cn.edu.swpu.cins.weike.entity.persistence.StudentDetail">
+        <result typeHandler="cn.edu.swpu.cins.weike.typehandler.StringArrayTypeHandler" column="skills" javaType="list"
+                jdbcType="VARCHAR"
+                property="skills"/>
+    </resultMap>
 
     <select id="queryForStudentPhone" parameterType="String"
-            resultType="cn.edu.swpu.cins.weike.entity.persistence.StudentDetail">
+            resultMap="studentSkillsResultMap">
 
     SELECT
         <include refid="allDetailFields" />
@@ -176,4 +181,6 @@
         WHERE
           username=#{username} limit 1
     </select>
+
+
 </mapper>

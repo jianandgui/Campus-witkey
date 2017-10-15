@@ -32,19 +32,7 @@ public class ProjectDetail {
     //访问量
     private long proHits;
 
-    public ProjectDetail(String projectName, String projectKind, String projectConnector, long qq, String email, int numNeed, List<String> projectNeed, long projectStart, long projectEnd, String projectProfile, long proHits) {
-        this.projectName = projectName;
-        this.projectKind = projectKind;
-        this.projectConnector = projectConnector;
-        this.qq = qq;
-        this.email = email;
-        this.numNeed = numNeed;
-        this.projectNeed = projectNeed;
-        this.projectStart = projectStart;
-        this.projectEnd = projectEnd;
-        this.projectProfile = projectProfile;
-        this.proHits = proHits;
-    }
+
 
     public ProjectDetail() {
     }

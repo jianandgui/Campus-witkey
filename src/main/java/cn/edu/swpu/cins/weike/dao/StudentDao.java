@@ -32,6 +32,7 @@ public interface StudentDao {
     //查询用户详细信息用于获取QQ号码
     StudentDetail queryForStudentPhone(String username);
 
+
     //学生修改密码
     int updatePassword(@Param("username") String username, @Param("password") String password);
 

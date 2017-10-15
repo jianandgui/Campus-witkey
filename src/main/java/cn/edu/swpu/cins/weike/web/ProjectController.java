@@ -44,13 +44,14 @@ public class ProjectController {
      * @return
      */
     @GetMapping("/index")
-    public ResultData queryForIndex(@RequestParam(required = false,name = "offset",defaultValue = "1") int offset) {
-        try {
-            List<IndexVO> indexVOList= projectService.queryForIndex(offset);
-            return new ResultData(true, indexVOList);
-        } catch (Exception e) {
-            return new ResultData(false, e.getMessage());
-        }
+    public ResultData queryForIndex(@RequestParam(required = false, name = "offset", defaultValue = "1") int offset) throws Exception {
+
+//        try {
+        List<IndexVO> indexVOList = projectService.queryForIndex(offset);
+        return new ResultData(true, indexVOList);
+//        } catch (Exception e) {
+//            return new ResultData(false, e.getMessage());
+//        }
     }
 
     /**
