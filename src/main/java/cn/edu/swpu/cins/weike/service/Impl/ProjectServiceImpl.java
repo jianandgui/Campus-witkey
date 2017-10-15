@@ -104,8 +104,9 @@ public class ProjectServiceImpl implements ProjectService {
     @Override
     public List<IndexVO> queryByKeyWords(String keyWords) throws ProjectException {
         try {
-
-            return projectDao.queryByKeywords(keyWords);
+            List<ProjectDetail> projectDetailList = projectDao.queryByKeywords(keyWords);
+            List<IndexVO> indexVOList = getProjectDetail(projectDetailList);
+            return indexVOList;
         } catch (Exception e) {
             throw new ProjectException(ExceptionEnum.INNER_ERROR.getMsg());
         }
@@ -120,23 +121,28 @@ public class ProjectServiceImpl implements ProjectService {
     public List<IndexVO> queryForIndex(int offset) throws ProjectException{
         try {
             List<ProjectDetail> projectDetails=projectDao.queryForIndex((--offset) * pageCount, pageCount);
-            List<IndexVO> indexVOList=projectDetails
-                    .stream()
-                    .map(IndexVO::new).collect(Collectors.toList()).stream().map(indexVO -> {
-                //项目详细情况
-                String proName=indexVO.getProjectDetails().getProjectName();
-                String proClickNum = RedisKey.getBizProClickNum(proName);
-                long hitsNum = Long.parseLong(jedisAdapter.get(proClickNum));
-                indexVO.getProjectDetails().setProHits(hitsNum);
-                String projectConnector = indexVO.getProjectDetails().getProjectConnector();
-                getPersonData(indexVO, projectConnector,proName);
-                return indexVO;
-            }).collect(Collectors.toList());
+            List<IndexVO> indexVOList = getProjectDetail(projectDetails);
             return indexVOList;
         }
         catch (Exception e) {
             throw new ProjectException(ExceptionEnum.INNER_ERROR.getMsg());
         }
+    }
+
+    public List<IndexVO> getProjectDetail(List<ProjectDetail> projectDetails) {
+        List<IndexVO> indexVOList=projectDetails
+                .stream()
+                .map(IndexVO::new).collect(Collectors.toList()).stream().map(indexVO -> {
+                    //项目详细情况
+                    String proName=indexVO.getProjectDetails().getProjectName();
+                    String proClickNum = RedisKey.getBizProClickNum(proName);
+                    long hitsNum = Long.parseLong(jedisAdapter.get(proClickNum));
+                    indexVO.getProjectDetails().setProHits(hitsNum);
+                    String projectConnector = indexVO.getProjectDetails().getProjectConnector();
+                    getPersonData(indexVO, projectConnector,proName);
+                    return indexVO;
+                }).collect(Collectors.toList());
+        return indexVOList;
     }
 
     @Override
