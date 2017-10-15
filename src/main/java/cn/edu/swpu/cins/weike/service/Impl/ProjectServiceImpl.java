@@ -10,8 +10,10 @@ import cn.edu.swpu.cins.weike.exception.ProjectException;
 import cn.edu.swpu.cins.weike.service.ProjectService;
 import cn.edu.swpu.cins.weike.service.StudentService;
 import cn.edu.swpu.cins.weike.service.TeacherService;
+import cn.edu.swpu.cins.weike.util.GetUsrName;
 import cn.edu.swpu.cins.weike.util.JedisAdapter;
 import cn.edu.swpu.cins.weike.util.RedisKey;
+import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
@@ -36,6 +38,9 @@ public class ProjectServiceImpl implements ProjectService {
     private TeacherService teacherService;
     @Autowired
     JedisAdapter jedisAdapter;
+
+    @Autowired
+    private GetUsrName getUsrName;
 
     @Autowired
     public ProjectServiceImpl(ProjectDao projectDao) {
@@ -173,5 +178,30 @@ public class ProjectServiceImpl implements ProjectService {
         }
     }
 
+    @Override
+    public int deleteProByProName(String projectName, HttpServletRequest request) {
+        String username = getUsrName.AllProjects(request);
+        int count = projectDao.deletePro(projectName, username);
+        if (count != 1) {
+            throw new ProjectException(ExceptionEnum.INNER_ERROR.getMsg());
+        }
+        return 1;
+    }
 
+    @Override
+    public int updateProByName(String projectName,ProjectInfo projectInfo, HttpServletRequest request) {
+        try {
+            String username = getUsrName.AllProjects(request);
+            if (projectDao.queryProjectDetail(projectInfo.getProjectName()) != null) {
+                throw new ProjectException(ExceptionEnum.REPEATE_PRO_NAME.getMsg());
+            }
+            int modCount = projectDao.updatePro(projectName, username, projectInfo);
+            if (modCount != 1) {
+                throw new ProjectException(ExceptionEnum.INNER_ERROR.getMsg());
+            }
+        } catch (Exception e) {
+            throw new ProjectException(ExceptionEnum.INNER_ERROR.getMsg());
+        }
+        return 1;
+    }
 }

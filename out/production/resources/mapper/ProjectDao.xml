@@ -113,4 +113,26 @@
         </foreach>
     </select>
 
+    <delete id="deletePro" parameterType="String">
+        DELETE FROM
+        <include refid="table"/>
+        WHERE project_name=#{projectName} AND project_connector=#{username}
+
+    </delete>
+
+    <update id="updatePro">
+        UPDATE
+            <include refid="table"/>
+        SET
+            project_name=#{projectInfo.projectName},
+            project_kind=#{projectInfo.projectKind},
+            num_need=#{projectInfo.numNeed},
+            project_need=#{projectInfo.projectNeed , javaType = List , jdbcType = VARCHAR,typeHandler=cn.edu.swpu.cins.weike.typehandler.StringArrayTypeHandler},
+            project_start=#{projectInfo.projectStart},
+            project_end=#{projectInfo.projectEnd},
+            project_profile=#{projectInfo.projectProfile}
+        WHERE
+            project_name=#{projectName} AND project_connector=#{username}
+        </update>
+
 </mapper>

@@ -1,8 +1,10 @@
 package cn.edu.swpu.cins.weike.web;
 
+import cn.edu.swpu.cins.weike.entity.persistence.ProjectInfo;
 import cn.edu.swpu.cins.weike.entity.view.IndexVO;
 import cn.edu.swpu.cins.weike.entity.view.ProjectDetail;
 import cn.edu.swpu.cins.weike.entity.view.ResultData;
+import cn.edu.swpu.cins.weike.enums.ExceptionEnum;
 import cn.edu.swpu.cins.weike.enums.ProjectEnum;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,6 +12,7 @@ import org.springframework.web.bind.annotation.*;
 import cn.edu.swpu.cins.weike.entity.view.ProjectView;
 import cn.edu.swpu.cins.weike.service.ProjectService;
 
+import javax.servlet.http.HttpServletRequest;
 import java.util.List;
 
 /**
@@ -45,13 +48,12 @@ public class ProjectController {
      */
     @GetMapping("/index")
     public ResultData queryForIndex(@RequestParam(required = false, name = "offset", defaultValue = "1") int offset) throws Exception {
-
-//        try {
+        try {
         List<IndexVO> indexVOList = projectService.queryForIndex(offset);
         return new ResultData(true, indexVOList);
-//        } catch (Exception e) {
-//            return new ResultData(false, e.getMessage());
-//        }
+        } catch (Exception e) {
+            return new ResultData(false, e.getMessage());
+        }
     }
 
     /**
@@ -85,6 +87,26 @@ public class ProjectController {
                 return new ResultData(projectViews);
             }
             return new ResultData(false, ProjectEnum.NO_PROJECTS.getMsg());
+        } catch (Exception e) {
+            return new ResultData(false, e.getMessage());
+        }
+    }
+
+    @PostMapping("/{projectName}")
+    public ResultData deletePro(@PathVariable("projectName") String projectName, HttpServletRequest request) {
+        try {
+            projectService.deleteProByProName(projectName, request);
+            return new ResultData(true, "删除成功");
+        } catch (Exception e) {
+            return new ResultData(false, e.getMessage());
+        }
+    }
+
+    @PostMapping("/{projectName}")
+    public ResultData updatePro(@PathVariable("projectName") String projectName, @RequestBody ProjectInfo projectInfo, HttpServletRequest request) {
+        try {
+            projectService.updateProByName(projectName, projectInfo, request);
+            return new ResultData(true, "修改成功！");
         } catch (Exception e) {
             return new ResultData(false, e.getMessage());
         }

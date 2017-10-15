@@ -48,6 +48,22 @@ public class ProjectDaoTest {
     }
 
     @Test
+    public void updatePro() {
+        List<String> list=new ArrayList<String>();
+        list.add("Spring");
+        ProjectInfo projectInfo=new ProjectInfo();
+        projectInfo.setProjectName("TET");
+        projectInfo.setNumNeed(8);
+        projectInfo.setProjectEnd(132131);
+        projectInfo.setProjectKind("tset");
+        projectInfo.setProjectStart(1231321);
+        projectInfo.setProjectProfile("asas");
+        projectInfo.setProjectNeed(list);
+        Assert.assertEquals(1,projectDao.updatePro("TETETETETE","muyi",projectInfo));
+
+    }
+
+    @Test
     public void queryAll() throws Exception {
 
         System.out.println(projectDao.queryAll(0,10));
@@ -87,5 +103,10 @@ public class ProjectDaoTest {
         for (ProjectInfo projectInfo : projectInfoList) {
             System.out.println(projectInfo.toString());
         }
+    }
+
+    @Test
+    public void deletePro() {
+        log.info(String.valueOf(projectDao.deletePro("testSchoilWeiKe", "muyi")));
     }
 }

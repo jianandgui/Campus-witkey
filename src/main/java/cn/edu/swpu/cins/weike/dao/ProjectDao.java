@@ -35,4 +35,8 @@ public interface ProjectDao {
 
     List<ProjectInfo> selectRecommend(List<String> skills);
 
+    int deletePro(@Param("projectName") String projectName,@Param("username") String username);
+
+    int updatePro(@Param("projectName") String projectName, @Param("username") String username,@Param("projectInfo") ProjectInfo projectInfo);
+
 }
