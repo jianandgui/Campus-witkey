@@ -2,7 +2,6 @@ package cn.edu.swpu.cins.weike.service;
 
 import cn.edu.swpu.cins.weike.entity.view.IndexVO;
 import cn.edu.swpu.cins.weike.entity.view.ProApplyInfo;
-import cn.edu.swpu.cins.weike.entity.view.ProjectDetail;
 import cn.edu.swpu.cins.weike.entity.view.ProjectView;
 import cn.edu.swpu.cins.weike.exception.ProjectException;
 
@@ -16,9 +15,9 @@ public interface ProjectService {
 
     List<ProjectView> showProjectAll(int offset, int limit) throws ProjectException;
 
-    ProjectDetail showProject(String projectName) throws ProjectException;
+    IndexVO showProject(String projectName) throws ProjectException;
 
-    List<ProjectView> queryByKeyWords(String keyWords) throws ProjectException;
+    List<IndexVO> queryByKeyWords(String keyWords) throws ProjectException;
 
     List<IndexVO>  queryForIndex(int offset) throws ProjectException;
 

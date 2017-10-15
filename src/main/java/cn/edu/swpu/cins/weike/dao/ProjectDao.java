@@ -29,7 +29,7 @@ public interface ProjectDao {
     int deleteByName(int projectName);
 
     //根据关键词检索项目
-    List<ProjectView> queryByKeywords(String keywords);
+    List<ProjectDetail> queryByKeywords(String keywords);
 
     List<ProjectDetail> queryForIndex(@Param("offset") int offset, @Param("limit") int limit);
 

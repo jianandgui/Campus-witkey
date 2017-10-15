@@ -58,22 +58,53 @@ public class ProjectServiceImpl implements ProjectService {
     }
 
     @Override
-    public ProjectDetail showProject(String projectName) throws ProjectException {
+    public IndexVO showProject(String projectName) throws ProjectException {
         String proClickNum = RedisKey.getBizProClickNum(projectName);
         try {
             long hitsNum = jedisAdapter.incr(proClickNum);
             jedisAdapter.add(proClickNum, hitsNum);
+            IndexVO indexVO = new IndexVO();
             ProjectDetail projectDetail = projectDao.queryProjectDetail(projectName);
             projectDetail.setProHits(hitsNum);
-            return projectDetail;
+            indexVO.setProjectDetails(projectDetail);
+            String publisher = projectDetail.getProjectConnector();
+            getPersonData(indexVO, publisher,projectName);
+            return indexVO;
         } catch (Exception e) {
             throw new ProjectException(ExceptionEnum.INNER_ERROR.getMsg());
         }
     }
 
-    @Override
-    public List<ProjectView> queryByKeyWords(String keyWords) throws ProjectException {
+    public void getPersonData(IndexVO indexVO,String username,String projectName) {
+        String proFollowerKeys = RedisKey.getBizProFollower(projectName);
+        String proApplySuccess = RedisKey.getBizProApplicant(projectName);
         try {
+            //项目关注人
+            List<String> proFollowers=jedisAdapter.smenber(proFollowerKeys).stream().collect(Collectors.toList());
+            indexVO.setFollowPros(proFollowers);
+            //项目关注人数
+            indexVO.setFollowNum(proFollowers.size());
+            //项目申请成功的人
+            List<String> applyPersons=jedisAdapter.smenber(proApplySuccess).stream().collect(Collectors.toList());
+            indexVO.setApplySuccessPerson(applyPersons);
+            //项目成功申请的人数
+            indexVO.setApplySuccessNum(applyPersons.size());
+            //发布人详情
+            if (studentService.queryForData(username) == null) {
+                indexVO.setPersonData(teacherService.queryForData(username));
+            } else {
+                indexVO.setPersonData(studentService.queryForData(username));
+            }
+        } catch (Exception e) {
+               throw new ProjectException(ExceptionEnum.INNER_ERROR.getMsg());
+        }
+    }
+
+
+    @Override
+    public List<IndexVO> queryByKeyWords(String keyWords) throws ProjectException {
+        try {
+
             return projectDao.queryByKeywords(keyWords);
         } catch (Exception e) {
             throw new ProjectException(ExceptionEnum.INNER_ERROR.getMsg());
@@ -97,35 +128,8 @@ public class ProjectServiceImpl implements ProjectService {
                 String proClickNum = RedisKey.getBizProClickNum(proName);
                 long hitsNum = Long.parseLong(jedisAdapter.get(proClickNum));
                 indexVO.getProjectDetails().setProHits(hitsNum);
-                //项目申请成功的人
-                String proApplySuccess = RedisKey.getBizProApplicant(proName);
-                List<String> applyPersons=jedisAdapter.smenber(proApplySuccess).stream().collect(Collectors.toList());
-                indexVO.setApplySuccessPerson(applyPersons);
-                //项目成功申请的人数
-                indexVO.setApplySuccessNum(applyPersons.size());
-                //项目关注的人
-                String proFollowerKeys = RedisKey.getBizProFollower(proName);
-                List<String> proFollowers=jedisAdapter.smenber(proFollowerKeys).stream().collect(Collectors.toList());
-                indexVO.setFollowPros(proFollowers);
-                //项目关注人数
-                indexVO.setFollowNum(proFollowers.size());
-                //项目发布人详细信息
-                        String projectConnector = indexVO.getProjectDetails().getProjectConnector();
-                        try {
-                            if (studentService.queryForData(projectConnector) == null) {
-                                indexVO.setPersonData(teacherService.queryForData(projectConnector));
-                            }
-                            else {
-                                indexVO.setPersonData(studentService.queryForData(projectConnector));
-                            }
-                        }
-                        catch (Exception e){
-                            try {
-                                throw new ProjectException(ExceptionEnum.INNER_ERROR.getMsg());
-                            } catch (ProjectException e1) {
-                                e1.printStackTrace();
-                            }
-                        }
+                String projectConnector = indexVO.getProjectDetails().getProjectConnector();
+                getPersonData(indexVO, projectConnector,proName);
                 return indexVO;
             }).collect(Collectors.toList());
             return indexVOList;

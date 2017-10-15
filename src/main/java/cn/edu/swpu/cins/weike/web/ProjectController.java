@@ -62,8 +62,8 @@ public class ProjectController {
     @GetMapping("/projectName")
     public ResultData queryForProjectByName(@RequestParam String projectName) {
         try {
-            ProjectDetail projectDetail = projectService.showProject(projectName);
-            return new ResultData(true, projectDetail);
+            IndexVO indexVO= projectService.showProject(projectName);
+            return new ResultData(true, indexVO);
         } catch (Exception e) {
             return new ResultData(false, e.getMessage());
         }
