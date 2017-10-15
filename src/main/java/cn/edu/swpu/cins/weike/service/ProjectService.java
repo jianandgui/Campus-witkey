@@ -1,6 +1,7 @@
 package cn.edu.swpu.cins.weike.service;
 
 import cn.edu.swpu.cins.weike.entity.persistence.ProjectInfo;
+import cn.edu.swpu.cins.weike.entity.view.ApplyPro;
 import cn.edu.swpu.cins.weike.entity.view.IndexVO;
 import cn.edu.swpu.cins.weike.entity.view.ProApplyInfo;
 import cn.edu.swpu.cins.weike.entity.view.ProjectView;
@@ -29,6 +30,6 @@ public interface ProjectService {
 
     int updateProByName(String projectName,ProjectInfo projectInfo, HttpServletRequest request);
 
-
+    ApplyPro getApplyDetail(HttpServletRequest request);
 
 }

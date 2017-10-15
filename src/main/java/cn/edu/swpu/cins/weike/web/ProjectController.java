@@ -1,15 +1,13 @@
 package cn.edu.swpu.cins.weike.web;
 
 import cn.edu.swpu.cins.weike.entity.persistence.ProjectInfo;
-import cn.edu.swpu.cins.weike.entity.view.IndexVO;
-import cn.edu.swpu.cins.weike.entity.view.ProjectDetail;
-import cn.edu.swpu.cins.weike.entity.view.ResultData;
+import cn.edu.swpu.cins.weike.entity.view.*;
 import cn.edu.swpu.cins.weike.enums.ExceptionEnum;
 import cn.edu.swpu.cins.weike.enums.ProjectEnum;
 
+import com.sun.org.apache.regexp.internal.RE;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
-import cn.edu.swpu.cins.weike.entity.view.ProjectView;
 import cn.edu.swpu.cins.weike.service.ProjectService;
 
 import javax.servlet.http.HttpServletRequest;
@@ -109,6 +107,19 @@ public class ProjectController {
             return new ResultData(true, "修改成功！");
         } catch (Exception e) {
             return new ResultData(false, e.getMessage());
+        }
+    }
+
+    @GetMapping("/getApplyProDetail")
+    public ResultData getApplyDetail(HttpServletRequest request) {
+        try {
+            ApplyPro applyPro = projectService.getApplyDetail(request);
+            if (applyPro == null) {
+                return new ResultData(true, "目前没有项目申请情况");
+            }
+            return new ResultData(true, applyPro);
+        } catch (Exception e) {
+            return new ResultData(false, ExceptionEnum.INNER_ERROR.getMsg());
         }
     }
 }

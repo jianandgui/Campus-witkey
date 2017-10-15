@@ -1,10 +1,7 @@
 package cn.edu.swpu.cins.weike.service.Impl;
 
 import cn.edu.swpu.cins.weike.entity.persistence.ProjectInfo;
-import cn.edu.swpu.cins.weike.entity.view.IndexVO;
-import cn.edu.swpu.cins.weike.entity.view.ProApplyInfo;
-import cn.edu.swpu.cins.weike.entity.view.ProjectDetail;
-import cn.edu.swpu.cins.weike.entity.view.ProjectView;
+import cn.edu.swpu.cins.weike.entity.view.*;
 import cn.edu.swpu.cins.weike.enums.ExceptionEnum;
 import cn.edu.swpu.cins.weike.exception.ProjectException;
 import cn.edu.swpu.cins.weike.service.ProjectService;
@@ -203,5 +200,18 @@ public class ProjectServiceImpl implements ProjectService {
             throw new ProjectException(ExceptionEnum.INNER_ERROR.getMsg());
         }
         return 1;
+    }
+
+    @Override
+    public ApplyPro getApplyDetail(HttpServletRequest request) throws RuntimeException{
+        String username = getUsrName.AllProjects(request);
+        String applySuccess = RedisKey.getBizJoinSuccess(username);
+        String applyFailed = RedisKey.getBizJoinFail(username);
+        String apllying = RedisKey.getBizApplyingPro(username);
+        List<String> applySuccessList = jedisAdapter.smenber(applySuccess).stream().collect(Collectors.toList());
+        List<String> applyFailedList = jedisAdapter.smenber(applyFailed).stream().collect(Collectors.toList());
+        List<String> applyingList = jedisAdapter.smenber(apllying).stream().collect(Collectors.toList());
+        ApplyPro applyPro = new ApplyPro(applySuccessList, applyFailedList, applyingList);
+        return applyPro;
     }
 }
