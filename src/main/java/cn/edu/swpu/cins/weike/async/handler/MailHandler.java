@@ -47,6 +47,8 @@ public class MailHandler implements EventHandler {
                     verifyCode=mailService.sendSimpleMail(username,model.getExts().get("email"));
                     jedisAdapter.setex(RedisKey.getBizRegisterKey(username),1800,verifyCode);
                     break;
+                case "joinProSuccess":
+                    mailService.sendMailForJoinPro(model.getExts().get("email"),model.getExts().get("saver"),model.getExts().get("projectName"));
                 default:
                     throw new Exception("服务器内部异常");
         }

@@ -7,6 +7,7 @@ import cn.edu.swpu.cins.weike.entity.persistence.AdminInfo;
 import cn.edu.swpu.cins.weike.entity.persistence.StudentInfo;
 import cn.edu.swpu.cins.weike.entity.persistence.TeacherInfo;
 import cn.edu.swpu.cins.weike.entity.view.JwtUserFactory;
+import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
@@ -17,17 +18,11 @@ import org.springframework.stereotype.Service;
  * Created by muyi on 17-4-18.
  */
 @Service
+@AllArgsConstructor
 public class JwtUserServiceDetailImpl implements UserDetailsService {
     private AdminDao adminDao;
     private TeacherDao teacherDao;
     private StudentDao studentDao;
-
-    @Autowired
-    public JwtUserServiceDetailImpl(AdminDao adminDao, TeacherDao teacherDao, StudentDao studentDao) {
-        this.adminDao = adminDao;
-        this.teacherDao = teacherDao;
-        this.studentDao = studentDao;
-    }
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {

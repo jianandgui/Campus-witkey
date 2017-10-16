@@ -66,13 +66,10 @@ public class StudentServiceImpl implements StudentService {
             projectInfo.setProjectName(sensitiveWordsFilter.Filter(projectInfo.getProjectName()));
             StudentInfo studentinfo = studentDao.selectStudent(username);
             StudentDetail studentDetail = studentDao.queryForStudentPhone(username);
-
             if (projectDao.queryProjectDetail(projectInfo.getProjectName()) == null) {
-
                 projectInfo.setProjectConnector(username);
                 projectInfo.setEmail(studentinfo.getEmail());
                 projectInfo.setQq(studentDetail.getQq());
-
                 int num = projectDao.addProject(projectInfo);
                 if (num != 1) {
                     throw new StudentException(ProjectEnum.PUBLISH_PROJECT_FAILD.getMsg());
@@ -167,7 +164,6 @@ public class StudentServiceImpl implements StudentService {
             personData.setRole("ROLE_STUDENT".toString());
         }
         return personData;
-
         } catch (Exception e) {
             throw new StudentException(ExceptionEnum.INNER_ERROR.getMsg());
         }
@@ -194,7 +190,6 @@ public class StudentServiceImpl implements StudentService {
         List<ProjectInfo> projectInfoList = projectDao.selectRecommend(skills);
         List<ProjectDetail> projectDetailList = projectInfoList.stream().map(ProjectDetail::new).collect(Collectors.toList());
         List<IndexVO> indexVOList = projectService.getProjectDetail(projectDetailList);
-
         if (indexVOList.isEmpty()) {
             throw new StudentException(ExceptionEnum.NO_SUITBLE_PRO.getMsg());
         }
