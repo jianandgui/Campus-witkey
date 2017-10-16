@@ -10,6 +10,7 @@ import cn.edu.swpu.cins.weike.service.TeacherService;
 import cn.edu.swpu.cins.weike.util.GetUsrName;
 import cn.edu.swpu.cins.weike.util.JedisAdapter;
 import cn.edu.swpu.cins.weike.util.RedisKey;
+import cn.edu.swpu.cins.weike.util.RedisToList;
 import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -27,23 +28,20 @@ import java.util.stream.Collectors;
 public class ProjectServiceImpl implements ProjectService {
 
     private ProjectDao projectDao;
-
     @Autowired
     private StudentService studentService;
-
     @Autowired
     private TeacherService teacherService;
     @Autowired
-    JedisAdapter jedisAdapter;
-
+    private JedisAdapter jedisAdapter;
     @Autowired
     private GetUsrName getUsrName;
-
+    @Autowired
+    private RedisToList redisToList;
     @Autowired
     public ProjectServiceImpl(ProjectDao projectDao) {
         this.projectDao = projectDao;
     }
-
     @Value("${event.service.pageCount}")
     private int pageCount;
 
@@ -84,17 +82,12 @@ public class ProjectServiceImpl implements ProjectService {
 
         String proApplySuccess = RedisKey.getBizProApplicant(projectName);
         try {
-            //项目关注人
-            List<String> proFollowers=jedisAdapter.smenber(proFollowerKeys).stream().collect(Collectors.toList());
-
+            List<String> proFollowers=redisToList.redisToList(proFollowerKeys); //项目关注人
             indexVO.setFollowPros(proFollowers);
-            //项目关注人数
-            indexVO.setFollowNum(proFollowers.size());
-            //项目申请成功的人
-            List<String> applyPersons=jedisAdapter.smenber(proApplySuccess).stream().collect(Collectors.toList());
+            indexVO.setFollowNum(proFollowers.size());//项目关注人数
+            List<String> applyPersons=redisToList.redisToList(proApplySuccess);//项目申请成功的人
             indexVO.setApplySuccessPerson(applyPersons);
-            //项目成功申请的人数
-            indexVO.setApplySuccessNum(applyPersons.size());
+            indexVO.setApplySuccessNum(applyPersons.size());//项目成功申请的人数
             //发布人详情
             if (studentService.queryForData(username) == null) {
                 indexVO.setPersonData(teacherService.queryForData(username));
@@ -142,9 +135,7 @@ public class ProjectServiceImpl implements ProjectService {
                 .map(IndexVO::new)
                 .collect(Collectors.toList())
                 .stream().map(indexVO -> {
-                    //项目详细情况
-                    String proName=indexVO.getProjectDetails().getProjectName();
-
+                    String proName=indexVO.getProjectDetails().getProjectName(); //项目详细情况
                     String proClickNum = RedisKey.getBizProClickNum(proName);
                     long hitsNum;
                     if (jedisAdapter.get(proClickNum) != null) {
@@ -166,9 +157,9 @@ public class ProjectServiceImpl implements ProjectService {
         String proApplying = RedisKey.getBizProApplying(projectName);
         ProApplyInfo proApplyInfo = new ProApplyInfo();
         try {
-            proApplyInfo.setApplySuccess(jedisAdapter.smenber(proApplySuccess).stream().collect(Collectors.toList()));
-            proApplyInfo.setApplyFailed(jedisAdapter.smenber(proApplyFailed).stream().collect(Collectors.toList()));
-            proApplyInfo.setApplying(jedisAdapter.smenber(proApplying).stream().collect(Collectors.toList()));
+            proApplyInfo.setApplySuccess(redisToList.redisToList(proApplySuccess));
+            proApplyInfo.setApplyFailed(redisToList.redisToList(proApplyFailed));
+            proApplyInfo.setApplying(redisToList.redisToList(proApplying));
             return proApplyInfo;
         } catch (Exception e) {
             throw new ProjectException(ExceptionEnum.INNER_ERROR.getMsg());
@@ -208,10 +199,12 @@ public class ProjectServiceImpl implements ProjectService {
         String applySuccess = RedisKey.getBizJoinSuccess(username);
         String applyFailed = RedisKey.getBizJoinFail(username);
         String apllying = RedisKey.getBizApplyingPro(username);
-        List<String> applySuccessList = jedisAdapter.smenber(applySuccess).stream().collect(Collectors.toList());
-        List<String> applyFailedList = jedisAdapter.smenber(applyFailed).stream().collect(Collectors.toList());
-        List<String> applyingList = jedisAdapter.smenber(apllying).stream().collect(Collectors.toList());
+        List<String> applySuccessList = redisToList.redisToList(applySuccess);
+        List<String> applyFailedList = redisToList.redisToList(applyFailed);
+        List<String> applyingList = redisToList.redisToList(apllying);
         ApplyPro applyPro = new ApplyPro(applySuccessList, applyFailedList, applyingList);
         return applyPro;
     }
+
+
 }

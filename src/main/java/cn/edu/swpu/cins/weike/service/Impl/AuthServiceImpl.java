@@ -12,9 +12,9 @@ import cn.edu.swpu.cins.weike.exception.AuthException;
 import cn.edu.swpu.cins.weike.exception.StudentException;
 import cn.edu.swpu.cins.weike.util.JedisAdapter;
 import cn.edu.swpu.cins.weike.util.RedisKey;
+import cn.edu.swpu.cins.weike.util.RedisToList;
 import cn.edu.swpu.cins.weike.util.UpdatePwd;
 import lombok.AllArgsConstructor;
-import org.omg.CORBA.UserException;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
@@ -29,8 +29,6 @@ import cn.edu.swpu.cins.weike.service.AuthService;
 
 import javax.management.OperationsException;
 import java.util.Date;
-import java.util.List;
-import java.util.stream.Collectors;
 
 import static cn.edu.swpu.cins.weike.enums.RegisterEnum.REPETE_USERNAME;
 
@@ -49,6 +47,7 @@ public class AuthServiceImpl implements AuthService {
     private AdminDao adminDao;
     private JedisAdapter jedisAdapter;
     private EventProducer eventProducer;
+    private RedisToList redisToList;
 
 
 
@@ -180,16 +179,14 @@ public class AuthServiceImpl implements AuthService {
         String applySuccessKey = RedisKey.getBizJoinSuccess(username);
         String applyFailedKey = RedisKey.getBizJoinFail(username);
         String followerProKey = RedisKey.getBizAttentionPro(username);
-        joinProject.setJoining(getList(applyingProKey));
-        joinProject.setJoinSuccess(getList(applySuccessKey));
-        joinProject.setJoinFailed(getList(applyFailedKey));
-        joinProject.setFollowPro(getList(followerProKey));
+        joinProject.setJoining(redisToList.redisToList(applyingProKey));
+        joinProject.setJoinSuccess(redisToList.redisToList(applySuccessKey));
+        joinProject.setJoinFailed(redisToList.redisToList(applyFailedKey));
+        joinProject.setFollowPro(redisToList.redisToList(followerProKey));
         return joinProject;
     }
 
-    public List<String> getList(String key) {
-        return jedisAdapter.smenber(key).stream().collect(Collectors.toList());
-    }
+
 
     @Override
     public JwtAuthenticationResponse teacherLogin(JwtAuthenticationRequest authenticationRequest, String captchaCode) throws AuthException {
@@ -340,7 +337,7 @@ public class AuthServiceImpl implements AuthService {
             checkForRegister(username, email,"student");
             eventProducerUtils(username, email, "register");
         } catch (Exception e) {
-            throw e;
+            throw new AuthException(ExceptionEnum.INNER_ERROR.getMsg());
         }
     }
 
@@ -350,7 +347,7 @@ public class AuthServiceImpl implements AuthService {
             checkForRegister(username, email,"teacher");
             eventProducerUtils(username, email, "register");
         } catch (Exception e) {
-            throw e;
+            throw new AuthException(ExceptionEnum.INNER_ERROR.getMsg());
         }
     }
 
@@ -406,7 +403,7 @@ public class AuthServiceImpl implements AuthService {
             }
 
         } catch (Exception e) {
-            throw e;
+            throw new AuthException(ExceptionEnum.INNER_ERROR.getMsg());
         }
 
     }
@@ -419,7 +416,7 @@ public class AuthServiceImpl implements AuthService {
             checkForFindPwd(studentinfo, email, Tmail);
             eventProducerUtils(username, email, "findPwd");
         } catch (Exception e) {
-            throw e;
+            throw new AuthException(ExceptionEnum.INNER_ERROR.getMsg());
         }
     }
 
@@ -440,7 +437,7 @@ public class AuthServiceImpl implements AuthService {
             checkForFindPwd(teacherinfo, email, Tmail);
             eventProducerUtils(username, email, "findPwd");
         } catch (Exception e) {
-            throw e;
+            throw new AuthException(ExceptionEnum.INNER_ERROR.getMsg());
         }
     }
 }
