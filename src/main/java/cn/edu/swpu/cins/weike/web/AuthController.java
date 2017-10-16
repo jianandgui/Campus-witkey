@@ -5,9 +5,11 @@ import cn.apiclub.captcha.backgrounds.GradiatedBackgroundProducer;
 import cn.apiclub.captcha.gimpy.FishEyeGimpyRenderer;
 import cn.edu.swpu.cins.weike.entity.persistence.*;
 import cn.edu.swpu.cins.weike.entity.view.*;
+import cn.edu.swpu.cins.weike.enums.ExceptionEnum;
 import cn.edu.swpu.cins.weike.enums.LoginEnum;
 import cn.edu.swpu.cins.weike.enums.UpdatePwdEnum;
 import cn.edu.swpu.cins.weike.service.MailService;
+import cn.edu.swpu.cins.weike.util.GetVerifyCode;
 import cn.edu.swpu.cins.weike.util.JedisAdapter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -45,14 +47,14 @@ public class AuthController {
     private MailService mailService;
     private TeacherDao teacherDao;
     private AdminDao adminDao;
+    private JedisAdapter jedisAdapter;
+    private GetVerifyCode getVerifyCode;
 
 
     @Autowired
-    JedisAdapter jedisAdapter;
-
-
-    @Autowired
-    public AuthController(AuthService authService, StudentDao studentDao, MailService mailService, TeacherDao teacherDao, AdminDao adminDao) {
+    public AuthController(AuthService authService, StudentDao studentDao, MailService mailService, TeacherDao teacherDao, AdminDao adminDao, JedisAdapter jedisAdapter, GetVerifyCode getVerifyCode) {
+        this.getVerifyCode = getVerifyCode;
+        this.jedisAdapter = jedisAdapter;
         this.authService = authService;
         this.studentDao = studentDao;
         this.mailService = mailService;
@@ -60,9 +62,7 @@ public class AuthController {
         this.adminDao = adminDao;
     }
 
-    private static int captchaExpires = 3 * 60; //超时时间3min
-    private static int captchaW = 200;
-    private static int captchaH = 60;
+
 
     /**
      * 获取登录验证码接口
@@ -71,29 +71,11 @@ public class AuthController {
      */
     @GetMapping(value = "/getVerifyCode")
     public ResultData getVerifyCodeForLogin(HttpServletResponse response) {
-
-        BASE64Encoder encoder = new BASE64Encoder();
-
-        String uuid = UUID.randomUUID().toString();
-        Captcha captcha = new Captcha.Builder(captchaW, captchaH)
-                .addText().addBackground(new GradiatedBackgroundProducer(Color.orange, Color.white))
-                .gimp(new FishEyeGimpyRenderer())
-                .build();
-        System.out.println("验证码为    " + captcha.getAnswer());
-        //将验证码以<key,value>形式缓存到redis
-        jedisAdapter.setex(uuid, captchaExpires, captcha.getAnswer());
-        //将验证码key，及验证码的图片返回
-        response.addHeader("captcha-code", uuid);
-        ByteArrayOutputStream bao = new ByteArrayOutputStream();
         try {
-            ImageIO.write(captcha.getImage(), "png", bao);
-
-            byte[] bytes = bao.toByteArray();
-            String result = encoder.encode(bytes);
-//            response.getWriter().write(result);
-            return new ResultData(true,result);
-        } catch (IOException e) {
-            return null;
+            String result = getVerifyCode.getVerifyCode(response);
+            return new ResultData(true, result);
+        } catch (Exception e) {
+            return new ResultData(false, ExceptionEnum.INNER_ERROR.getMsg());
         }
     }
 

@@ -133,7 +133,6 @@ public class ProjectServiceImpl implements ProjectService {
     }
 
     public List<IndexVO> getProjectDetail(List<ProjectDetail> projectDetails) {
-
         List<IndexVO> indexVOList=projectDetails
                 .stream()
                 .map(IndexVO::new)

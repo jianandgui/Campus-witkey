@@ -13227,3 +13227,447 @@ PzzcdSq9UXCHcVCCpeOgPVqtuLR9SvBDU/2bg+/LI+lhJ2deIOhWep8thCuDONwD5T7D3Xa4a7C8
 2017-10-16 18:56:15.208  INFO 10021 --- [http-nio-8080-exec-1] c.e.s.c.weike.Aspect.ServiceLogAspect    : 
 
 2017-10-16 18:56:15.219  INFO 10021 --- [http-nio-8080-exec-1] c.e.swpu.cins.weike.Aspect.WebLogAspect  : controller return ResultData(data=[IndexVO(projectDetails=ProjectDetail(projectName=test3, projectKind=projectKind, projectConnector=木易, qq=879604213, email=yangquan5991@gamil.com, numNeed=20, projectNeed=[JavaScript, springboot], projectStart=20150606, projectEnd=0, projectProfile=test, proHits=8), personData=TeacherPersonData(id=11, username=木易, image=image, sex=female, university=SWPU, academy=test, rank=perfessor, qq=879604213, email=yangquan5991@gmail.com, role=ROLE_TEACHER), applySuccessPerson=[], followPros=[], proApplyingPerson=[], applyingNum=0, followNum=0, applySuccessNum=0), IndexVO(projectDetails=ProjectDetail(projectName=test4, projectKind=projectKind, projectConnector=木易, qq=879604213, email=yangquan5991@gamil.com, numNeed=20, projectNeed=[JavaScript, BootStrap], projectStart=20150606, projectEnd=0, projectProfile=test, proHits=8), personData=TeacherPersonData(id=11, username=木易, image=image, sex=female, university=SWPU, academy=test, rank=perfessor, qq=879604213, email=yangquan5991@gmail.com, role=ROLE_TEACHER), applySuccessPerson=[], followPros=[], proApplyingPerson=[], applyingNum=0, followNum=0, applySuccessNum=0), IndexVO(projectDetails=ProjectDetail(projectName=test5, projectKind=projectKind, projectConnector=木易, qq=879604213, email=yangquan5991@gamil.com, numNeed=20, projectNeed=[JavaScript, CSS], projectStart=20150606, projectEnd=0, projectProfile=test, proHits=8), personData=TeacherPersonData(id=11, username=木易, image=image, sex=female, university=SWPU, academy=test, rank=perfessor, qq=879604213, email=yangquan5991@gmail.com, role=ROLE_TEACHER), applySuccessPerson=[], followPros=[], proApplyingPerson=[], applyingNum=0, followNum=0, applySuccessNum=0), IndexVO(projectDetails=ProjectDetail(projectName=test6, projectKind=projectKind, projectConnector=木易, qq=879604213, email=yangquan5991@gamil.com, numNeed=20, projectNeed=[struct2, hibernate], projectStart=20150606, projectEnd=0, projectProfile=test, proHits=8), personData=TeacherPersonData(id=11, username=木易, image=image, sex=female, university=SWPU, academy=test, rank=perfessor, qq=879604213, email=yangquan5991@gmail.com, role=ROLE_TEACHER), applySuccessPerson=[], followPros=[], proApplyingPerson=[], applyingNum=0, followNum=0, applySuccessNum=0), IndexVO(projectDetails=ProjectDetail(projectName=test7, projectKind=projectKind, projectConnector=木易, qq=879604213, email=yangquan5991@gamil.com, numNeed=20, projectNeed=[struct2, SpringMVC], projectStart=20150606, projectEnd=0, projectProfile=test, proHits=8), personData=TeacherPersonData(id=11, username=木易, image=image, sex=female, university=SWPU, academy=test, rank=perfessor, qq=879604213, email=yangquan5991@gmail.com, role=ROLE_TEACHER), applySuccessPerson=[], followPros=[], proApplyingPerson=[], applyingNum=0, followNum=0, applySuccessNum=0), IndexVO(projectDetails=ProjectDetail(projectName=test8, projectKind=projectKind, projectConnector=木易, qq=879604213, email=yangquan5991@gamil.com, numNeed=20, projectNeed=[struct2, Tomcat], projectStart=20150606, projectEnd=0, projectProfile=test, proHits=8), personData=TeacherPersonData(id=11, username=木易, image=image, sex=female, university=SWPU, academy=test, rank=perfessor, qq=879604213, email=yangquan5991@gmail.com, role=ROLE_TEACHER), applySuccessPerson=[], followPros=[], proApplyingPerson=[], applyingNum=0, followNum=0, applySuccessNum=0), IndexVO(projectDetails=ProjectDetail(projectName=Projectasdasd1, projectKind=projectKind, projectConnector=muyi, qq=13076046792, email=873453@qq.com, numNeed=20, projectNeed=[springmvc, mybatis], projectStart=20150606, projectEnd=0, projectProfile=test, proHits=8), personData=PersonData(id=0, username=muyi, image=test, sex=男, eduBackgroud=大专, university=西南石油大学, majorAndGrade=网络工程, entryUniversity=2010, leaveUniversity=2014, qq=879604213, skills=[Java, struct2, springmvc], experience=两个项目，担任后端工程师, selfFeel=Just so so!, level=B, email=873453@qq.com, role=ROLE_STUDENT), applySuccessPerson=[], followPros=[], proApplyingPerson=[], applyingNum=0, followNum=0, applySuccessNum=0), IndexVO(projectDetails=ProjectDetail(projectName=TEs, projectKind=projectKind, projectConnector=muyi, qq=13076046792, email=873453@qq.com, numNeed=20, projectNeed=[springmvc, mybatis, js], projectStart=20150606, projectEnd=0, projectProfile=test, proHits=1), personData=PersonData(id=0, username=muyi, image=test, sex=男, eduBackgroud=大专, university=西南石油大学, majorAndGrade=网络工程, entryUniversity=2010, leaveUniversity=2014, qq=879604213, skills=[Java, struct2, springmvc], experience=两个项目，担任后端工程师, selfFeel=Just so so!, level=B, email=873453@qq.com, role=ROLE_STUDENT), applySuccessPerson=[], followPros=[], proApplyingPerson=[], applyingNum=0, followNum=0, applySuccessNum=0), IndexVO(projectDetails=ProjectDetail(projectName=TEDSs, projectKind=projectKind, projectConnector=muyi, qq=13076046792, email=873453@qq.com, numNeed=20, projectNeed=[springmvc, mybatis, js], projectStart=20150606, projectEnd=0, projectProfile=test, proHits=1), personData=PersonData(id=0, username=muyi, image=test, sex=男, eduBackgroud=大专, university=西南石油大学, majorAndGrade=网络工程, entryUniversity=2010, leaveUniversity=2014, qq=879604213, skills=[Java, struct2, springmvc], experience=两个项目，担任后端工程师, selfFeel=Just so so!, level=B, email=873453@qq.com, role=ROLE_STUDENT), applySuccessPerson=[], followPros=[], proApplyingPerson=[], applyingNum=0, followNum=0, applySuccessNum=0), IndexVO(projectDetails=ProjectDetail(projectName=TEDDSDs, projectKind=projectKind, projectConnector=muyi, qq=13076046792, email=873453@qq.com, numNeed=20, projectNeed=[springmvc, mybatis, js, Jquery], projectStart=20150606, projectEnd=0, projectProfile=test, proHits=1), personData=PersonData(id=0, username=muyi, image=test, sex=男, eduBackgroud=大专, university=西南石油大学, majorAndGrade=网络工程, entryUniversity=2010, leaveUniversity=2014, qq=879604213, skills=[Java, struct2, springmvc], experience=两个项目，担任后端工程师, selfFeel=Just so so!, level=B, email=873453@qq.com, role=ROLE_STUDENT), applySuccessPerson=[], followPros=[], proApplyingPerson=[], applyingNum=0, followNum=0, applySuccessNum=0), IndexVO(projectDetails=ProjectDetail(projectName=TEDSDKHDs, projectKind=projectKind, projectConnector=muyi, qq=13076046792, email=873453@qq.com, numNeed=20, projectNeed=[springmvc, mybatis, js, Jquery], projectStart=20150606, projectEnd=0, projectProfile=test, proHits=0), personData=PersonData(id=0, username=muyi, image=test, sex=男, eduBackgroud=大专, university=西南石油大学, majorAndGrade=网络工程, entryUniversity=2010, leaveUniversity=2014, qq=879604213, skills=[Java, struct2, springmvc], experience=两个项目，担任后端工程师, selfFeel=Just so so!, level=B, email=873453@qq.com, role=ROLE_STUDENT), applySuccessPerson=[], followPros=[], proApplyingPerson=[], applyingNum=0, followNum=0, applySuccessNum=0), IndexVO(projectDetails=ProjectDetail(projectName=LNLJ, projectKind=projectKind, projectConnector=muyi, qq=13076046792, email=873453@qq.com, numNeed=20, projectNeed=[springmvc, mybatis, js, Jquery], projectStart=20150606, projectEnd=0, projectProfile=test, proHits=0), personData=PersonData(id=0, username=muyi, image=test, sex=男, eduBackgroud=大专, university=西南石油大学, majorAndGrade=网络工程, entryUniversity=2010, leaveUniversity=2014, qq=879604213, skills=[Java, struct2, springmvc], experience=两个项目，担任后端工程师, selfFeel=Just so so!, level=B, email=873453@qq.com, role=ROLE_STUDENT), applySuccessPerson=[], followPros=[], proApplyingPerson=[], applyingNum=0, followNum=0, applySuccessNum=0), IndexVO(projectDetails=ProjectDetail(projectName=kjhhjasd, projectKind=projectKind, projectConnector=muyi, qq=13076046792, email=873453@qq.com, numNeed=20, projectNeed=[springmvc, mybatis, js, Jquery], projectStart=20150606, projectEnd=0, projectProfile=test, proHits=0), personData=PersonData(id=0, username=muyi, image=test, sex=男, eduBackgroud=大专, university=西南石油大学, majorAndGrade=网络工程, entryUniversity=2010, leaveUniversity=2014, qq=879604213, skills=[Java, struct2, springmvc], experience=两个项目，担任后端工程师, selfFeel=Just so so!, level=B, email=873453@qq.com, role=ROLE_STUDENT), applySuccessPerson=[], followPros=[], proApplyingPerson=[], applyingNum=0, followNum=0, applySuccessNum=0), IndexVO(projectDetails=ProjectDetail(projectName=kjhacasdaasd, projectKind=projectKind, projectConnector=muyi, qq=13076046792, email=873453@qq.com, numNeed=20, projectNeed=[springmvc, mybatis, js, Jquery], projectStart=20150606, projectEnd=0, projectProfile=test, proHits=0), personData=PersonData(id=0, username=muyi, image=test, sex=男, eduBackgroud=大专, university=西南石油大学, majorAndGrade=网络工程, entryUniversity=2010, leaveUniversity=2014, qq=879604213, skills=[Java, struct2, springmvc], experience=两个项目，担任后端工程师, selfFeel=Just so so!, level=B, email=873453@qq.com, role=ROLE_STUDENT), applySuccessPerson=[], followPros=[], proApplyingPerson=[], applyingNum=0, followNum=0, applySuccessNum=0), IndexVO(projectDetails=ProjectDetail(projectName=CINS, projectKind=, projectConnector=muyi, qq=879604213, email=873453@qq.com, numNeed=4, projectNeed=[javaScript, jQuery, Bootstrap, java, Spring, SpringBoot], projectStart=2017818, projectEnd=2017927, projectProfile=test, proHits=7), personData=PersonData(id=0, username=muyi, image=test, sex=男, eduBackgroud=大专, university=西南石油大学, majorAndGrade=网络工程, entryUniversity=2010, leaveUniversity=2014, qq=879604213, skills=[Java, struct2, springmvc], experience=两个项目，担任后端工程师, selfFeel=Just so so!, level=B, email=873453@qq.com, role=ROLE_STUDENT), applySuccessPerson=[], followPros=[], proApplyingPerson=[], applyingNum=0, followNum=0, applySuccessNum=0), IndexVO(projectDetails=ProjectDetail(projectName=Projectasd, projectKind=projectKind, projectConnector=muyi, qq=879604213, email=873453@qq.com, numNeed=20, projectNeed=[springmvc, mybatis], projectStart=20150606, projectEnd=0, projectProfile=test, proHits=0), personData=PersonData(id=0, username=muyi, image=test, sex=男, eduBackgroud=大专, university=西南石油大学, majorAndGrade=网络工程, entryUniversity=2010, leaveUniversity=2014, qq=879604213, skills=[Java, struct2, springmvc], experience=两个项目，担任后端工程师, selfFeel=Just so so!, level=B, email=873453@qq.com, role=ROLE_STUDENT), applySuccessPerson=[], followPros=[], proApplyingPerson=[], applyingNum=0, followNum=0, applySuccessNum=0), IndexVO(projectDetails=ProjectDetail(projectName=Projectas, projectKind=projectKind, projectConnector=muyi, qq=879604213, email=873453@qq.com, numNeed=20, projectNeed=[springmvc, mybatis], projectStart=20150606, projectEnd=0, projectProfile=test, proHits=0), personData=PersonData(id=0, username=muyi, image=test, sex=男, eduBackgroud=大专, university=西南石油大学, majorAndGrade=网络工程, entryUniversity=2010, leaveUniversity=2014, qq=879604213, skills=[Java, struct2, springmvc], experience=两个项目，担任后端工程师, selfFeel=Just so so!, level=B, email=873453@qq.com, role=ROLE_STUDENT), applySuccessPerson=[], followPros=[], proApplyingPerson=[], applyingNum=0, followNum=0, applySuccessNum=0), IndexVO(projectDetails=ProjectDetail(projectName=test13, projectKind=projectKind, projectConnector=muyi, qq=879604213, email=873453@qq.com, numNeed=20, projectNeed=[springmvc], projectStart=20150606, projectEnd=0, projectProfile=test, proHits=0), personData=PersonData(id=0, username=muyi, image=test, sex=男, eduBackgroud=大专, university=西南石油大学, majorAndGrade=网络工程, entryUniversity=2010, leaveUniversity=2014, qq=879604213, skills=[Java, struct2, springmvc], experience=两个项目，担任后端工程师, selfFeel=Just so so!, level=B, email=873453@qq.com, role=ROLE_STUDENT), applySuccessPerson=[], followPros=[], proApplyingPerson=[], applyingNum=0, followNum=0, applySuccessNum=0), IndexVO(projectDetails=ProjectDetail(projectName=aysnc, projectKind=projectKind, projectConnector=aysnc, qq=13076046792, email=yangquan95@163.com, numNeed=20, projectNeed=[springmvc], projectStart=20150606, projectEnd=0, projectProfile=test, proHits=0), personData=PersonData(id=0, username=aysnc, image=meiyou, sex=male, eduBackgroud=西南石油大学, university=test, majorAndGrade=test, entryUniversity=20150901, leaveUniversity=20190601, qq=13076046792, skills=[Java, struct2, springmvc], experience=null, selfFeel=Better, level=C, email=null, role=null), applySuccessPerson=[], followPros=[], proApplyingPerson=[], applyingNum=0, followNum=0, applySuccessNum=0), IndexVO(projectDetails=ProjectDetail(projectName=testRepeat, projectKind=projectKind, projectConnector=Amos, qq=13076046792, email=123123123123@qq.com, numNeed=20, projectNeed=[springmvc], projectStart=20150606, projectEnd=0, projectProfile=test, proHits=0), personData=PersonData(id=0, username=Amos, image=test, sex=male, eduBackgroud=西南石油大学, university=test, majorAndGrade=test, entryUniversity=20150901, leaveUniversity=20190601, qq=13076046792, skills=[Java, struct2, springmvc], experience=null, selfFeel=Better, level=B, email=123123123123@qq.com, role=ROLE_STUDENT), applySuccessPerson=[], followPros=[], proApplyingPerson=[], applyingNum=0, followNum=0, applySuccessNum=0), IndexVO(projectDetails=ProjectDetail(projectName=testRepeat2, projectKind=projectKind, projectConnector=Amos, qq=13076046792, email=123123123123@qq.com, numNeed=20, projectNeed=[springmvc, struct2], projectStart=20150606, projectEnd=0, projectProfile=test, proHits=0), personData=PersonData(id=0, username=Amos, image=test, sex=male, eduBackgroud=西南石油大学, university=test, majorAndGrade=test, entryUniversity=20150901, leaveUniversity=20190601, qq=13076046792, skills=[Java, struct2, springmvc], experience=null, selfFeel=Better, level=B, email=123123123123@qq.com, role=ROLE_STUDENT), applySuccessPerson=[], followPros=[], proApplyingPerson=[], applyingNum=0, followNum=0, applySuccessNum=0), IndexVO(projectDetails=ProjectDetail(projectName=testRepeat3, projectKind=projectKind, projectConnector=Amos, qq=13076046792, email=123123123123@qq.com, numNeed=20, projectNeed=[springmvc, struct2], projectStart=20150606, projectEnd=0, projectProfile=test, proHits=0), personData=PersonData(id=0, username=Amos, image=test, sex=male, eduBackgroud=西南石油大学, university=test, majorAndGrade=test, entryUniversity=20150901, leaveUniversity=20190601, qq=13076046792, skills=[Java, struct2, springmvc], experience=null, selfFeel=Better, level=B, email=123123123123@qq.com, role=ROLE_STUDENT), applySuccessPerson=[], followPros=[], proApplyingPerson=[], applyingNum=0, followNum=0, applySuccessNum=0), IndexVO(projectDetails=ProjectDetail(projectName=testRepeat4, projectKind=projectKind, projectConnector=muyi, qq=879604213, email=873453@qq.com, numNeed=20, projectNeed=[springmvc, struct2], projectStart=20150606, projectEnd=0, projectProfile=test, proHits=0), personData=PersonData(id=0, username=muyi, image=test, sex=男, eduBackgroud=大专, university=西南石油大学, majorAndGrade=网络工程, entryUniversity=2010, leaveUniversity=2014, qq=879604213, skills=[Java, struct2, springmvc], experience=两个项目，担任后端工程师, selfFeel=Just so so!, level=B, email=873453@qq.com, role=ROLE_STUDENT), applySuccessPerson=[], followPros=[], proApplyingPerson=[], applyingNum=0, followNum=0, applySuccessNum=0)], ifSuccess=true, msg=null)
+2017-10-16 19:01:12.242  INFO 10211 --- [main] cn.edu.swpu.cins.weike.WeikeApplication  : Starting WeikeApplication on yang with PID 10211 (/home/yang/idea_work_space/weike/out/production/classes started by yang in /home/yang/idea_work_space/weike)
+2017-10-16 19:01:12.245  INFO 10211 --- [main] cn.edu.swpu.cins.weike.WeikeApplication  : No active profile set, falling back to default profiles: default
+2017-10-16 19:01:12.289  INFO 10211 --- [main] ationConfigEmbeddedWebApplicationContext : Refreshing org.springframework.boot.context.embedded.AnnotationConfigEmbeddedWebApplicationContext@55b7a4e0: startup date [Mon Oct 16 19:01:12 CST 2017]; root of context hierarchy
+2017-10-16 19:01:13.411  INFO 10211 --- [main] .s.d.r.c.RepositoryConfigurationDelegate : Multiple Spring Data modules found, entering strict repository configuration mode!
+2017-10-16 19:01:13.742  INFO 10211 --- [main] trationDelegate$BeanPostProcessorChecker : Bean 'org.springframework.transaction.annotation.ProxyTransactionManagementConfiguration' of type [org.springframework.transaction.annotation.ProxyTransactionManagementConfiguration$$EnhancerBySpringCGLIB$$28d96513] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2017-10-16 19:01:13.863  INFO 10211 --- [main] trationDelegate$BeanPostProcessorChecker : Bean 'org.springframework.security.config.annotation.configuration.ObjectPostProcessorConfiguration' of type [org.springframework.security.config.annotation.configuration.ObjectPostProcessorConfiguration$$EnhancerBySpringCGLIB$$c1872d4d] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2017-10-16 19:01:13.876  INFO 10211 --- [main] trationDelegate$BeanPostProcessorChecker : Bean 'objectPostProcessor' of type [org.springframework.security.config.annotation.configuration.AutowireBeanFactoryObjectPostProcessor] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2017-10-16 19:01:13.883  INFO 10211 --- [main] trationDelegate$BeanPostProcessorChecker : Bean 'org.springframework.security.access.expression.method.DefaultMethodSecurityExpressionHandler@695a69a1' of type [org.springframework.security.access.expression.method.DefaultMethodSecurityExpressionHandler] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2017-10-16 19:01:13.889  INFO 10211 --- [main] trationDelegate$BeanPostProcessorChecker : Bean 'org.springframework.security.config.annotation.method.configuration.GlobalMethodSecurityConfiguration' of type [org.springframework.security.config.annotation.method.configuration.GlobalMethodSecurityConfiguration$$EnhancerBySpringCGLIB$$e65bcfff] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2017-10-16 19:01:13.905  INFO 10211 --- [main] trationDelegate$BeanPostProcessorChecker : Bean 'methodSecurityMetadataSource' of type [org.springframework.security.access.method.DelegatingMethodSecurityMetadataSource] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2017-10-16 19:01:14.150  INFO 10211 --- [main] s.b.c.e.t.TomcatEmbeddedServletContainer : Tomcat initialized with port(s): 8080 (http)
+2017-10-16 19:01:14.159  INFO 10211 --- [main] o.apache.catalina.core.StandardService   : Starting service Tomcat
+2017-10-16 19:01:14.160  INFO 10211 --- [main] org.apache.catalina.core.StandardEngine  : Starting Servlet Engine: Apache Tomcat/8.5.11
+2017-10-16 19:01:14.206  INFO 10211 --- [localhost-startStop-1] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2017-10-16 19:01:14.207  INFO 10211 --- [localhost-startStop-1] o.s.web.context.ContextLoader            : Root WebApplicationContext: initialization completed in 1920 ms
+2017-10-16 19:01:15.308  INFO 10211 --- [localhost-startStop-1] o.s.b.w.servlet.FilterRegistrationBean   : Mapping filter: 'characterEncodingFilter' to: [/*]
+2017-10-16 19:01:15.309  INFO 10211 --- [localhost-startStop-1] o.s.b.w.servlet.FilterRegistrationBean   : Mapping filter: 'hiddenHttpMethodFilter' to: [/*]
+2017-10-16 19:01:15.309  INFO 10211 --- [localhost-startStop-1] o.s.b.w.servlet.FilterRegistrationBean   : Mapping filter: 'httpPutFormContentFilter' to: [/*]
+2017-10-16 19:01:15.309  INFO 10211 --- [localhost-startStop-1] o.s.b.w.servlet.FilterRegistrationBean   : Mapping filter: 'requestContextFilter' to: [/*]
+2017-10-16 19:01:15.310  INFO 10211 --- [localhost-startStop-1] .s.DelegatingFilterProxyRegistrationBean : Mapping filter: 'springSecurityFilterChain' to: [/*]
+2017-10-16 19:01:15.310  INFO 10211 --- [localhost-startStop-1] o.s.b.w.servlet.FilterRegistrationBean   : Mapping filter: 'jwtAuthenticationTokenFilter' to: [/*]
+2017-10-16 19:01:15.310  INFO 10211 --- [localhost-startStop-1] o.s.b.w.servlet.FilterRegistrationBean   : Mapping filter: 'authenticationTokenFilterBean' to: [/*]
+2017-10-16 19:01:15.310  INFO 10211 --- [localhost-startStop-1] o.s.b.w.servlet.ServletRegistrationBean  : Mapping servlet: 'dispatcherServlet' to [/]
+2017-10-16 19:01:15.793  INFO 10211 --- [main] o.s.s.web.DefaultSecurityFilterChain     : Creating filter chain: org.springframework.security.web.util.matcher.AnyRequestMatcher@1, [org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter@3ae0b770, org.springframework.security.web.context.SecurityContextPersistenceFilter@4d6ee47, org.springframework.security.web.header.HeaderWriterFilter@4f67e3df, org.springframework.security.web.authentication.logout.LogoutFilter@3a5c2626, cn.edu.swpu.cins.weike.config.filter.JwtAuthenticationTokenFilter@6ee77ef8, org.springframework.security.web.savedrequest.RequestCacheAwareFilter@3874b815, org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter@162b3d47, org.springframework.security.web.authentication.AnonymousAuthenticationFilter@55e3d6c3, org.springframework.security.web.session.SessionManagementFilter@30a7c98f, org.springframework.security.web.access.ExceptionTranslationFilter@34819867, org.springframework.security.web.access.intercept.FilterSecurityInterceptor@1ac45389]
+2017-10-16 19:01:15.902  INFO 10211 --- [main] s.w.s.m.m.a.RequestMappingHandlerAdapter : Looking for @ControllerAdvice: org.springframework.boot.context.embedded.AnnotationConfigEmbeddedWebApplicationContext@55b7a4e0: startup date [Mon Oct 16 19:01:12 CST 2017]; root of context hierarchy
+2017-10-16 19:01:15.954  INFO 10211 --- [main] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped "{[/weike/student/FindPassword],methods=[POST]}" onto public cn.edu.swpu.cins.weike.entity.view.ResultData cn.edu.swpu.cins.weike.web.AuthController.studentUpdatePassword(cn.edu.swpu.cins.weike.entity.view.UpdatePassword)
+2017-10-16 19:01:15.955  INFO 10211 --- [main] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped "{[/weike/teacher/FindPassword],methods=[POST]}" onto public cn.edu.swpu.cins.weike.entity.view.ResultData cn.edu.swpu.cins.weike.web.AuthController.teacherUpdatePassword(cn.edu.swpu.cins.weike.entity.view.UpdatePassword)
+2017-10-16 19:01:15.955  INFO 10211 --- [main] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped "{[/weike/student/login],methods=[POST]}" onto public cn.edu.swpu.cins.weike.entity.view.ResultData cn.edu.swpu.cins.weike.web.AuthController.createStudentAuthenticationToken(cn.edu.swpu.cins.weike.entity.view.JwtAuthenticationRequest,java.lang.String)
+2017-10-16 19:01:15.955  INFO 10211 --- [main] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped "{[/weike/teacher/login],methods=[POST]}" onto public cn.edu.swpu.cins.weike.entity.view.ResultData cn.edu.swpu.cins.weike.web.AuthController.createTeacherAuthenticationToken(cn.edu.swpu.cins.weike.entity.view.JwtAuthenticationRequest,java.lang.String)
+2017-10-16 19:01:15.955  INFO 10211 --- [main] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped "{[/weike/student/GetVerifyCodeForRegister],methods=[GET]}" onto public cn.edu.swpu.cins.weike.entity.view.ResultData cn.edu.swpu.cins.weike.web.AuthController.studentGetVerifyCode(java.lang.String,java.lang.String)
+2017-10-16 19:01:15.955  INFO 10211 --- [main] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped "{[/weike/teacher/GetVerifyCodeForRegister],methods=[GET]}" onto public cn.edu.swpu.cins.weike.entity.view.ResultData cn.edu.swpu.cins.weike.web.AuthController.teacherGetVerifyCode(java.lang.String,java.lang.String)
+2017-10-16 19:01:15.956  INFO 10211 --- [main] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped "{[/weike/student/register],methods=[POST]}" onto public cn.edu.swpu.cins.weike.entity.view.ResultData cn.edu.swpu.cins.weike.web.AuthController.StudentSaveToDB(cn.edu.swpu.cins.weike.entity.view.RegisterStudentVO)
+2017-10-16 19:01:15.956  INFO 10211 --- [main] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped "{[/weike/teacher/register],methods=[POST]}" onto public cn.edu.swpu.cins.weike.entity.view.ResultData cn.edu.swpu.cins.weike.web.AuthController.teacherSaveToDB(cn.edu.swpu.cins.weike.entity.view.RegisterTeacherVO)
+2017-10-16 19:01:15.956  INFO 10211 --- [main] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped "{[/weike/student/getVerifyCodeForFindPassword],methods=[GET]}" onto public cn.edu.swpu.cins.weike.entity.view.ResultData cn.edu.swpu.cins.weike.web.AuthController.studentGetVerifyForUpdate(java.lang.String,java.lang.String)
+2017-10-16 19:01:15.956  INFO 10211 --- [main] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped "{[/weike/teacher/getVerifyCodeForFindPassword],methods=[GET]}" onto public cn.edu.swpu.cins.weike.entity.view.ResultData cn.edu.swpu.cins.weike.web.AuthController.teacherGetVerifyForUpdatePassword(java.lang.String,java.lang.String)
+2017-10-16 19:01:15.956  INFO 10211 --- [main] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped "{[/weike/admin/login],methods=[POST]}" onto public cn.edu.swpu.cins.weike.entity.view.ResultData cn.edu.swpu.cins.weike.web.AuthController.createAdminAuthenticationToken(cn.edu.swpu.cins.weike.entity.view.JwtAuthenticationRequest)
+2017-10-16 19:01:15.956  INFO 10211 --- [main] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped "{[/weike/getVerifyCode],methods=[GET]}" onto public cn.edu.swpu.cins.weike.entity.view.ResultData cn.edu.swpu.cins.weike.web.AuthController.getVerifyCodeForLogin(javax.servlet.http.HttpServletResponse)
+2017-10-16 19:01:15.958  INFO 10211 --- [main] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped "{[/WeiKe/messageList],methods=[GET]}" onto public cn.edu.swpu.cins.weike.entity.view.ResultData cn.edu.swpu.cins.weike.web.MessageController.getConversationDetail(javax.servlet.http.HttpServletRequest)
+2017-10-16 19:01:15.959  INFO 10211 --- [main] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped "{[/WeiKe/deleteMessage],methods=[POST]}" onto public cn.edu.swpu.cins.weike.entity.view.ResultData cn.edu.swpu.cins.weike.web.MessageController.deleteMessage(cn.edu.swpu.cins.weike.entity.view.MessageDelete)
+2017-10-16 19:01:15.959  INFO 10211 --- [main] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped "{[/WeiKe/followPros],methods=[GET]}" onto public cn.edu.swpu.cins.weike.entity.view.ResultData cn.edu.swpu.cins.weike.web.MessageController.queryFollowPros(javax.servlet.http.HttpServletRequest)
+2017-10-16 19:01:15.959  INFO 10211 --- [main] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped "{[/WeiKe/proFollower],methods=[GET]}" onto public cn.edu.swpu.cins.weike.entity.view.ResultData cn.edu.swpu.cins.weike.web.MessageController.queryProFollower(java.lang.String)
+2017-10-16 19:01:15.959  INFO 10211 --- [main] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped "{[/WeiKe/acceptApply],methods=[POST]}" onto public cn.edu.swpu.cins.weike.entity.view.ResultData cn.edu.swpu.cins.weike.web.MessageController.acceptJoin(cn.edu.swpu.cins.weike.entity.view.JoinMessage,javax.servlet.http.HttpServletRequest)
+2017-10-16 19:01:15.959  INFO 10211 --- [main] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped "{[/WeiKe/refuseApply],methods=[POST]}" onto public cn.edu.swpu.cins.weike.entity.view.ResultData cn.edu.swpu.cins.weike.web.MessageController.refuseJoin(cn.edu.swpu.cins.weike.entity.view.JoinMessage,javax.servlet.http.HttpServletRequest)
+2017-10-16 19:01:15.959  INFO 10211 --- [main] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped "{[/WeiKe/sendMessage],methods=[POST]}" onto public cn.edu.swpu.cins.weike.entity.view.ResultData cn.edu.swpu.cins.weike.web.MessageController.sendMessage(cn.edu.swpu.cins.weike.entity.view.MessageView,javax.servlet.http.HttpServletRequest)
+2017-10-16 19:01:15.959  INFO 10211 --- [main] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped "{[/WeiKe/followPro],methods=[POST]}" onto public cn.edu.swpu.cins.weike.entity.view.ResultData cn.edu.swpu.cins.weike.web.MessageController.attentionPro(cn.edu.swpu.cins.weike.entity.view.FollowPro,javax.servlet.http.HttpServletRequest)
+2017-10-16 19:01:15.960  INFO 10211 --- [main] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped "{[/WeiKe/unFollowPro],methods=[POST]}" onto public cn.edu.swpu.cins.weike.entity.view.ResultData cn.edu.swpu.cins.weike.web.MessageController.unAttentionPro(cn.edu.swpu.cins.weike.entity.view.FollowPro,javax.servlet.http.HttpServletRequest)
+2017-10-16 19:01:15.961  INFO 10211 --- [main] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped "{[/WeiKe/projectsByWords],methods=[GET]}" onto public cn.edu.swpu.cins.weike.entity.view.ResultData cn.edu.swpu.cins.weike.web.ProjectController.queryByKeyWords(java.lang.String)
+2017-10-16 19:01:15.961  INFO 10211 --- [main] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped "{[/WeiKe/index],methods=[GET]}" onto public cn.edu.swpu.cins.weike.entity.view.ResultData cn.edu.swpu.cins.weike.web.ProjectController.queryForIndex(int) throws java.lang.Exception
+2017-10-16 19:01:15.961  INFO 10211 --- [main] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped "{[/WeiKe/getApplyProDetail],methods=[GET]}" onto public cn.edu.swpu.cins.weike.entity.view.ResultData cn.edu.swpu.cins.weike.web.ProjectController.getApplyDetail(javax.servlet.http.HttpServletRequest)
+2017-10-16 19:01:15.962  INFO 10211 --- [main] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped "{[/WeiKe/deletePro],methods=[POST]}" onto public cn.edu.swpu.cins.weike.entity.view.ResultData cn.edu.swpu.cins.weike.web.ProjectController.deletePro(cn.edu.swpu.cins.weike.entity.view.DeletePro,javax.servlet.http.HttpServletRequest)
+2017-10-16 19:01:15.962  INFO 10211 --- [main] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped "{[/WeiKe/updatePro],methods=[POST]}" onto public cn.edu.swpu.cins.weike.entity.view.ResultData cn.edu.swpu.cins.weike.web.ProjectController.updatePro(cn.edu.swpu.cins.weike.entity.view.UpdatePro,javax.servlet.http.HttpServletRequest)
+2017-10-16 19:01:15.962  INFO 10211 --- [main] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped "{[/WeiKe/projectName],methods=[GET]}" onto public cn.edu.swpu.cins.weike.entity.view.ResultData cn.edu.swpu.cins.weike.web.ProjectController.queryForProjectByName(java.lang.String)
+2017-10-16 19:01:15.963  INFO 10211 --- [main] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped "{[/WeiKe/student/personalData],methods=[GET]}" onto public cn.edu.swpu.cins.weike.entity.view.ResultData cn.edu.swpu.cins.weike.web.StudentController.queryForData(javax.servlet.http.HttpServletRequest)
+2017-10-16 19:01:15.964  INFO 10211 --- [main] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped "{[/WeiKe/student/updateInfo],methods=[POST]}" onto public cn.edu.swpu.cins.weike.entity.view.ResultData cn.edu.swpu.cins.weike.web.StudentController.updateInfo(cn.edu.swpu.cins.weike.entity.persistence.StudentDetail,javax.servlet.http.HttpServletRequest)
+2017-10-16 19:01:15.964  INFO 10211 --- [main] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped "{[/WeiKe/student/allProject],methods=[GET]}" onto public cn.edu.swpu.cins.weike.entity.view.ResultData cn.edu.swpu.cins.weike.web.StudentController.queryAllProject(javax.servlet.http.HttpServletRequest)
+2017-10-16 19:01:15.964  INFO 10211 --- [main] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped "{[/WeiKe/student/addProject],methods=[POST]}" onto public cn.edu.swpu.cins.weike.entity.view.ResultData cn.edu.swpu.cins.weike.web.StudentController.publishProject(cn.edu.swpu.cins.weike.entity.persistence.ProjectInfo,javax.servlet.http.HttpServletRequest)
+2017-10-16 19:01:15.964  INFO 10211 --- [main] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped "{[/WeiKe/student/addPersonalDeail],methods=[POST]}" onto public cn.edu.swpu.cins.weike.entity.view.ResultData cn.edu.swpu.cins.weike.web.StudentController.addPersonalDetail(cn.edu.swpu.cins.weike.entity.persistence.StudentDetail,javax.servlet.http.HttpServletRequest)
+2017-10-16 19:01:15.964  INFO 10211 --- [main] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped "{[/WeiKe/student/projectName],methods=[GET]}" onto public cn.edu.swpu.cins.weike.entity.view.ResultData cn.edu.swpu.cins.weike.web.StudentController.queryApplyInfo(java.lang.String)
+2017-10-16 19:01:15.964  INFO 10211 --- [main] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped "{[/WeiKe/student/getRecommend],methods=[GET]}" onto public cn.edu.swpu.cins.weike.entity.view.ResultData cn.edu.swpu.cins.weike.web.StudentController.getRecommend(javax.servlet.http.HttpServletRequest)
+2017-10-16 19:01:15.968  INFO 10211 --- [main] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped "{[/WeiKe/teacher/personalData],methods=[GET]}" onto public cn.edu.swpu.cins.weike.entity.view.ResultData cn.edu.swpu.cins.weike.web.TeacherController.queryForData(javax.servlet.http.HttpServletRequest)
+2017-10-16 19:01:15.969  INFO 10211 --- [main] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped "{[/WeiKe/teacher/updateInfo],methods=[POST]}" onto public cn.edu.swpu.cins.weike.entity.view.ResultData cn.edu.swpu.cins.weike.web.TeacherController.updateInfo(cn.edu.swpu.cins.weike.entity.persistence.TeacherDetail,javax.servlet.http.HttpServletRequest)
+2017-10-16 19:01:15.969  INFO 10211 --- [main] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped "{[/WeiKe/teacher/allProject],methods=[GET]}" onto public cn.edu.swpu.cins.weike.entity.view.ResultData cn.edu.swpu.cins.weike.web.TeacherController.queryAllProject(javax.servlet.http.HttpServletRequest)
+2017-10-16 19:01:15.969  INFO 10211 --- [main] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped "{[/WeiKe/teacher/addPersonal],methods=[POST]}" onto public cn.edu.swpu.cins.weike.entity.view.ResultData cn.edu.swpu.cins.weike.web.TeacherController.addTeacherPersonal(cn.edu.swpu.cins.weike.entity.persistence.TeacherDetail,javax.servlet.http.HttpServletRequest)
+2017-10-16 19:01:15.969  INFO 10211 --- [main] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped "{[/WeiKe/teacher/addProject],methods=[POST]}" onto public cn.edu.swpu.cins.weike.entity.view.ResultData cn.edu.swpu.cins.weike.web.TeacherController.publishProject(cn.edu.swpu.cins.weike.entity.persistence.ProjectInfo,javax.servlet.http.HttpServletRequest)
+2017-10-16 19:01:15.971  INFO 10211 --- [main] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped "{[/error],produces=[text/html]}" onto public org.springframework.web.servlet.ModelAndView org.springframework.boot.autoconfigure.web.BasicErrorController.errorHtml(javax.servlet.http.HttpServletRequest,javax.servlet.http.HttpServletResponse)
+2017-10-16 19:01:15.971  INFO 10211 --- [main] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped "{[/error]}" onto public org.springframework.http.ResponseEntity<java.util.Map<java.lang.String, java.lang.Object>> org.springframework.boot.autoconfigure.web.BasicErrorController.error(javax.servlet.http.HttpServletRequest)
+2017-10-16 19:01:16.029  INFO 10211 --- [main] o.s.w.s.handler.SimpleUrlHandlerMapping  : Mapped URL path [/webjars/**] onto handler of type [class org.springframework.web.servlet.resource.ResourceHttpRequestHandler]
+2017-10-16 19:01:16.029  INFO 10211 --- [main] o.s.w.s.handler.SimpleUrlHandlerMapping  : Mapped URL path [/**] onto handler of type [class org.springframework.web.servlet.resource.ResourceHttpRequestHandler]
+2017-10-16 19:01:16.086  INFO 10211 --- [main] o.s.w.s.handler.SimpleUrlHandlerMapping  : Mapped URL path [/**/favicon.ico] onto handler of type [class org.springframework.web.servlet.resource.ResourceHttpRequestHandler]
+2017-10-16 19:01:16.600  INFO 10211 --- [main] o.s.j.e.a.AnnotationMBeanExporter        : Registering beans for JMX exposure on startup
+2017-10-16 19:01:16.637  INFO 10211 --- [main] s.b.c.e.t.TomcatEmbeddedServletContainer : Tomcat started on port(s): 8080 (http)
+2017-10-16 19:01:16.641  INFO 10211 --- [main] cn.edu.swpu.cins.weike.WeikeApplication  : Started WeikeApplication in 4.759 seconds (JVM running for 5.218)
+2017-10-16 19:01:43.637  INFO 10211 --- [http-nio-8080-exec-1] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring FrameworkServlet 'dispatcherServlet'
+2017-10-16 19:01:43.637  INFO 10211 --- [http-nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : FrameworkServlet 'dispatcherServlet': initialization started
+2017-10-16 19:01:43.654  INFO 10211 --- [http-nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : FrameworkServlet 'dispatcherServlet': initialization completed in 17 ms
+2017-10-16 19:01:43.678  INFO 10211 --- [http-nio-8080-exec-1] c.e.swpu.cins.weike.Aspect.WebLogAspect  : controller aspect beginning
+2017-10-16 19:01:43.678  INFO 10211 --- [http-nio-8080-exec-1] c.e.swpu.cins.weike.Aspect.WebLogAspect  : arg : org.springframework.security.web.firewall.FirewalledResponse@131a1486
+2017-10-16 19:01:43.679  INFO 10211 --- [http-nio-8080-exec-1] c.e.swpu.cins.weike.Aspect.WebLogAspect  : aspect finishing
+2017-10-16 19:01:43.679  INFO 10211 --- [http-nio-8080-exec-1] c.e.swpu.cins.weike.Aspect.WebLogAspect  : calling cn.edu.swpu.cins.weike.web.AuthController.getVerifyCodeForLogin
+2017-10-16 19:01:43.821  INFO 10211 --- [http-nio-8080-exec-1] c.e.swpu.cins.weike.Aspect.WebLogAspect  : controller return ResultData(data=null, ifSuccess=true, msg=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)
+2017-10-16 19:02:17.069  INFO 10211 --- [http-nio-8080-exec-2] c.e.swpu.cins.weike.Aspect.WebLogAspect  : controller aspect beginning
+2017-10-16 19:02:17.070  INFO 10211 --- [http-nio-8080-exec-2] c.e.swpu.cins.weike.Aspect.WebLogAspect  : arg : JwtAuthenticationRequest(username=muyi, password=1234, verifyCode=y6nn5)
+2017-10-16 19:02:17.070  INFO 10211 --- [http-nio-8080-exec-2] c.e.swpu.cins.weike.Aspect.WebLogAspect  : arg : c6fb06a2-c61d-4055-8da2-a1af2ff89c2f
+2017-10-16 19:02:17.070  INFO 10211 --- [http-nio-8080-exec-2] c.e.swpu.cins.weike.Aspect.WebLogAspect  : aspect finishing
+2017-10-16 19:02:17.070  INFO 10211 --- [http-nio-8080-exec-2] c.e.swpu.cins.weike.Aspect.WebLogAspect  : calling cn.edu.swpu.cins.weike.web.AuthController.createStudentAuthenticationToken
+2017-10-16 19:02:17.070  INFO 10211 --- [http-nio-8080-exec-2] c.e.s.c.weike.Aspect.ServiceLogAspect    : 
+
+2017-10-16 19:02:17.070  INFO 10211 --- [http-nio-8080-exec-2] c.e.s.c.weike.Aspect.ServiceLogAspect    : calling : cn.edu.swpu.cins.weike.service.Impl.AuthServiceImpl.studentLogin
+2017-10-16 19:02:17.070  INFO 10211 --- [http-nio-8080-exec-2] c.e.s.c.weike.Aspect.ServiceLogAspect    : arg : JwtAuthenticationRequest(username=muyi, password=1234, verifyCode=y6nn5)
+2017-10-16 19:02:17.070  INFO 10211 --- [http-nio-8080-exec-2] c.e.s.c.weike.Aspect.ServiceLogAspect    : arg : c6fb06a2-c61d-4055-8da2-a1af2ff89c2f
+2017-10-16 19:02:17.070  INFO 10211 --- [http-nio-8080-exec-2] c.e.s.c.weike.Aspect.ServiceLogAspect    : 
+
+2017-10-16 19:02:21.530  INFO 10211 --- [http-nio-8080-exec-2] c.e.s.c.weike.Aspect.ServiceLogAspect    : 
+
+2017-10-16 19:02:21.531  INFO 10211 --- [http-nio-8080-exec-2] c.e.s.c.weike.Aspect.ServiceLogAspect    : service return : JwtAuthenticationResponse(token=eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJtdXlpIiwiY3JlYXRlZCI6MTUwODE1MTc0MTQzMSwiZXhwIjoxNTA4MjM4MTQxfQ.n40YYFcx_Y0hD-s_obsTf_05XqBuWrvLvL6-ClA-5RlGczAwRcFsdGoOn0qASqbGrPMMYqyC3M5Q_x_WJg3gSQ, username=muyi, role=ROLE_STUDENT, image=test, isCompleted=true, joinProject=JoinProject(released=[Projectasdasd1, TET, TEs, TEDSs, TEDDSDs, TEDSDKHDs, LNLJ, kjhhjasd, kjhacasdaasd, CINS, asdasdas, Projectasd, Projectas, test13, testRepeat4, testRepeat5, testRepeat6, testRepeat7], joining=[], joinFailed=[], joinSuccess=[], followPro=[]))
+2017-10-16 19:02:21.531  INFO 10211 --- [http-nio-8080-exec-2] c.e.s.c.weike.Aspect.ServiceLogAspect    : 
+
+2017-10-16 19:02:21.531  INFO 10211 --- [http-nio-8080-exec-2] c.e.swpu.cins.weike.Aspect.WebLogAspect  : controller return ResultData(data=JwtAuthenticationResponse(token=eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJtdXlpIiwiY3JlYXRlZCI6MTUwODE1MTc0MTQzMSwiZXhwIjoxNTA4MjM4MTQxfQ.n40YYFcx_Y0hD-s_obsTf_05XqBuWrvLvL6-ClA-5RlGczAwRcFsdGoOn0qASqbGrPMMYqyC3M5Q_x_WJg3gSQ, username=muyi, role=ROLE_STUDENT, image=test, isCompleted=true, joinProject=JoinProject(released=[Projectasdasd1, TET, TEs, TEDSs, TEDDSDs, TEDSDKHDs, LNLJ, kjhhjasd, kjhacasdaasd, CINS, asdasdas, Projectasd, Projectas, test13, testRepeat4, testRepeat5, testRepeat6, testRepeat7], joining=[], joinFailed=[], joinSuccess=[], followPro=[])), ifSuccess=true, msg=null)
+2017-10-16 19:07:35.082  INFO 10211 --- [Thread-6] ationConfigEmbeddedWebApplicationContext : Closing org.springframework.boot.context.embedded.AnnotationConfigEmbeddedWebApplicationContext@55b7a4e0: startup date [Mon Oct 16 19:01:12 CST 2017]; root of context hierarchy
+2017-10-16 19:07:35.084  INFO 10211 --- [Thread-6] o.s.j.e.a.AnnotationMBeanExporter        : Unregistering JMX-exposed beans on shutdown
+2017-10-16 19:24:26.924  INFO 10760 --- [main] cn.edu.swpu.cins.weike.WeikeApplication  : Starting WeikeApplication on yang with PID 10760 (/home/yang/idea_work_space/weike/out/production/classes started by yang in /home/yang/idea_work_space/weike)
+2017-10-16 19:24:26.927  INFO 10760 --- [main] cn.edu.swpu.cins.weike.WeikeApplication  : No active profile set, falling back to default profiles: default
+2017-10-16 19:24:26.971  INFO 10760 --- [main] ationConfigEmbeddedWebApplicationContext : Refreshing org.springframework.boot.context.embedded.AnnotationConfigEmbeddedWebApplicationContext@55b7a4e0: startup date [Mon Oct 16 19:24:26 CST 2017]; root of context hierarchy
+2017-10-16 19:24:28.078  INFO 10760 --- [main] .s.d.r.c.RepositoryConfigurationDelegate : Multiple Spring Data modules found, entering strict repository configuration mode!
+2017-10-16 19:24:28.462  INFO 10760 --- [main] trationDelegate$BeanPostProcessorChecker : Bean 'org.springframework.transaction.annotation.ProxyTransactionManagementConfiguration' of type [org.springframework.transaction.annotation.ProxyTransactionManagementConfiguration$$EnhancerBySpringCGLIB$$dbb15cae] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2017-10-16 19:24:28.576  INFO 10760 --- [main] trationDelegate$BeanPostProcessorChecker : Bean 'org.springframework.security.config.annotation.configuration.ObjectPostProcessorConfiguration' of type [org.springframework.security.config.annotation.configuration.ObjectPostProcessorConfiguration$$EnhancerBySpringCGLIB$$745f24e8] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2017-10-16 19:24:28.585  INFO 10760 --- [main] trationDelegate$BeanPostProcessorChecker : Bean 'objectPostProcessor' of type [org.springframework.security.config.annotation.configuration.AutowireBeanFactoryObjectPostProcessor] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2017-10-16 19:24:28.590  INFO 10760 --- [main] trationDelegate$BeanPostProcessorChecker : Bean 'org.springframework.security.access.expression.method.DefaultMethodSecurityExpressionHandler@5eeedb60' of type [org.springframework.security.access.expression.method.DefaultMethodSecurityExpressionHandler] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2017-10-16 19:24:28.595  INFO 10760 --- [main] trationDelegate$BeanPostProcessorChecker : Bean 'org.springframework.security.config.annotation.method.configuration.GlobalMethodSecurityConfiguration' of type [org.springframework.security.config.annotation.method.configuration.GlobalMethodSecurityConfiguration$$EnhancerBySpringCGLIB$$9933c79a] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2017-10-16 19:24:28.614  INFO 10760 --- [main] trationDelegate$BeanPostProcessorChecker : Bean 'methodSecurityMetadataSource' of type [org.springframework.security.access.method.DelegatingMethodSecurityMetadataSource] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2017-10-16 19:24:28.877  INFO 10760 --- [main] s.b.c.e.t.TomcatEmbeddedServletContainer : Tomcat initialized with port(s): 8080 (http)
+2017-10-16 19:24:28.886  INFO 10760 --- [main] o.apache.catalina.core.StandardService   : Starting service Tomcat
+2017-10-16 19:24:28.888  INFO 10760 --- [main] org.apache.catalina.core.StandardEngine  : Starting Servlet Engine: Apache Tomcat/8.5.11
+2017-10-16 19:24:28.934  INFO 10760 --- [localhost-startStop-1] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2017-10-16 19:24:28.934  INFO 10760 --- [localhost-startStop-1] o.s.web.context.ContextLoader            : Root WebApplicationContext: initialization completed in 1966 ms
+2017-10-16 19:24:29.952  INFO 10760 --- [localhost-startStop-1] o.s.b.w.servlet.FilterRegistrationBean   : Mapping filter: 'characterEncodingFilter' to: [/*]
+2017-10-16 19:24:29.953  INFO 10760 --- [localhost-startStop-1] o.s.b.w.servlet.FilterRegistrationBean   : Mapping filter: 'hiddenHttpMethodFilter' to: [/*]
+2017-10-16 19:24:29.953  INFO 10760 --- [localhost-startStop-1] o.s.b.w.servlet.FilterRegistrationBean   : Mapping filter: 'httpPutFormContentFilter' to: [/*]
+2017-10-16 19:24:29.953  INFO 10760 --- [localhost-startStop-1] o.s.b.w.servlet.FilterRegistrationBean   : Mapping filter: 'requestContextFilter' to: [/*]
+2017-10-16 19:24:29.954  INFO 10760 --- [localhost-startStop-1] .s.DelegatingFilterProxyRegistrationBean : Mapping filter: 'springSecurityFilterChain' to: [/*]
+2017-10-16 19:24:29.954  INFO 10760 --- [localhost-startStop-1] o.s.b.w.servlet.FilterRegistrationBean   : Mapping filter: 'jwtAuthenticationTokenFilter' to: [/*]
+2017-10-16 19:24:29.954  INFO 10760 --- [localhost-startStop-1] o.s.b.w.servlet.FilterRegistrationBean   : Mapping filter: 'authenticationTokenFilterBean' to: [/*]
+2017-10-16 19:24:29.954  INFO 10760 --- [localhost-startStop-1] o.s.b.w.servlet.ServletRegistrationBean  : Mapping servlet: 'dispatcherServlet' to [/]
+2017-10-16 19:24:30.426  INFO 10760 --- [main] o.s.s.web.DefaultSecurityFilterChain     : Creating filter chain: org.springframework.security.web.util.matcher.AnyRequestMatcher@1, [org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter@367b22e5, org.springframework.security.web.context.SecurityContextPersistenceFilter@8b91134, org.springframework.security.web.header.HeaderWriterFilter@1da4b6b3, org.springframework.security.web.authentication.logout.LogoutFilter@396e6d9, cn.edu.swpu.cins.weike.config.filter.JwtAuthenticationTokenFilter@3813aa6, org.springframework.security.web.savedrequest.RequestCacheAwareFilter@7e736350, org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter@6940f685, org.springframework.security.web.authentication.AnonymousAuthenticationFilter@fca387, org.springframework.security.web.session.SessionManagementFilter@a33b4e3, org.springframework.security.web.access.ExceptionTranslationFilter@4f67e3df, org.springframework.security.web.access.intercept.FilterSecurityInterceptor@4fad6218]
+2017-10-16 19:24:30.528  INFO 10760 --- [main] s.w.s.m.m.a.RequestMappingHandlerAdapter : Looking for @ControllerAdvice: org.springframework.boot.context.embedded.AnnotationConfigEmbeddedWebApplicationContext@55b7a4e0: startup date [Mon Oct 16 19:24:26 CST 2017]; root of context hierarchy
+2017-10-16 19:24:30.580  INFO 10760 --- [main] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped "{[/weike/student/FindPassword],methods=[POST]}" onto public cn.edu.swpu.cins.weike.entity.view.ResultData cn.edu.swpu.cins.weike.web.AuthController.studentUpdatePassword(cn.edu.swpu.cins.weike.entity.view.UpdatePassword)
+2017-10-16 19:24:30.581  INFO 10760 --- [main] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped "{[/weike/teacher/FindPassword],methods=[POST]}" onto public cn.edu.swpu.cins.weike.entity.view.ResultData cn.edu.swpu.cins.weike.web.AuthController.teacherUpdatePassword(cn.edu.swpu.cins.weike.entity.view.UpdatePassword)
+2017-10-16 19:24:30.581  INFO 10760 --- [main] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped "{[/weike/getVerifyCode],methods=[GET]}" onto public cn.edu.swpu.cins.weike.entity.view.ResultData cn.edu.swpu.cins.weike.web.AuthController.getVerifyCodeForLogin(javax.servlet.http.HttpServletResponse)
+2017-10-16 19:24:30.581  INFO 10760 --- [main] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped "{[/weike/student/login],methods=[POST]}" onto public cn.edu.swpu.cins.weike.entity.view.ResultData cn.edu.swpu.cins.weike.web.AuthController.createStudentAuthenticationToken(cn.edu.swpu.cins.weike.entity.view.JwtAuthenticationRequest,java.lang.String)
+2017-10-16 19:24:30.581  INFO 10760 --- [main] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped "{[/weike/teacher/login],methods=[POST]}" onto public cn.edu.swpu.cins.weike.entity.view.ResultData cn.edu.swpu.cins.weike.web.AuthController.createTeacherAuthenticationToken(cn.edu.swpu.cins.weike.entity.view.JwtAuthenticationRequest,java.lang.String)
+2017-10-16 19:24:30.581  INFO 10760 --- [main] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped "{[/weike/student/GetVerifyCodeForRegister],methods=[GET]}" onto public cn.edu.swpu.cins.weike.entity.view.ResultData cn.edu.swpu.cins.weike.web.AuthController.studentGetVerifyCode(java.lang.String,java.lang.String)
+2017-10-16 19:24:30.581  INFO 10760 --- [main] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped "{[/weike/teacher/GetVerifyCodeForRegister],methods=[GET]}" onto public cn.edu.swpu.cins.weike.entity.view.ResultData cn.edu.swpu.cins.weike.web.AuthController.teacherGetVerifyCode(java.lang.String,java.lang.String)
+2017-10-16 19:24:30.581  INFO 10760 --- [main] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped "{[/weike/student/register],methods=[POST]}" onto public cn.edu.swpu.cins.weike.entity.view.ResultData cn.edu.swpu.cins.weike.web.AuthController.StudentSaveToDB(cn.edu.swpu.cins.weike.entity.view.RegisterStudentVO)
+2017-10-16 19:24:30.582  INFO 10760 --- [main] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped "{[/weike/teacher/register],methods=[POST]}" onto public cn.edu.swpu.cins.weike.entity.view.ResultData cn.edu.swpu.cins.weike.web.AuthController.teacherSaveToDB(cn.edu.swpu.cins.weike.entity.view.RegisterTeacherVO)
+2017-10-16 19:24:30.582  INFO 10760 --- [main] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped "{[/weike/student/getVerifyCodeForFindPassword],methods=[GET]}" onto public cn.edu.swpu.cins.weike.entity.view.ResultData cn.edu.swpu.cins.weike.web.AuthController.studentGetVerifyForUpdate(java.lang.String,java.lang.String)
+2017-10-16 19:24:30.582  INFO 10760 --- [main] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped "{[/weike/teacher/getVerifyCodeForFindPassword],methods=[GET]}" onto public cn.edu.swpu.cins.weike.entity.view.ResultData cn.edu.swpu.cins.weike.web.AuthController.teacherGetVerifyForUpdatePassword(java.lang.String,java.lang.String)
+2017-10-16 19:24:30.582  INFO 10760 --- [main] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped "{[/weike/admin/login],methods=[POST]}" onto public cn.edu.swpu.cins.weike.entity.view.ResultData cn.edu.swpu.cins.weike.web.AuthController.createAdminAuthenticationToken(cn.edu.swpu.cins.weike.entity.view.JwtAuthenticationRequest)
+2017-10-16 19:24:30.584  INFO 10760 --- [main] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped "{[/WeiKe/messageList],methods=[GET]}" onto public cn.edu.swpu.cins.weike.entity.view.ResultData cn.edu.swpu.cins.weike.web.MessageController.getConversationDetail(javax.servlet.http.HttpServletRequest)
+2017-10-16 19:24:30.584  INFO 10760 --- [main] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped "{[/WeiKe/deleteMessage],methods=[POST]}" onto public cn.edu.swpu.cins.weike.entity.view.ResultData cn.edu.swpu.cins.weike.web.MessageController.deleteMessage(cn.edu.swpu.cins.weike.entity.view.MessageDelete)
+2017-10-16 19:24:30.584  INFO 10760 --- [main] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped "{[/WeiKe/followPros],methods=[GET]}" onto public cn.edu.swpu.cins.weike.entity.view.ResultData cn.edu.swpu.cins.weike.web.MessageController.queryFollowPros(javax.servlet.http.HttpServletRequest)
+2017-10-16 19:24:30.584  INFO 10760 --- [main] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped "{[/WeiKe/proFollower],methods=[GET]}" onto public cn.edu.swpu.cins.weike.entity.view.ResultData cn.edu.swpu.cins.weike.web.MessageController.queryProFollower(java.lang.String)
+2017-10-16 19:24:30.585  INFO 10760 --- [main] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped "{[/WeiKe/acceptApply],methods=[POST]}" onto public cn.edu.swpu.cins.weike.entity.view.ResultData cn.edu.swpu.cins.weike.web.MessageController.acceptJoin(cn.edu.swpu.cins.weike.entity.view.JoinMessage,javax.servlet.http.HttpServletRequest)
+2017-10-16 19:24:30.585  INFO 10760 --- [main] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped "{[/WeiKe/refuseApply],methods=[POST]}" onto public cn.edu.swpu.cins.weike.entity.view.ResultData cn.edu.swpu.cins.weike.web.MessageController.refuseJoin(cn.edu.swpu.cins.weike.entity.view.JoinMessage,javax.servlet.http.HttpServletRequest)
+2017-10-16 19:24:30.585  INFO 10760 --- [main] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped "{[/WeiKe/sendMessage],methods=[POST]}" onto public cn.edu.swpu.cins.weike.entity.view.ResultData cn.edu.swpu.cins.weike.web.MessageController.sendMessage(cn.edu.swpu.cins.weike.entity.view.MessageView,javax.servlet.http.HttpServletRequest)
+2017-10-16 19:24:30.585  INFO 10760 --- [main] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped "{[/WeiKe/followPro],methods=[POST]}" onto public cn.edu.swpu.cins.weike.entity.view.ResultData cn.edu.swpu.cins.weike.web.MessageController.attentionPro(cn.edu.swpu.cins.weike.entity.view.FollowPro,javax.servlet.http.HttpServletRequest)
+2017-10-16 19:24:30.585  INFO 10760 --- [main] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped "{[/WeiKe/unFollowPro],methods=[POST]}" onto public cn.edu.swpu.cins.weike.entity.view.ResultData cn.edu.swpu.cins.weike.web.MessageController.unAttentionPro(cn.edu.swpu.cins.weike.entity.view.FollowPro,javax.servlet.http.HttpServletRequest)
+2017-10-16 19:24:30.587  INFO 10760 --- [main] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped "{[/WeiKe/projectsByWords],methods=[GET]}" onto public cn.edu.swpu.cins.weike.entity.view.ResultData cn.edu.swpu.cins.weike.web.ProjectController.queryByKeyWords(java.lang.String)
+2017-10-16 19:24:30.587  INFO 10760 --- [main] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped "{[/WeiKe/index],methods=[GET]}" onto public cn.edu.swpu.cins.weike.entity.view.ResultData cn.edu.swpu.cins.weike.web.ProjectController.queryForIndex(int) throws java.lang.Exception
+2017-10-16 19:24:30.587  INFO 10760 --- [main] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped "{[/WeiKe/getApplyProDetail],methods=[GET]}" onto public cn.edu.swpu.cins.weike.entity.view.ResultData cn.edu.swpu.cins.weike.web.ProjectController.getApplyDetail(javax.servlet.http.HttpServletRequest)
+2017-10-16 19:24:30.587  INFO 10760 --- [main] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped "{[/WeiKe/deletePro],methods=[POST]}" onto public cn.edu.swpu.cins.weike.entity.view.ResultData cn.edu.swpu.cins.weike.web.ProjectController.deletePro(cn.edu.swpu.cins.weike.entity.view.DeletePro,javax.servlet.http.HttpServletRequest)
+2017-10-16 19:24:30.587  INFO 10760 --- [main] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped "{[/WeiKe/updatePro],methods=[POST]}" onto public cn.edu.swpu.cins.weike.entity.view.ResultData cn.edu.swpu.cins.weike.web.ProjectController.updatePro(cn.edu.swpu.cins.weike.entity.view.UpdatePro,javax.servlet.http.HttpServletRequest)
+2017-10-16 19:24:30.587  INFO 10760 --- [main] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped "{[/WeiKe/projectName],methods=[GET]}" onto public cn.edu.swpu.cins.weike.entity.view.ResultData cn.edu.swpu.cins.weike.web.ProjectController.queryForProjectByName(java.lang.String)
+2017-10-16 19:24:30.589  INFO 10760 --- [main] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped "{[/WeiKe/student/personalData],methods=[GET]}" onto public cn.edu.swpu.cins.weike.entity.view.ResultData cn.edu.swpu.cins.weike.web.StudentController.queryForData(javax.servlet.http.HttpServletRequest)
+2017-10-16 19:24:30.589  INFO 10760 --- [main] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped "{[/WeiKe/student/updateInfo],methods=[POST]}" onto public cn.edu.swpu.cins.weike.entity.view.ResultData cn.edu.swpu.cins.weike.web.StudentController.updateInfo(cn.edu.swpu.cins.weike.entity.persistence.StudentDetail,javax.servlet.http.HttpServletRequest)
+2017-10-16 19:24:30.589  INFO 10760 --- [main] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped "{[/WeiKe/student/allProject],methods=[GET]}" onto public cn.edu.swpu.cins.weike.entity.view.ResultData cn.edu.swpu.cins.weike.web.StudentController.queryAllProject(javax.servlet.http.HttpServletRequest)
+2017-10-16 19:24:30.589  INFO 10760 --- [main] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped "{[/WeiKe/student/addProject],methods=[POST]}" onto public cn.edu.swpu.cins.weike.entity.view.ResultData cn.edu.swpu.cins.weike.web.StudentController.publishProject(cn.edu.swpu.cins.weike.entity.persistence.ProjectInfo,javax.servlet.http.HttpServletRequest)
+2017-10-16 19:24:30.589  INFO 10760 --- [main] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped "{[/WeiKe/student/projectName],methods=[GET]}" onto public cn.edu.swpu.cins.weike.entity.view.ResultData cn.edu.swpu.cins.weike.web.StudentController.queryApplyInfo(java.lang.String)
+2017-10-16 19:24:30.589  INFO 10760 --- [main] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped "{[/WeiKe/student/getRecommend],methods=[GET]}" onto public cn.edu.swpu.cins.weike.entity.view.ResultData cn.edu.swpu.cins.weike.web.StudentController.getRecommend(javax.servlet.http.HttpServletRequest)
+2017-10-16 19:24:30.590  INFO 10760 --- [main] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped "{[/WeiKe/student/addPersonalDeail],methods=[POST]}" onto public cn.edu.swpu.cins.weike.entity.view.ResultData cn.edu.swpu.cins.weike.web.StudentController.addPersonalDetail(cn.edu.swpu.cins.weike.entity.persistence.StudentDetail,javax.servlet.http.HttpServletRequest)
+2017-10-16 19:24:30.594  INFO 10760 --- [main] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped "{[/WeiKe/teacher/personalData],methods=[GET]}" onto public cn.edu.swpu.cins.weike.entity.view.ResultData cn.edu.swpu.cins.weike.web.TeacherController.queryForData(javax.servlet.http.HttpServletRequest)
+2017-10-16 19:24:30.594  INFO 10760 --- [main] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped "{[/WeiKe/teacher/updateInfo],methods=[POST]}" onto public cn.edu.swpu.cins.weike.entity.view.ResultData cn.edu.swpu.cins.weike.web.TeacherController.updateInfo(cn.edu.swpu.cins.weike.entity.persistence.TeacherDetail,javax.servlet.http.HttpServletRequest)
+2017-10-16 19:24:30.594  INFO 10760 --- [main] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped "{[/WeiKe/teacher/allProject],methods=[GET]}" onto public cn.edu.swpu.cins.weike.entity.view.ResultData cn.edu.swpu.cins.weike.web.TeacherController.queryAllProject(javax.servlet.http.HttpServletRequest)
+2017-10-16 19:24:30.594  INFO 10760 --- [main] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped "{[/WeiKe/teacher/addProject],methods=[POST]}" onto public cn.edu.swpu.cins.weike.entity.view.ResultData cn.edu.swpu.cins.weike.web.TeacherController.publishProject(cn.edu.swpu.cins.weike.entity.persistence.ProjectInfo,javax.servlet.http.HttpServletRequest)
+2017-10-16 19:24:30.594  INFO 10760 --- [main] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped "{[/WeiKe/teacher/addPersonal],methods=[POST]}" onto public cn.edu.swpu.cins.weike.entity.view.ResultData cn.edu.swpu.cins.weike.web.TeacherController.addTeacherPersonal(cn.edu.swpu.cins.weike.entity.persistence.TeacherDetail,javax.servlet.http.HttpServletRequest)
+2017-10-16 19:24:30.596  INFO 10760 --- [main] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped "{[/error],produces=[text/html]}" onto public org.springframework.web.servlet.ModelAndView org.springframework.boot.autoconfigure.web.BasicErrorController.errorHtml(javax.servlet.http.HttpServletRequest,javax.servlet.http.HttpServletResponse)
+2017-10-16 19:24:30.596  INFO 10760 --- [main] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped "{[/error]}" onto public org.springframework.http.ResponseEntity<java.util.Map<java.lang.String, java.lang.Object>> org.springframework.boot.autoconfigure.web.BasicErrorController.error(javax.servlet.http.HttpServletRequest)
+2017-10-16 19:24:30.655  INFO 10760 --- [main] o.s.w.s.handler.SimpleUrlHandlerMapping  : Mapped URL path [/webjars/**] onto handler of type [class org.springframework.web.servlet.resource.ResourceHttpRequestHandler]
+2017-10-16 19:24:30.655  INFO 10760 --- [main] o.s.w.s.handler.SimpleUrlHandlerMapping  : Mapped URL path [/**] onto handler of type [class org.springframework.web.servlet.resource.ResourceHttpRequestHandler]
+2017-10-16 19:24:30.704  INFO 10760 --- [main] o.s.w.s.handler.SimpleUrlHandlerMapping  : Mapped URL path [/**/favicon.ico] onto handler of type [class org.springframework.web.servlet.resource.ResourceHttpRequestHandler]
+2017-10-16 19:24:31.282  INFO 10760 --- [main] o.s.j.e.a.AnnotationMBeanExporter        : Registering beans for JMX exposure on startup
+2017-10-16 19:24:31.324  INFO 10760 --- [main] s.b.c.e.t.TomcatEmbeddedServletContainer : Tomcat started on port(s): 8080 (http)
+2017-10-16 19:24:31.329  INFO 10760 --- [main] cn.edu.swpu.cins.weike.WeikeApplication  : Started WeikeApplication in 4.776 seconds (JVM running for 5.335)
+2017-10-16 19:24:35.839  INFO 10760 --- [http-nio-8080-exec-1] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring FrameworkServlet 'dispatcherServlet'
+2017-10-16 19:24:35.839  INFO 10760 --- [http-nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : FrameworkServlet 'dispatcherServlet': initialization started
+2017-10-16 19:24:35.854  INFO 10760 --- [http-nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : FrameworkServlet 'dispatcherServlet': initialization completed in 15 ms
+2017-10-16 19:24:35.878  INFO 10760 --- [http-nio-8080-exec-1] c.e.swpu.cins.weike.Aspect.WebLogAspect  : controller aspect beginning
+2017-10-16 19:24:35.879  INFO 10760 --- [http-nio-8080-exec-1] c.e.swpu.cins.weike.Aspect.WebLogAspect  : arg : org.springframework.security.web.firewall.FirewalledResponse@c06a328
+2017-10-16 19:24:35.879  INFO 10760 --- [http-nio-8080-exec-1] c.e.swpu.cins.weike.Aspect.WebLogAspect  : aspect finishing
+2017-10-16 19:24:35.879  INFO 10760 --- [http-nio-8080-exec-1] c.e.swpu.cins.weike.Aspect.WebLogAspect  : calling cn.edu.swpu.cins.weike.web.AuthController.getVerifyCodeForLogin
+2017-10-16 19:24:36.021  INFO 10760 --- [http-nio-8080-exec-1] c.e.swpu.cins.weike.Aspect.WebLogAspect  : controller return ResultData(data=null, ifSuccess=true, msg=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
+AAAASUVORK5CYII=)
+2017-10-16 19:24:57.491  INFO 10760 --- [http-nio-8080-exec-2] c.e.swpu.cins.weike.Aspect.WebLogAspect  : controller aspect beginning
+2017-10-16 19:24:57.492  INFO 10760 --- [http-nio-8080-exec-2] c.e.swpu.cins.weike.Aspect.WebLogAspect  : arg : JwtAuthenticationRequest(username=muyi, password=1234, verifyCode=427kx)
+2017-10-16 19:24:57.492  INFO 10760 --- [http-nio-8080-exec-2] c.e.swpu.cins.weike.Aspect.WebLogAspect  : arg : 9c2c28e5-4942-4fcf-b803-5cf2eaf26f29
+2017-10-16 19:24:57.492  INFO 10760 --- [http-nio-8080-exec-2] c.e.swpu.cins.weike.Aspect.WebLogAspect  : aspect finishing
+2017-10-16 19:24:57.492  INFO 10760 --- [http-nio-8080-exec-2] c.e.swpu.cins.weike.Aspect.WebLogAspect  : calling cn.edu.swpu.cins.weike.web.AuthController.createStudentAuthenticationToken
+2017-10-16 19:24:57.492  INFO 10760 --- [http-nio-8080-exec-2] c.e.s.c.weike.Aspect.ServiceLogAspect    : 
+
+2017-10-16 19:24:57.492  INFO 10760 --- [http-nio-8080-exec-2] c.e.s.c.weike.Aspect.ServiceLogAspect    : calling : cn.edu.swpu.cins.weike.service.Impl.AuthServiceImpl.studentLogin
+2017-10-16 19:24:57.492  INFO 10760 --- [http-nio-8080-exec-2] c.e.s.c.weike.Aspect.ServiceLogAspect    : arg : JwtAuthenticationRequest(username=muyi, password=1234, verifyCode=427kx)
+2017-10-16 19:24:57.492  INFO 10760 --- [http-nio-8080-exec-2] c.e.s.c.weike.Aspect.ServiceLogAspect    : arg : 9c2c28e5-4942-4fcf-b803-5cf2eaf26f29
+2017-10-16 19:24:57.492  INFO 10760 --- [http-nio-8080-exec-2] c.e.s.c.weike.Aspect.ServiceLogAspect    : 
+
+2017-10-16 19:25:01.770  INFO 10760 --- [http-nio-8080-exec-2] c.e.s.c.weike.Aspect.ServiceLogAspect    : 
+
+2017-10-16 19:25:01.771  INFO 10760 --- [http-nio-8080-exec-2] c.e.s.c.weike.Aspect.ServiceLogAspect    : service return : JwtAuthenticationResponse(token=eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJtdXlpIiwiY3JlYXRlZCI6MTUwODE1MzEwMTY3MSwiZXhwIjoxNTA4MjM5NTAxfQ.IOvE9Kayhc6MM55hky3EKvpTiZ2y_KwFHYkjFUJNgOlCvkt77av509CX0kMeKbwrfoiyiCMk_oOkHsK-gDbfNQ, username=muyi, role=ROLE_STUDENT, image=test, isCompleted=true, joinProject=JoinProject(released=[Projectasdasd1, TET, TEs, TEDSs, TEDDSDs, TEDSDKHDs, LNLJ, kjhhjasd, kjhacasdaasd, CINS, asdasdas, Projectasd, Projectas, test13, testRepeat4, testRepeat5, testRepeat6, testRepeat7], joining=[], joinFailed=[], joinSuccess=[], followPro=[]))
+2017-10-16 19:25:01.771  INFO 10760 --- [http-nio-8080-exec-2] c.e.s.c.weike.Aspect.ServiceLogAspect    : 
+
+2017-10-16 19:25:01.771  INFO 10760 --- [http-nio-8080-exec-2] c.e.swpu.cins.weike.Aspect.WebLogAspect  : controller return ResultData(data=JwtAuthenticationResponse(token=eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJtdXlpIiwiY3JlYXRlZCI6MTUwODE1MzEwMTY3MSwiZXhwIjoxNTA4MjM5NTAxfQ.IOvE9Kayhc6MM55hky3EKvpTiZ2y_KwFHYkjFUJNgOlCvkt77av509CX0kMeKbwrfoiyiCMk_oOkHsK-gDbfNQ, username=muyi, role=ROLE_STUDENT, image=test, isCompleted=true, joinProject=JoinProject(released=[Projectasdasd1, TET, TEs, TEDSs, TEDDSDs, TEDSDKHDs, LNLJ, kjhhjasd, kjhacasdaasd, CINS, asdasdas, Projectasd, Projectas, test13, testRepeat4, testRepeat5, testRepeat6, testRepeat7], joining=[], joinFailed=[], joinSuccess=[], followPro=[])), ifSuccess=true, msg=null)

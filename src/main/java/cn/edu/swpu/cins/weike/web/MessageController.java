@@ -35,15 +35,11 @@ public class MessageController {
     private String tokenHead;
     private MessageService messageService;
     private GetUsrName getUsrName;
+    private JoinProjectService joinProjectService;
 
     @Autowired
-    JoinProjectService joinProjectService;
-
-
-
-
-    @Autowired
-    public MessageController(MessageService messageService, GetUsrName getUsrName) {
+    public MessageController(MessageService messageService, GetUsrName getUsrName, JoinProjectService joinProjectService) {
+        this.joinProjectService = joinProjectService;
         this.messageService = messageService;
         this.getUsrName = getUsrName;
     }
