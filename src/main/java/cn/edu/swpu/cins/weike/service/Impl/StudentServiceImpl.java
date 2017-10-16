@@ -2,13 +2,17 @@ package cn.edu.swpu.cins.weike.service.Impl;
 
 import cn.edu.swpu.cins.weike.entity.persistence.StudentDetail;
 import cn.edu.swpu.cins.weike.entity.persistence.StudentInfo;
+import cn.edu.swpu.cins.weike.entity.view.IndexVO;
 import cn.edu.swpu.cins.weike.entity.view.PersonData;
+import cn.edu.swpu.cins.weike.entity.view.ProjectDetail;
 import cn.edu.swpu.cins.weike.entity.view.ProjectRecommend;
 import cn.edu.swpu.cins.weike.enums.ExceptionEnum;
 import cn.edu.swpu.cins.weike.enums.ProjectEnum;
 import cn.edu.swpu.cins.weike.enums.UserEnum;
 import cn.edu.swpu.cins.weike.exception.StudentException;
+import cn.edu.swpu.cins.weike.service.ProjectService;
 import cn.edu.swpu.cins.weike.util.*;
+import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
@@ -43,6 +47,9 @@ public class StudentServiceImpl implements StudentService {
 
     @Autowired
     private GetUsrName getUsrName;
+
+    @Autowired
+    private ProjectServiceImpl projectService;
 
     @Autowired
     public StudentServiceImpl(StudentDao studentDao, ProjectDao projectDao, ReduceRepeat reduceRepeat) {
@@ -178,18 +185,20 @@ public class StudentServiceImpl implements StudentService {
 
     @Override
     @Transactional(rollbackFor = SQLException.class)
-    public List<ProjectInfo> queryForRecommend(HttpServletRequest request) {
+    public List<IndexVO> queryForRecommend(HttpServletRequest request) {
         String username = getUsrName.AllProjects(request);
         List<String> skills = studentDao.queryForStudentPhone(username).getSkills();
         if (skills == null) {
             throw new StudentException(ExceptionEnum.INNER_ERROR.getMsg());
         }
         List<ProjectInfo> projectInfoList = projectDao.selectRecommend(skills);
+        List<ProjectDetail> projectDetailList = projectInfoList.stream().map(ProjectDetail::new).collect(Collectors.toList());
+        List<IndexVO> indexVOList = projectService.getProjectDetail(projectDetailList);
 
-        if (projectInfoList.isEmpty()) {
+        if (indexVOList.isEmpty()) {
             throw new StudentException(ExceptionEnum.NO_SUITBLE_PRO.getMsg());
         }
-        return projectInfoList;
+        return indexVOList;
     }
 
 }

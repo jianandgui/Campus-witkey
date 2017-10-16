@@ -1,8 +1,6 @@
 package cn.edu.swpu.cins.weike.web;
 
-import cn.edu.swpu.cins.weike.entity.view.PersonData;
-import cn.edu.swpu.cins.weike.entity.view.ProApplyInfo;
-import cn.edu.swpu.cins.weike.entity.view.ProjectRecommend;
+import cn.edu.swpu.cins.weike.entity.view.*;
 import cn.edu.swpu.cins.weike.enums.ExceptionEnum;
 import cn.edu.swpu.cins.weike.enums.ProjectEnum;
 import cn.edu.swpu.cins.weike.enums.UserEnum;
@@ -20,7 +18,6 @@ import cn.edu.swpu.cins.weike.dao.StudentDao;
 import cn.edu.swpu.cins.weike.entity.persistence.ProjectInfo;
 import cn.edu.swpu.cins.weike.entity.persistence.StudentDetail;
 import cn.edu.swpu.cins.weike.entity.persistence.StudentInfo;
-import cn.edu.swpu.cins.weike.entity.view.ResultData;
 import cn.edu.swpu.cins.weike.service.ProjectService;
 import cn.edu.swpu.cins.weike.service.StudentService;
 
@@ -168,8 +165,8 @@ public class StudentController {
     @GetMapping("/getRecommend")
     public ResultData getRecommend(HttpServletRequest request) {
         try {
-            List<ProjectInfo> projectInfoList = studentService.queryForRecommend(request);
-            return new ResultData(true,projectInfoList);
+            List<IndexVO> recommendList = studentService.queryForRecommend(request);
+            return new ResultData(true,recommendList);
         } catch (Exception e) {
             return new ResultData(false, ExceptionEnum.INNER_ERROR.getMsg());
         }

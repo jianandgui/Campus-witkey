@@ -25,6 +25,7 @@ public class ProjectInfo {
     private String projectConnector;
     //联系人电话
     private long qq;
+
     private String email;
     //项目需要人数
     private int numNeed;

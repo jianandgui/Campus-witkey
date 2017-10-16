@@ -1,5 +1,6 @@
 package cn.edu.swpu.cins.weike.entity.view;
 
+import cn.edu.swpu.cins.weike.entity.persistence.ProjectInfo;
 import lombok.Data;
 
 import java.util.List;
@@ -35,6 +36,19 @@ public class ProjectDetail {
 
 
     public ProjectDetail() {
+    }
+
+    public ProjectDetail(ProjectInfo projectInfo) {
+        projectConnector = projectInfo.getProjectConnector();
+        projectEnd = projectInfo.getProjectEnd();
+        projectKind = projectInfo.getProjectKind();
+        projectName = projectInfo.getProjectName();
+        projectNeed = projectInfo.getProjectNeed();
+        projectProfile = projectInfo.getProjectProfile();
+        projectStart = projectInfo.getProjectStart();
+        email = projectInfo.getEmail();
+        qq = projectInfo.getQq();
+        numNeed = projectInfo.getNumNeed();
     }
 
 

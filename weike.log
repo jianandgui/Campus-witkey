@@ -11809,3 +11809,824 @@ public cn.edu.swpu.cins.weike.entity.view.ResultData cn.edu.swpu.cins.weike.web.
 2017-10-15 18:56:51.975  INFO 18431 --- [main] o.s.j.e.a.AnnotationMBeanExporter        : Registering beans for JMX exposure on startup
 2017-10-15 18:56:52.010  INFO 18431 --- [main] s.b.c.e.t.TomcatEmbeddedServletContainer : Tomcat started on port(s): 8080 (http)
 2017-10-15 18:56:52.013  INFO 18431 --- [main] cn.edu.swpu.cins.weike.WeikeApplication  : Started WeikeApplication in 5.066 seconds (JVM running for 5.528)
+2017-10-15 21:10:55.566  INFO 18431 --- [Thread-6] ationConfigEmbeddedWebApplicationContext : Closing org.springframework.boot.context.embedded.AnnotationConfigEmbeddedWebApplicationContext@55b7a4e0: startup date [Sun Oct 15 18:56:47 CST 2017]; root of context hierarchy
+2017-10-15 21:10:55.571  INFO 18431 --- [Thread-6] o.s.j.e.a.AnnotationMBeanExporter        : Unregistering JMX-exposed beans on shutdown
+2017-10-16 13:36:36.750  INFO 5411 --- [main] cn.edu.swpu.cins.weike.WeikeApplication  : Starting WeikeApplication on yang with PID 5411 (/home/yang/idea_work_space/weike/out/production/classes started by yang in /home/yang/idea_work_space/weike)
+2017-10-16 13:36:36.772  INFO 5411 --- [main] cn.edu.swpu.cins.weike.WeikeApplication  : No active profile set, falling back to default profiles: default
+2017-10-16 13:36:36.930  INFO 5411 --- [main] ationConfigEmbeddedWebApplicationContext : Refreshing org.springframework.boot.context.embedded.AnnotationConfigEmbeddedWebApplicationContext@6eda5c9: startup date [Mon Oct 16 13:36:36 CST 2017]; root of context hierarchy
+2017-10-16 13:36:38.165  INFO 5411 --- [main] .s.d.r.c.RepositoryConfigurationDelegate : Multiple Spring Data modules found, entering strict repository configuration mode!
+2017-10-16 13:36:38.595  INFO 5411 --- [main] trationDelegate$BeanPostProcessorChecker : Bean 'org.springframework.transaction.annotation.ProxyTransactionManagementConfiguration' of type [org.springframework.transaction.annotation.ProxyTransactionManagementConfiguration$$EnhancerBySpringCGLIB$$7991092f] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2017-10-16 13:36:38.710  INFO 5411 --- [main] trationDelegate$BeanPostProcessorChecker : Bean 'org.springframework.security.config.annotation.configuration.ObjectPostProcessorConfiguration' of type [org.springframework.security.config.annotation.configuration.ObjectPostProcessorConfiguration$$EnhancerBySpringCGLIB$$123ed169] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2017-10-16 13:36:38.720  INFO 5411 --- [main] trationDelegate$BeanPostProcessorChecker : Bean 'objectPostProcessor' of type [org.springframework.security.config.annotation.configuration.AutowireBeanFactoryObjectPostProcessor] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2017-10-16 13:36:38.724  INFO 5411 --- [main] trationDelegate$BeanPostProcessorChecker : Bean 'org.springframework.security.access.expression.method.DefaultMethodSecurityExpressionHandler@2e52fb3e' of type [org.springframework.security.access.expression.method.DefaultMethodSecurityExpressionHandler] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2017-10-16 13:36:38.733  INFO 5411 --- [main] trationDelegate$BeanPostProcessorChecker : Bean 'org.springframework.security.config.annotation.method.configuration.GlobalMethodSecurityConfiguration' of type [org.springframework.security.config.annotation.method.configuration.GlobalMethodSecurityConfiguration$$EnhancerBySpringCGLIB$$3713741b] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2017-10-16 13:36:38.757  INFO 5411 --- [main] trationDelegate$BeanPostProcessorChecker : Bean 'methodSecurityMetadataSource' of type [org.springframework.security.access.method.DelegatingMethodSecurityMetadataSource] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2017-10-16 13:36:39.040  INFO 5411 --- [main] s.b.c.e.t.TomcatEmbeddedServletContainer : Tomcat initialized with port(s): 8080 (http)
+2017-10-16 13:36:39.048  INFO 5411 --- [main] o.apache.catalina.core.StandardService   : Starting service Tomcat
+2017-10-16 13:36:39.050  INFO 5411 --- [main] org.apache.catalina.core.StandardEngine  : Starting Servlet Engine: Apache Tomcat/8.5.11
+2017-10-16 13:36:39.103  INFO 5411 --- [localhost-startStop-1] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2017-10-16 13:36:39.103  INFO 5411 --- [localhost-startStop-1] o.s.web.context.ContextLoader            : Root WebApplicationContext: initialization completed in 2176 ms
+2017-10-16 13:36:40.252  INFO 5411 --- [localhost-startStop-1] o.s.b.w.servlet.FilterRegistrationBean   : Mapping filter: 'characterEncodingFilter' to: [/*]
+2017-10-16 13:36:40.252  INFO 5411 --- [localhost-startStop-1] o.s.b.w.servlet.FilterRegistrationBean   : Mapping filter: 'hiddenHttpMethodFilter' to: [/*]
+2017-10-16 13:36:40.253  INFO 5411 --- [localhost-startStop-1] o.s.b.w.servlet.FilterRegistrationBean   : Mapping filter: 'httpPutFormContentFilter' to: [/*]
+2017-10-16 13:36:40.253  INFO 5411 --- [localhost-startStop-1] o.s.b.w.servlet.FilterRegistrationBean   : Mapping filter: 'requestContextFilter' to: [/*]
+2017-10-16 13:36:40.254  INFO 5411 --- [localhost-startStop-1] .s.DelegatingFilterProxyRegistrationBean : Mapping filter: 'springSecurityFilterChain' to: [/*]
+2017-10-16 13:36:40.254  INFO 5411 --- [localhost-startStop-1] o.s.b.w.servlet.FilterRegistrationBean   : Mapping filter: 'jwtAuthenticationTokenFilter' to: [/*]
+2017-10-16 13:36:40.254  INFO 5411 --- [localhost-startStop-1] o.s.b.w.servlet.FilterRegistrationBean   : Mapping filter: 'authenticationTokenFilterBean' to: [/*]
+2017-10-16 13:36:40.254  INFO 5411 --- [localhost-startStop-1] o.s.b.w.servlet.ServletRegistrationBean  : Mapping servlet: 'dispatcherServlet' to [/]
+2017-10-16 13:36:40.354 ERROR 5411 --- [Thread-2] c.edu.swpu.cins.weike.util.JedisAdapter  : 发生异常Could not get a resource from the pool
+2017-10-16 13:36:40.789  INFO 5411 --- [main] o.s.s.web.DefaultSecurityFilterChain     : Creating filter chain: org.springframework.security.web.util.matcher.AnyRequestMatcher@1, [org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter@396e6d9, org.springframework.security.web.context.SecurityContextPersistenceFilter@31f20c9f, org.springframework.security.web.header.HeaderWriterFilter@6ff415ad, org.springframework.security.web.authentication.logout.LogoutFilter@1046498a, cn.edu.swpu.cins.weike.config.filter.JwtAuthenticationTokenFilter@356441e7, org.springframework.security.web.savedrequest.RequestCacheAwareFilter@32f0c7f8, org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter@4315e9af, org.springframework.security.web.authentication.AnonymousAuthenticationFilter@75308740, org.springframework.security.web.session.SessionManagementFilter@3b90a30a, org.springframework.security.web.access.ExceptionTranslationFilter@70331432, org.springframework.security.web.access.intercept.FilterSecurityInterceptor@363a3d15]
+2017-10-16 13:36:40.898  INFO 5411 --- [main] s.w.s.m.m.a.RequestMappingHandlerAdapter : Looking for @ControllerAdvice: org.springframework.boot.context.embedded.AnnotationConfigEmbeddedWebApplicationContext@6eda5c9: startup date [Mon Oct 16 13:36:36 CST 2017]; root of context hierarchy
+2017-10-16 13:36:40.949  INFO 5411 --- [main] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped "{[/weike/student/FindPassword],methods=[POST]}" onto public cn.edu.swpu.cins.weike.entity.view.ResultData cn.edu.swpu.cins.weike.web.AuthController.studentUpdatePassword(cn.edu.swpu.cins.weike.entity.view.UpdatePassword)
+2017-10-16 13:36:40.950  INFO 5411 --- [main] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped "{[/weike/teacher/FindPassword],methods=[POST]}" onto public cn.edu.swpu.cins.weike.entity.view.ResultData cn.edu.swpu.cins.weike.web.AuthController.teacherUpdatePassword(cn.edu.swpu.cins.weike.entity.view.UpdatePassword)
+2017-10-16 13:36:40.951  INFO 5411 --- [main] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped "{[/weike/getVerifyCode],methods=[GET]}" onto public cn.edu.swpu.cins.weike.entity.view.ResultData cn.edu.swpu.cins.weike.web.AuthController.getVerifyCodeForLogin(javax.servlet.http.HttpServletResponse)
+2017-10-16 13:36:40.951  INFO 5411 --- [main] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped "{[/weike/student/login],methods=[POST]}" onto public cn.edu.swpu.cins.weike.entity.view.ResultData cn.edu.swpu.cins.weike.web.AuthController.createStudentAuthenticationToken(cn.edu.swpu.cins.weike.entity.view.JwtAuthenticationRequest,java.lang.String)
+2017-10-16 13:36:40.951  INFO 5411 --- [main] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped "{[/weike/teacher/login],methods=[POST]}" onto public cn.edu.swpu.cins.weike.entity.view.ResultData cn.edu.swpu.cins.weike.web.AuthController.createTeacherAuthenticationToken(cn.edu.swpu.cins.weike.entity.view.JwtAuthenticationRequest,java.lang.String)
+2017-10-16 13:36:40.951  INFO 5411 --- [main] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped "{[/weike/student/GetVerifyCodeForRegister],methods=[GET]}" onto public cn.edu.swpu.cins.weike.entity.view.ResultData cn.edu.swpu.cins.weike.web.AuthController.studentGetVerifyCode(java.lang.String,java.lang.String)
+2017-10-16 13:36:40.951  INFO 5411 --- [main] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped "{[/weike/teacher/GetVerifyCodeForRegister],methods=[GET]}" onto public cn.edu.swpu.cins.weike.entity.view.ResultData cn.edu.swpu.cins.weike.web.AuthController.teacherGetVerifyCode(java.lang.String,java.lang.String)
+2017-10-16 13:36:40.951  INFO 5411 --- [main] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped "{[/weike/student/register],methods=[POST]}" onto public cn.edu.swpu.cins.weike.entity.view.ResultData cn.edu.swpu.cins.weike.web.AuthController.StudentSaveToDB(cn.edu.swpu.cins.weike.entity.view.RegisterStudentVO)
+2017-10-16 13:36:40.952  INFO 5411 --- [main] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped "{[/weike/teacher/register],methods=[POST]}" onto public cn.edu.swpu.cins.weike.entity.view.ResultData cn.edu.swpu.cins.weike.web.AuthController.teacherSaveToDB(cn.edu.swpu.cins.weike.entity.view.RegisterTeacherVO)
+2017-10-16 13:36:40.952  INFO 5411 --- [main] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped "{[/weike/student/getVerifyCodeForFindPassword],methods=[GET]}" onto public cn.edu.swpu.cins.weike.entity.view.ResultData cn.edu.swpu.cins.weike.web.AuthController.studentGetVerifyForUpdate(java.lang.String,java.lang.String)
+2017-10-16 13:36:40.952  INFO 5411 --- [main] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped "{[/weike/teacher/getVerifyCodeForFindPassword],methods=[GET]}" onto public cn.edu.swpu.cins.weike.entity.view.ResultData cn.edu.swpu.cins.weike.web.AuthController.teacherGetVerifyForUpdatePassword(java.lang.String,java.lang.String)
+2017-10-16 13:36:40.952  INFO 5411 --- [main] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped "{[/weike/admin/login],methods=[POST]}" onto public cn.edu.swpu.cins.weike.entity.view.ResultData cn.edu.swpu.cins.weike.web.AuthController.createAdminAuthenticationToken(cn.edu.swpu.cins.weike.entity.view.JwtAuthenticationRequest)
+2017-10-16 13:36:40.955  INFO 5411 --- [main] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped "{[/WeiKe/deleteMessage],methods=[POST]}" onto public cn.edu.swpu.cins.weike.entity.view.ResultData cn.edu.swpu.cins.weike.web.MessageController.deleteMessage(cn.edu.swpu.cins.weike.entity.view.MessageDelete)
+2017-10-16 13:36:40.955  INFO 5411 --- [main] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped "{[/WeiKe/followPros],methods=[GET]}" onto public cn.edu.swpu.cins.weike.entity.view.ResultData cn.edu.swpu.cins.weike.web.MessageController.queryFollowPros(javax.servlet.http.HttpServletRequest)
+2017-10-16 13:36:40.955  INFO 5411 --- [main] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped "{[/WeiKe/messageList],methods=[GET]}" onto public cn.edu.swpu.cins.weike.entity.view.ResultData cn.edu.swpu.cins.weike.web.MessageController.getConversationDetail(javax.servlet.http.HttpServletRequest)
+2017-10-16 13:36:40.956  INFO 5411 --- [main] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped "{[/WeiKe/proFollower],methods=[GET]}" onto public cn.edu.swpu.cins.weike.entity.view.ResultData cn.edu.swpu.cins.weike.web.MessageController.queryProFollower(java.lang.String)
+2017-10-16 13:36:40.956  INFO 5411 --- [main] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped "{[/WeiKe/acceptApply],methods=[POST]}" onto public cn.edu.swpu.cins.weike.entity.view.ResultData cn.edu.swpu.cins.weike.web.MessageController.acceptJoin(cn.edu.swpu.cins.weike.entity.view.JoinMessage,javax.servlet.http.HttpServletRequest)
+2017-10-16 13:36:40.956  INFO 5411 --- [main] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped "{[/WeiKe/refuseApply],methods=[POST]}" onto public cn.edu.swpu.cins.weike.entity.view.ResultData cn.edu.swpu.cins.weike.web.MessageController.refuseJoin(cn.edu.swpu.cins.weike.entity.view.JoinMessage,javax.servlet.http.HttpServletRequest)
+2017-10-16 13:36:40.956  INFO 5411 --- [main] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped "{[/WeiKe/sendMessage],methods=[POST]}" onto public cn.edu.swpu.cins.weike.entity.view.ResultData cn.edu.swpu.cins.weike.web.MessageController.sendMessage(cn.edu.swpu.cins.weike.entity.view.MessageView,javax.servlet.http.HttpServletRequest)
+2017-10-16 13:36:40.957  INFO 5411 --- [main] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped "{[/WeiKe/followPro],methods=[POST]}" onto public cn.edu.swpu.cins.weike.entity.view.ResultData cn.edu.swpu.cins.weike.web.MessageController.attentionPro(cn.edu.swpu.cins.weike.entity.view.FollowPro,javax.servlet.http.HttpServletRequest)
+2017-10-16 13:36:40.957  INFO 5411 --- [main] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped "{[/WeiKe/unFollowPro],methods=[POST]}" onto public cn.edu.swpu.cins.weike.entity.view.ResultData cn.edu.swpu.cins.weike.web.MessageController.unAttentionPro(cn.edu.swpu.cins.weike.entity.view.FollowPro,javax.servlet.http.HttpServletRequest)
+2017-10-16 13:36:40.959  INFO 5411 --- [main] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped "{[/WeiKe/projectsByWords],methods=[GET]}" onto public cn.edu.swpu.cins.weike.entity.view.ResultData cn.edu.swpu.cins.weike.web.ProjectController.queryByKeyWords(java.lang.String)
+2017-10-16 13:36:40.959  INFO 5411 --- [main] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped "{[/WeiKe/index],methods=[GET]}" onto public cn.edu.swpu.cins.weike.entity.view.ResultData cn.edu.swpu.cins.weike.web.ProjectController.queryForIndex(int) throws java.lang.Exception
+2017-10-16 13:36:40.959  INFO 5411 --- [main] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped "{[/WeiKe/getApplyProDetail],methods=[GET]}" onto public cn.edu.swpu.cins.weike.entity.view.ResultData cn.edu.swpu.cins.weike.web.ProjectController.getApplyDetail(javax.servlet.http.HttpServletRequest)
+2017-10-16 13:36:40.960  INFO 5411 --- [main] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped "{[/WeiKe/delete/{projectName}],methods=[POST]}" onto public cn.edu.swpu.cins.weike.entity.view.ResultData cn.edu.swpu.cins.weike.web.ProjectController.deletePro(java.lang.String,javax.servlet.http.HttpServletRequest)
+2017-10-16 13:36:40.960  INFO 5411 --- [main] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped "{[/WeiKe/update/{projectName}],methods=[POST]}" onto public cn.edu.swpu.cins.weike.entity.view.ResultData cn.edu.swpu.cins.weike.web.ProjectController.updatePro(java.lang.String,cn.edu.swpu.cins.weike.entity.persistence.ProjectInfo,javax.servlet.http.HttpServletRequest)
+2017-10-16 13:36:40.960  INFO 5411 --- [main] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped "{[/WeiKe/projectName],methods=[GET]}" onto public cn.edu.swpu.cins.weike.entity.view.ResultData cn.edu.swpu.cins.weike.web.ProjectController.queryForProjectByName(java.lang.String)
+2017-10-16 13:36:40.962  INFO 5411 --- [main] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped "{[/WeiKe/student/personalData],methods=[GET]}" onto public cn.edu.swpu.cins.weike.entity.view.ResultData cn.edu.swpu.cins.weike.web.StudentController.queryForData(javax.servlet.http.HttpServletRequest)
+2017-10-16 13:36:40.962  INFO 5411 --- [main] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped "{[/WeiKe/student/updateInfo],methods=[POST]}" onto public cn.edu.swpu.cins.weike.entity.view.ResultData cn.edu.swpu.cins.weike.web.StudentController.updateInfo(cn.edu.swpu.cins.weike.entity.persistence.StudentDetail,javax.servlet.http.HttpServletRequest)
+2017-10-16 13:36:40.963  INFO 5411 --- [main] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped "{[/WeiKe/student/allProject],methods=[GET]}" onto public cn.edu.swpu.cins.weike.entity.view.ResultData cn.edu.swpu.cins.weike.web.StudentController.queryAllProject(javax.servlet.http.HttpServletRequest)
+2017-10-16 13:36:40.963  INFO 5411 --- [main] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped "{[/WeiKe/student/addProject],methods=[POST]}" onto public cn.edu.swpu.cins.weike.entity.view.ResultData cn.edu.swpu.cins.weike.web.StudentController.publishProject(cn.edu.swpu.cins.weike.entity.persistence.ProjectInfo,javax.servlet.http.HttpServletRequest)
+2017-10-16 13:36:40.963  INFO 5411 --- [main] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped "{[/WeiKe/student/addPersonalDeail],methods=[POST]}" onto public cn.edu.swpu.cins.weike.entity.view.ResultData cn.edu.swpu.cins.weike.web.StudentController.addPersonalDetail(cn.edu.swpu.cins.weike.entity.persistence.StudentDetail,javax.servlet.http.HttpServletRequest)
+2017-10-16 13:36:40.963  INFO 5411 --- [main] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped "{[/WeiKe/student/projectName],methods=[GET]}" onto public cn.edu.swpu.cins.weike.entity.view.ResultData cn.edu.swpu.cins.weike.web.StudentController.queryApplyInfo(java.lang.String)
+2017-10-16 13:36:40.963  INFO 5411 --- [main] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped "{[/WeiKe/student/getRecommend],methods=[GET]}" onto public cn.edu.swpu.cins.weike.entity.view.ResultData cn.edu.swpu.cins.weike.web.StudentController.getRecommend(javax.servlet.http.HttpServletRequest)
+2017-10-16 13:36:40.969  INFO 5411 --- [main] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped "{[/WeiKe/teacher/personalData],methods=[GET]}" onto public cn.edu.swpu.cins.weike.entity.view.ResultData cn.edu.swpu.cins.weike.web.TeacherController.queryForData(javax.servlet.http.HttpServletRequest)
+2017-10-16 13:36:40.969  INFO 5411 --- [main] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped "{[/WeiKe/teacher/updateInfo],methods=[POST]}" onto public cn.edu.swpu.cins.weike.entity.view.ResultData cn.edu.swpu.cins.weike.web.TeacherController.updateInfo(cn.edu.swpu.cins.weike.entity.persistence.TeacherDetail,javax.servlet.http.HttpServletRequest)
+2017-10-16 13:36:40.969  INFO 5411 --- [main] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped "{[/WeiKe/teacher/allProject],methods=[GET]}" onto public cn.edu.swpu.cins.weike.entity.view.ResultData cn.edu.swpu.cins.weike.web.TeacherController.queryAllProject(javax.servlet.http.HttpServletRequest)
+2017-10-16 13:36:40.969  INFO 5411 --- [main] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped "{[/WeiKe/teacher/addProject],methods=[POST]}" onto public cn.edu.swpu.cins.weike.entity.view.ResultData cn.edu.swpu.cins.weike.web.TeacherController.publishProject(cn.edu.swpu.cins.weike.entity.persistence.ProjectInfo,javax.servlet.http.HttpServletRequest)
+2017-10-16 13:36:40.970  INFO 5411 --- [main] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped "{[/WeiKe/teacher/addPersonal],methods=[POST]}" onto public cn.edu.swpu.cins.weike.entity.view.ResultData cn.edu.swpu.cins.weike.web.TeacherController.addTeacherPersonal(cn.edu.swpu.cins.weike.entity.persistence.TeacherDetail,javax.servlet.http.HttpServletRequest)
+2017-10-16 13:36:40.972  INFO 5411 --- [main] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped "{[/error],produces=[text/html]}" onto public org.springframework.web.servlet.ModelAndView org.springframework.boot.autoconfigure.web.BasicErrorController.errorHtml(javax.servlet.http.HttpServletRequest,javax.servlet.http.HttpServletResponse)
+2017-10-16 13:36:40.973  INFO 5411 --- [main] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped "{[/error]}" onto public org.springframework.http.ResponseEntity<java.util.Map<java.lang.String, java.lang.Object>> org.springframework.boot.autoconfigure.web.BasicErrorController.error(javax.servlet.http.HttpServletRequest)
+2017-10-16 13:36:41.049  INFO 5411 --- [main] o.s.w.s.handler.SimpleUrlHandlerMapping  : Mapped URL path [/webjars/**] onto handler of type [class org.springframework.web.servlet.resource.ResourceHttpRequestHandler]
+2017-10-16 13:36:41.049  INFO 5411 --- [main] o.s.w.s.handler.SimpleUrlHandlerMapping  : Mapped URL path [/**] onto handler of type [class org.springframework.web.servlet.resource.ResourceHttpRequestHandler]
+2017-10-16 13:36:41.126  INFO 5411 --- [main] o.s.w.s.handler.SimpleUrlHandlerMapping  : Mapped URL path [/**/favicon.ico] onto handler of type [class org.springframework.web.servlet.resource.ResourceHttpRequestHandler]
+2017-10-16 13:36:41.639  INFO 5411 --- [main] o.s.j.e.a.AnnotationMBeanExporter        : Registering beans for JMX exposure on startup
+2017-10-16 13:36:41.675  INFO 5411 --- [main] s.b.c.e.t.TomcatEmbeddedServletContainer : Tomcat started on port(s): 8080 (http)
+2017-10-16 13:36:41.678  INFO 5411 --- [main] cn.edu.swpu.cins.weike.WeikeApplication  : Started WeikeApplication in 5.566 seconds (JVM running for 6.602)
+2017-10-16 13:36:48.318  INFO 5411 --- [Thread-6] ationConfigEmbeddedWebApplicationContext : Closing org.springframework.boot.context.embedded.AnnotationConfigEmbeddedWebApplicationContext@6eda5c9: startup date [Mon Oct 16 13:36:36 CST 2017]; root of context hierarchy
+2017-10-16 13:36:48.327  INFO 5411 --- [Thread-6] o.s.j.e.a.AnnotationMBeanExporter        : Unregistering JMX-exposed beans on shutdown
+2017-10-16 13:36:50.370  INFO 5509 --- [main] cn.edu.swpu.cins.weike.WeikeApplication  : Starting WeikeApplication on yang with PID 5509 (/home/yang/idea_work_space/weike/out/production/classes started by yang in /home/yang/idea_work_space/weike)
+2017-10-16 13:36:50.374  INFO 5509 --- [main] cn.edu.swpu.cins.weike.WeikeApplication  : No active profile set, falling back to default profiles: default
+2017-10-16 13:36:50.456  INFO 5509 --- [main] ationConfigEmbeddedWebApplicationContext : Refreshing org.springframework.boot.context.embedded.AnnotationConfigEmbeddedWebApplicationContext@6eda5c9: startup date [Mon Oct 16 13:36:50 CST 2017]; root of context hierarchy
+2017-10-16 13:36:51.878  INFO 5509 --- [main] .s.d.r.c.RepositoryConfigurationDelegate : Multiple Spring Data modules found, entering strict repository configuration mode!
+2017-10-16 13:36:52.223  INFO 5509 --- [main] trationDelegate$BeanPostProcessorChecker : Bean 'org.springframework.transaction.annotation.ProxyTransactionManagementConfiguration' of type [org.springframework.transaction.annotation.ProxyTransactionManagementConfiguration$$EnhancerBySpringCGLIB$$df54bbb1] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2017-10-16 13:36:52.340  INFO 5509 --- [main] trationDelegate$BeanPostProcessorChecker : Bean 'org.springframework.security.config.annotation.configuration.ObjectPostProcessorConfiguration' of type [org.springframework.security.config.annotation.configuration.ObjectPostProcessorConfiguration$$EnhancerBySpringCGLIB$$780283eb] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2017-10-16 13:36:52.353  INFO 5509 --- [main] trationDelegate$BeanPostProcessorChecker : Bean 'objectPostProcessor' of type [org.springframework.security.config.annotation.configuration.AutowireBeanFactoryObjectPostProcessor] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2017-10-16 13:36:52.360  INFO 5509 --- [main] trationDelegate$BeanPostProcessorChecker : Bean 'org.springframework.security.access.expression.method.DefaultMethodSecurityExpressionHandler@27f1bbe0' of type [org.springframework.security.access.expression.method.DefaultMethodSecurityExpressionHandler] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2017-10-16 13:36:52.368  INFO 5509 --- [main] trationDelegate$BeanPostProcessorChecker : Bean 'org.springframework.security.config.annotation.method.configuration.GlobalMethodSecurityConfiguration' of type [org.springframework.security.config.annotation.method.configuration.GlobalMethodSecurityConfiguration$$EnhancerBySpringCGLIB$$9cd7269d] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2017-10-16 13:36:52.391  INFO 5509 --- [main] trationDelegate$BeanPostProcessorChecker : Bean 'methodSecurityMetadataSource' of type [org.springframework.security.access.method.DelegatingMethodSecurityMetadataSource] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2017-10-16 13:36:52.698  INFO 5509 --- [main] s.b.c.e.t.TomcatEmbeddedServletContainer : Tomcat initialized with port(s): 8080 (http)
+2017-10-16 13:36:52.706  INFO 5509 --- [main] o.apache.catalina.core.StandardService   : Starting service Tomcat
+2017-10-16 13:36:52.707  INFO 5509 --- [main] org.apache.catalina.core.StandardEngine  : Starting Servlet Engine: Apache Tomcat/8.5.11
+2017-10-16 13:36:52.762  INFO 5509 --- [localhost-startStop-1] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2017-10-16 13:36:52.762  INFO 5509 --- [localhost-startStop-1] o.s.web.context.ContextLoader            : Root WebApplicationContext: initialization completed in 2310 ms
+2017-10-16 13:36:56.261  INFO 5509 --- [localhost-startStop-1] o.s.b.w.servlet.FilterRegistrationBean   : Mapping filter: 'characterEncodingFilter' to: [/*]
+2017-10-16 13:36:56.262  INFO 5509 --- [localhost-startStop-1] o.s.b.w.servlet.FilterRegistrationBean   : Mapping filter: 'hiddenHttpMethodFilter' to: [/*]
+2017-10-16 13:36:56.269  INFO 5509 --- [localhost-startStop-1] o.s.b.w.servlet.FilterRegistrationBean   : Mapping filter: 'httpPutFormContentFilter' to: [/*]
+2017-10-16 13:36:56.269  INFO 5509 --- [localhost-startStop-1] o.s.b.w.servlet.FilterRegistrationBean   : Mapping filter: 'requestContextFilter' to: [/*]
+2017-10-16 13:36:56.271  INFO 5509 --- [localhost-startStop-1] .s.DelegatingFilterProxyRegistrationBean : Mapping filter: 'springSecurityFilterChain' to: [/*]
+2017-10-16 13:36:56.275  INFO 5509 --- [localhost-startStop-1] o.s.b.w.servlet.FilterRegistrationBean   : Mapping filter: 'jwtAuthenticationTokenFilter' to: [/*]
+2017-10-16 13:36:56.276  INFO 5509 --- [localhost-startStop-1] o.s.b.w.servlet.FilterRegistrationBean   : Mapping filter: 'authenticationTokenFilterBean' to: [/*]
+2017-10-16 13:36:56.276  INFO 5509 --- [localhost-startStop-1] o.s.b.w.servlet.ServletRegistrationBean  : Mapping servlet: 'dispatcherServlet' to [/]
+2017-10-16 13:36:57.964  INFO 5509 --- [main] o.s.s.web.DefaultSecurityFilterChain     : Creating filter chain: org.springframework.security.web.util.matcher.AnyRequestMatcher@1, [org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter@5d5b5fa7, org.springframework.security.web.context.SecurityContextPersistenceFilter@7063686f, org.springframework.security.web.header.HeaderWriterFilter@7275c74b, org.springframework.security.web.authentication.logout.LogoutFilter@1da4b6b3, cn.edu.swpu.cins.weike.config.filter.JwtAuthenticationTokenFilter@578873a2, org.springframework.security.web.savedrequest.RequestCacheAwareFilter@76f856a8, org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter@409986fe, org.springframework.security.web.authentication.AnonymousAuthenticationFilter@2a32fb6, org.springframework.security.web.session.SessionManagementFilter@4f966719, org.springframework.security.web.access.ExceptionTranslationFilter@5d1b9c3d, org.springframework.security.web.access.intercept.FilterSecurityInterceptor@5c20aab9]
+2017-10-16 13:36:58.274  INFO 5509 --- [main] s.w.s.m.m.a.RequestMappingHandlerAdapter : Looking for @ControllerAdvice: org.springframework.boot.context.embedded.AnnotationConfigEmbeddedWebApplicationContext@6eda5c9: startup date [Mon Oct 16 13:36:50 CST 2017]; root of context hierarchy
+2017-10-16 13:36:58.379  INFO 5509 --- [main] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped "{[/weike/student/FindPassword],methods=[POST]}" onto public cn.edu.swpu.cins.weike.entity.view.ResultData cn.edu.swpu.cins.weike.web.AuthController.studentUpdatePassword(cn.edu.swpu.cins.weike.entity.view.UpdatePassword)
+2017-10-16 13:36:58.380  INFO 5509 --- [main] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped "{[/weike/teacher/FindPassword],methods=[POST]}" onto public cn.edu.swpu.cins.weike.entity.view.ResultData cn.edu.swpu.cins.weike.web.AuthController.teacherUpdatePassword(cn.edu.swpu.cins.weike.entity.view.UpdatePassword)
+2017-10-16 13:36:58.381  INFO 5509 --- [main] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped "{[/weike/getVerifyCode],methods=[GET]}" onto public cn.edu.swpu.cins.weike.entity.view.ResultData cn.edu.swpu.cins.weike.web.AuthController.getVerifyCodeForLogin(javax.servlet.http.HttpServletResponse)
+2017-10-16 13:36:58.381  INFO 5509 --- [main] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped "{[/weike/student/login],methods=[POST]}" onto public cn.edu.swpu.cins.weike.entity.view.ResultData cn.edu.swpu.cins.weike.web.AuthController.createStudentAuthenticationToken(cn.edu.swpu.cins.weike.entity.view.JwtAuthenticationRequest,java.lang.String)
+2017-10-16 13:36:58.381  INFO 5509 --- [main] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped "{[/weike/teacher/login],methods=[POST]}" onto public cn.edu.swpu.cins.weike.entity.view.ResultData cn.edu.swpu.cins.weike.web.AuthController.createTeacherAuthenticationToken(cn.edu.swpu.cins.weike.entity.view.JwtAuthenticationRequest,java.lang.String)
+2017-10-16 13:36:58.381  INFO 5509 --- [main] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped "{[/weike/student/GetVerifyCodeForRegister],methods=[GET]}" onto public cn.edu.swpu.cins.weike.entity.view.ResultData cn.edu.swpu.cins.weike.web.AuthController.studentGetVerifyCode(java.lang.String,java.lang.String)
+2017-10-16 13:36:58.381  INFO 5509 --- [main] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped "{[/weike/teacher/GetVerifyCodeForRegister],methods=[GET]}" onto public cn.edu.swpu.cins.weike.entity.view.ResultData cn.edu.swpu.cins.weike.web.AuthController.teacherGetVerifyCode(java.lang.String,java.lang.String)
+2017-10-16 13:36:58.382  INFO 5509 --- [main] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped "{[/weike/student/register],methods=[POST]}" onto public cn.edu.swpu.cins.weike.entity.view.ResultData cn.edu.swpu.cins.weike.web.AuthController.StudentSaveToDB(cn.edu.swpu.cins.weike.entity.view.RegisterStudentVO)
+2017-10-16 13:36:58.382  INFO 5509 --- [main] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped "{[/weike/teacher/register],methods=[POST]}" onto public cn.edu.swpu.cins.weike.entity.view.ResultData cn.edu.swpu.cins.weike.web.AuthController.teacherSaveToDB(cn.edu.swpu.cins.weike.entity.view.RegisterTeacherVO)
+2017-10-16 13:36:58.382  INFO 5509 --- [main] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped "{[/weike/student/getVerifyCodeForFindPassword],methods=[GET]}" onto public cn.edu.swpu.cins.weike.entity.view.ResultData cn.edu.swpu.cins.weike.web.AuthController.studentGetVerifyForUpdate(java.lang.String,java.lang.String)
+2017-10-16 13:36:58.383  INFO 5509 --- [main] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped "{[/weike/teacher/getVerifyCodeForFindPassword],methods=[GET]}" onto public cn.edu.swpu.cins.weike.entity.view.ResultData cn.edu.swpu.cins.weike.web.AuthController.teacherGetVerifyForUpdatePassword(java.lang.String,java.lang.String)
+2017-10-16 13:36:58.383  INFO 5509 --- [main] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped "{[/weike/admin/login],methods=[POST]}" onto public cn.edu.swpu.cins.weike.entity.view.ResultData cn.edu.swpu.cins.weike.web.AuthController.createAdminAuthenticationToken(cn.edu.swpu.cins.weike.entity.view.JwtAuthenticationRequest)
+2017-10-16 13:36:58.389  INFO 5509 --- [main] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped "{[/WeiKe/deleteMessage],methods=[POST]}" onto public cn.edu.swpu.cins.weike.entity.view.ResultData cn.edu.swpu.cins.weike.web.MessageController.deleteMessage(cn.edu.swpu.cins.weike.entity.view.MessageDelete)
+2017-10-16 13:36:58.389  INFO 5509 --- [main] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped "{[/WeiKe/followPros],methods=[GET]}" onto public cn.edu.swpu.cins.weike.entity.view.ResultData cn.edu.swpu.cins.weike.web.MessageController.queryFollowPros(javax.servlet.http.HttpServletRequest)
+2017-10-16 13:36:58.390  INFO 5509 --- [main] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped "{[/WeiKe/messageList],methods=[GET]}" onto public cn.edu.swpu.cins.weike.entity.view.ResultData cn.edu.swpu.cins.weike.web.MessageController.getConversationDetail(javax.servlet.http.HttpServletRequest)
+2017-10-16 13:36:58.390  INFO 5509 --- [main] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped "{[/WeiKe/proFollower],methods=[GET]}" onto public cn.edu.swpu.cins.weike.entity.view.ResultData cn.edu.swpu.cins.weike.web.MessageController.queryProFollower(java.lang.String)
+2017-10-16 13:36:58.390  INFO 5509 --- [main] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped "{[/WeiKe/acceptApply],methods=[POST]}" onto public cn.edu.swpu.cins.weike.entity.view.ResultData cn.edu.swpu.cins.weike.web.MessageController.acceptJoin(cn.edu.swpu.cins.weike.entity.view.JoinMessage,javax.servlet.http.HttpServletRequest)
+2017-10-16 13:36:58.390  INFO 5509 --- [main] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped "{[/WeiKe/refuseApply],methods=[POST]}" onto public cn.edu.swpu.cins.weike.entity.view.ResultData cn.edu.swpu.cins.weike.web.MessageController.refuseJoin(cn.edu.swpu.cins.weike.entity.view.JoinMessage,javax.servlet.http.HttpServletRequest)
+2017-10-16 13:36:58.390  INFO 5509 --- [main] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped "{[/WeiKe/sendMessage],methods=[POST]}" onto public cn.edu.swpu.cins.weike.entity.view.ResultData cn.edu.swpu.cins.weike.web.MessageController.sendMessage(cn.edu.swpu.cins.weike.entity.view.MessageView,javax.servlet.http.HttpServletRequest)
+2017-10-16 13:36:58.391  INFO 5509 --- [main] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped "{[/WeiKe/followPro],methods=[POST]}" onto public cn.edu.swpu.cins.weike.entity.view.ResultData cn.edu.swpu.cins.weike.web.MessageController.attentionPro(cn.edu.swpu.cins.weike.entity.view.FollowPro,javax.servlet.http.HttpServletRequest)
+2017-10-16 13:36:58.391  INFO 5509 --- [main] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped "{[/WeiKe/unFollowPro],methods=[POST]}" onto public cn.edu.swpu.cins.weike.entity.view.ResultData cn.edu.swpu.cins.weike.web.MessageController.unAttentionPro(cn.edu.swpu.cins.weike.entity.view.FollowPro,javax.servlet.http.HttpServletRequest)
+2017-10-16 13:36:58.393  INFO 5509 --- [main] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped "{[/WeiKe/projectsByWords],methods=[GET]}" onto public cn.edu.swpu.cins.weike.entity.view.ResultData cn.edu.swpu.cins.weike.web.ProjectController.queryByKeyWords(java.lang.String)
+2017-10-16 13:36:58.394  INFO 5509 --- [main] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped "{[/WeiKe/index],methods=[GET]}" onto public cn.edu.swpu.cins.weike.entity.view.ResultData cn.edu.swpu.cins.weike.web.ProjectController.queryForIndex(int) throws java.lang.Exception
+2017-10-16 13:36:58.394  INFO 5509 --- [main] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped "{[/WeiKe/getApplyProDetail],methods=[GET]}" onto public cn.edu.swpu.cins.weike.entity.view.ResultData cn.edu.swpu.cins.weike.web.ProjectController.getApplyDetail(javax.servlet.http.HttpServletRequest)
+2017-10-16 13:36:58.395  INFO 5509 --- [main] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped "{[/WeiKe/delete/{projectName}],methods=[POST]}" onto public cn.edu.swpu.cins.weike.entity.view.ResultData cn.edu.swpu.cins.weike.web.ProjectController.deletePro(java.lang.String,javax.servlet.http.HttpServletRequest)
+2017-10-16 13:36:58.395  INFO 5509 --- [main] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped "{[/WeiKe/update/{projectName}],methods=[POST]}" onto public cn.edu.swpu.cins.weike.entity.view.ResultData cn.edu.swpu.cins.weike.web.ProjectController.updatePro(java.lang.String,cn.edu.swpu.cins.weike.entity.persistence.ProjectInfo,javax.servlet.http.HttpServletRequest)
+2017-10-16 13:36:58.395  INFO 5509 --- [main] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped "{[/WeiKe/projectName],methods=[GET]}" onto public cn.edu.swpu.cins.weike.entity.view.ResultData cn.edu.swpu.cins.weike.web.ProjectController.queryForProjectByName(java.lang.String)
+2017-10-16 13:36:58.399  INFO 5509 --- [main] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped "{[/WeiKe/student/personalData],methods=[GET]}" onto public cn.edu.swpu.cins.weike.entity.view.ResultData cn.edu.swpu.cins.weike.web.StudentController.queryForData(javax.servlet.http.HttpServletRequest)
+2017-10-16 13:36:58.399  INFO 5509 --- [main] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped "{[/WeiKe/student/updateInfo],methods=[POST]}" onto public cn.edu.swpu.cins.weike.entity.view.ResultData cn.edu.swpu.cins.weike.web.StudentController.updateInfo(cn.edu.swpu.cins.weike.entity.persistence.StudentDetail,javax.servlet.http.HttpServletRequest)
+2017-10-16 13:36:58.400  INFO 5509 --- [main] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped "{[/WeiKe/student/allProject],methods=[GET]}" onto public cn.edu.swpu.cins.weike.entity.view.ResultData cn.edu.swpu.cins.weike.web.StudentController.queryAllProject(javax.servlet.http.HttpServletRequest)
+2017-10-16 13:36:58.401  INFO 5509 --- [main] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped "{[/WeiKe/student/addProject],methods=[POST]}" onto public cn.edu.swpu.cins.weike.entity.view.ResultData cn.edu.swpu.cins.weike.web.StudentController.publishProject(cn.edu.swpu.cins.weike.entity.persistence.ProjectInfo,javax.servlet.http.HttpServletRequest)
+2017-10-16 13:36:58.402  INFO 5509 --- [main] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped "{[/WeiKe/student/addPersonalDeail],methods=[POST]}" onto public cn.edu.swpu.cins.weike.entity.view.ResultData cn.edu.swpu.cins.weike.web.StudentController.addPersonalDetail(cn.edu.swpu.cins.weike.entity.persistence.StudentDetail,javax.servlet.http.HttpServletRequest)
+2017-10-16 13:36:58.403  INFO 5509 --- [main] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped "{[/WeiKe/student/projectName],methods=[GET]}" onto public cn.edu.swpu.cins.weike.entity.view.ResultData cn.edu.swpu.cins.weike.web.StudentController.queryApplyInfo(java.lang.String)
+2017-10-16 13:36:58.404  INFO 5509 --- [main] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped "{[/WeiKe/student/getRecommend],methods=[GET]}" onto public cn.edu.swpu.cins.weike.entity.view.ResultData cn.edu.swpu.cins.weike.web.StudentController.getRecommend(javax.servlet.http.HttpServletRequest)
+2017-10-16 13:36:58.411  INFO 5509 --- [main] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped "{[/WeiKe/teacher/personalData],methods=[GET]}" onto public cn.edu.swpu.cins.weike.entity.view.ResultData cn.edu.swpu.cins.weike.web.TeacherController.queryForData(javax.servlet.http.HttpServletRequest)
+2017-10-16 13:36:58.412  INFO 5509 --- [main] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped "{[/WeiKe/teacher/updateInfo],methods=[POST]}" onto public cn.edu.swpu.cins.weike.entity.view.ResultData cn.edu.swpu.cins.weike.web.TeacherController.updateInfo(cn.edu.swpu.cins.weike.entity.persistence.TeacherDetail,javax.servlet.http.HttpServletRequest)
+2017-10-16 13:36:58.412  INFO 5509 --- [main] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped "{[/WeiKe/teacher/allProject],methods=[GET]}" onto public cn.edu.swpu.cins.weike.entity.view.ResultData cn.edu.swpu.cins.weike.web.TeacherController.queryAllProject(javax.servlet.http.HttpServletRequest)
+2017-10-16 13:36:58.412  INFO 5509 --- [main] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped "{[/WeiKe/teacher/addProject],methods=[POST]}" onto public cn.edu.swpu.cins.weike.entity.view.ResultData cn.edu.swpu.cins.weike.web.TeacherController.publishProject(cn.edu.swpu.cins.weike.entity.persistence.ProjectInfo,javax.servlet.http.HttpServletRequest)
+2017-10-16 13:36:58.412  INFO 5509 --- [main] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped "{[/WeiKe/teacher/addPersonal],methods=[POST]}" onto public cn.edu.swpu.cins.weike.entity.view.ResultData cn.edu.swpu.cins.weike.web.TeacherController.addTeacherPersonal(cn.edu.swpu.cins.weike.entity.persistence.TeacherDetail,javax.servlet.http.HttpServletRequest)
+2017-10-16 13:36:58.415  INFO 5509 --- [main] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped "{[/error],produces=[text/html]}" onto public org.springframework.web.servlet.ModelAndView org.springframework.boot.autoconfigure.web.BasicErrorController.errorHtml(javax.servlet.http.HttpServletRequest,javax.servlet.http.HttpServletResponse)
+2017-10-16 13:36:58.416  INFO 5509 --- [main] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped "{[/error]}" onto public org.springframework.http.ResponseEntity<java.util.Map<java.lang.String, java.lang.Object>> org.springframework.boot.autoconfigure.web.BasicErrorController.error(javax.servlet.http.HttpServletRequest)
+2017-10-16 13:36:58.516  INFO 5509 --- [main] o.s.w.s.handler.SimpleUrlHandlerMapping  : Mapped URL path [/webjars/**] onto handler of type [class org.springframework.web.servlet.resource.ResourceHttpRequestHandler]
+2017-10-16 13:36:58.517  INFO 5509 --- [main] o.s.w.s.handler.SimpleUrlHandlerMapping  : Mapped URL path [/**] onto handler of type [class org.springframework.web.servlet.resource.ResourceHttpRequestHandler]
+2017-10-16 13:36:58.620  INFO 5509 --- [main] o.s.w.s.handler.SimpleUrlHandlerMapping  : Mapped URL path [/**/favicon.ico] onto handler of type [class org.springframework.web.servlet.resource.ResourceHttpRequestHandler]
+2017-10-16 13:37:00.017  INFO 5509 --- [main] o.s.j.e.a.AnnotationMBeanExporter        : Registering beans for JMX exposure on startup
+2017-10-16 13:37:00.080  INFO 5509 --- [main] s.b.c.e.t.TomcatEmbeddedServletContainer : Tomcat started on port(s): 8080 (http)
+2017-10-16 13:37:00.088  INFO 5509 --- [main] cn.edu.swpu.cins.weike.WeikeApplication  : Started WeikeApplication in 10.167 seconds (JVM running for 10.967)
+2017-10-16 13:37:11.264  INFO 5509 --- [http-nio-8080-exec-1] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring FrameworkServlet 'dispatcherServlet'
+2017-10-16 13:37:11.264  INFO 5509 --- [http-nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : FrameworkServlet 'dispatcherServlet': initialization started
+2017-10-16 13:37:11.284  INFO 5509 --- [http-nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : FrameworkServlet 'dispatcherServlet': initialization completed in 20 ms
+2017-10-16 13:37:43.612  INFO 5509 --- [http-nio-8080-exec-2] c.e.swpu.cins.weike.Aspect.WebLogAspect  : controller aspect beginning
+2017-10-16 13:37:43.613  INFO 5509 --- [http-nio-8080-exec-2] c.e.swpu.cins.weike.Aspect.WebLogAspect  : arg : org.springframework.security.web.firewall.FirewalledResponse@6b4eb247
+2017-10-16 13:37:43.614  INFO 5509 --- [http-nio-8080-exec-2] c.e.swpu.cins.weike.Aspect.WebLogAspect  : aspect finishing
+2017-10-16 13:37:43.614  INFO 5509 --- [http-nio-8080-exec-2] c.e.swpu.cins.weike.Aspect.WebLogAspect  : calling cn.edu.swpu.cins.weike.web.AuthController.getVerifyCodeForLogin
+2017-10-16 13:37:43.990  INFO 5509 --- [http-nio-8080-exec-2] c.e.swpu.cins.weike.Aspect.WebLogAspect  : controller return ResultData(data=null, ifSuccess=true, msg=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
+9SAF6/8BQafwXSCu0nMAAAAASUVORK5CYII=)
+2017-10-16 13:38:16.382  INFO 5509 --- [http-nio-8080-exec-3] c.e.swpu.cins.weike.Aspect.WebLogAspect  : controller aspect beginning
+2017-10-16 13:38:16.382  INFO 5509 --- [http-nio-8080-exec-3] c.e.swpu.cins.weike.Aspect.WebLogAspect  : arg : JwtAuthenticationRequest(username=muyi, password=1234, verifyCode=3ey3e)
+2017-10-16 13:38:16.382  INFO 5509 --- [http-nio-8080-exec-3] c.e.swpu.cins.weike.Aspect.WebLogAspect  : arg : 42559afe-3da1-46d9-8784-3aa13d9bab9e
+2017-10-16 13:38:16.382  INFO 5509 --- [http-nio-8080-exec-3] c.e.swpu.cins.weike.Aspect.WebLogAspect  : aspect finishing
+2017-10-16 13:38:16.383  INFO 5509 --- [http-nio-8080-exec-3] c.e.swpu.cins.weike.Aspect.WebLogAspect  : calling cn.edu.swpu.cins.weike.web.AuthController.createStudentAuthenticationToken
+2017-10-16 13:38:16.384  INFO 5509 --- [http-nio-8080-exec-3] c.e.s.c.weike.Aspect.ServiceLogAspect    : 
+
+2017-10-16 13:38:16.384  INFO 5509 --- [http-nio-8080-exec-3] c.e.s.c.weike.Aspect.ServiceLogAspect    : calling : cn.edu.swpu.cins.weike.service.Impl.AuthServiceImpl.studentLogin
+2017-10-16 13:38:16.384  INFO 5509 --- [http-nio-8080-exec-3] c.e.s.c.weike.Aspect.ServiceLogAspect    : arg : JwtAuthenticationRequest(username=muyi, password=1234, verifyCode=3ey3e)
+2017-10-16 13:38:16.384  INFO 5509 --- [http-nio-8080-exec-3] c.e.s.c.weike.Aspect.ServiceLogAspect    : arg : 42559afe-3da1-46d9-8784-3aa13d9bab9e
+2017-10-16 13:38:16.384  INFO 5509 --- [http-nio-8080-exec-3] c.e.s.c.weike.Aspect.ServiceLogAspect    : 
+
+2017-10-16 13:38:22.571  INFO 5509 --- [http-nio-8080-exec-3] c.e.s.c.weike.Aspect.ServiceLogAspect    : 
+
+2017-10-16 13:38:22.571  INFO 5509 --- [http-nio-8080-exec-3] c.e.s.c.weike.Aspect.ServiceLogAspect    : service return : JwtAuthenticationResponse(token=eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJtdXlpIiwiY3JlYXRlZCI6MTUwODEzMjMwMjU2MywiZXhwIjoxNTA4MjE4NzAyfQ.SyMEDNzgYfZ_MQQ9JbJ8EdV1IjStB-UDY2Ays44gT5SN5e54VCuUL6EfnfPR2We_AOcm6Q6zRh0ZEG9qa1c9cA, username=muyi, role=ROLE_STUDENT, image=test, isCompleted=true, joinProject=JoinProject(released=[Projectasdasd1, TET, TEs, TEDSs, TEDDSDs, TEDSDKHDs, LNLJ, kjhhjasd, kjhacasdaasd, CINS, asdasdas, Projectasd, Projectas, test13, testRepeat4, testRepeat5, testRepeat6, testRepeat7], joining=[], joinFailed=[], joinSuccess=[], followPro=[]))
+2017-10-16 13:38:22.571  INFO 5509 --- [http-nio-8080-exec-3] c.e.s.c.weike.Aspect.ServiceLogAspect    : 
+
+2017-10-16 13:38:22.571  INFO 5509 --- [http-nio-8080-exec-3] c.e.swpu.cins.weike.Aspect.WebLogAspect  : controller return ResultData(data=JwtAuthenticationResponse(token=eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJtdXlpIiwiY3JlYXRlZCI6MTUwODEzMjMwMjU2MywiZXhwIjoxNTA4MjE4NzAyfQ.SyMEDNzgYfZ_MQQ9JbJ8EdV1IjStB-UDY2Ays44gT5SN5e54VCuUL6EfnfPR2We_AOcm6Q6zRh0ZEG9qa1c9cA, username=muyi, role=ROLE_STUDENT, image=test, isCompleted=true, joinProject=JoinProject(released=[Projectasdasd1, TET, TEs, TEDSs, TEDDSDs, TEDSDKHDs, LNLJ, kjhhjasd, kjhacasdaasd, CINS, asdasdas, Projectasd, Projectas, test13, testRepeat4, testRepeat5, testRepeat6, testRepeat7], joining=[], joinFailed=[], joinSuccess=[], followPro=[])), ifSuccess=true, msg=null)
+2017-10-16 13:38:46.412  INFO 5509 --- [http-nio-8080-exec-4] c.e.swpu.cins.weike.Aspect.WebLogAspect  : controller aspect beginning
+2017-10-16 13:38:46.412  INFO 5509 --- [http-nio-8080-exec-4] c.e.swpu.cins.weike.Aspect.WebLogAspect  : arg : SecurityContextHolderAwareRequestWrapper[ FirewalledRequest[ org.apache.catalina.connector.RequestFacade@7f4485ae]]
+2017-10-16 13:38:46.412  INFO 5509 --- [http-nio-8080-exec-4] c.e.swpu.cins.weike.Aspect.WebLogAspect  : aspect finishing
+2017-10-16 13:38:46.412  INFO 5509 --- [http-nio-8080-exec-4] c.e.swpu.cins.weike.Aspect.WebLogAspect  : calling cn.edu.swpu.cins.weike.web.StudentController.getRecommend
+2017-10-16 13:38:46.426  INFO 5509 --- [http-nio-8080-exec-4] c.e.s.c.weike.Aspect.ServiceLogAspect    : 
+
+2017-10-16 13:38:46.426  INFO 5509 --- [http-nio-8080-exec-4] c.e.s.c.weike.Aspect.ServiceLogAspect    : calling : cn.edu.swpu.cins.weike.service.Impl.StudentServiceImpl.queryForRecommend
+2017-10-16 13:38:46.426  INFO 5509 --- [http-nio-8080-exec-4] c.e.s.c.weike.Aspect.ServiceLogAspect    : arg : SecurityContextHolderAwareRequestWrapper[ FirewalledRequest[ org.apache.catalina.connector.RequestFacade@7f4485ae]]
+2017-10-16 13:38:46.426  INFO 5509 --- [http-nio-8080-exec-4] c.e.s.c.weike.Aspect.ServiceLogAspect    : 
+
+2017-10-16 13:38:46.469  INFO 5509 --- [http-nio-8080-exec-4] c.e.s.c.weike.Aspect.ServiceLogAspect    : 
+
+2017-10-16 13:38:46.469  INFO 5509 --- [http-nio-8080-exec-4] c.e.s.c.weike.Aspect.ServiceLogAspect    : calling : cn.edu.swpu.cins.weike.service.Impl.StudentServiceImpl.queryForData
+2017-10-16 13:38:46.469  INFO 5509 --- [http-nio-8080-exec-4] c.e.s.c.weike.Aspect.ServiceLogAspect    : arg : 木易
+2017-10-16 13:38:46.469  INFO 5509 --- [http-nio-8080-exec-4] c.e.s.c.weike.Aspect.ServiceLogAspect    : 
+
+2017-10-16 13:38:46.480  INFO 5509 --- [http-nio-8080-exec-4] c.e.s.c.weike.Aspect.ServiceLogAspect    : 
+
+2017-10-16 13:38:46.480  INFO 5509 --- [http-nio-8080-exec-4] c.e.s.c.weike.Aspect.ServiceLogAspect    : service return : null
+2017-10-16 13:38:46.480  INFO 5509 --- [http-nio-8080-exec-4] c.e.s.c.weike.Aspect.ServiceLogAspect    : 
+
+2017-10-16 13:38:46.480  INFO 5509 --- [http-nio-8080-exec-4] c.e.s.c.weike.Aspect.ServiceLogAspect    : 
+
+2017-10-16 13:38:46.480  INFO 5509 --- [http-nio-8080-exec-4] c.e.s.c.weike.Aspect.ServiceLogAspect    : calling : cn.edu.swpu.cins.weike.service.Impl.TeacherServiceImpl.queryForData
+2017-10-16 13:38:46.480  INFO 5509 --- [http-nio-8080-exec-4] c.e.s.c.weike.Aspect.ServiceLogAspect    : arg : 木易
+2017-10-16 13:38:46.480  INFO 5509 --- [http-nio-8080-exec-4] c.e.s.c.weike.Aspect.ServiceLogAspect    : 
+
+2017-10-16 13:38:46.494  INFO 5509 --- [http-nio-8080-exec-4] c.e.s.c.weike.Aspect.ServiceLogAspect    : 
+
+2017-10-16 13:38:46.494  INFO 5509 --- [http-nio-8080-exec-4] c.e.s.c.weike.Aspect.ServiceLogAspect    : service return : TeacherPersonData(id=11, username=木易, image=image, sex=female, university=SWPU, academy=test, rank=perfessor, qq=879604213, email=yangquan5991@gmail.com, role=ROLE_TEACHER)
+2017-10-16 13:38:46.494  INFO 5509 --- [http-nio-8080-exec-4] c.e.s.c.weike.Aspect.ServiceLogAspect    : 
+
+2017-10-16 13:38:46.495  INFO 5509 --- [http-nio-8080-exec-4] c.e.s.c.weike.Aspect.ServiceLogAspect    : 
+
+2017-10-16 13:38:46.495  INFO 5509 --- [http-nio-8080-exec-4] c.e.s.c.weike.Aspect.ServiceLogAspect    : calling : cn.edu.swpu.cins.weike.service.Impl.StudentServiceImpl.queryForData
+2017-10-16 13:38:46.495  INFO 5509 --- [http-nio-8080-exec-4] c.e.s.c.weike.Aspect.ServiceLogAspect    : arg : 木易
+2017-10-16 13:38:46.495  INFO 5509 --- [http-nio-8080-exec-4] c.e.s.c.weike.Aspect.ServiceLogAspect    : 
+
+2017-10-16 13:38:46.495  INFO 5509 --- [http-nio-8080-exec-4] c.e.s.c.weike.Aspect.ServiceLogAspect    : 
+
+2017-10-16 13:38:46.495  INFO 5509 --- [http-nio-8080-exec-4] c.e.s.c.weike.Aspect.ServiceLogAspect    : service return : null
+2017-10-16 13:38:46.495  INFO 5509 --- [http-nio-8080-exec-4] c.e.s.c.weike.Aspect.ServiceLogAspect    : 
+
+2017-10-16 13:38:46.495  INFO 5509 --- [http-nio-8080-exec-4] c.e.s.c.weike.Aspect.ServiceLogAspect    : 
+
+2017-10-16 13:38:46.495  INFO 5509 --- [http-nio-8080-exec-4] c.e.s.c.weike.Aspect.ServiceLogAspect    : calling : cn.edu.swpu.cins.weike.service.Impl.TeacherServiceImpl.queryForData
+2017-10-16 13:38:46.495  INFO 5509 --- [http-nio-8080-exec-4] c.e.s.c.weike.Aspect.ServiceLogAspect    : arg : 木易
+2017-10-16 13:38:46.495  INFO 5509 --- [http-nio-8080-exec-4] c.e.s.c.weike.Aspect.ServiceLogAspect    : 
+
+2017-10-16 13:38:46.496  INFO 5509 --- [http-nio-8080-exec-4] c.e.s.c.weike.Aspect.ServiceLogAspect    : 
+
+2017-10-16 13:38:46.496  INFO 5509 --- [http-nio-8080-exec-4] c.e.s.c.weike.Aspect.ServiceLogAspect    : service return : TeacherPersonData(id=11, username=木易, image=image, sex=female, university=SWPU, academy=test, rank=perfessor, qq=879604213, email=yangquan5991@gmail.com, role=ROLE_TEACHER)
+2017-10-16 13:38:46.496  INFO 5509 --- [http-nio-8080-exec-4] c.e.s.c.weike.Aspect.ServiceLogAspect    : 
+
+2017-10-16 13:38:46.496  INFO 5509 --- [http-nio-8080-exec-4] c.e.s.c.weike.Aspect.ServiceLogAspect    : 
+
+2017-10-16 13:38:46.496  INFO 5509 --- [http-nio-8080-exec-4] c.e.s.c.weike.Aspect.ServiceLogAspect    : calling : cn.edu.swpu.cins.weike.service.Impl.StudentServiceImpl.queryForData
+2017-10-16 13:38:46.496  INFO 5509 --- [http-nio-8080-exec-4] c.e.s.c.weike.Aspect.ServiceLogAspect    : arg : 木易
+2017-10-16 13:38:46.496  INFO 5509 --- [http-nio-8080-exec-4] c.e.s.c.weike.Aspect.ServiceLogAspect    : 
+
+2017-10-16 13:38:46.496  INFO 5509 --- [http-nio-8080-exec-4] c.e.s.c.weike.Aspect.ServiceLogAspect    : 
+
+2017-10-16 13:38:46.496  INFO 5509 --- [http-nio-8080-exec-4] c.e.s.c.weike.Aspect.ServiceLogAspect    : service return : null
+2017-10-16 13:38:46.496  INFO 5509 --- [http-nio-8080-exec-4] c.e.s.c.weike.Aspect.ServiceLogAspect    : 
+
+2017-10-16 13:38:46.496  INFO 5509 --- [http-nio-8080-exec-4] c.e.s.c.weike.Aspect.ServiceLogAspect    : 
+
+2017-10-16 13:38:46.496  INFO 5509 --- [http-nio-8080-exec-4] c.e.s.c.weike.Aspect.ServiceLogAspect    : calling : cn.edu.swpu.cins.weike.service.Impl.TeacherServiceImpl.queryForData
+2017-10-16 13:38:46.496  INFO 5509 --- [http-nio-8080-exec-4] c.e.s.c.weike.Aspect.ServiceLogAspect    : arg : 木易
+2017-10-16 13:38:46.497  INFO 5509 --- [http-nio-8080-exec-4] c.e.s.c.weike.Aspect.ServiceLogAspect    : 
+
+2017-10-16 13:38:46.497  INFO 5509 --- [http-nio-8080-exec-4] c.e.s.c.weike.Aspect.ServiceLogAspect    : 
+
+2017-10-16 13:38:46.497  INFO 5509 --- [http-nio-8080-exec-4] c.e.s.c.weike.Aspect.ServiceLogAspect    : service return : TeacherPersonData(id=11, username=木易, image=image, sex=female, university=SWPU, academy=test, rank=perfessor, qq=879604213, email=yangquan5991@gmail.com, role=ROLE_TEACHER)
+2017-10-16 13:38:46.497  INFO 5509 --- [http-nio-8080-exec-4] c.e.s.c.weike.Aspect.ServiceLogAspect    : 
+
+2017-10-16 13:38:46.498  INFO 5509 --- [http-nio-8080-exec-4] c.e.s.c.weike.Aspect.ServiceLogAspect    : 
+
+2017-10-16 13:38:46.498  INFO 5509 --- [http-nio-8080-exec-4] c.e.s.c.weike.Aspect.ServiceLogAspect    : calling : cn.edu.swpu.cins.weike.service.Impl.StudentServiceImpl.queryForData
+2017-10-16 13:38:46.498  INFO 5509 --- [http-nio-8080-exec-4] c.e.s.c.weike.Aspect.ServiceLogAspect    : arg : 木易
+2017-10-16 13:38:46.498  INFO 5509 --- [http-nio-8080-exec-4] c.e.s.c.weike.Aspect.ServiceLogAspect    : 
+
+2017-10-16 13:38:46.499  INFO 5509 --- [http-nio-8080-exec-4] c.e.s.c.weike.Aspect.ServiceLogAspect    : 
+
+2017-10-16 13:38:46.499  INFO 5509 --- [http-nio-8080-exec-4] c.e.s.c.weike.Aspect.ServiceLogAspect    : service return : null
+2017-10-16 13:38:46.499  INFO 5509 --- [http-nio-8080-exec-4] c.e.s.c.weike.Aspect.ServiceLogAspect    : 
+
+2017-10-16 13:38:46.499  INFO 5509 --- [http-nio-8080-exec-4] c.e.s.c.weike.Aspect.ServiceLogAspect    : 
+
+2017-10-16 13:38:46.499  INFO 5509 --- [http-nio-8080-exec-4] c.e.s.c.weike.Aspect.ServiceLogAspect    : calling : cn.edu.swpu.cins.weike.service.Impl.TeacherServiceImpl.queryForData
+2017-10-16 13:38:46.499  INFO 5509 --- [http-nio-8080-exec-4] c.e.s.c.weike.Aspect.ServiceLogAspect    : arg : 木易
+2017-10-16 13:38:46.499  INFO 5509 --- [http-nio-8080-exec-4] c.e.s.c.weike.Aspect.ServiceLogAspect    : 
+
+2017-10-16 13:38:46.499  INFO 5509 --- [http-nio-8080-exec-4] c.e.s.c.weike.Aspect.ServiceLogAspect    : 
+
+2017-10-16 13:38:46.499  INFO 5509 --- [http-nio-8080-exec-4] c.e.s.c.weike.Aspect.ServiceLogAspect    : service return : TeacherPersonData(id=11, username=木易, image=image, sex=female, university=SWPU, academy=test, rank=perfessor, qq=879604213, email=yangquan5991@gmail.com, role=ROLE_TEACHER)
+2017-10-16 13:38:46.499  INFO 5509 --- [http-nio-8080-exec-4] c.e.s.c.weike.Aspect.ServiceLogAspect    : 
+
+2017-10-16 13:38:46.499  INFO 5509 --- [http-nio-8080-exec-4] c.e.s.c.weike.Aspect.ServiceLogAspect    : 
+
+2017-10-16 13:38:46.499  INFO 5509 --- [http-nio-8080-exec-4] c.e.s.c.weike.Aspect.ServiceLogAspect    : calling : cn.edu.swpu.cins.weike.service.Impl.StudentServiceImpl.queryForData
+2017-10-16 13:38:46.499  INFO 5509 --- [http-nio-8080-exec-4] c.e.s.c.weike.Aspect.ServiceLogAspect    : arg : 木易
+2017-10-16 13:38:46.499  INFO 5509 --- [http-nio-8080-exec-4] c.e.s.c.weike.Aspect.ServiceLogAspect    : 
+
+2017-10-16 13:38:46.500  INFO 5509 --- [http-nio-8080-exec-4] c.e.s.c.weike.Aspect.ServiceLogAspect    : 
+
+2017-10-16 13:38:46.500  INFO 5509 --- [http-nio-8080-exec-4] c.e.s.c.weike.Aspect.ServiceLogAspect    : service return : null
+2017-10-16 13:38:46.500  INFO 5509 --- [http-nio-8080-exec-4] c.e.s.c.weike.Aspect.ServiceLogAspect    : 
+
+2017-10-16 13:38:46.500  INFO 5509 --- [http-nio-8080-exec-4] c.e.s.c.weike.Aspect.ServiceLogAspect    : 
+
+2017-10-16 13:38:46.500  INFO 5509 --- [http-nio-8080-exec-4] c.e.s.c.weike.Aspect.ServiceLogAspect    : calling : cn.edu.swpu.cins.weike.service.Impl.TeacherServiceImpl.queryForData
+2017-10-16 13:38:46.500  INFO 5509 --- [http-nio-8080-exec-4] c.e.s.c.weike.Aspect.ServiceLogAspect    : arg : 木易
+2017-10-16 13:38:46.500  INFO 5509 --- [http-nio-8080-exec-4] c.e.s.c.weike.Aspect.ServiceLogAspect    : 
+
+2017-10-16 13:38:46.500  INFO 5509 --- [http-nio-8080-exec-4] c.e.s.c.weike.Aspect.ServiceLogAspect    : 
+
+2017-10-16 13:38:46.500  INFO 5509 --- [http-nio-8080-exec-4] c.e.s.c.weike.Aspect.ServiceLogAspect    : service return : TeacherPersonData(id=11, username=木易, image=image, sex=female, university=SWPU, academy=test, rank=perfessor, qq=879604213, email=yangquan5991@gmail.com, role=ROLE_TEACHER)
+2017-10-16 13:38:46.500  INFO 5509 --- [http-nio-8080-exec-4] c.e.s.c.weike.Aspect.ServiceLogAspect    : 
+
+2017-10-16 13:38:46.500  INFO 5509 --- [http-nio-8080-exec-4] c.e.s.c.weike.Aspect.ServiceLogAspect    : 
+
+2017-10-16 13:38:46.500  INFO 5509 --- [http-nio-8080-exec-4] c.e.s.c.weike.Aspect.ServiceLogAspect    : calling : cn.edu.swpu.cins.weike.service.Impl.StudentServiceImpl.queryForData
+2017-10-16 13:38:46.500  INFO 5509 --- [http-nio-8080-exec-4] c.e.s.c.weike.Aspect.ServiceLogAspect    : arg : 木易
+2017-10-16 13:38:46.500  INFO 5509 --- [http-nio-8080-exec-4] c.e.s.c.weike.Aspect.ServiceLogAspect    : 
+
+2017-10-16 13:38:46.500  INFO 5509 --- [http-nio-8080-exec-4] c.e.s.c.weike.Aspect.ServiceLogAspect    : 
+
+2017-10-16 13:38:46.500  INFO 5509 --- [http-nio-8080-exec-4] c.e.s.c.weike.Aspect.ServiceLogAspect    : service return : null
+2017-10-16 13:38:46.500  INFO 5509 --- [http-nio-8080-exec-4] c.e.s.c.weike.Aspect.ServiceLogAspect    : 
+
+2017-10-16 13:38:46.500  INFO 5509 --- [http-nio-8080-exec-4] c.e.s.c.weike.Aspect.ServiceLogAspect    : 
+
+2017-10-16 13:38:46.500  INFO 5509 --- [http-nio-8080-exec-4] c.e.s.c.weike.Aspect.ServiceLogAspect    : calling : cn.edu.swpu.cins.weike.service.Impl.TeacherServiceImpl.queryForData
+2017-10-16 13:38:46.500  INFO 5509 --- [http-nio-8080-exec-4] c.e.s.c.weike.Aspect.ServiceLogAspect    : arg : 木易
+2017-10-16 13:38:46.500  INFO 5509 --- [http-nio-8080-exec-4] c.e.s.c.weike.Aspect.ServiceLogAspect    : 
+
+2017-10-16 13:38:46.501  INFO 5509 --- [http-nio-8080-exec-4] c.e.s.c.weike.Aspect.ServiceLogAspect    : 
+
+2017-10-16 13:38:46.501  INFO 5509 --- [http-nio-8080-exec-4] c.e.s.c.weike.Aspect.ServiceLogAspect    : service return : TeacherPersonData(id=11, username=木易, image=image, sex=female, university=SWPU, academy=test, rank=perfessor, qq=879604213, email=yangquan5991@gmail.com, role=ROLE_TEACHER)
+2017-10-16 13:38:46.501  INFO 5509 --- [http-nio-8080-exec-4] c.e.s.c.weike.Aspect.ServiceLogAspect    : 
+
+2017-10-16 13:38:46.501  INFO 5509 --- [http-nio-8080-exec-4] c.e.s.c.weike.Aspect.ServiceLogAspect    : 
+
+2017-10-16 13:38:46.501  INFO 5509 --- [http-nio-8080-exec-4] c.e.s.c.weike.Aspect.ServiceLogAspect    : calling : cn.edu.swpu.cins.weike.service.Impl.StudentServiceImpl.queryForData
+2017-10-16 13:38:46.501  INFO 5509 --- [http-nio-8080-exec-4] c.e.s.c.weike.Aspect.ServiceLogAspect    : arg : muyi
+2017-10-16 13:38:46.501  INFO 5509 --- [http-nio-8080-exec-4] c.e.s.c.weike.Aspect.ServiceLogAspect    : 
+
+2017-10-16 13:38:46.513  INFO 5509 --- [http-nio-8080-exec-4] c.e.s.c.weike.Aspect.ServiceLogAspect    : 
+
+2017-10-16 13:38:46.513  INFO 5509 --- [http-nio-8080-exec-4] c.e.s.c.weike.Aspect.ServiceLogAspect    : service return : PersonData(id=0, username=muyi, image=test, sex=男, eduBackgroud=大专, university=西南石油大学, majorAndGrade=网络工程, entryUniversity=2010, leaveUniversity=2014, qq=879604213, skills=[Java, struct2, springmvc], experience=两个项目，担任后端工程师, selfFeel=Just so so!, level=B, email=873453@qq.com, role=ROLE_STUDENT)
+2017-10-16 13:38:46.513  INFO 5509 --- [http-nio-8080-exec-4] c.e.s.c.weike.Aspect.ServiceLogAspect    : 
+
+2017-10-16 13:38:46.514  INFO 5509 --- [http-nio-8080-exec-4] c.e.s.c.weike.Aspect.ServiceLogAspect    : 
+
+2017-10-16 13:38:46.514  INFO 5509 --- [http-nio-8080-exec-4] c.e.s.c.weike.Aspect.ServiceLogAspect    : calling : cn.edu.swpu.cins.weike.service.Impl.StudentServiceImpl.queryForData
+2017-10-16 13:38:46.514  INFO 5509 --- [http-nio-8080-exec-4] c.e.s.c.weike.Aspect.ServiceLogAspect    : arg : muyi
+2017-10-16 13:38:46.514  INFO 5509 --- [http-nio-8080-exec-4] c.e.s.c.weike.Aspect.ServiceLogAspect    : 
+
+2017-10-16 13:38:46.514  INFO 5509 --- [http-nio-8080-exec-4] c.e.s.c.weike.Aspect.ServiceLogAspect    : 
+
+2017-10-16 13:38:46.514  INFO 5509 --- [http-nio-8080-exec-4] c.e.s.c.weike.Aspect.ServiceLogAspect    : service return : PersonData(id=0, username=muyi, image=test, sex=男, eduBackgroud=大专, university=西南石油大学, majorAndGrade=网络工程, entryUniversity=2010, leaveUniversity=2014, qq=879604213, skills=[Java, struct2, springmvc], experience=两个项目，担任后端工程师, selfFeel=Just so so!, level=B, email=873453@qq.com, role=ROLE_STUDENT)
+2017-10-16 13:38:46.514  INFO 5509 --- [http-nio-8080-exec-4] c.e.s.c.weike.Aspect.ServiceLogAspect    : 
+
+2017-10-16 13:38:46.514  INFO 5509 --- [http-nio-8080-exec-4] c.e.s.c.weike.Aspect.ServiceLogAspect    : 
+
+2017-10-16 13:38:46.514  INFO 5509 --- [http-nio-8080-exec-4] c.e.s.c.weike.Aspect.ServiceLogAspect    : calling : cn.edu.swpu.cins.weike.service.Impl.StudentServiceImpl.queryForData
+2017-10-16 13:38:46.515  INFO 5509 --- [http-nio-8080-exec-4] c.e.s.c.weike.Aspect.ServiceLogAspect    : arg : muyi
+2017-10-16 13:38:46.515  INFO 5509 --- [http-nio-8080-exec-4] c.e.s.c.weike.Aspect.ServiceLogAspect    : 
+
+2017-10-16 13:38:46.515  INFO 5509 --- [http-nio-8080-exec-4] c.e.s.c.weike.Aspect.ServiceLogAspect    : 
+
+2017-10-16 13:38:46.515  INFO 5509 --- [http-nio-8080-exec-4] c.e.s.c.weike.Aspect.ServiceLogAspect    : service return : PersonData(id=0, username=muyi, image=test, sex=男, eduBackgroud=大专, university=西南石油大学, majorAndGrade=网络工程, entryUniversity=2010, leaveUniversity=2014, qq=879604213, skills=[Java, struct2, springmvc], experience=两个项目，担任后端工程师, selfFeel=Just so so!, level=B, email=873453@qq.com, role=ROLE_STUDENT)
+2017-10-16 13:38:46.515  INFO 5509 --- [http-nio-8080-exec-4] c.e.s.c.weike.Aspect.ServiceLogAspect    : 
+
+2017-10-16 13:38:46.515  INFO 5509 --- [http-nio-8080-exec-4] c.e.s.c.weike.Aspect.ServiceLogAspect    : 
+
+2017-10-16 13:38:46.515  INFO 5509 --- [http-nio-8080-exec-4] c.e.s.c.weike.Aspect.ServiceLogAspect    : calling : cn.edu.swpu.cins.weike.service.Impl.StudentServiceImpl.queryForData
+2017-10-16 13:38:46.515  INFO 5509 --- [http-nio-8080-exec-4] c.e.s.c.weike.Aspect.ServiceLogAspect    : arg : muyi
+2017-10-16 13:38:46.515  INFO 5509 --- [http-nio-8080-exec-4] c.e.s.c.weike.Aspect.ServiceLogAspect    : 
+
+2017-10-16 13:38:46.515  INFO 5509 --- [http-nio-8080-exec-4] c.e.s.c.weike.Aspect.ServiceLogAspect    : 
+
+2017-10-16 13:38:46.515  INFO 5509 --- [http-nio-8080-exec-4] c.e.s.c.weike.Aspect.ServiceLogAspect    : service return : PersonData(id=0, username=muyi, image=test, sex=男, eduBackgroud=大专, university=西南石油大学, majorAndGrade=网络工程, entryUniversity=2010, leaveUniversity=2014, qq=879604213, skills=[Java, struct2, springmvc], experience=两个项目，担任后端工程师, selfFeel=Just so so!, level=B, email=873453@qq.com, role=ROLE_STUDENT)
+2017-10-16 13:38:46.515  INFO 5509 --- [http-nio-8080-exec-4] c.e.s.c.weike.Aspect.ServiceLogAspect    : 
+
+2017-10-16 13:38:46.516  INFO 5509 --- [http-nio-8080-exec-4] c.e.s.c.weike.Aspect.ServiceLogAspect    : 
+
+2017-10-16 13:38:46.516  INFO 5509 --- [http-nio-8080-exec-4] c.e.s.c.weike.Aspect.ServiceLogAspect    : calling : cn.edu.swpu.cins.weike.service.Impl.StudentServiceImpl.queryForData
+2017-10-16 13:38:46.516  INFO 5509 --- [http-nio-8080-exec-4] c.e.s.c.weike.Aspect.ServiceLogAspect    : arg : muyi
+2017-10-16 13:38:46.516  INFO 5509 --- [http-nio-8080-exec-4] c.e.s.c.weike.Aspect.ServiceLogAspect    : 
+
+2017-10-16 13:38:46.516  INFO 5509 --- [http-nio-8080-exec-4] c.e.s.c.weike.Aspect.ServiceLogAspect    : 
+
+2017-10-16 13:38:46.516  INFO 5509 --- [http-nio-8080-exec-4] c.e.s.c.weike.Aspect.ServiceLogAspect    : service return : PersonData(id=0, username=muyi, image=test, sex=男, eduBackgroud=大专, university=西南石油大学, majorAndGrade=网络工程, entryUniversity=2010, leaveUniversity=2014, qq=879604213, skills=[Java, struct2, springmvc], experience=两个项目，担任后端工程师, selfFeel=Just so so!, level=B, email=873453@qq.com, role=ROLE_STUDENT)
+2017-10-16 13:38:46.516  INFO 5509 --- [http-nio-8080-exec-4] c.e.s.c.weike.Aspect.ServiceLogAspect    : 
+
+2017-10-16 13:38:46.516  INFO 5509 --- [http-nio-8080-exec-4] c.e.s.c.weike.Aspect.ServiceLogAspect    : 
+
+2017-10-16 13:38:46.516  INFO 5509 --- [http-nio-8080-exec-4] c.e.s.c.weike.Aspect.ServiceLogAspect    : calling : cn.edu.swpu.cins.weike.service.Impl.StudentServiceImpl.queryForData
+2017-10-16 13:38:46.516  INFO 5509 --- [http-nio-8080-exec-4] c.e.s.c.weike.Aspect.ServiceLogAspect    : arg : muyi
+2017-10-16 13:38:46.516  INFO 5509 --- [http-nio-8080-exec-4] c.e.s.c.weike.Aspect.ServiceLogAspect    : 
+
+2017-10-16 13:38:46.516  INFO 5509 --- [http-nio-8080-exec-4] c.e.s.c.weike.Aspect.ServiceLogAspect    : 
+
+2017-10-16 13:38:46.516  INFO 5509 --- [http-nio-8080-exec-4] c.e.s.c.weike.Aspect.ServiceLogAspect    : service return : PersonData(id=0, username=muyi, image=test, sex=男, eduBackgroud=大专, university=西南石油大学, majorAndGrade=网络工程, entryUniversity=2010, leaveUniversity=2014, qq=879604213, skills=[Java, struct2, springmvc], experience=两个项目，担任后端工程师, selfFeel=Just so so!, level=B, email=873453@qq.com, role=ROLE_STUDENT)
+2017-10-16 13:38:46.516  INFO 5509 --- [http-nio-8080-exec-4] c.e.s.c.weike.Aspect.ServiceLogAspect    : 
+
+2017-10-16 13:38:46.517  INFO 5509 --- [http-nio-8080-exec-4] c.e.s.c.weike.Aspect.ServiceLogAspect    : 
+
+2017-10-16 13:38:46.517  INFO 5509 --- [http-nio-8080-exec-4] c.e.s.c.weike.Aspect.ServiceLogAspect    : calling : cn.edu.swpu.cins.weike.service.Impl.StudentServiceImpl.queryForData
+2017-10-16 13:38:46.517  INFO 5509 --- [http-nio-8080-exec-4] c.e.s.c.weike.Aspect.ServiceLogAspect    : arg : muyi
+2017-10-16 13:38:46.517  INFO 5509 --- [http-nio-8080-exec-4] c.e.s.c.weike.Aspect.ServiceLogAspect    : 
+
+2017-10-16 13:38:46.517  INFO 5509 --- [http-nio-8080-exec-4] c.e.s.c.weike.Aspect.ServiceLogAspect    : 
+
+2017-10-16 13:38:46.517  INFO 5509 --- [http-nio-8080-exec-4] c.e.s.c.weike.Aspect.ServiceLogAspect    : service return : PersonData(id=0, username=muyi, image=test, sex=男, eduBackgroud=大专, university=西南石油大学, majorAndGrade=网络工程, entryUniversity=2010, leaveUniversity=2014, qq=879604213, skills=[Java, struct2, springmvc], experience=两个项目，担任后端工程师, selfFeel=Just so so!, level=B, email=873453@qq.com, role=ROLE_STUDENT)
+2017-10-16 13:38:46.517  INFO 5509 --- [http-nio-8080-exec-4] c.e.s.c.weike.Aspect.ServiceLogAspect    : 
+
+2017-10-16 13:38:46.517  INFO 5509 --- [http-nio-8080-exec-4] c.e.s.c.weike.Aspect.ServiceLogAspect    : 
+
+2017-10-16 13:38:46.517  INFO 5509 --- [http-nio-8080-exec-4] c.e.s.c.weike.Aspect.ServiceLogAspect    : calling : cn.edu.swpu.cins.weike.service.Impl.StudentServiceImpl.queryForData
+2017-10-16 13:38:46.517  INFO 5509 --- [http-nio-8080-exec-4] c.e.s.c.weike.Aspect.ServiceLogAspect    : arg : muyi
+2017-10-16 13:38:46.517  INFO 5509 --- [http-nio-8080-exec-4] c.e.s.c.weike.Aspect.ServiceLogAspect    : 
+
+2017-10-16 13:38:46.517  INFO 5509 --- [http-nio-8080-exec-4] c.e.s.c.weike.Aspect.ServiceLogAspect    : 
+
+2017-10-16 13:38:46.517  INFO 5509 --- [http-nio-8080-exec-4] c.e.s.c.weike.Aspect.ServiceLogAspect    : service return : PersonData(id=0, username=muyi, image=test, sex=男, eduBackgroud=大专, university=西南石油大学, majorAndGrade=网络工程, entryUniversity=2010, leaveUniversity=2014, qq=879604213, skills=[Java, struct2, springmvc], experience=两个项目，担任后端工程师, selfFeel=Just so so!, level=B, email=873453@qq.com, role=ROLE_STUDENT)
+2017-10-16 13:38:46.517  INFO 5509 --- [http-nio-8080-exec-4] c.e.s.c.weike.Aspect.ServiceLogAspect    : 
+
+2017-10-16 13:38:46.518  INFO 5509 --- [http-nio-8080-exec-4] c.e.s.c.weike.Aspect.ServiceLogAspect    : 
+
+2017-10-16 13:38:46.518  INFO 5509 --- [http-nio-8080-exec-4] c.e.s.c.weike.Aspect.ServiceLogAspect    : calling : cn.edu.swpu.cins.weike.service.Impl.StudentServiceImpl.queryForData
+2017-10-16 13:38:46.518  INFO 5509 --- [http-nio-8080-exec-4] c.e.s.c.weike.Aspect.ServiceLogAspect    : arg : muyi
+2017-10-16 13:38:46.518  INFO 5509 --- [http-nio-8080-exec-4] c.e.s.c.weike.Aspect.ServiceLogAspect    : 
+
+2017-10-16 13:38:46.518  INFO 5509 --- [http-nio-8080-exec-4] c.e.s.c.weike.Aspect.ServiceLogAspect    : 
+
+2017-10-16 13:38:46.518  INFO 5509 --- [http-nio-8080-exec-4] c.e.s.c.weike.Aspect.ServiceLogAspect    : service return : PersonData(id=0, username=muyi, image=test, sex=男, eduBackgroud=大专, university=西南石油大学, majorAndGrade=网络工程, entryUniversity=2010, leaveUniversity=2014, qq=879604213, skills=[Java, struct2, springmvc], experience=两个项目，担任后端工程师, selfFeel=Just so so!, level=B, email=873453@qq.com, role=ROLE_STUDENT)
+2017-10-16 13:38:46.518  INFO 5509 --- [http-nio-8080-exec-4] c.e.s.c.weike.Aspect.ServiceLogAspect    : 
+
+2017-10-16 13:38:46.518  INFO 5509 --- [http-nio-8080-exec-4] c.e.s.c.weike.Aspect.ServiceLogAspect    : 
+
+2017-10-16 13:38:46.518  INFO 5509 --- [http-nio-8080-exec-4] c.e.s.c.weike.Aspect.ServiceLogAspect    : calling : cn.edu.swpu.cins.weike.service.Impl.StudentServiceImpl.queryForData
+2017-10-16 13:38:46.518  INFO 5509 --- [http-nio-8080-exec-4] c.e.s.c.weike.Aspect.ServiceLogAspect    : arg : muyi
+2017-10-16 13:38:46.518  INFO 5509 --- [http-nio-8080-exec-4] c.e.s.c.weike.Aspect.ServiceLogAspect    : 
+
+2017-10-16 13:38:46.518  INFO 5509 --- [http-nio-8080-exec-4] c.e.s.c.weike.Aspect.ServiceLogAspect    : 
+
+2017-10-16 13:38:46.518  INFO 5509 --- [http-nio-8080-exec-4] c.e.s.c.weike.Aspect.ServiceLogAspect    : service return : PersonData(id=0, username=muyi, image=test, sex=男, eduBackgroud=大专, university=西南石油大学, majorAndGrade=网络工程, entryUniversity=2010, leaveUniversity=2014, qq=879604213, skills=[Java, struct2, springmvc], experience=两个项目，担任后端工程师, selfFeel=Just so so!, level=B, email=873453@qq.com, role=ROLE_STUDENT)
+2017-10-16 13:38:46.518  INFO 5509 --- [http-nio-8080-exec-4] c.e.s.c.weike.Aspect.ServiceLogAspect    : 
+
+2017-10-16 13:38:46.519  INFO 5509 --- [http-nio-8080-exec-4] c.e.s.c.weike.Aspect.ServiceLogAspect    : 
+
+2017-10-16 13:38:46.519  INFO 5509 --- [http-nio-8080-exec-4] c.e.s.c.weike.Aspect.ServiceLogAspect    : calling : cn.edu.swpu.cins.weike.service.Impl.StudentServiceImpl.queryForData
+2017-10-16 13:38:46.519  INFO 5509 --- [http-nio-8080-exec-4] c.e.s.c.weike.Aspect.ServiceLogAspect    : arg : muyi
+2017-10-16 13:38:46.519  INFO 5509 --- [http-nio-8080-exec-4] c.e.s.c.weike.Aspect.ServiceLogAspect    : 
+
+2017-10-16 13:38:46.519  INFO 5509 --- [http-nio-8080-exec-4] c.e.s.c.weike.Aspect.ServiceLogAspect    : 
+
+2017-10-16 13:38:46.519  INFO 5509 --- [http-nio-8080-exec-4] c.e.s.c.weike.Aspect.ServiceLogAspect    : service return : PersonData(id=0, username=muyi, image=test, sex=男, eduBackgroud=大专, university=西南石油大学, majorAndGrade=网络工程, entryUniversity=2010, leaveUniversity=2014, qq=879604213, skills=[Java, struct2, springmvc], experience=两个项目，担任后端工程师, selfFeel=Just so so!, level=B, email=873453@qq.com, role=ROLE_STUDENT)
+2017-10-16 13:38:46.519  INFO 5509 --- [http-nio-8080-exec-4] c.e.s.c.weike.Aspect.ServiceLogAspect    : 
+
+2017-10-16 13:38:46.519  INFO 5509 --- [http-nio-8080-exec-4] c.e.s.c.weike.Aspect.ServiceLogAspect    : 
+
+2017-10-16 13:38:46.519  INFO 5509 --- [http-nio-8080-exec-4] c.e.s.c.weike.Aspect.ServiceLogAspect    : calling : cn.edu.swpu.cins.weike.service.Impl.StudentServiceImpl.queryForData
+2017-10-16 13:38:46.519  INFO 5509 --- [http-nio-8080-exec-4] c.e.s.c.weike.Aspect.ServiceLogAspect    : arg : muyi
+2017-10-16 13:38:46.519  INFO 5509 --- [http-nio-8080-exec-4] c.e.s.c.weike.Aspect.ServiceLogAspect    : 
+
+2017-10-16 13:38:46.519  INFO 5509 --- [http-nio-8080-exec-4] c.e.s.c.weike.Aspect.ServiceLogAspect    : 
+
+2017-10-16 13:38:46.519  INFO 5509 --- [http-nio-8080-exec-4] c.e.s.c.weike.Aspect.ServiceLogAspect    : service return : PersonData(id=0, username=muyi, image=test, sex=男, eduBackgroud=大专, university=西南石油大学, majorAndGrade=网络工程, entryUniversity=2010, leaveUniversity=2014, qq=879604213, skills=[Java, struct2, springmvc], experience=两个项目，担任后端工程师, selfFeel=Just so so!, level=B, email=873453@qq.com, role=ROLE_STUDENT)
+2017-10-16 13:38:46.519  INFO 5509 --- [http-nio-8080-exec-4] c.e.s.c.weike.Aspect.ServiceLogAspect    : 
+
+2017-10-16 13:38:46.520  INFO 5509 --- [http-nio-8080-exec-4] c.e.s.c.weike.Aspect.ServiceLogAspect    : 
+
+2017-10-16 13:38:46.520  INFO 5509 --- [http-nio-8080-exec-4] c.e.s.c.weike.Aspect.ServiceLogAspect    : calling : cn.edu.swpu.cins.weike.service.Impl.StudentServiceImpl.queryForData
+2017-10-16 13:38:46.521  INFO 5509 --- [http-nio-8080-exec-4] c.e.s.c.weike.Aspect.ServiceLogAspect    : arg : muyi
+2017-10-16 13:38:46.521  INFO 5509 --- [http-nio-8080-exec-4] c.e.s.c.weike.Aspect.ServiceLogAspect    : 
+
+2017-10-16 13:38:46.521  INFO 5509 --- [http-nio-8080-exec-4] c.e.s.c.weike.Aspect.ServiceLogAspect    : 
+
+2017-10-16 13:38:46.521  INFO 5509 --- [http-nio-8080-exec-4] c.e.s.c.weike.Aspect.ServiceLogAspect    : service return : PersonData(id=0, username=muyi, image=test, sex=男, eduBackgroud=大专, university=西南石油大学, majorAndGrade=网络工程, entryUniversity=2010, leaveUniversity=2014, qq=879604213, skills=[Java, struct2, springmvc], experience=两个项目，担任后端工程师, selfFeel=Just so so!, level=B, email=873453@qq.com, role=ROLE_STUDENT)
+2017-10-16 13:38:46.521  INFO 5509 --- [http-nio-8080-exec-4] c.e.s.c.weike.Aspect.ServiceLogAspect    : 
+
+2017-10-16 13:38:46.521  INFO 5509 --- [http-nio-8080-exec-4] c.e.s.c.weike.Aspect.ServiceLogAspect    : 
+
+2017-10-16 13:38:46.521  INFO 5509 --- [http-nio-8080-exec-4] c.e.s.c.weike.Aspect.ServiceLogAspect    : calling : cn.edu.swpu.cins.weike.service.Impl.StudentServiceImpl.queryForData
+2017-10-16 13:38:46.521  INFO 5509 --- [http-nio-8080-exec-4] c.e.s.c.weike.Aspect.ServiceLogAspect    : arg : muyi
+2017-10-16 13:38:46.521  INFO 5509 --- [http-nio-8080-exec-4] c.e.s.c.weike.Aspect.ServiceLogAspect    : 
+
+2017-10-16 13:38:46.521  INFO 5509 --- [http-nio-8080-exec-4] c.e.s.c.weike.Aspect.ServiceLogAspect    : 
+
+2017-10-16 13:38:46.521  INFO 5509 --- [http-nio-8080-exec-4] c.e.s.c.weike.Aspect.ServiceLogAspect    : service return : PersonData(id=0, username=muyi, image=test, sex=男, eduBackgroud=大专, university=西南石油大学, majorAndGrade=网络工程, entryUniversity=2010, leaveUniversity=2014, qq=879604213, skills=[Java, struct2, springmvc], experience=两个项目，担任后端工程师, selfFeel=Just so so!, level=B, email=873453@qq.com, role=ROLE_STUDENT)
+2017-10-16 13:38:46.521  INFO 5509 --- [http-nio-8080-exec-4] c.e.s.c.weike.Aspect.ServiceLogAspect    : 
+
+2017-10-16 13:38:46.522  INFO 5509 --- [http-nio-8080-exec-4] c.e.s.c.weike.Aspect.ServiceLogAspect    : 
+
+2017-10-16 13:38:46.522  INFO 5509 --- [http-nio-8080-exec-4] c.e.s.c.weike.Aspect.ServiceLogAspect    : calling : cn.edu.swpu.cins.weike.service.Impl.StudentServiceImpl.queryForData
+2017-10-16 13:38:46.522  INFO 5509 --- [http-nio-8080-exec-4] c.e.s.c.weike.Aspect.ServiceLogAspect    : arg : muyi
+2017-10-16 13:38:46.522  INFO 5509 --- [http-nio-8080-exec-4] c.e.s.c.weike.Aspect.ServiceLogAspect    : 
+
+2017-10-16 13:38:46.522  INFO 5509 --- [http-nio-8080-exec-4] c.e.s.c.weike.Aspect.ServiceLogAspect    : 
+
+2017-10-16 13:38:46.522  INFO 5509 --- [http-nio-8080-exec-4] c.e.s.c.weike.Aspect.ServiceLogAspect    : service return : PersonData(id=0, username=muyi, image=test, sex=男, eduBackgroud=大专, university=西南石油大学, majorAndGrade=网络工程, entryUniversity=2010, leaveUniversity=2014, qq=879604213, skills=[Java, struct2, springmvc], experience=两个项目，担任后端工程师, selfFeel=Just so so!, level=B, email=873453@qq.com, role=ROLE_STUDENT)
+2017-10-16 13:38:46.522  INFO 5509 --- [http-nio-8080-exec-4] c.e.s.c.weike.Aspect.ServiceLogAspect    : 
+
+2017-10-16 13:38:46.522  INFO 5509 --- [http-nio-8080-exec-4] c.e.s.c.weike.Aspect.ServiceLogAspect    : 
+
+2017-10-16 13:38:46.522  INFO 5509 --- [http-nio-8080-exec-4] c.e.s.c.weike.Aspect.ServiceLogAspect    : calling : cn.edu.swpu.cins.weike.service.Impl.StudentServiceImpl.queryForData
+2017-10-16 13:38:46.522  INFO 5509 --- [http-nio-8080-exec-4] c.e.s.c.weike.Aspect.ServiceLogAspect    : arg : muyi
+2017-10-16 13:38:46.522  INFO 5509 --- [http-nio-8080-exec-4] c.e.s.c.weike.Aspect.ServiceLogAspect    : 
+
+2017-10-16 13:38:46.522  INFO 5509 --- [http-nio-8080-exec-4] c.e.s.c.weike.Aspect.ServiceLogAspect    : 
+
+2017-10-16 13:38:46.522  INFO 5509 --- [http-nio-8080-exec-4] c.e.s.c.weike.Aspect.ServiceLogAspect    : service return : PersonData(id=0, username=muyi, image=test, sex=男, eduBackgroud=大专, university=西南石油大学, majorAndGrade=网络工程, entryUniversity=2010, leaveUniversity=2014, qq=879604213, skills=[Java, struct2, springmvc], experience=两个项目，担任后端工程师, selfFeel=Just so so!, level=B, email=873453@qq.com, role=ROLE_STUDENT)
+2017-10-16 13:38:46.522  INFO 5509 --- [http-nio-8080-exec-4] c.e.s.c.weike.Aspect.ServiceLogAspect    : 
+
+2017-10-16 13:38:46.523  INFO 5509 --- [http-nio-8080-exec-4] c.e.s.c.weike.Aspect.ServiceLogAspect    : 
+
+2017-10-16 13:38:46.523  INFO 5509 --- [http-nio-8080-exec-4] c.e.s.c.weike.Aspect.ServiceLogAspect    : calling : cn.edu.swpu.cins.weike.service.Impl.StudentServiceImpl.queryForData
+2017-10-16 13:38:46.523  INFO 5509 --- [http-nio-8080-exec-4] c.e.s.c.weike.Aspect.ServiceLogAspect    : arg : muyi
+2017-10-16 13:38:46.523  INFO 5509 --- [http-nio-8080-exec-4] c.e.s.c.weike.Aspect.ServiceLogAspect    : 
+
+2017-10-16 13:38:46.523  INFO 5509 --- [http-nio-8080-exec-4] c.e.s.c.weike.Aspect.ServiceLogAspect    : 
+
+2017-10-16 13:38:46.523  INFO 5509 --- [http-nio-8080-exec-4] c.e.s.c.weike.Aspect.ServiceLogAspect    : service return : PersonData(id=0, username=muyi, image=test, sex=男, eduBackgroud=大专, university=西南石油大学, majorAndGrade=网络工程, entryUniversity=2010, leaveUniversity=2014, qq=879604213, skills=[Java, struct2, springmvc], experience=两个项目，担任后端工程师, selfFeel=Just so so!, level=B, email=873453@qq.com, role=ROLE_STUDENT)
+2017-10-16 13:38:46.523  INFO 5509 --- [http-nio-8080-exec-4] c.e.s.c.weike.Aspect.ServiceLogAspect    : 
+
+2017-10-16 13:38:46.523  INFO 5509 --- [http-nio-8080-exec-4] c.e.s.c.weike.Aspect.ServiceLogAspect    : 
+
+2017-10-16 13:38:46.523  INFO 5509 --- [http-nio-8080-exec-4] c.e.s.c.weike.Aspect.ServiceLogAspect    : calling : cn.edu.swpu.cins.weike.service.Impl.StudentServiceImpl.queryForData
+2017-10-16 13:38:46.524  INFO 5509 --- [http-nio-8080-exec-4] c.e.s.c.weike.Aspect.ServiceLogAspect    : arg : muyi
+2017-10-16 13:38:46.524  INFO 5509 --- [http-nio-8080-exec-4] c.e.s.c.weike.Aspect.ServiceLogAspect    : 
+
+2017-10-16 13:38:46.524  INFO 5509 --- [http-nio-8080-exec-4] c.e.s.c.weike.Aspect.ServiceLogAspect    : 
+
+2017-10-16 13:38:46.524  INFO 5509 --- [http-nio-8080-exec-4] c.e.s.c.weike.Aspect.ServiceLogAspect    : service return : PersonData(id=0, username=muyi, image=test, sex=男, eduBackgroud=大专, university=西南石油大学, majorAndGrade=网络工程, entryUniversity=2010, leaveUniversity=2014, qq=879604213, skills=[Java, struct2, springmvc], experience=两个项目，担任后端工程师, selfFeel=Just so so!, level=B, email=873453@qq.com, role=ROLE_STUDENT)
+2017-10-16 13:38:46.524  INFO 5509 --- [http-nio-8080-exec-4] c.e.s.c.weike.Aspect.ServiceLogAspect    : 
+
+2017-10-16 13:38:46.524  INFO 5509 --- [http-nio-8080-exec-4] c.e.s.c.weike.Aspect.ServiceLogAspect    : 
+
+2017-10-16 13:38:46.524  INFO 5509 --- [http-nio-8080-exec-4] c.e.s.c.weike.Aspect.ServiceLogAspect    : calling : cn.edu.swpu.cins.weike.service.Impl.StudentServiceImpl.queryForData
+2017-10-16 13:38:46.524  INFO 5509 --- [http-nio-8080-exec-4] c.e.s.c.weike.Aspect.ServiceLogAspect    : arg : muyi
+2017-10-16 13:38:46.524  INFO 5509 --- [http-nio-8080-exec-4] c.e.s.c.weike.Aspect.ServiceLogAspect    : 
+
+2017-10-16 13:38:46.524  INFO 5509 --- [http-nio-8080-exec-4] c.e.s.c.weike.Aspect.ServiceLogAspect    : 
+
+2017-10-16 13:38:46.525  INFO 5509 --- [http-nio-8080-exec-4] c.e.s.c.weike.Aspect.ServiceLogAspect    : service return : PersonData(id=0, username=muyi, image=test, sex=男, eduBackgroud=大专, university=西南石油大学, majorAndGrade=网络工程, entryUniversity=2010, leaveUniversity=2014, qq=879604213, skills=[Java, struct2, springmvc], experience=两个项目，担任后端工程师, selfFeel=Just so so!, level=B, email=873453@qq.com, role=ROLE_STUDENT)
+2017-10-16 13:38:46.525  INFO 5509 --- [http-nio-8080-exec-4] c.e.s.c.weike.Aspect.ServiceLogAspect    : 
+
+2017-10-16 13:38:46.525  INFO 5509 --- [http-nio-8080-exec-4] c.e.s.c.weike.Aspect.ServiceLogAspect    : 
+
+2017-10-16 13:38:46.525  INFO 5509 --- [http-nio-8080-exec-4] c.e.s.c.weike.Aspect.ServiceLogAspect    : calling : cn.edu.swpu.cins.weike.service.Impl.StudentServiceImpl.queryForData
+2017-10-16 13:38:46.525  INFO 5509 --- [http-nio-8080-exec-4] c.e.s.c.weike.Aspect.ServiceLogAspect    : arg : muyi
+2017-10-16 13:38:46.525  INFO 5509 --- [http-nio-8080-exec-4] c.e.s.c.weike.Aspect.ServiceLogAspect    : 
+
+2017-10-16 13:38:46.525  INFO 5509 --- [http-nio-8080-exec-4] c.e.s.c.weike.Aspect.ServiceLogAspect    : 
+
+2017-10-16 13:38:46.525  INFO 5509 --- [http-nio-8080-exec-4] c.e.s.c.weike.Aspect.ServiceLogAspect    : service return : PersonData(id=0, username=muyi, image=test, sex=男, eduBackgroud=大专, university=西南石油大学, majorAndGrade=网络工程, entryUniversity=2010, leaveUniversity=2014, qq=879604213, skills=[Java, struct2, springmvc], experience=两个项目，担任后端工程师, selfFeel=Just so so!, level=B, email=873453@qq.com, role=ROLE_STUDENT)
+2017-10-16 13:38:46.525  INFO 5509 --- [http-nio-8080-exec-4] c.e.s.c.weike.Aspect.ServiceLogAspect    : 
+
+2017-10-16 13:38:46.525  INFO 5509 --- [http-nio-8080-exec-4] c.e.s.c.weike.Aspect.ServiceLogAspect    : 
+
+2017-10-16 13:38:46.525  INFO 5509 --- [http-nio-8080-exec-4] c.e.s.c.weike.Aspect.ServiceLogAspect    : calling : cn.edu.swpu.cins.weike.service.Impl.StudentServiceImpl.queryForData
+2017-10-16 13:38:46.525  INFO 5509 --- [http-nio-8080-exec-4] c.e.s.c.weike.Aspect.ServiceLogAspect    : arg : muyi
+2017-10-16 13:38:46.525  INFO 5509 --- [http-nio-8080-exec-4] c.e.s.c.weike.Aspect.ServiceLogAspect    : 
+
+2017-10-16 13:38:46.526  INFO 5509 --- [http-nio-8080-exec-4] c.e.s.c.weike.Aspect.ServiceLogAspect    : 
+
+2017-10-16 13:38:46.526  INFO 5509 --- [http-nio-8080-exec-4] c.e.s.c.weike.Aspect.ServiceLogAspect    : service return : PersonData(id=0, username=muyi, image=test, sex=男, eduBackgroud=大专, university=西南石油大学, majorAndGrade=网络工程, entryUniversity=2010, leaveUniversity=2014, qq=879604213, skills=[Java, struct2, springmvc], experience=两个项目，担任后端工程师, selfFeel=Just so so!, level=B, email=873453@qq.com, role=ROLE_STUDENT)
+2017-10-16 13:38:46.526  INFO 5509 --- [http-nio-8080-exec-4] c.e.s.c.weike.Aspect.ServiceLogAspect    : 
+
+2017-10-16 13:38:46.526  INFO 5509 --- [http-nio-8080-exec-4] c.e.s.c.weike.Aspect.ServiceLogAspect    : 
+
+2017-10-16 13:38:46.526  INFO 5509 --- [http-nio-8080-exec-4] c.e.s.c.weike.Aspect.ServiceLogAspect    : calling : cn.edu.swpu.cins.weike.service.Impl.StudentServiceImpl.queryForData
+2017-10-16 13:38:46.526  INFO 5509 --- [http-nio-8080-exec-4] c.e.s.c.weike.Aspect.ServiceLogAspect    : arg : muyi
+2017-10-16 13:38:46.526  INFO 5509 --- [http-nio-8080-exec-4] c.e.s.c.weike.Aspect.ServiceLogAspect    : 
+
+2017-10-16 13:38:46.526  INFO 5509 --- [http-nio-8080-exec-4] c.e.s.c.weike.Aspect.ServiceLogAspect    : 
+
+2017-10-16 13:38:46.526  INFO 5509 --- [http-nio-8080-exec-4] c.e.s.c.weike.Aspect.ServiceLogAspect    : service return : PersonData(id=0, username=muyi, image=test, sex=男, eduBackgroud=大专, university=西南石油大学, majorAndGrade=网络工程, entryUniversity=2010, leaveUniversity=2014, qq=879604213, skills=[Java, struct2, springmvc], experience=两个项目，担任后端工程师, selfFeel=Just so so!, level=B, email=873453@qq.com, role=ROLE_STUDENT)
+2017-10-16 13:38:46.526  INFO 5509 --- [http-nio-8080-exec-4] c.e.s.c.weike.Aspect.ServiceLogAspect    : 
+
+2017-10-16 13:38:46.528  INFO 5509 --- [http-nio-8080-exec-4] c.e.s.c.weike.Aspect.ServiceLogAspect    : 
+
+2017-10-16 13:38:46.528  INFO 5509 --- [http-nio-8080-exec-4] c.e.s.c.weike.Aspect.ServiceLogAspect    : calling : cn.edu.swpu.cins.weike.service.Impl.StudentServiceImpl.queryForData
+2017-10-16 13:38:46.528  INFO 5509 --- [http-nio-8080-exec-4] c.e.s.c.weike.Aspect.ServiceLogAspect    : arg : muyi
+2017-10-16 13:38:46.528  INFO 5509 --- [http-nio-8080-exec-4] c.e.s.c.weike.Aspect.ServiceLogAspect    : 
+
+2017-10-16 13:38:46.528  INFO 5509 --- [http-nio-8080-exec-4] c.e.s.c.weike.Aspect.ServiceLogAspect    : 
+
+2017-10-16 13:38:46.528  INFO 5509 --- [http-nio-8080-exec-4] c.e.s.c.weike.Aspect.ServiceLogAspect    : service return : PersonData(id=0, username=muyi, image=test, sex=男, eduBackgroud=大专, university=西南石油大学, majorAndGrade=网络工程, entryUniversity=2010, leaveUniversity=2014, qq=879604213, skills=[Java, struct2, springmvc], experience=两个项目，担任后端工程师, selfFeel=Just so so!, level=B, email=873453@qq.com, role=ROLE_STUDENT)
+2017-10-16 13:38:46.528  INFO 5509 --- [http-nio-8080-exec-4] c.e.s.c.weike.Aspect.ServiceLogAspect    : 
+
+2017-10-16 13:38:46.528  INFO 5509 --- [http-nio-8080-exec-4] c.e.s.c.weike.Aspect.ServiceLogAspect    : 
+
+2017-10-16 13:38:46.528  INFO 5509 --- [http-nio-8080-exec-4] c.e.s.c.weike.Aspect.ServiceLogAspect    : calling : cn.edu.swpu.cins.weike.service.Impl.StudentServiceImpl.queryForData
+2017-10-16 13:38:46.529  INFO 5509 --- [http-nio-8080-exec-4] c.e.s.c.weike.Aspect.ServiceLogAspect    : arg : muyi
+2017-10-16 13:38:46.529  INFO 5509 --- [http-nio-8080-exec-4] c.e.s.c.weike.Aspect.ServiceLogAspect    : 
+
+2017-10-16 13:38:46.529  INFO 5509 --- [http-nio-8080-exec-4] c.e.s.c.weike.Aspect.ServiceLogAspect    : 
+
+2017-10-16 13:38:46.529  INFO 5509 --- [http-nio-8080-exec-4] c.e.s.c.weike.Aspect.ServiceLogAspect    : service return : PersonData(id=0, username=muyi, image=test, sex=男, eduBackgroud=大专, university=西南石油大学, majorAndGrade=网络工程, entryUniversity=2010, leaveUniversity=2014, qq=879604213, skills=[Java, struct2, springmvc], experience=两个项目，担任后端工程师, selfFeel=Just so so!, level=B, email=873453@qq.com, role=ROLE_STUDENT)
+2017-10-16 13:38:46.529  INFO 5509 --- [http-nio-8080-exec-4] c.e.s.c.weike.Aspect.ServiceLogAspect    : 
+
+2017-10-16 13:38:46.529  INFO 5509 --- [http-nio-8080-exec-4] c.e.s.c.weike.Aspect.ServiceLogAspect    : 
+
+2017-10-16 13:38:46.529  INFO 5509 --- [http-nio-8080-exec-4] c.e.s.c.weike.Aspect.ServiceLogAspect    : calling : cn.edu.swpu.cins.weike.service.Impl.StudentServiceImpl.queryForData
+2017-10-16 13:38:46.529  INFO 5509 --- [http-nio-8080-exec-4] c.e.s.c.weike.Aspect.ServiceLogAspect    : arg : aysnc
+2017-10-16 13:38:46.529  INFO 5509 --- [http-nio-8080-exec-4] c.e.s.c.weike.Aspect.ServiceLogAspect    : 
+
+2017-10-16 13:38:46.547  INFO 5509 --- [http-nio-8080-exec-4] c.e.s.c.weike.Aspect.ServiceLogAspect    : 
+
+2017-10-16 13:38:46.547  INFO 5509 --- [http-nio-8080-exec-4] c.e.s.c.weike.Aspect.ServiceLogAspect    : service return : PersonData(id=0, username=aysnc, image=meiyou, sex=male, eduBackgroud=西南石油大学, university=test, majorAndGrade=test, entryUniversity=20150901, leaveUniversity=20190601, qq=13076046792, skills=[Java, struct2, springmvc], experience=null, selfFeel=Better, level=C, email=null, role=null)
+2017-10-16 13:38:46.547  INFO 5509 --- [http-nio-8080-exec-4] c.e.s.c.weike.Aspect.ServiceLogAspect    : 
+
+2017-10-16 13:38:46.547  INFO 5509 --- [http-nio-8080-exec-4] c.e.s.c.weike.Aspect.ServiceLogAspect    : 
+
+2017-10-16 13:38:46.547  INFO 5509 --- [http-nio-8080-exec-4] c.e.s.c.weike.Aspect.ServiceLogAspect    : calling : cn.edu.swpu.cins.weike.service.Impl.StudentServiceImpl.queryForData
+2017-10-16 13:38:46.547  INFO 5509 --- [http-nio-8080-exec-4] c.e.s.c.weike.Aspect.ServiceLogAspect    : arg : aysnc
+2017-10-16 13:38:46.547  INFO 5509 --- [http-nio-8080-exec-4] c.e.s.c.weike.Aspect.ServiceLogAspect    : 
+
+2017-10-16 13:38:46.548  INFO 5509 --- [http-nio-8080-exec-4] c.e.s.c.weike.Aspect.ServiceLogAspect    : 
+
+2017-10-16 13:38:46.548  INFO 5509 --- [http-nio-8080-exec-4] c.e.s.c.weike.Aspect.ServiceLogAspect    : service return : PersonData(id=0, username=aysnc, image=meiyou, sex=male, eduBackgroud=西南石油大学, university=test, majorAndGrade=test, entryUniversity=20150901, leaveUniversity=20190601, qq=13076046792, skills=[Java, struct2, springmvc], experience=null, selfFeel=Better, level=C, email=null, role=null)
+2017-10-16 13:38:46.548  INFO 5509 --- [http-nio-8080-exec-4] c.e.s.c.weike.Aspect.ServiceLogAspect    : 
+
+2017-10-16 13:38:46.548  INFO 5509 --- [http-nio-8080-exec-4] c.e.s.c.weike.Aspect.ServiceLogAspect    : 
+
+2017-10-16 13:38:46.548  INFO 5509 --- [http-nio-8080-exec-4] c.e.s.c.weike.Aspect.ServiceLogAspect    : calling : cn.edu.swpu.cins.weike.service.Impl.StudentServiceImpl.queryForData
+2017-10-16 13:38:46.548  INFO 5509 --- [http-nio-8080-exec-4] c.e.s.c.weike.Aspect.ServiceLogAspect    : arg : Amos
+2017-10-16 13:38:46.548  INFO 5509 --- [http-nio-8080-exec-4] c.e.s.c.weike.Aspect.ServiceLogAspect    : 
+
+2017-10-16 13:38:46.560  INFO 5509 --- [http-nio-8080-exec-4] c.e.s.c.weike.Aspect.ServiceLogAspect    : 
+
+2017-10-16 13:38:46.560  INFO 5509 --- [http-nio-8080-exec-4] c.e.s.c.weike.Aspect.ServiceLogAspect    : service return : PersonData(id=0, username=Amos, image=test, sex=male, eduBackgroud=西南石油大学, university=test, majorAndGrade=test, entryUniversity=20150901, leaveUniversity=20190601, qq=13076046792, skills=[Java, struct2, springmvc], experience=null, selfFeel=Better, level=B, email=123123123123@qq.com, role=ROLE_STUDENT)
+2017-10-16 13:38:46.560  INFO 5509 --- [http-nio-8080-exec-4] c.e.s.c.weike.Aspect.ServiceLogAspect    : 
+
+2017-10-16 13:38:46.560  INFO 5509 --- [http-nio-8080-exec-4] c.e.s.c.weike.Aspect.ServiceLogAspect    : 
+
+2017-10-16 13:38:46.560  INFO 5509 --- [http-nio-8080-exec-4] c.e.s.c.weike.Aspect.ServiceLogAspect    : calling : cn.edu.swpu.cins.weike.service.Impl.StudentServiceImpl.queryForData
+2017-10-16 13:38:46.560  INFO 5509 --- [http-nio-8080-exec-4] c.e.s.c.weike.Aspect.ServiceLogAspect    : arg : Amos
+2017-10-16 13:38:46.560  INFO 5509 --- [http-nio-8080-exec-4] c.e.s.c.weike.Aspect.ServiceLogAspect    : 
+
+2017-10-16 13:38:46.560  INFO 5509 --- [http-nio-8080-exec-4] c.e.s.c.weike.Aspect.ServiceLogAspect    : 
+
+2017-10-16 13:38:46.560  INFO 5509 --- [http-nio-8080-exec-4] c.e.s.c.weike.Aspect.ServiceLogAspect    : service return : PersonData(id=0, username=Amos, image=test, sex=male, eduBackgroud=西南石油大学, university=test, majorAndGrade=test, entryUniversity=20150901, leaveUniversity=20190601, qq=13076046792, skills=[Java, struct2, springmvc], experience=null, selfFeel=Better, level=B, email=123123123123@qq.com, role=ROLE_STUDENT)
+2017-10-16 13:38:46.560  INFO 5509 --- [http-nio-8080-exec-4] c.e.s.c.weike.Aspect.ServiceLogAspect    : 
+
+2017-10-16 13:38:46.561  INFO 5509 --- [http-nio-8080-exec-4] c.e.s.c.weike.Aspect.ServiceLogAspect    : 
+
+2017-10-16 13:38:46.561  INFO 5509 --- [http-nio-8080-exec-4] c.e.s.c.weike.Aspect.ServiceLogAspect    : calling : cn.edu.swpu.cins.weike.service.Impl.StudentServiceImpl.queryForData
+2017-10-16 13:38:46.561  INFO 5509 --- [http-nio-8080-exec-4] c.e.s.c.weike.Aspect.ServiceLogAspect    : arg : Amos
+2017-10-16 13:38:46.561  INFO 5509 --- [http-nio-8080-exec-4] c.e.s.c.weike.Aspect.ServiceLogAspect    : 
+
+2017-10-16 13:38:46.561  INFO 5509 --- [http-nio-8080-exec-4] c.e.s.c.weike.Aspect.ServiceLogAspect    : 
+
+2017-10-16 13:38:46.561  INFO 5509 --- [http-nio-8080-exec-4] c.e.s.c.weike.Aspect.ServiceLogAspect    : service return : PersonData(id=0, username=Amos, image=test, sex=male, eduBackgroud=西南石油大学, university=test, majorAndGrade=test, entryUniversity=20150901, leaveUniversity=20190601, qq=13076046792, skills=[Java, struct2, springmvc], experience=null, selfFeel=Better, level=B, email=123123123123@qq.com, role=ROLE_STUDENT)
+2017-10-16 13:38:46.561  INFO 5509 --- [http-nio-8080-exec-4] c.e.s.c.weike.Aspect.ServiceLogAspect    : 
+
+2017-10-16 13:38:46.561  INFO 5509 --- [http-nio-8080-exec-4] c.e.s.c.weike.Aspect.ServiceLogAspect    : 
+
+2017-10-16 13:38:46.561  INFO 5509 --- [http-nio-8080-exec-4] c.e.s.c.weike.Aspect.ServiceLogAspect    : calling : cn.edu.swpu.cins.weike.service.Impl.StudentServiceImpl.queryForData
+2017-10-16 13:38:46.561  INFO 5509 --- [http-nio-8080-exec-4] c.e.s.c.weike.Aspect.ServiceLogAspect    : arg : Amos
+2017-10-16 13:38:46.561  INFO 5509 --- [http-nio-8080-exec-4] c.e.s.c.weike.Aspect.ServiceLogAspect    : 
+
+2017-10-16 13:38:46.561  INFO 5509 --- [http-nio-8080-exec-4] c.e.s.c.weike.Aspect.ServiceLogAspect    : 
+
+2017-10-16 13:38:46.561  INFO 5509 --- [http-nio-8080-exec-4] c.e.s.c.weike.Aspect.ServiceLogAspect    : service return : PersonData(id=0, username=Amos, image=test, sex=male, eduBackgroud=西南石油大学, university=test, majorAndGrade=test, entryUniversity=20150901, leaveUniversity=20190601, qq=13076046792, skills=[Java, struct2, springmvc], experience=null, selfFeel=Better, level=B, email=123123123123@qq.com, role=ROLE_STUDENT)
+2017-10-16 13:38:46.561  INFO 5509 --- [http-nio-8080-exec-4] c.e.s.c.weike.Aspect.ServiceLogAspect    : 
+
+2017-10-16 13:38:46.562  INFO 5509 --- [http-nio-8080-exec-4] c.e.s.c.weike.Aspect.ServiceLogAspect    : 
+
+2017-10-16 13:38:46.562  INFO 5509 --- [http-nio-8080-exec-4] c.e.s.c.weike.Aspect.ServiceLogAspect    : calling : cn.edu.swpu.cins.weike.service.Impl.StudentServiceImpl.queryForData
+2017-10-16 13:38:46.562  INFO 5509 --- [http-nio-8080-exec-4] c.e.s.c.weike.Aspect.ServiceLogAspect    : arg : Amos
+2017-10-16 13:38:46.562  INFO 5509 --- [http-nio-8080-exec-4] c.e.s.c.weike.Aspect.ServiceLogAspect    : 
+
+2017-10-16 13:38:46.562  INFO 5509 --- [http-nio-8080-exec-4] c.e.s.c.weike.Aspect.ServiceLogAspect    : 
+
+2017-10-16 13:38:46.562  INFO 5509 --- [http-nio-8080-exec-4] c.e.s.c.weike.Aspect.ServiceLogAspect    : service return : PersonData(id=0, username=Amos, image=test, sex=male, eduBackgroud=西南石油大学, university=test, majorAndGrade=test, entryUniversity=20150901, leaveUniversity=20190601, qq=13076046792, skills=[Java, struct2, springmvc], experience=null, selfFeel=Better, level=B, email=123123123123@qq.com, role=ROLE_STUDENT)
+2017-10-16 13:38:46.562  INFO 5509 --- [http-nio-8080-exec-4] c.e.s.c.weike.Aspect.ServiceLogAspect    : 
+
+2017-10-16 13:38:46.562  INFO 5509 --- [http-nio-8080-exec-4] c.e.s.c.weike.Aspect.ServiceLogAspect    : 
+
+2017-10-16 13:38:46.562  INFO 5509 --- [http-nio-8080-exec-4] c.e.s.c.weike.Aspect.ServiceLogAspect    : calling : cn.edu.swpu.cins.weike.service.Impl.StudentServiceImpl.queryForData
+2017-10-16 13:38:46.562  INFO 5509 --- [http-nio-8080-exec-4] c.e.s.c.weike.Aspect.ServiceLogAspect    : arg : Amos
+2017-10-16 13:38:46.562  INFO 5509 --- [http-nio-8080-exec-4] c.e.s.c.weike.Aspect.ServiceLogAspect    : 
+
+2017-10-16 13:38:46.562  INFO 5509 --- [http-nio-8080-exec-4] c.e.s.c.weike.Aspect.ServiceLogAspect    : 
+
+2017-10-16 13:38:46.562  INFO 5509 --- [http-nio-8080-exec-4] c.e.s.c.weike.Aspect.ServiceLogAspect    : service return : PersonData(id=0, username=Amos, image=test, sex=male, eduBackgroud=西南石油大学, university=test, majorAndGrade=test, entryUniversity=20150901, leaveUniversity=20190601, qq=13076046792, skills=[Java, struct2, springmvc], experience=null, selfFeel=Better, level=B, email=123123123123@qq.com, role=ROLE_STUDENT)
+2017-10-16 13:38:46.562  INFO 5509 --- [http-nio-8080-exec-4] c.e.s.c.weike.Aspect.ServiceLogAspect    : 
+
+2017-10-16 13:38:46.567  INFO 5509 --- [http-nio-8080-exec-4] c.e.s.c.weike.Aspect.ServiceLogAspect    : 
+
+2017-10-16 13:38:46.567  INFO 5509 --- [http-nio-8080-exec-4] c.e.s.c.weike.Aspect.ServiceLogAspect    : calling : cn.edu.swpu.cins.weike.service.Impl.StudentServiceImpl.queryForData
+2017-10-16 13:38:46.567  INFO 5509 --- [http-nio-8080-exec-4] c.e.s.c.weike.Aspect.ServiceLogAspect    : arg : muyi
+2017-10-16 13:38:46.567  INFO 5509 --- [http-nio-8080-exec-4] c.e.s.c.weike.Aspect.ServiceLogAspect    : 
+
+2017-10-16 13:38:46.567  INFO 5509 --- [http-nio-8080-exec-4] c.e.s.c.weike.Aspect.ServiceLogAspect    : 
+
+2017-10-16 13:38:46.567  INFO 5509 --- [http-nio-8080-exec-4] c.e.s.c.weike.Aspect.ServiceLogAspect    : service return : PersonData(id=0, username=muyi, image=test, sex=男, eduBackgroud=大专, university=西南石油大学, majorAndGrade=网络工程, entryUniversity=2010, leaveUniversity=2014, qq=879604213, skills=[Java, struct2, springmvc], experience=两个项目，担任后端工程师, selfFeel=Just so so!, level=B, email=873453@qq.com, role=ROLE_STUDENT)
+2017-10-16 13:38:46.567  INFO 5509 --- [http-nio-8080-exec-4] c.e.s.c.weike.Aspect.ServiceLogAspect    : 
+
+2017-10-16 13:38:46.567  INFO 5509 --- [http-nio-8080-exec-4] c.e.s.c.weike.Aspect.ServiceLogAspect    : 
+
+2017-10-16 13:38:46.567  INFO 5509 --- [http-nio-8080-exec-4] c.e.s.c.weike.Aspect.ServiceLogAspect    : calling : cn.edu.swpu.cins.weike.service.Impl.StudentServiceImpl.queryForData
+2017-10-16 13:38:46.567  INFO 5509 --- [http-nio-8080-exec-4] c.e.s.c.weike.Aspect.ServiceLogAspect    : arg : muyi
+2017-10-16 13:38:46.567  INFO 5509 --- [http-nio-8080-exec-4] c.e.s.c.weike.Aspect.ServiceLogAspect    : 
+
+2017-10-16 13:38:46.567  INFO 5509 --- [http-nio-8080-exec-4] c.e.s.c.weike.Aspect.ServiceLogAspect    : 
+
+2017-10-16 13:38:46.567  INFO 5509 --- [http-nio-8080-exec-4] c.e.s.c.weike.Aspect.ServiceLogAspect    : service return : PersonData(id=0, username=muyi, image=test, sex=男, eduBackgroud=大专, university=西南石油大学, majorAndGrade=网络工程, entryUniversity=2010, leaveUniversity=2014, qq=879604213, skills=[Java, struct2, springmvc], experience=两个项目，担任后端工程师, selfFeel=Just so so!, level=B, email=873453@qq.com, role=ROLE_STUDENT)
+2017-10-16 13:38:46.567  INFO 5509 --- [http-nio-8080-exec-4] c.e.s.c.weike.Aspect.ServiceLogAspect    : 
+
+2017-10-16 13:38:46.567  INFO 5509 --- [http-nio-8080-exec-4] c.e.s.c.weike.Aspect.ServiceLogAspect    : 
+
+2017-10-16 13:38:46.568  INFO 5509 --- [http-nio-8080-exec-4] c.e.s.c.weike.Aspect.ServiceLogAspect    : service return : [IndexVO(projectDetails=ProjectDetail(projectName=test3, projectKind=projectKind, projectConnector=木易, qq=879604213, email=yangquan5991@gamil.com, numNeed=20, projectNeed=[JavaScript, springboot], projectStart=20150606, projectEnd=0, projectProfile=test, proHits=8), personData=TeacherPersonData(id=11, username=木易, image=image, sex=female, university=SWPU, academy=test, rank=perfessor, qq=879604213, email=yangquan5991@gmail.com, role=ROLE_TEACHER), applySuccessPerson=[], followPros=[], followNum=0, applySuccessNum=0), IndexVO(projectDetails=ProjectDetail(projectName=test4, projectKind=projectKind, projectConnector=木易, qq=879604213, email=yangquan5991@gamil.com, numNeed=20, projectNeed=[JavaScript, BootStrap], projectStart=20150606, projectEnd=0, projectProfile=test, proHits=8), personData=TeacherPersonData(id=11, username=木易, image=image, sex=female, university=SWPU, academy=test, rank=perfessor, qq=879604213, email=yangquan5991@gmail.com, role=ROLE_TEACHER), applySuccessPerson=[], followPros=[], followNum=0, applySuccessNum=0), IndexVO(projectDetails=ProjectDetail(projectName=test5, projectKind=projectKind, projectConnector=木易, qq=879604213, email=yangquan5991@gamil.com, numNeed=20, projectNeed=[JavaScript, CSS], projectStart=20150606, projectEnd=0, projectProfile=test, proHits=8), personData=TeacherPersonData(id=11, username=木易, image=image, sex=female, university=SWPU, academy=test, rank=perfessor, qq=879604213, email=yangquan5991@gmail.com, role=ROLE_TEACHER), applySuccessPerson=[], followPros=[], followNum=0, applySuccessNum=0), IndexVO(projectDetails=ProjectDetail(projectName=test6, projectKind=projectKind, projectConnector=木易, qq=879604213, email=yangquan5991@gamil.com, numNeed=20, projectNeed=[struct2, hibernate], projectStart=20150606, projectEnd=0, projectProfile=test, proHits=8), personData=TeacherPersonData(id=11, username=木易, image=image, sex=female, university=SWPU, academy=test, rank=perfessor, qq=879604213, email=yangquan5991@gmail.com, role=ROLE_TEACHER), applySuccessPerson=[], followPros=[], followNum=0, applySuccessNum=0), IndexVO(projectDetails=ProjectDetail(projectName=test7, projectKind=projectKind, projectConnector=木易, qq=879604213, email=yangquan5991@gamil.com, numNeed=20, projectNeed=[struct2, SpringMVC], projectStart=20150606, projectEnd=0, projectProfile=test, proHits=8), personData=TeacherPersonData(id=11, username=木易, image=image, sex=female, university=SWPU, academy=test, rank=perfessor, qq=879604213, email=yangquan5991@gmail.com, role=ROLE_TEACHER), applySuccessPerson=[], followPros=[], followNum=0, applySuccessNum=0), IndexVO(projectDetails=ProjectDetail(projectName=test8, projectKind=projectKind, projectConnector=木易, qq=879604213, email=yangquan5991@gamil.com, numNeed=20, projectNeed=[struct2, Tomcat], projectStart=20150606, projectEnd=0, projectProfile=test, proHits=8), personData=TeacherPersonData(id=11, username=木易, image=image, sex=female, university=SWPU, academy=test, rank=perfessor, qq=879604213, email=yangquan5991@gmail.com, role=ROLE_TEACHER), applySuccessPerson=[], followPros=[], followNum=0, applySuccessNum=0), IndexVO(projectDetails=ProjectDetail(projectName=Projectasdasd1, projectKind=projectKind, projectConnector=muyi, qq=13076046792, email=873453@qq.com, numNeed=20, projectNeed=[springmvc, mybatis], projectStart=20150606, projectEnd=0, projectProfile=test, proHits=8), personData=PersonData(id=0, username=muyi, image=test, sex=男, eduBackgroud=大专, university=西南石油大学, majorAndGrade=网络工程, entryUniversity=2010, leaveUniversity=2014, qq=879604213, skills=[Java, struct2, springmvc], experience=两个项目，担任后端工程师, selfFeel=Just so so!, level=B, email=873453@qq.com, role=ROLE_STUDENT), applySuccessPerson=[], followPros=[], followNum=0, applySuccessNum=0), IndexVO(projectDetails=ProjectDetail(projectName=TEs, projectKind=projectKind, projectConnector=muyi, qq=13076046792, email=873453@qq.com, numNeed=20, projectNeed=[springmvc, mybatis, js], projectStart=20150606, projectEnd=0, projectProfile=test, proHits=1), personData=PersonData(id=0, username=muyi, image=test, sex=男, eduBackgroud=大专, university=西南石油大学, majorAndGrade=网络工程, entryUniversity=2010, leaveUniversity=2014, qq=879604213, skills=[Java, struct2, springmvc], experience=两个项目，担任后端工程师, selfFeel=Just so so!, level=B, email=873453@qq.com, role=ROLE_STUDENT), applySuccessPerson=[], followPros=[], followNum=0, applySuccessNum=0), IndexVO(projectDetails=ProjectDetail(projectName=TEDSs, projectKind=projectKind, projectConnector=muyi, qq=13076046792, email=873453@qq.com, numNeed=20, projectNeed=[springmvc, mybatis, js], projectStart=20150606, projectEnd=0, projectProfile=test, proHits=1), personData=PersonData(id=0, username=muyi, image=test, sex=男, eduBackgroud=大专, university=西南石油大学, majorAndGrade=网络工程, entryUniversity=2010, leaveUniversity=2014, qq=879604213, skills=[Java, struct2, springmvc], experience=两个项目，担任后端工程师, selfFeel=Just so so!, level=B, email=873453@qq.com, role=ROLE_STUDENT), applySuccessPerson=[], followPros=[], followNum=0, applySuccessNum=0), IndexVO(projectDetails=ProjectDetail(projectName=TEDDSDs, projectKind=projectKind, projectConnector=muyi, qq=13076046792, email=873453@qq.com, numNeed=20, projectNeed=[springmvc, mybatis, js, Jquery], projectStart=20150606, projectEnd=0, projectProfile=test, proHits=1), personData=PersonData(id=0, username=muyi, image=test, sex=男, eduBackgroud=大专, university=西南石油大学, majorAndGrade=网络工程, entryUniversity=2010, leaveUniversity=2014, qq=879604213, skills=[Java, struct2, springmvc], experience=两个项目，担任后端工程师, selfFeel=Just so so!, level=B, email=873453@qq.com, role=ROLE_STUDENT), applySuccessPerson=[], followPros=[], followNum=0, applySuccessNum=0), IndexVO(projectDetails=ProjectDetail(projectName=TEDSDKHDs, projectKind=projectKind, projectConnector=muyi, qq=13076046792, email=873453@qq.com, numNeed=20, projectNeed=[springmvc, mybatis, js, Jquery], projectStart=20150606, projectEnd=0, projectProfile=test, proHits=0), personData=PersonData(id=0, username=muyi, image=test, sex=男, eduBackgroud=大专, university=西南石油大学, majorAndGrade=网络工程, entryUniversity=2010, leaveUniversity=2014, qq=879604213, skills=[Java, struct2, springmvc], experience=两个项目，担任后端工程师, selfFeel=Just so so!, level=B, email=873453@qq.com, role=ROLE_STUDENT), applySuccessPerson=[], followPros=[], followNum=0, applySuccessNum=0), IndexVO(projectDetails=ProjectDetail(projectName=LNLJ, projectKind=projectKind, projectConnector=muyi, qq=13076046792, email=873453@qq.com, numNeed=20, projectNeed=[springmvc, mybatis, js, Jquery], projectStart=20150606, projectEnd=0, projectProfile=test, proHits=0), personData=PersonData(id=0, username=muyi, image=test, sex=男, eduBackgroud=大专, university=西南石油大学, majorAndGrade=网络工程, entryUniversity=2010, leaveUniversity=2014, qq=879604213, skills=[Java, struct2, springmvc], experience=两个项目，担任后端工程师, selfFeel=Just so so!, level=B, email=873453@qq.com, role=ROLE_STUDENT), applySuccessPerson=[], followPros=[], followNum=0, applySuccessNum=0), IndexVO(projectDetails=ProjectDetail(projectName=kjhhjasd, projectKind=projectKind, projectConnector=muyi, qq=13076046792, email=873453@qq.com, numNeed=20, projectNeed=[springmvc, mybatis, js, Jquery], projectStart=20150606, projectEnd=0, projectProfile=test, proHits=0), personData=PersonData(id=0, username=muyi, image=test, sex=男, eduBackgroud=大专, university=西南石油大学, majorAndGrade=网络工程, entryUniversity=2010, leaveUniversity=2014, qq=879604213, skills=[Java, struct2, springmvc], experience=两个项目，担任后端工程师, selfFeel=Just so so!, level=B, email=873453@qq.com, role=ROLE_STUDENT), applySuccessPerson=[], followPros=[], followNum=0, applySuccessNum=0), IndexVO(projectDetails=ProjectDetail(projectName=kjhacasdaasd, projectKind=projectKind, projectConnector=muyi, qq=13076046792, email=873453@qq.com, numNeed=20, projectNeed=[springmvc, mybatis, js, Jquery], projectStart=20150606, projectEnd=0, projectProfile=test, proHits=0), personData=PersonData(id=0, username=muyi, image=test, sex=男, eduBackgroud=大专, university=西南石油大学, majorAndGrade=网络工程, entryUniversity=2010, leaveUniversity=2014, qq=879604213, skills=[Java, struct2, springmvc], experience=两个项目，担任后端工程师, selfFeel=Just so so!, level=B, email=873453@qq.com, role=ROLE_STUDENT), applySuccessPerson=[], followPros=[], followNum=0, applySuccessNum=0), IndexVO(projectDetails=ProjectDetail(projectName=CINS, projectKind=, projectConnector=muyi, qq=879604213, email=873453@qq.com, numNeed=4, projectNeed=[javaScript, jQuery, Bootstrap, java, Spring, SpringBoot], projectStart=2017818, projectEnd=2017927, projectProfile=test, proHits=7), personData=PersonData(id=0, username=muyi, image=test, sex=男, eduBackgroud=大专, university=西南石油大学, majorAndGrade=网络工程, entryUniversity=2010, leaveUniversity=2014, qq=879604213, skills=[Java, struct2, springmvc], experience=两个项目，担任后端工程师, selfFeel=Just so so!, level=B, email=873453@qq.com, role=ROLE_STUDENT), applySuccessPerson=[], followPros=[], followNum=0, applySuccessNum=0), IndexVO(projectDetails=ProjectDetail(projectName=Projectasd, projectKind=projectKind, projectConnector=muyi, qq=879604213, email=873453@qq.com, numNeed=20, projectNeed=[springmvc, mybatis], projectStart=20150606, projectEnd=0, projectProfile=test, proHits=0), personData=PersonData(id=0, username=muyi, image=test, sex=男, eduBackgroud=大专, university=西南石油大学, majorAndGrade=网络工程, entryUniversity=2010, leaveUniversity=2014, qq=879604213, skills=[Java, struct2, springmvc], experience=两个项目，担任后端工程师, selfFeel=Just so so!, level=B, email=873453@qq.com, role=ROLE_STUDENT), applySuccessPerson=[], followPros=[], followNum=0, applySuccessNum=0), IndexVO(projectDetails=ProjectDetail(projectName=Projectas, projectKind=projectKind, projectConnector=muyi, qq=879604213, email=873453@qq.com, numNeed=20, projectNeed=[springmvc, mybatis], projectStart=20150606, projectEnd=0, projectProfile=test, proHits=0), personData=PersonData(id=0, username=muyi, image=test, sex=男, eduBackgroud=大专, university=西南石油大学, majorAndGrade=网络工程, entryUniversity=2010, leaveUniversity=2014, qq=879604213, skills=[Java, struct2, springmvc], experience=两个项目，担任后端工程师, selfFeel=Just so so!, level=B, email=873453@qq.com, role=ROLE_STUDENT), applySuccessPerson=[], followPros=[], followNum=0, applySuccessNum=0), IndexVO(projectDetails=ProjectDetail(projectName=test13, projectKind=projectKind, projectConnector=muyi, qq=879604213, email=873453@qq.com, numNeed=20, projectNeed=[springmvc], projectStart=20150606, projectEnd=0, projectProfile=test, proHits=0), personData=PersonData(id=0, username=muyi, image=test, sex=男, eduBackgroud=大专, university=西南石油大学, majorAndGrade=网络工程, entryUniversity=2010, leaveUniversity=2014, qq=879604213, skills=[Java, struct2, springmvc], experience=两个项目，担任后端工程师, selfFeel=Just so so!, level=B, email=873453@qq.com, role=ROLE_STUDENT), applySuccessPerson=[], followPros=[], followNum=0, applySuccessNum=0), IndexVO(projectDetails=ProjectDetail(projectName=aysnc, projectKind=projectKind, projectConnector=aysnc, qq=13076046792, email=yangquan95@163.com, numNeed=20, projectNeed=[springmvc], projectStart=20150606, projectEnd=0, projectProfile=test, proHits=0), personData=PersonData(id=0, username=aysnc, image=meiyou, sex=male, eduBackgroud=西南石油大学, university=test, majorAndGrade=test, entryUniversity=20150901, leaveUniversity=20190601, qq=13076046792, skills=[Java, struct2, springmvc], experience=null, selfFeel=Better, level=C, email=null, role=null), applySuccessPerson=[], followPros=[], followNum=0, applySuccessNum=0), IndexVO(projectDetails=ProjectDetail(projectName=testRepeat, projectKind=projectKind, projectConnector=Amos, qq=13076046792, email=123123123123@qq.com, numNeed=20, projectNeed=[springmvc], projectStart=20150606, projectEnd=0, projectProfile=test, proHits=0), personData=PersonData(id=0, username=Amos, image=test, sex=male, eduBackgroud=西南石油大学, university=test, majorAndGrade=test, entryUniversity=20150901, leaveUniversity=20190601, qq=13076046792, skills=[Java, struct2, springmvc], experience=null, selfFeel=Better, level=B, email=123123123123@qq.com, role=ROLE_STUDENT), applySuccessPerson=[], followPros=[], followNum=0, applySuccessNum=0), IndexVO(projectDetails=ProjectDetail(projectName=testRepeat2, projectKind=projectKind, projectConnector=Amos, qq=13076046792, email=123123123123@qq.com, numNeed=20, projectNeed=[springmvc, struct2], projectStart=20150606, projectEnd=0, projectProfile=test, proHits=0), personData=PersonData(id=0, username=Amos, image=test, sex=male, eduBackgroud=西南石油大学, university=test, majorAndGrade=test, entryUniversity=20150901, leaveUniversity=20190601, qq=13076046792, skills=[Java, struct2, springmvc], experience=null, selfFeel=Better, level=B, email=123123123123@qq.com, role=ROLE_STUDENT), applySuccessPerson=[], followPros=[], followNum=0, applySuccessNum=0), IndexVO(projectDetails=ProjectDetail(projectName=testRepeat3, projectKind=projectKind, projectConnector=Amos, qq=13076046792, email=123123123123@qq.com, numNeed=20, projectNeed=[springmvc, struct2], projectStart=20150606, projectEnd=0, projectProfile=test, proHits=0), personData=PersonData(id=0, username=Amos, image=test, sex=male, eduBackgroud=西南石油大学, university=test, majorAndGrade=test, entryUniversity=20150901, leaveUniversity=20190601, qq=13076046792, skills=[Java, struct2, springmvc], experience=null, selfFeel=Better, level=B, email=123123123123@qq.com, role=ROLE_STUDENT), applySuccessPerson=[], followPros=[], followNum=0, applySuccessNum=0), IndexVO(projectDetails=ProjectDetail(projectName=testRepeat4, projectKind=projectKind, projectConnector=muyi, qq=879604213, email=873453@qq.com, numNeed=20, projectNeed=[springmvc, struct2], projectStart=20150606, projectEnd=0, projectProfile=test, proHits=0), personData=PersonData(id=0, username=muyi, image=test, sex=男, eduBackgroud=大专, university=西南石油大学, majorAndGrade=网络工程, entryUniversity=2010, leaveUniversity=2014, qq=879604213, skills=[Java, struct2, springmvc], experience=两个项目，担任后端工程师, selfFeel=Just so so!, level=B, email=873453@qq.com, role=ROLE_STUDENT), applySuccessPerson=[], followPros=[], followNum=0, applySuccessNum=0)]
+2017-10-16 13:38:46.568  INFO 5509 --- [http-nio-8080-exec-4] c.e.s.c.weike.Aspect.ServiceLogAspect    : 
+
+2017-10-16 13:38:46.582  INFO 5509 --- [http-nio-8080-exec-4] c.e.swpu.cins.weike.Aspect.WebLogAspect  : controller return ResultData(data=[IndexVO(projectDetails=ProjectDetail(projectName=test3, projectKind=projectKind, projectConnector=木易, qq=879604213, email=yangquan5991@gamil.com, numNeed=20, projectNeed=[JavaScript, springboot], projectStart=20150606, projectEnd=0, projectProfile=test, proHits=8), personData=TeacherPersonData(id=11, username=木易, image=image, sex=female, university=SWPU, academy=test, rank=perfessor, qq=879604213, email=yangquan5991@gmail.com, role=ROLE_TEACHER), applySuccessPerson=[], followPros=[], followNum=0, applySuccessNum=0), IndexVO(projectDetails=ProjectDetail(projectName=test4, projectKind=projectKind, projectConnector=木易, qq=879604213, email=yangquan5991@gamil.com, numNeed=20, projectNeed=[JavaScript, BootStrap], projectStart=20150606, projectEnd=0, projectProfile=test, proHits=8), personData=TeacherPersonData(id=11, username=木易, image=image, sex=female, university=SWPU, academy=test, rank=perfessor, qq=879604213, email=yangquan5991@gmail.com, role=ROLE_TEACHER), applySuccessPerson=[], followPros=[], followNum=0, applySuccessNum=0), IndexVO(projectDetails=ProjectDetail(projectName=test5, projectKind=projectKind, projectConnector=木易, qq=879604213, email=yangquan5991@gamil.com, numNeed=20, projectNeed=[JavaScript, CSS], projectStart=20150606, projectEnd=0, projectProfile=test, proHits=8), personData=TeacherPersonData(id=11, username=木易, image=image, sex=female, university=SWPU, academy=test, rank=perfessor, qq=879604213, email=yangquan5991@gmail.com, role=ROLE_TEACHER), applySuccessPerson=[], followPros=[], followNum=0, applySuccessNum=0), IndexVO(projectDetails=ProjectDetail(projectName=test6, projectKind=projectKind, projectConnector=木易, qq=879604213, email=yangquan5991@gamil.com, numNeed=20, projectNeed=[struct2, hibernate], projectStart=20150606, projectEnd=0, projectProfile=test, proHits=8), personData=TeacherPersonData(id=11, username=木易, image=image, sex=female, university=SWPU, academy=test, rank=perfessor, qq=879604213, email=yangquan5991@gmail.com, role=ROLE_TEACHER), applySuccessPerson=[], followPros=[], followNum=0, applySuccessNum=0), IndexVO(projectDetails=ProjectDetail(projectName=test7, projectKind=projectKind, projectConnector=木易, qq=879604213, email=yangquan5991@gamil.com, numNeed=20, projectNeed=[struct2, SpringMVC], projectStart=20150606, projectEnd=0, projectProfile=test, proHits=8), personData=TeacherPersonData(id=11, username=木易, image=image, sex=female, university=SWPU, academy=test, rank=perfessor, qq=879604213, email=yangquan5991@gmail.com, role=ROLE_TEACHER), applySuccessPerson=[], followPros=[], followNum=0, applySuccessNum=0), IndexVO(projectDetails=ProjectDetail(projectName=test8, projectKind=projectKind, projectConnector=木易, qq=879604213, email=yangquan5991@gamil.com, numNeed=20, projectNeed=[struct2, Tomcat], projectStart=20150606, projectEnd=0, projectProfile=test, proHits=8), personData=TeacherPersonData(id=11, username=木易, image=image, sex=female, university=SWPU, academy=test, rank=perfessor, qq=879604213, email=yangquan5991@gmail.com, role=ROLE_TEACHER), applySuccessPerson=[], followPros=[], followNum=0, applySuccessNum=0), IndexVO(projectDetails=ProjectDetail(projectName=Projectasdasd1, projectKind=projectKind, projectConnector=muyi, qq=13076046792, email=873453@qq.com, numNeed=20, projectNeed=[springmvc, mybatis], projectStart=20150606, projectEnd=0, projectProfile=test, proHits=8), personData=PersonData(id=0, username=muyi, image=test, sex=男, eduBackgroud=大专, university=西南石油大学, majorAndGrade=网络工程, entryUniversity=2010, leaveUniversity=2014, qq=879604213, skills=[Java, struct2, springmvc], experience=两个项目，担任后端工程师, selfFeel=Just so so!, level=B, email=873453@qq.com, role=ROLE_STUDENT), applySuccessPerson=[], followPros=[], followNum=0, applySuccessNum=0), IndexVO(projectDetails=ProjectDetail(projectName=TEs, projectKind=projectKind, projectConnector=muyi, qq=13076046792, email=873453@qq.com, numNeed=20, projectNeed=[springmvc, mybatis, js], projectStart=20150606, projectEnd=0, projectProfile=test, proHits=1), personData=PersonData(id=0, username=muyi, image=test, sex=男, eduBackgroud=大专, university=西南石油大学, majorAndGrade=网络工程, entryUniversity=2010, leaveUniversity=2014, qq=879604213, skills=[Java, struct2, springmvc], experience=两个项目，担任后端工程师, selfFeel=Just so so!, level=B, email=873453@qq.com, role=ROLE_STUDENT), applySuccessPerson=[], followPros=[], followNum=0, applySuccessNum=0), IndexVO(projectDetails=ProjectDetail(projectName=TEDSs, projectKind=projectKind, projectConnector=muyi, qq=13076046792, email=873453@qq.com, numNeed=20, projectNeed=[springmvc, mybatis, js], projectStart=20150606, projectEnd=0, projectProfile=test, proHits=1), personData=PersonData(id=0, username=muyi, image=test, sex=男, eduBackgroud=大专, university=西南石油大学, majorAndGrade=网络工程, entryUniversity=2010, leaveUniversity=2014, qq=879604213, skills=[Java, struct2, springmvc], experience=两个项目，担任后端工程师, selfFeel=Just so so!, level=B, email=873453@qq.com, role=ROLE_STUDENT), applySuccessPerson=[], followPros=[], followNum=0, applySuccessNum=0), IndexVO(projectDetails=ProjectDetail(projectName=TEDDSDs, projectKind=projectKind, projectConnector=muyi, qq=13076046792, email=873453@qq.com, numNeed=20, projectNeed=[springmvc, mybatis, js, Jquery], projectStart=20150606, projectEnd=0, projectProfile=test, proHits=1), personData=PersonData(id=0, username=muyi, image=test, sex=男, eduBackgroud=大专, university=西南石油大学, majorAndGrade=网络工程, entryUniversity=2010, leaveUniversity=2014, qq=879604213, skills=[Java, struct2, springmvc], experience=两个项目，担任后端工程师, selfFeel=Just so so!, level=B, email=873453@qq.com, role=ROLE_STUDENT), applySuccessPerson=[], followPros=[], followNum=0, applySuccessNum=0), IndexVO(projectDetails=ProjectDetail(projectName=TEDSDKHDs, projectKind=projectKind, projectConnector=muyi, qq=13076046792, email=873453@qq.com, numNeed=20, projectNeed=[springmvc, mybatis, js, Jquery], projectStart=20150606, projectEnd=0, projectProfile=test, proHits=0), personData=PersonData(id=0, username=muyi, image=test, sex=男, eduBackgroud=大专, university=西南石油大学, majorAndGrade=网络工程, entryUniversity=2010, leaveUniversity=2014, qq=879604213, skills=[Java, struct2, springmvc], experience=两个项目，担任后端工程师, selfFeel=Just so so!, level=B, email=873453@qq.com, role=ROLE_STUDENT), applySuccessPerson=[], followPros=[], followNum=0, applySuccessNum=0), IndexVO(projectDetails=ProjectDetail(projectName=LNLJ, projectKind=projectKind, projectConnector=muyi, qq=13076046792, email=873453@qq.com, numNeed=20, projectNeed=[springmvc, mybatis, js, Jquery], projectStart=20150606, projectEnd=0, projectProfile=test, proHits=0), personData=PersonData(id=0, username=muyi, image=test, sex=男, eduBackgroud=大专, university=西南石油大学, majorAndGrade=网络工程, entryUniversity=2010, leaveUniversity=2014, qq=879604213, skills=[Java, struct2, springmvc], experience=两个项目，担任后端工程师, selfFeel=Just so so!, level=B, email=873453@qq.com, role=ROLE_STUDENT), applySuccessPerson=[], followPros=[], followNum=0, applySuccessNum=0), IndexVO(projectDetails=ProjectDetail(projectName=kjhhjasd, projectKind=projectKind, projectConnector=muyi, qq=13076046792, email=873453@qq.com, numNeed=20, projectNeed=[springmvc, mybatis, js, Jquery], projectStart=20150606, projectEnd=0, projectProfile=test, proHits=0), personData=PersonData(id=0, username=muyi, image=test, sex=男, eduBackgroud=大专, university=西南石油大学, majorAndGrade=网络工程, entryUniversity=2010, leaveUniversity=2014, qq=879604213, skills=[Java, struct2, springmvc], experience=两个项目，担任后端工程师, selfFeel=Just so so!, level=B, email=873453@qq.com, role=ROLE_STUDENT), applySuccessPerson=[], followPros=[], followNum=0, applySuccessNum=0), IndexVO(projectDetails=ProjectDetail(projectName=kjhacasdaasd, projectKind=projectKind, projectConnector=muyi, qq=13076046792, email=873453@qq.com, numNeed=20, projectNeed=[springmvc, mybatis, js, Jquery], projectStart=20150606, projectEnd=0, projectProfile=test, proHits=0), personData=PersonData(id=0, username=muyi, image=test, sex=男, eduBackgroud=大专, university=西南石油大学, majorAndGrade=网络工程, entryUniversity=2010, leaveUniversity=2014, qq=879604213, skills=[Java, struct2, springmvc], experience=两个项目，担任后端工程师, selfFeel=Just so so!, level=B, email=873453@qq.com, role=ROLE_STUDENT), applySuccessPerson=[], followPros=[], followNum=0, applySuccessNum=0), IndexVO(projectDetails=ProjectDetail(projectName=CINS, projectKind=, projectConnector=muyi, qq=879604213, email=873453@qq.com, numNeed=4, projectNeed=[javaScript, jQuery, Bootstrap, java, Spring, SpringBoot], projectStart=2017818, projectEnd=2017927, projectProfile=test, proHits=7), personData=PersonData(id=0, username=muyi, image=test, sex=男, eduBackgroud=大专, university=西南石油大学, majorAndGrade=网络工程, entryUniversity=2010, leaveUniversity=2014, qq=879604213, skills=[Java, struct2, springmvc], experience=两个项目，担任后端工程师, selfFeel=Just so so!, level=B, email=873453@qq.com, role=ROLE_STUDENT), applySuccessPerson=[], followPros=[], followNum=0, applySuccessNum=0), IndexVO(projectDetails=ProjectDetail(projectName=Projectasd, projectKind=projectKind, projectConnector=muyi, qq=879604213, email=873453@qq.com, numNeed=20, projectNeed=[springmvc, mybatis], projectStart=20150606, projectEnd=0, projectProfile=test, proHits=0), personData=PersonData(id=0, username=muyi, image=test, sex=男, eduBackgroud=大专, university=西南石油大学, majorAndGrade=网络工程, entryUniversity=2010, leaveUniversity=2014, qq=879604213, skills=[Java, struct2, springmvc], experience=两个项目，担任后端工程师, selfFeel=Just so so!, level=B, email=873453@qq.com, role=ROLE_STUDENT), applySuccessPerson=[], followPros=[], followNum=0, applySuccessNum=0), IndexVO(projectDetails=ProjectDetail(projectName=Projectas, projectKind=projectKind, projectConnector=muyi, qq=879604213, email=873453@qq.com, numNeed=20, projectNeed=[springmvc, mybatis], projectStart=20150606, projectEnd=0, projectProfile=test, proHits=0), personData=PersonData(id=0, username=muyi, image=test, sex=男, eduBackgroud=大专, university=西南石油大学, majorAndGrade=网络工程, entryUniversity=2010, leaveUniversity=2014, qq=879604213, skills=[Java, struct2, springmvc], experience=两个项目，担任后端工程师, selfFeel=Just so so!, level=B, email=873453@qq.com, role=ROLE_STUDENT), applySuccessPerson=[], followPros=[], followNum=0, applySuccessNum=0), IndexVO(projectDetails=ProjectDetail(projectName=test13, projectKind=projectKind, projectConnector=muyi, qq=879604213, email=873453@qq.com, numNeed=20, projectNeed=[springmvc], projectStart=20150606, projectEnd=0, projectProfile=test, proHits=0), personData=PersonData(id=0, username=muyi, image=test, sex=男, eduBackgroud=大专, university=西南石油大学, majorAndGrade=网络工程, entryUniversity=2010, leaveUniversity=2014, qq=879604213, skills=[Java, struct2, springmvc], experience=两个项目，担任后端工程师, selfFeel=Just so so!, level=B, email=873453@qq.com, role=ROLE_STUDENT), applySuccessPerson=[], followPros=[], followNum=0, applySuccessNum=0), IndexVO(projectDetails=ProjectDetail(projectName=aysnc, projectKind=projectKind, projectConnector=aysnc, qq=13076046792, email=yangquan95@163.com, numNeed=20, projectNeed=[springmvc], projectStart=20150606, projectEnd=0, projectProfile=test, proHits=0), personData=PersonData(id=0, username=aysnc, image=meiyou, sex=male, eduBackgroud=西南石油大学, university=test, majorAndGrade=test, entryUniversity=20150901, leaveUniversity=20190601, qq=13076046792, skills=[Java, struct2, springmvc], experience=null, selfFeel=Better, level=C, email=null, role=null), applySuccessPerson=[], followPros=[], followNum=0, applySuccessNum=0), IndexVO(projectDetails=ProjectDetail(projectName=testRepeat, projectKind=projectKind, projectConnector=Amos, qq=13076046792, email=123123123123@qq.com, numNeed=20, projectNeed=[springmvc], projectStart=20150606, projectEnd=0, projectProfile=test, proHits=0), personData=PersonData(id=0, username=Amos, image=test, sex=male, eduBackgroud=西南石油大学, university=test, majorAndGrade=test, entryUniversity=20150901, leaveUniversity=20190601, qq=13076046792, skills=[Java, struct2, springmvc], experience=null, selfFeel=Better, level=B, email=123123123123@qq.com, role=ROLE_STUDENT), applySuccessPerson=[], followPros=[], followNum=0, applySuccessNum=0), IndexVO(projectDetails=ProjectDetail(projectName=testRepeat2, projectKind=projectKind, projectConnector=Amos, qq=13076046792, email=123123123123@qq.com, numNeed=20, projectNeed=[springmvc, struct2], projectStart=20150606, projectEnd=0, projectProfile=test, proHits=0), personData=PersonData(id=0, username=Amos, image=test, sex=male, eduBackgroud=西南石油大学, university=test, majorAndGrade=test, entryUniversity=20150901, leaveUniversity=20190601, qq=13076046792, skills=[Java, struct2, springmvc], experience=null, selfFeel=Better, level=B, email=123123123123@qq.com, role=ROLE_STUDENT), applySuccessPerson=[], followPros=[], followNum=0, applySuccessNum=0), IndexVO(projectDetails=ProjectDetail(projectName=testRepeat3, projectKind=projectKind, projectConnector=Amos, qq=13076046792, email=123123123123@qq.com, numNeed=20, projectNeed=[springmvc, struct2], projectStart=20150606, projectEnd=0, projectProfile=test, proHits=0), personData=PersonData(id=0, username=Amos, image=test, sex=male, eduBackgroud=西南石油大学, university=test, majorAndGrade=test, entryUniversity=20150901, leaveUniversity=20190601, qq=13076046792, skills=[Java, struct2, springmvc], experience=null, selfFeel=Better, level=B, email=123123123123@qq.com, role=ROLE_STUDENT), applySuccessPerson=[], followPros=[], followNum=0, applySuccessNum=0), IndexVO(projectDetails=ProjectDetail(projectName=testRepeat4, projectKind=projectKind, projectConnector=muyi, qq=879604213, email=873453@qq.com, numNeed=20, projectNeed=[springmvc, struct2], projectStart=20150606, projectEnd=0, projectProfile=test, proHits=0), personData=PersonData(id=0, username=muyi, image=test, sex=男, eduBackgroud=大专, university=西南石油大学, majorAndGrade=网络工程, entryUniversity=2010, leaveUniversity=2014, qq=879604213, skills=[Java, struct2, springmvc], experience=两个项目，担任后端工程师, selfFeel=Just so so!, level=B, email=873453@qq.com, role=ROLE_STUDENT), applySuccessPerson=[], followPros=[], followNum=0, applySuccessNum=0)], ifSuccess=true, msg=null)

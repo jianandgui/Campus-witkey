@@ -149,7 +149,7 @@ public class ProjectServiceImpl implements ProjectService {
                     long hitsNum;
                     if (jedisAdapter.get(proClickNum) != null) {
                          hitsNum= Long.parseLong(jedisAdapter.get(proClickNum));
-                        indexVO.getProjectDetails().setProHits(hitsNum);
+                         indexVO.getProjectDetails().setProHits(hitsNum);
                     }
                     String projectConnector = indexVO.getProjectDetails().getProjectConnector();
                     getPersonData(indexVO, projectConnector,proName);

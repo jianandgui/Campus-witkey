@@ -2,6 +2,7 @@ package cn.edu.swpu.cins.weike.service;
 
 import cn.edu.swpu.cins.weike.entity.persistence.ProjectInfo;
 import cn.edu.swpu.cins.weike.entity.persistence.StudentDetail;
+import cn.edu.swpu.cins.weike.entity.view.IndexVO;
 import cn.edu.swpu.cins.weike.entity.view.PersonData;
 import cn.edu.swpu.cins.weike.entity.view.ProjectRecommend;
 import cn.edu.swpu.cins.weike.exception.StudentException;
@@ -29,7 +30,7 @@ public interface StudentService {
 
     List<String> queryProFollower(String projectName) throws StudentException;
 
-    List<ProjectInfo> queryForRecommend(HttpServletRequest request);
+    List<IndexVO> queryForRecommend(HttpServletRequest request);
 
 
 }
