@@ -48,6 +48,7 @@ public class JoinProjectServiceImpl implements JoinProjectService {
      * @return
      */
 
+    //生产message
     public Message getMessageForMail(String sender,String saver,String projectName) {
         Message message = new Message();
         String content = "尊敬的" + saver + "您好," + "您在威客平台申请参与的项目" + projectName + "已经成功通过申请,请登录平台查看详情！";

@@ -17,18 +17,21 @@ import cn.edu.swpu.cins.weike.enums.ExceptionEnum;
 import cn.edu.swpu.cins.weike.enums.MessageEnum;
 import cn.edu.swpu.cins.weike.exception.MessageException;
 import cn.edu.swpu.cins.weike.exception.ProjectException;
+import cn.edu.swpu.cins.weike.exception.WeiKeException;
 import cn.edu.swpu.cins.weike.service.MailService;
 import cn.edu.swpu.cins.weike.service.MessageService;
 import cn.edu.swpu.cins.weike.service.ProjectService;
 import cn.edu.swpu.cins.weike.util.GetUsrName;
 import cn.edu.swpu.cins.weike.util.JedisAdapter;
 import cn.edu.swpu.cins.weike.util.RedisKey;
+import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import redis.clients.jedis.Jedis;
 
 import javax.servlet.http.HttpServletRequest;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -38,86 +41,82 @@ import java.util.stream.Collectors;
  * Created by muyi on 17-6-12.
  */
 @Service
+@AllArgsConstructor
 public class MessageServiceImpl implements MessageService {
     private MessageDao messageDao;
     private TeacherDao teacherDao;
     private StudentDao studentDao;
     private ProjectDao projectDao;
     private MailService mailService;
-
-    @Autowired
     private JedisAdapter jedisAdapter;
-
-    @Autowired
     private ProjectService projectService;
-    @Autowired
     private GetUsrName getUsrName;
+    private EventProducer eventProducer;
 
 
-    @Autowired
-    EventProducer eventProducer;
-
-    @Autowired
-    public MessageServiceImpl(MessageDao messageDao, TeacherDao teacherDao, StudentDao studentDao, ProjectDao projectDao, MailService mailService) {
-        this.messageDao = messageDao;
-        this.teacherDao = teacherDao;
-        this.studentDao = studentDao;
-        this.projectDao = projectDao;
-        this.mailService = mailService;
-    }
 
     /*
     事务操作：发送信息的同时给该用户发送一封邮件通知他的项目有新动态
      */
 
     @Override
+    @Transactional(rollbackFor = {SQLException.class,RuntimeException.class, WeiKeException.class})
     public int addMessage(String content, String projectName, String userSender) throws MessageException {
         try {
-            String sender;
-            Message message = new Message();
-            StudentDetail studentSender = studentDao.queryForStudentPhone(userSender);
-            TeacherDetail teacherSender = teacherDao.queryForPhone(userSender);
-            String userSaver = projectDao.queryProjectDetail(projectName).getProjectConnector();
-            StudentDetail studentSaver = studentDao.queryForStudentPhone(userSaver);
-            TeacherDetail teacherSaver = teacherDao.queryForPhone(userSaver);
-            String email = projectDao.queryProjectDetail(projectName).getEmail();
-            if (studentSender != null) {
-                sender = studentSender.getUsername();
-                message.setFromName(studentSender.getUsername());
-            } else {
-                message.setFromName(teacherSender.getUsername());
-                sender = teacherSender.getUsername();
-            }
-            if (studentSaver != null) {
-                message.setToName(studentSaver.getUsername());
-                eventProducer.fireEvent(new EventModel(EventType.MAIL).setExts("email", email)
-                        .setExts("username", studentSaver.getUsername())
-                        .setExts("projectName", projectName)
-                        .setExts("status", "joinPro"));
-            } else {
-                message.setToName(teacherSaver.getUsername());
-                eventProducer.fireEvent(new EventModel(EventType.MAIL).setExts("email", email)
-                        .setExts("username", teacherSaver.getUsername())
-                        .setExts("projectName", projectName)
-                        .setExts("status", "joinPro"));
-            }
-            message.setContent(content);
-            message.setCreateDate(new Date());
-            message.setProjectAbout(projectName);
-
-            int num = messageDao.addMessage(message);
-            if (num != 1) {
-                throw new MessageException(MessageEnum.SEND_MESSAGE_FAILD.getMsg());
-            }
-            //申请项目
-            String joiningProjectKey = RedisKey.getBizApplyingPro(sender);
-            //项目正在申请人
-            String projectApplyingKey = RedisKey.getBizProApplying(projectName);
-            jedisAdapter.sadd(projectApplyingKey, sender);
-            jedisAdapter.sadd(joiningProjectKey, projectName);
-            return num;
+            String sender=null;
+            sendApplyMessage(content, projectName, userSender, sender);
+            return 1;
         } catch (Exception e) {
-            throw e;
+            throw new MessageException(ExceptionEnum.INNER_ERROR.getMsg());
+        }
+    }
+
+    //redis申请项目操作
+    public void redisApplyPro(String sender,String projectName) {
+        //申请项目
+        String joiningProjectKey = RedisKey.getBizApplyingPro(sender);
+        //项目正在申请人
+        String projectApplyingKey = RedisKey.getBizProApplying(projectName);
+        jedisAdapter.sadd(projectApplyingKey, sender);
+        jedisAdapter.sadd(joiningProjectKey, projectName);
+    }
+
+    public void sendApplyMessage(String content, String projectName, String userSender,String sender) {
+        Message message = new Message();
+        StudentDetail studentSender = studentDao.queryForStudentPhone(userSender);
+        TeacherDetail teacherSender = teacherDao.queryForPhone(userSender);
+        String userSaver = projectDao.queryProjectDetail(projectName).getProjectConnector();
+        StudentDetail studentSaver = studentDao.queryForStudentPhone(userSaver);
+        TeacherDetail teacherSaver = teacherDao.queryForPhone(userSaver);
+        String email = projectDao.queryProjectDetail(projectName).getEmail();
+        if (studentSender != null) {
+            sender = studentSender.getUsername();
+            message.setFromName(studentSender.getUsername());
+        } else {
+            message.setFromName(teacherSender.getUsername());
+            sender = teacherSender.getUsername();
+        }
+        //修改redis中的情况
+        redisApplyPro(sender,projectName);
+        if (studentSaver != null) {
+            message.setToName(studentSaver.getUsername());
+            eventProducer.fireEvent(new EventModel(EventType.MAIL).setExts("email", email)
+                    .setExts("username", studentSaver.getUsername())
+                    .setExts("projectName", projectName)
+                    .setExts("status", "joinPro"));
+        } else {
+            message.setToName(teacherSaver.getUsername());
+            eventProducer.fireEvent(new EventModel(EventType.MAIL).setExts("email", email)
+                    .setExts("username", teacherSaver.getUsername())
+                    .setExts("projectName", projectName)
+                    .setExts("status", "joinPro"));
+        }
+        message.setContent(content);
+        message.setCreateDate(new Date());
+        message.setProjectAbout(projectName);
+        int num = messageDao.addMessage(message);
+        if (num != 1) {
+            throw new MessageException(MessageEnum.SEND_MESSAGE_FAILD.getMsg());
         }
     }
 
