@@ -30,6 +30,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import redis.clients.jedis.Jedis;
 
+import javax.mail.MessagingException;
 import javax.servlet.http.HttpServletRequest;
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -60,7 +61,7 @@ public class MessageServiceImpl implements MessageService {
      */
 
     @Override
-    @Transactional(rollbackFor = {SQLException.class,RuntimeException.class, WeiKeException.class})
+    @Transactional(rollbackFor = {SQLException.class,RuntimeException.class, WeiKeException.class, MessagingException.class})
     public int addMessage(String content, String projectName, String userSender) throws MessageException {
         try {
             String sender=null;
@@ -98,6 +99,17 @@ public class MessageServiceImpl implements MessageService {
         }
         //修改redis中的情况
         redisApplyPro(sender,projectName);
+        message = sendMailForApply(message, studentSaver, teacherSaver, email, projectName);
+        message.setContent(content);
+        message.setCreateDate(new Date());
+        message.setProjectAbout(projectName);
+        int num = messageDao.addMessage(message);
+        if (num != 1) {
+            throw new MessageException(MessageEnum.SEND_MESSAGE_FAILD.getMsg());
+        }
+    }
+
+    public Message sendMailForApply(Message message,StudentDetail studentSaver,TeacherDetail teacherSaver,String email,String projectName ) {
         if (studentSaver != null) {
             message.setToName(studentSaver.getUsername());
             eventProducer.fireEvent(new EventModel(EventType.MAIL).setExts("email", email)
@@ -111,13 +123,7 @@ public class MessageServiceImpl implements MessageService {
                     .setExts("projectName", projectName)
                     .setExts("status", "joinPro"));
         }
-        message.setContent(content);
-        message.setCreateDate(new Date());
-        message.setProjectAbout(projectName);
-        int num = messageDao.addMessage(message);
-        if (num != 1) {
-            throw new MessageException(MessageEnum.SEND_MESSAGE_FAILD.getMsg());
-        }
+        return message;
     }
 
     /*
