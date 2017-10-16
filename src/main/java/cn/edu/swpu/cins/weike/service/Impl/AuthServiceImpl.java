@@ -9,10 +9,12 @@ import cn.edu.swpu.cins.weike.entity.persistence.*;
 import cn.edu.swpu.cins.weike.entity.view.*;
 import cn.edu.swpu.cins.weike.enums.*;
 import cn.edu.swpu.cins.weike.exception.AuthException;
+import cn.edu.swpu.cins.weike.exception.StudentException;
 import cn.edu.swpu.cins.weike.util.JedisAdapter;
 import cn.edu.swpu.cins.weike.util.RedisKey;
 import cn.edu.swpu.cins.weike.util.UpdatePwd;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.AllArgsConstructor;
+import org.omg.CORBA.UserException;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
@@ -27,12 +29,16 @@ import cn.edu.swpu.cins.weike.service.AuthService;
 
 import javax.management.OperationsException;
 import java.util.Date;
+import java.util.List;
 import java.util.stream.Collectors;
+
+import static cn.edu.swpu.cins.weike.enums.RegisterEnum.REPETE_USERNAME;
 
 /**
  * Created by muyi on 17-4-18.
  */
 @Service
+@AllArgsConstructor
 public class AuthServiceImpl implements AuthService {
 
     private StudentDao studentDao;
@@ -41,24 +47,11 @@ public class AuthServiceImpl implements AuthService {
     private UserDetailsService userDetailsService;
     private JwtTokenUtil jwtTokenUtil;
     private AdminDao adminDao;
+    private JedisAdapter jedisAdapter;
+    private EventProducer eventProducer;
 
 
-    @Autowired
-    JedisAdapter jedisAdapter;
 
-    @Autowired
-    EventProducer eventProducer;
-
-
-    @Autowired
-    public AuthServiceImpl(StudentDao studentDao, TeacherDao teacherDao, AuthenticationManager authenticationManager, UserDetailsService userDetailsService, JwtTokenUtil jwtTokenUtil, AdminDao adminDao) {
-        this.studentDao = studentDao;
-        this.teacherDao = teacherDao;
-        this.authenticationManager = authenticationManager;
-        this.userDetailsService = userDetailsService;
-        this.jwtTokenUtil = jwtTokenUtil;
-        this.adminDao = adminDao;
-    }
 
     @Override
     public int studentRegister(RegisterStudentVO registerStudentVO) throws AuthException {
@@ -76,13 +69,13 @@ public class AuthServiceImpl implements AuthService {
             }
             return 1;
         } catch (Exception e) {
-            throw e;
+            throw new StudentException(ExceptionEnum.INNER_ERROR.getMsg());
         }
     }
 
-    public  int registerCheck(String username,String verifyCode,String role) {
+    public void registerCheck(String username,String verifyCode,String role) {
         if (studentDao.selectStudent(username) != null && teacherDao.queryByName(username) != null) {
-            return 0;
+            throw new AuthException(RegisterEnum.REPETE_USERNAME.getMessage());
         }
         String redisKey = RedisKey.getBizRegisterKey(username);
         if (!jedisAdapter.exists(redisKey)) {
@@ -105,7 +98,18 @@ public class AuthServiceImpl implements AuthService {
             default:
                 throw new AuthException("注册失败");
         }
-        return 1;
+
+    }
+
+    //验证验证码
+    public void checkVerifyCode(String loginKey, String verifyCode) {
+        if (!jedisAdapter.exists(loginKey)) {
+            throw new AuthException(VerifyCodeEnum.GET_CODE_AGAIN.getMsg());
+        }
+        String code = jedisAdapter.get(loginKey);
+        if (!code.equals(verifyCode)) {
+            throw new AuthException(VerifyCodeEnum.CODE_ERROR.getMsg());
+        }
     }
 
     @Override
@@ -113,22 +117,15 @@ public class AuthServiceImpl implements AuthService {
 
         UsernamePasswordAuthenticationToken upToken = new UsernamePasswordAuthenticationToken(authenticationRequest.getUsername(), authenticationRequest.getPassword());
         try {
-            String loginKey = captchaCode;
-            if (!jedisAdapter.exists(loginKey)) {
-                throw new AuthException(VerifyCodeEnum.GET_CODE_AGAIN.getMsg());
-            }
-            String code = jedisAdapter.get(loginKey);
-            if (!code.equals(authenticationRequest.getVerifyCode())) {
-                throw new AuthException(VerifyCodeEnum.CODE_ERROR.getMsg());
-            }
-            StudentInfo studentInfo = studentDao.selectStudent(authenticationRequest.getUsername());
-
+            String username = authenticationRequest.getUsername();
+            JoinProject joinProject = loginUtils(username);
+            joinProject.setReleased(studentDao.queryAllProject(username));
+            checkVerifyCode(captchaCode,authenticationRequest.getVerifyCode());
+            StudentInfo studentInfo = studentDao.selectStudent(username);
             if (studentInfo == null) {
                 throw new AuthException(LoginEnum.NO_USER.getMessage());
             }
-            StudentDetail studentDetail = studentDao.queryForStudentPhone(authenticationRequest.getUsername());
-            JoinProject joinProject = loginUtils(authenticationRequest);
-            joinProject.setReleased(studentDao.queryAllProject(authenticationRequest.getUsername()));
+            StudentDetail studentDetail = studentDao.queryForStudentPhone(username);
             String image = null;
             boolean isCompleted;
             if (studentDetail != null) {
@@ -137,7 +134,6 @@ public class AuthServiceImpl implements AuthService {
             } else {
                 isCompleted = false;
             }
-            String username = studentInfo.getUsername();
             String role = studentInfo.getRole();
             // Perform the security
             final Authentication authentication = authenticationManager.authenticate(upToken);
@@ -145,17 +141,15 @@ public class AuthServiceImpl implements AuthService {
             // Reload password post-security so we can generate token
             final UserDetails userDetails = JwtUserFactory.createStudent(studentDao.selectStudent(username));
             final String token = jwtTokenUtil.generateToken(userDetails);
-
             JwtAuthenticationResponse response = new JwtAuthenticationResponse(token, username, role, image, isCompleted, joinProject);
             return response;
         } catch (Exception e) {
-            throw e;
+            throw new AuthException(ExceptionEnum.INNER_ERROR.getMsg());
         }
     }
 
     @Override
     public int teacherRegister(RegisterTeacherVO registerTeacherVO) throws AuthException {
-
         String username = registerTeacherVO.getTeacherInfo().getUsername();
         try {
             registerCheck(username, registerTeacherVO.getVerifyCode(), "TEACHER");
@@ -170,48 +164,45 @@ public class AuthServiceImpl implements AuthService {
             }
             return 1;
         } catch (Exception e) {
-            throw e;
+            throw new AuthException(ExceptionEnum.INNER_ERROR.getMsg());
         }
     }
 
     /**
      * 工具类方法用去去除重复代码
      *
-     * @param authenticationRequest
+     * @param username
      * @return
      */
-    public JoinProject loginUtils(JwtAuthenticationRequest authenticationRequest) {
+    public JoinProject loginUtils(String username) {
         JoinProject joinProject = new JoinProject();
-        String applyingProKey = RedisKey.getBizApplyingPro(authenticationRequest.getUsername());
-        String applySuccessKey = RedisKey.getBizJoinSuccess(authenticationRequest.getUsername());
-        String applyFailedKey = RedisKey.getBizJoinFail(authenticationRequest.getUsername());
-        String followerProKey = RedisKey.getBizAttentionPro(authenticationRequest.getUsername());
-        joinProject.setJoining((jedisAdapter.smenber(applyingProKey).stream().collect(Collectors.toList())));
-        joinProject.setJoinSuccess(jedisAdapter.smenber(applySuccessKey).stream().collect(Collectors.toList()));
-        joinProject.setJoinFailed(jedisAdapter.smenber(applyFailedKey).stream().collect(Collectors.toList()));
-        joinProject.setFollowPro(jedisAdapter.smenber(followerProKey).stream().collect(Collectors.toList()));
+        String applyingProKey = RedisKey.getBizApplyingPro(username);
+        String applySuccessKey = RedisKey.getBizJoinSuccess(username);
+        String applyFailedKey = RedisKey.getBizJoinFail(username);
+        String followerProKey = RedisKey.getBizAttentionPro(username);
+        joinProject.setJoining(getList(applyingProKey));
+        joinProject.setJoinSuccess(getList(applySuccessKey));
+        joinProject.setJoinFailed(getList(applyFailedKey));
+        joinProject.setFollowPro(getList(followerProKey));
         return joinProject;
+    }
+
+    public List<String> getList(String key) {
+        return jedisAdapter.smenber(key).stream().collect(Collectors.toList());
     }
 
     @Override
     public JwtAuthenticationResponse teacherLogin(JwtAuthenticationRequest authenticationRequest, String captchaCode) throws AuthException {
         UsernamePasswordAuthenticationToken upToken = new UsernamePasswordAuthenticationToken(authenticationRequest.getUsername(), authenticationRequest.getPassword());
+        String username = authenticationRequest.getUsername();
         try {
-            String loginKey = captchaCode;
-            if (!jedisAdapter.exists(loginKey)) {
-                throw new AuthException(VerifyCodeEnum.GET_CODE_AGAIN.getMsg());
-            }
-            String code = jedisAdapter.get(loginKey);
-            if (!code.equals(authenticationRequest.getVerifyCode())) {
-                throw new AuthException(VerifyCodeEnum.CODE_ERROR.getMsg());
-            }
-
-            TeacherDetail teacherDetail = teacherDao.queryForPhone(authenticationRequest.getUsername());
-            TeacherInfo teacherInfo = teacherDao.queryByName(authenticationRequest.getUsername());
+            checkVerifyCode(captchaCode, authenticationRequest.getVerifyCode());
+            TeacherDetail teacherDetail = teacherDao.queryForPhone(username);
+            TeacherInfo teacherInfo = teacherDao.queryByName(username);
             if (teacherInfo == null) {
                 throw new AuthException(LoginEnum.NO_USER.getMessage());
             }
-            JoinProject joinProject = loginUtils(authenticationRequest);
+            JoinProject joinProject = loginUtils(username);
             joinProject.setReleased(teacherDao.queryAllProject(authenticationRequest.getUsername()));
             String image = null;
             //判断个人信息是否完整
@@ -222,7 +213,6 @@ public class AuthServiceImpl implements AuthService {
             } else {
                 isCompleted = false;
             }
-            String username = teacherInfo.getUsername();
             String role = teacherInfo.getRole();
 
             final Authentication authentication = authenticationManager.authenticate(upToken);
@@ -234,7 +224,7 @@ public class AuthServiceImpl implements AuthService {
             JwtAuthenticationResponse response = new JwtAuthenticationResponse(token, username, role, image, isCompleted, joinProject);
             return response;
         } catch (Exception e) {
-            throw e;
+            throw new AuthException(ExceptionEnum.INNER_ERROR.getMsg());
         }
     }
 
@@ -250,7 +240,6 @@ public class AuthServiceImpl implements AuthService {
             final String token = jwtTokenUtil.generateToken(userDetails);
             return token;
         } catch (Exception e) {
-
             throw new AuthException(LoginEnum.ERROR_LOGIN.getMessage());
         }
     }
@@ -260,7 +249,7 @@ public class AuthServiceImpl implements AuthService {
         try {
             return updateUtils(updatePassword, "student");
         } catch (Exception e) {
-            throw e;
+            throw new AuthException(ExceptionEnum.INNER_ERROR.getMsg());
         }
     }
 
@@ -269,7 +258,7 @@ public class AuthServiceImpl implements AuthService {
         try {
             return updateUtils(updatePassword, "teacher");
         } catch (Exception e) {
-            throw e;
+            throw new AuthException(ExceptionEnum.INNER_ERROR.getMsg());
         }
     }
 
@@ -280,10 +269,9 @@ public class AuthServiceImpl implements AuthService {
      * @return
      */
     public int updateUtils(UpdatePassword updatePassword, String role) throws AuthException {
+        String username = updatePassword.getUsername();
+        String redisKey = RedisKey.getBizFindPassword(username);
         try {
-
-            String username = updatePassword.getUsername();
-            String redisKey = RedisKey.getBizFindPassword(username);
             if (!jedisAdapter.exists(redisKey)) {
                 throw new AuthException(VerifyCodeEnum.GET_CODE_AGAIN.getMsg());
             }
@@ -294,15 +282,14 @@ public class AuthServiceImpl implements AuthService {
                 if (studentDao.updatePassword(username, UpdatePwd.updatePwd(updatePassword.getPassword())) != 1) {
                     throw new AuthException(UpdatePwdEnum.UPDATE_PWD_WRONG.getMsg());
                 }
-                return 1;
             } else {
                 if (teacherDao.updatePassword(username, UpdatePwd.updatePwd(updatePassword.getPassword())) != 1) {
                     throw new AuthException(UpdatePwdEnum.UPDATE_PWD_WRONG.getMsg());
                 }
-                return 1;
             }
+            return 1;
         } catch (Exception e) {
-            throw e;
+            throw new AuthException(ExceptionEnum.INNER_ERROR.getMsg());
         }
     }
 
@@ -371,7 +358,7 @@ public class AuthServiceImpl implements AuthService {
         switch (role) {
             case "teacher":
                 if (teacherDao.queryByName(username) != null && studentDao.selectStudent(username) != null) {
-                    throw new AuthException(RegisterEnum.REPETE_USERNAME.getMessage());
+                    throw new AuthException(REPETE_USERNAME.getMessage());
                 }
                 if (teacherDao.queryEamil(email) != null) {
                     throw new AuthException(RegisterEnum.REPEATE_EMAIL.getMessage());
@@ -380,7 +367,7 @@ public class AuthServiceImpl implements AuthService {
 
             case "student":
                 if (studentDao.selectStudent(username) != null && teacherDao.queryByName(username) != null) {
-                    throw new AuthException(RegisterEnum.REPETE_USERNAME.getMessage()); }
+                    throw new AuthException(REPETE_USERNAME.getMessage()); }
                 if (studentDao.queryEmail(email) != null) {
                     throw new AuthException(RegisterEnum.REPEATE_EMAIL.getMessage()); }
                 break;
