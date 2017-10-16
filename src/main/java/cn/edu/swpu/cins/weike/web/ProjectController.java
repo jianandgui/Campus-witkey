@@ -90,20 +90,20 @@ public class ProjectController {
         }
     }
 
-    @PostMapping("/delete/{projectName}")
-    public ResultData deletePro(@PathVariable("projectName") String projectName, HttpServletRequest request) {
+    @PostMapping("/deletePro")
+    public ResultData deletePro(@RequestBody DeletePro deletePro, HttpServletRequest request) {
         try {
-            projectService.deleteProByProName(projectName, request);
+            projectService.deleteProByProName(deletePro.getProjectName(), request);
             return new ResultData(true, "删除成功");
         } catch (Exception e) {
             return new ResultData(false, e.getMessage());
         }
     }
 
-    @PostMapping("/update/{projectName}")
-    public ResultData updatePro(@PathVariable("projectName") String projectName, @RequestBody ProjectInfo projectInfo, HttpServletRequest request) {
+    @PostMapping("/updatePro")
+    public ResultData updatePro(@RequestBody UpdatePro updatePro, HttpServletRequest request) {
         try {
-            projectService.updateProByName(projectName, projectInfo, request);
+            projectService.updateProByName(updatePro.getProjectName(),updatePro.getProjectInfo(), request);
             return new ResultData(true, "修改成功！");
         } catch (Exception e) {
             return new ResultData(false, e.getMessage());

@@ -84,14 +84,14 @@ public class ProjectServiceImpl implements ProjectService {
 
         String proApplySuccess = RedisKey.getBizProApplicant(projectName);
         try {
-            //项目关注人
-            List<String> proFollowers=jedisAdapter.smenber(proFollowerKeys).stream().collect(Collectors.toList());
+
+            List<String> proFollowers=jedisAdapter.smenber(proFollowerKeys).stream().collect(Collectors.toList());//项目关注人
 
             indexVO.setFollowPros(proFollowers);
-            //项目关注人数
-            indexVO.setFollowNum(proFollowers.size());
-            //项目申请成功的人
-            List<String> applyPersons=jedisAdapter.smenber(proApplySuccess).stream().collect(Collectors.toList());
+
+            indexVO.setFollowNum(proFollowers.size());//项目关注人数
+
+            List<String> applyPersons=jedisAdapter.smenber(proApplySuccess).stream().collect(Collectors.toList());  //项目申请成功的人
             indexVO.setApplySuccessPerson(applyPersons);
             //项目成功申请的人数
             indexVO.setApplySuccessNum(applyPersons.size());
@@ -142,9 +142,7 @@ public class ProjectServiceImpl implements ProjectService {
                 .map(IndexVO::new)
                 .collect(Collectors.toList())
                 .stream().map(indexVO -> {
-                    //项目详细情况
-                    String proName=indexVO.getProjectDetails().getProjectName();
-
+                    String proName=indexVO.getProjectDetails().getProjectName();//项目详细情况
                     String proClickNum = RedisKey.getBizProClickNum(proName);
                     long hitsNum;
                     if (jedisAdapter.get(proClickNum) != null) {
