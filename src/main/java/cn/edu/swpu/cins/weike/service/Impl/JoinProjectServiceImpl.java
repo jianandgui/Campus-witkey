@@ -1,6 +1,9 @@
 package cn.edu.swpu.cins.weike.service.Impl;
 
 
+import cn.edu.swpu.cins.weike.async.EventModel;
+import cn.edu.swpu.cins.weike.async.EventProducer;
+import cn.edu.swpu.cins.weike.async.EventType;
 import cn.edu.swpu.cins.weike.dao.MessageDao;
 import cn.edu.swpu.cins.weike.dao.StudentDao;
 import cn.edu.swpu.cins.weike.dao.TeacherDao;
@@ -34,6 +37,7 @@ public class JoinProjectServiceImpl implements JoinProjectService {
     private TeacherDao teacherDao;
     private StudentDao studentDao;
     private GetUsrName getName;
+    private EventProducer eventProducer;
 
     /**
      * 同意或者拒绝申请，发送邮件和站内信（失败就不发送站内信了）
@@ -57,7 +61,7 @@ public class JoinProjectServiceImpl implements JoinProjectService {
     }
 
     //比如将正在申请人删除 在申请成功的人中加入
-    public void dealRedis(String sender,String saver,String projectName) {
+    public void dealAcceptRedis(String saver,String projectName) {
         //正在申请
         String joiningProjectKey = RedisKey.getBizApplyingPro(saver);
         //项目正在申请人
@@ -81,8 +85,12 @@ public class JoinProjectServiceImpl implements JoinProjectService {
         try {
             StudentInfo studentInfo = studentDao.selectStudent(saver);
             String email = studentInfo.getEmail();
-            mailService.sendMailForJoinPro(email, saver, projectName);
-            dealRedis(sender,saver,projectName);
+            eventProducer.fireEvent(new EventModel(EventType.MAIL)
+                    .setExts("email",email)
+                    .setExts("saver",saver)
+                    .setExts("projectName",projectName)
+                    .setExts("status","joinProSuccess"));
+            dealAcceptRedis(saver,projectName);
             return messageDao.addMessage(message);
         } catch (Exception e) {
             throw new AuthException(ExceptionEnum.INNER_ERROR.getMsg());
@@ -90,28 +98,28 @@ public class JoinProjectServiceImpl implements JoinProjectService {
     }
 
 
+    //拒绝申请后的redis处理
+    public void dealRefuseRedis(String saver,String projectName) {
+        //正在申请
+        String joiningProjectKey = RedisKey.getBizApplyingPro(saver);
+        //项目正在申请人
+        String projectApplyingKey = RedisKey.getBizProApplying(projectName);
+        //申请失败
+        String joinProjectFailedKey = RedisKey.getBizJoinFail(saver);
+        //项目团队人员（没有通过申请）
+        String projectApplyFailKey = RedisKey.getBizProApplyFail(projectName);
+        jedisAdapter.srem(joiningProjectKey, projectName);
+        jedisAdapter.sadd(joinProjectFailedKey, projectName);
+        jedisAdapter.srem(projectApplyingKey, saver);
+        jedisAdapter.sadd(projectApplyFailKey, saver);
+    }
 
     @Override
     public void refuseJoin(JoinMessage joinMessage, HttpServletRequest request) throws Exception {
         String projectName = joinMessage.getProjectAbout();
         String saver = joinMessage.getProjectApplicant();
         try {
-//            String sender=getName.AllProjects(request);
-            StudentInfo studentInfo = studentDao.selectStudent(saver);
-            String email = studentInfo.getEmail();
-            mailService.sendMailForJoinPro(email, saver, projectName);
-            //正在申请
-            String joiningProjectKey = RedisKey.getBizApplyingPro(saver);
-            //项目正在申请人
-            String projectApplyingKey = RedisKey.getBizProApplying(projectName);
-            //申请失败
-            String joinProjectFailedKey = RedisKey.getBizJoinFail(saver);
-            //项目团队人员（没有通过申请）
-            String projectApplyFailKey = RedisKey.getBizProApplyFail(projectName);
-            jedisAdapter.srem(joiningProjectKey, projectName);
-            jedisAdapter.sadd(joinProjectFailedKey, projectName);
-            jedisAdapter.srem(projectApplyingKey, saver);
-            jedisAdapter.sadd(projectApplyFailKey, saver);
+            dealRefuseRedis(saver,projectName);
         } catch (Exception e) {
             throw new AuthException(ExceptionEnum.INNER_ERROR.getMsg());
         }
