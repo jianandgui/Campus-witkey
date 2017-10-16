@@ -15,9 +15,9 @@ public class IndexVO<T> {
     private List<String> applySuccessPerson;
     //项目关注人
     private List<String> followPros;
-
+    //正在申请的人
     private List<String> proApplyingPerson;
-
+    private int applyingNum;
     private int followNum;
 
     private int applySuccessNum;

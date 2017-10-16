@@ -14,6 +14,7 @@ import cn.edu.swpu.cins.weike.util.RedisToList;
 import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.boot.autoconfigure.session.SessionProperties;
 import org.springframework.stereotype.Service;
 import cn.edu.swpu.cins.weike.dao.ProjectDao;
 
@@ -79,18 +80,18 @@ public class ProjectServiceImpl implements ProjectService {
     public void getPersonData(IndexVO indexVO,String username,String projectName) {
 
         String proFollowerKeys = RedisKey.getBizProFollower(projectName);
-
         String proApplySuccess = RedisKey.getBizProApplicant(projectName);
+        String proApplyingPerson = RedisKey.getBizProApplying(projectName);
         try {
-
-
             List<String> proFollowers=redisToList.redisToList(proFollowerKeys); //项目关注人
             indexVO.setFollowPros(proFollowers);
             indexVO.setFollowNum(proFollowers.size());//项目关注人数
             List<String> applyPersons=redisToList.redisToList(proApplySuccess);//项目申请成功的人
-
             indexVO.setApplySuccessPerson(applyPersons);
             indexVO.setApplySuccessNum(applyPersons.size());//项目成功申请的人数
+            List<String> applyingPerson = redisToList.redisToList(proApplyingPerson);
+            indexVO.setProApplyingPerson(applyingPerson);
+            indexVO.setApplyingNum(applyingPerson.size());
             //发布人详情
             if (studentService.queryForData(username) == null) {
                 indexVO.setPersonData(teacherService.queryForData(username));
@@ -138,10 +139,7 @@ public class ProjectServiceImpl implements ProjectService {
                 .map(IndexVO::new)
                 .collect(Collectors.toList())
                 .stream().map(indexVO -> {
-
                     String proName=indexVO.getProjectDetails().getProjectName();//项目详细情况
-
-
                     String proClickNum = RedisKey.getBizProClickNum(proName);
                     long hitsNum;
                     if (jedisAdapter.get(proClickNum) != null) {
@@ -149,9 +147,8 @@ public class ProjectServiceImpl implements ProjectService {
                          indexVO.getProjectDetails().setProHits(hitsNum);
                     }
                     String projectConnector = indexVO.getProjectDetails().getProjectConnector();
-                    getPersonData(indexVO, projectConnector,proName);
+                    getPersonData(indexVO, projectConnector,proName);//获取每个项目的详细情况
                     return indexVO;
-
                 }).collect(Collectors.toList());
         return indexVOList;
     }
