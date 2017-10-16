@@ -6,6 +6,8 @@ import cn.edu.swpu.cins.weike.entity.persistence.TeacherInfo;
 import cn.edu.swpu.cins.weike.entity.view.*;
 import cn.edu.swpu.cins.weike.exception.AuthException;
 
+import javax.management.OperationsException;
+
 /**
  * Created by muyi on 17-4-18.
  */
@@ -36,9 +38,9 @@ public interface AuthService {
     AdminInfo adminRegister(AdminInfo adminInfo) throws AuthException;
 
 
-    void studentGetVerifyCodeForRegister(String username,String email) throws AuthException;
+    void studentGetVerifyCodeForRegister(String username,String email) throws AuthException, OperationsException;
 
-    void teacherGetVerifyCodeForRegister(String username,String email) throws AuthException;
+    void teacherGetVerifyCodeForRegister(String username,String email) throws AuthException, OperationsException;
 
     void studentGetVerifyCodeForFindPassword(String username,String email) throws AuthException;
 

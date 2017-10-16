@@ -25,6 +25,7 @@ import cn.edu.swpu.cins.weike.dao.AdminDao;
 import cn.edu.swpu.cins.weike.dao.TeacherDao;
 import cn.edu.swpu.cins.weike.service.AuthService;
 
+import javax.management.OperationsException;
 import java.util.Date;
 import java.util.stream.Collectors;
 
@@ -347,12 +348,9 @@ public class AuthServiceImpl implements AuthService {
     }
 
     @Override
-    public void studentGetVerifyCodeForRegister(String username, String email) throws AuthException {
+    public void studentGetVerifyCodeForRegister(String username, String email) throws AuthException, OperationsException {
         try {
-            if (studentDao.selectStudent(username) != null && teacherDao.queryByName(username) != null) {
-                throw new AuthException(RegisterEnum.REPETE_USERNAME.getMessage()); }
-            if (studentDao.queryEmail(email) != null) {
-                throw new AuthException(RegisterEnum.REPEATE_EMAIL.getMessage()); }
+            checkForRegister(username, email,"student");
             eventProducerUtils(username, email, "register");
         } catch (Exception e) {
             throw e;
@@ -360,20 +358,37 @@ public class AuthServiceImpl implements AuthService {
     }
 
     @Override
-    public void teacherGetVerifyCodeForRegister(String username, String email) throws AuthException {
+    public void teacherGetVerifyCodeForRegister(String username, String email) throws AuthException, OperationsException {
         try {
-
+            checkForRegister(username, email,"teacher");
             eventProducerUtils(username, email, "register");
         } catch (Exception e) {
             throw e;
         }
     }
 
-    public void checkTeacherForRegister(String username, String email) {
-        if (teacherDao.queryByName(username) != null && studentDao.selectStudent(username) != null) {
-            throw new AuthException(RegisterEnum.REPETE_USERNAME.getMessage()); }
-        if (teacherDao.queryEamil(email) != null) {
-            throw new AuthException(RegisterEnum.REPEATE_EMAIL.getMessage()); }
+    public void checkForRegister(String username, String email, String role) throws OperationsException {
+        switch (role) {
+            case "teacher":
+                if (teacherDao.queryByName(username) != null && studentDao.selectStudent(username) != null) {
+                    throw new AuthException(RegisterEnum.REPETE_USERNAME.getMessage());
+                }
+                if (teacherDao.queryEamil(email) != null) {
+                    throw new AuthException(RegisterEnum.REPEATE_EMAIL.getMessage());
+                }
+                break;
+
+            case "student":
+                if (studentDao.selectStudent(username) != null && teacherDao.queryByName(username) != null) {
+                    throw new AuthException(RegisterEnum.REPETE_USERNAME.getMessage()); }
+                if (studentDao.queryEmail(email) != null) {
+                    throw new AuthException(RegisterEnum.REPEATE_EMAIL.getMessage()); }
+                break;
+
+            default:
+                throw new OperationsException();
+        }
+
     }
 
     /**
@@ -413,15 +428,20 @@ public class AuthServiceImpl implements AuthService {
     public void studentGetVerifyCodeForFindPassword(String username, String email) throws AuthException {
         try {
             StudentInfo studentinfo = studentDao.selectStudent(username);
-            if (studentinfo == null) {
-                throw new AuthException(UpdatePwdEnum.NO_USER.getMsg());
-            }
-            if (!email.equals(studentinfo.getEmail())) {
-                throw new AuthException(UpdatePwdEnum.WRONG_EMALI.getMsg());
-            }
+            String Tmail = studentinfo.getEmail();
+            checkForFindPwd(studentinfo, email, Tmail);
             eventProducerUtils(username, email, "findPwd");
         } catch (Exception e) {
             throw e;
+        }
+    }
+
+    public void checkForFindPwd(Object o,String email,String Tmail) {
+        if (o == null) {
+            throw new AuthException(UpdatePwdEnum.NO_USER.getMsg());
+        }
+        if (!email.equals(Tmail)) {
+            throw new AuthException(UpdatePwdEnum.WRONG_EMALI.getMsg());
         }
     }
 
@@ -429,12 +449,8 @@ public class AuthServiceImpl implements AuthService {
     public void teacherGetVerifyCodeForFindPassword(String username, String email) throws AuthException {
         try {
             TeacherInfo teacherinfo = teacherDao.queryByName(username);
-            if (teacherinfo == null) {
-                throw new AuthException(UpdatePwdEnum.NO_USER.getMsg());
-            }
-            if (!email.equals(teacherinfo.getEmail())) {
-                throw new AuthException(UpdatePwdEnum.WRONG_EMALI.getMsg());
-            }
+            String Tmail = teacherinfo.getEmail();
+            checkForFindPwd(teacherinfo, email, Tmail);
             eventProducerUtils(username, email, "findPwd");
         } catch (Exception e) {
             throw e;
