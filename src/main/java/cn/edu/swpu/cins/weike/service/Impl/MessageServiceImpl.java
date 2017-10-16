@@ -48,7 +48,6 @@ public class MessageServiceImpl implements MessageService {
     private TeacherDao teacherDao;
     private StudentDao studentDao;
     private ProjectDao projectDao;
-    private MailService mailService;
     private JedisAdapter jedisAdapter;
     private ProjectService projectService;
     private GetUsrName getUsrName;
@@ -147,13 +146,22 @@ public class MessageServiceImpl implements MessageService {
         try {
             List<Message> fromMessages = new ArrayList<Message>();
             List<Message> toMessages = new ArrayList<Message>();
-            for (Message message : messageDao.getConversationList(username)) {
+            /*for (Message message : messageDao.getConversationList(username)) {
                 if (message.getToName().equals(username)) {
                     fromMessages.add(message);
                 } else {
                     toMessages.add(message);
                 }
-            }
+            }*/
+            List<Message> messages = messageDao.getConversationList(username);
+            messages.stream().forEach(message -> {
+                if (message.getToName().equals(username)) {
+                    fromMessages.add(message);
+                } else {
+                    toMessages.add(message);
+                }
+            });
+
             MessageList messageList = new MessageList(fromMessages, toMessages);
             return messageList;
         } catch (Exception e) {
