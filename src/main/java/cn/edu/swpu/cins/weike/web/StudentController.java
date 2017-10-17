@@ -148,6 +148,25 @@ public class StudentController {
     }
 
     /**
+     *  查看发布项目人的信息
+     * @param username
+     * @return
+     */
+    @GetMapping("/otherStudentData")
+    public ResultData queryForStudentData(@RequestParam String username) {
+        try {
+            PersonData personData = studentService.queryForData(username);
+            return new ResultData(true, personData);
+        } catch (Exception e) {
+            return new ResultData(false, e.getMessage());
+        }
+    }
+
+
+
+
+
+    /**
      * 学生查看项目申请详细信息
      *
      * @param projectName

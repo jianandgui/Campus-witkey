@@ -138,4 +138,20 @@ public class TeacherController {
             return new ResultData(false, e.getMessage());
         }
     }
+
+    /**
+     * 查看发布项目的老师的信息
+     * @param username 
+     * @return
+     */
+    @GetMapping("/otherTeacherData")
+    public ResultData queryForData(@RequestParam String username) {
+
+        try {
+            TeacherPersonData teacherPersonData = teacherService.queryForData(username);
+            return new ResultData(true, teacherPersonData);
+        } catch (Exception e) {
+            return new ResultData(false, e.getMessage());
+        }
+    }
 }
