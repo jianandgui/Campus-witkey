@@ -141,7 +141,7 @@ public class TeacherController {
 
     /**
      * 查看发布项目的老师的信息
-     * @param username 
+     * @param username
      * @return
      */
     @GetMapping("/otherTeacherData")

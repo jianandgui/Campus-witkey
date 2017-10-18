@@ -185,4 +185,9 @@ public class MessageController {
             return new ResultData(false, e.getMessage());
         }
     }
+
+    @PostMapping("/loginByToken")
+    public ResultData loginByToken(HttpServletRequest request) {
+        return new ResultData(true, messageService.loginByToken(request));
+    }
 }

@@ -19,6 +19,9 @@ public interface AuthService {
     //学生登陆
     JwtAuthenticationResponse studentLogin(JwtAuthenticationRequest request,String captchaCode) throws AuthException;
 
+    //使用token登录
+//    JwtAuthenticationResponse loginByToken(String token);
+
     //老师注册
     int teacherRegister(RegisterTeacherVO registerTeacherVO) throws AuthException;
 

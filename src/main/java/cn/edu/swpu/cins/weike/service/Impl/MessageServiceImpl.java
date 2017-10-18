@@ -7,14 +7,15 @@ import cn.edu.swpu.cins.weike.dao.MessageDao;
 import cn.edu.swpu.cins.weike.dao.ProjectDao;
 import cn.edu.swpu.cins.weike.dao.StudentDao;
 import cn.edu.swpu.cins.weike.dao.TeacherDao;
-import cn.edu.swpu.cins.weike.entity.persistence.Message;
-import cn.edu.swpu.cins.weike.entity.persistence.StudentDetail;
-import cn.edu.swpu.cins.weike.entity.persistence.StudentInfo;
-import cn.edu.swpu.cins.weike.entity.persistence.TeacherDetail;
+import cn.edu.swpu.cins.weike.entity.persistence.*;
+import cn.edu.swpu.cins.weike.entity.view.JoinProject;
+import cn.edu.swpu.cins.weike.entity.view.JwtAuthenticationResponse;
 import cn.edu.swpu.cins.weike.entity.view.MessageList;
 import cn.edu.swpu.cins.weike.entity.view.ProjectDetail;
 import cn.edu.swpu.cins.weike.enums.ExceptionEnum;
+import cn.edu.swpu.cins.weike.enums.LoginEnum;
 import cn.edu.swpu.cins.weike.enums.MessageEnum;
+import cn.edu.swpu.cins.weike.exception.AuthException;
 import cn.edu.swpu.cins.weike.exception.MessageException;
 import cn.edu.swpu.cins.weike.exception.ProjectException;
 import cn.edu.swpu.cins.weike.exception.WeiKeException;
@@ -52,6 +53,7 @@ public class MessageServiceImpl implements MessageService {
     private ProjectService projectService;
     private GetUsrName getUsrName;
     private EventProducer eventProducer;
+    private AuthServiceImpl authService;
 
 
 
@@ -60,10 +62,10 @@ public class MessageServiceImpl implements MessageService {
      */
 
     @Override
-    @Transactional(rollbackFor = {SQLException.class,RuntimeException.class, WeiKeException.class, MessagingException.class})
+    @Transactional(rollbackFor = {SQLException.class, RuntimeException.class, WeiKeException.class, MessagingException.class})
     public int addMessage(String content, String projectName, String userSender) throws MessageException {
         try {
-            String sender=null;
+            String sender = null;
             sendApplyMessage(content, projectName, userSender, sender);
             return 1;
         } catch (Exception e) {
@@ -72,7 +74,7 @@ public class MessageServiceImpl implements MessageService {
     }
 
     //redis申请项目操作
-    public void redisApplyPro(String sender,String projectName) {
+    public void redisApplyPro(String sender, String projectName) {
         //申请项目
         String joiningProjectKey = RedisKey.getBizApplyingPro(sender);
         //项目正在申请人
@@ -81,7 +83,7 @@ public class MessageServiceImpl implements MessageService {
         jedisAdapter.sadd(joiningProjectKey, projectName);
     }
 
-    public void sendApplyMessage(String content, String projectName, String userSender,String sender) {
+    public void sendApplyMessage(String content, String projectName, String userSender, String sender) {
         Message message = new Message();
         StudentDetail studentSender = studentDao.queryForStudentPhone(userSender);
         TeacherDetail teacherSender = teacherDao.queryForPhone(userSender);
@@ -97,7 +99,7 @@ public class MessageServiceImpl implements MessageService {
             sender = teacherSender.getUsername();
         }
         //修改redis中的情况
-        redisApplyPro(sender,projectName);
+        redisApplyPro(sender, projectName);
         message = sendMailForApply(message, studentSaver, teacherSaver, email, projectName);
         message.setContent(content);
         message.setCreateDate(new Date());
@@ -108,7 +110,7 @@ public class MessageServiceImpl implements MessageService {
         }
     }
 
-    public Message sendMailForApply(Message message,StudentDetail studentSaver,TeacherDetail teacherSaver,String email,String projectName ) {
+    public Message sendMailForApply(Message message, StudentDetail studentSaver, TeacherDetail teacherSaver, String email, String projectName) {
         if (studentSaver != null) {
             message.setToName(studentSaver.getUsername());
             eventProducer.fireEvent(new EventModel(EventType.MAIL).setExts("email", email)
@@ -235,7 +237,7 @@ public class MessageServiceImpl implements MessageService {
         try {
             proNames = jedisAdapter.smenber(key).stream().collect(Collectors.toList());
             projectDetailList = new ArrayList<>();
-            proNames.stream().forEach(proName ->{
+            proNames.stream().forEach(proName -> {
                 projectDetailList.add(projectService.showProject(proName).getProjectDetails());
 
             });
@@ -243,5 +245,67 @@ public class MessageServiceImpl implements MessageService {
             throw new ProjectException(ExceptionEnum.INNER_ERROR.getMsg());
         }
         return projectDetailList;
+    }
+
+    @Override
+    public JwtAuthenticationResponse loginByToken(HttpServletRequest request) throws AuthException {
+        JwtAuthenticationResponse response;
+        String username = getUsrName.AllProjects(request);
+        try {
+            TeacherInfo teacherInfo = teacherDao.queryByName(username);
+            StudentInfo studentInfo = studentDao.selectStudent(username);
+
+            if (studentInfo != null) {
+                response = getStudentInfo(username, studentInfo);
+                return response;
+            }else {
+                response = getTeacherInfo(username,teacherInfo);
+                return response;
+            }
+        } catch (Exception e) {
+            throw new AuthException(ExceptionEnum.INNER_ERROR.getMsg());
+        }
+    }
+
+    public JwtAuthenticationResponse getStudentInfo(String username, StudentInfo studentInfo) {
+        StudentDetail teacherDetail = studentDao.queryForStudentPhone(username);
+        if (studentInfo == null) {
+            throw new AuthException(LoginEnum.NO_USER.getMessage());
+        }
+        JoinProject joinProject = authService.loginUtils(username);
+        joinProject.setReleased(teacherDao.queryAllProject(username));
+        String image = null;
+        //判断个人信息是否完整
+        boolean isCompleted;
+        if (teacherDetail != null) {
+            image = teacherDetail.getImage();
+            isCompleted = true;
+        } else {
+            isCompleted = false;
+        }
+        String role = studentInfo.getRole();
+        JwtAuthenticationResponse response = new JwtAuthenticationResponse(null, username, role, image, isCompleted, joinProject);
+        return response;
+    }
+
+    public JwtAuthenticationResponse getTeacherInfo(String username, TeacherInfo teacherInfo) {
+        TeacherDetail teacherDetail = teacherDao.queryForPhone(username);
+        if (teacherInfo == null) {
+            throw new AuthException(LoginEnum.NO_USER.getMessage());
+        }
+        JoinProject joinProject = authService.loginUtils(username);
+        joinProject.setReleased(teacherDao.queryAllProject(username));
+        String image = null;
+        //判断个人信息是否完整
+        boolean isCompleted;
+        if (teacherDetail != null) {
+            image = teacherDetail.getImage();
+            isCompleted = true;
+        } else {
+            isCompleted = false;
+        }
+        String role = teacherInfo.getRole();
+        JwtAuthenticationResponse response = new JwtAuthenticationResponse(null, username, role, image, isCompleted, joinProject);
+        return response;
     }
 }

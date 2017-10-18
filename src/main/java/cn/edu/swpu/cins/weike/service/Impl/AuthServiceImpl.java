@@ -68,7 +68,7 @@ public class AuthServiceImpl implements AuthService {
             }
             return 1;
         } catch (Exception e) {
-            throw new StudentException(ExceptionEnum.INNER_ERROR.getMsg());
+            throw e;
         }
     }
 
@@ -143,9 +143,15 @@ public class AuthServiceImpl implements AuthService {
             JwtAuthenticationResponse response = new JwtAuthenticationResponse(token, username, role, image, isCompleted, joinProject);
             return response;
         } catch (Exception e) {
-            throw new AuthException(ExceptionEnum.INNER_ERROR.getMsg());
+            throw e;
         }
     }
+
+//    @Override
+//    public JwtAuthenticationResponse loginByToken(String token) {
+//        return null;
+//    }
+
 
     @Override
     public int teacherRegister(RegisterTeacherVO registerTeacherVO) throws AuthException {
@@ -163,7 +169,7 @@ public class AuthServiceImpl implements AuthService {
             }
             return 1;
         } catch (Exception e) {
-            throw new AuthException(ExceptionEnum.INNER_ERROR.getMsg());
+            throw e;
         }
     }
 
@@ -221,7 +227,7 @@ public class AuthServiceImpl implements AuthService {
             JwtAuthenticationResponse response = new JwtAuthenticationResponse(token, username, role, image, isCompleted, joinProject);
             return response;
         } catch (Exception e) {
-            throw new AuthException(ExceptionEnum.INNER_ERROR.getMsg());
+            throw e;
         }
     }
 
@@ -237,7 +243,7 @@ public class AuthServiceImpl implements AuthService {
             final String token = jwtTokenUtil.generateToken(userDetails);
             return token;
         } catch (Exception e) {
-            throw new AuthException(LoginEnum.ERROR_LOGIN.getMessage());
+            throw e;
         }
     }
 
@@ -246,7 +252,7 @@ public class AuthServiceImpl implements AuthService {
         try {
             return updateUtils(updatePassword, "student");
         } catch (Exception e) {
-            throw new AuthException(ExceptionEnum.INNER_ERROR.getMsg());
+            throw e;
         }
     }
 
@@ -255,7 +261,7 @@ public class AuthServiceImpl implements AuthService {
         try {
             return updateUtils(updatePassword, "teacher");
         } catch (Exception e) {
-            throw new AuthException(ExceptionEnum.INNER_ERROR.getMsg());
+            throw e;
         }
     }
 
@@ -286,7 +292,7 @@ public class AuthServiceImpl implements AuthService {
             }
             return 1;
         } catch (Exception e) {
-            throw new AuthException(ExceptionEnum.INNER_ERROR.getMsg());
+            throw e;
         }
     }
 
@@ -327,7 +333,7 @@ public class AuthServiceImpl implements AuthService {
             adminInfo.setRole("ROLE_ADMIN");
             return adminDao.addAdmin(adminInfo) == 0 ? null : adminInfo;
         } catch (Exception e) {
-            throw new AuthException(ExceptionEnum.INNER_ERROR.getMsg());
+            throw e;
         }
     }
 
@@ -337,7 +343,7 @@ public class AuthServiceImpl implements AuthService {
             checkForRegister(username, email,"student");
             eventProducerUtils(username, email, "register");
         } catch (Exception e) {
-            throw new AuthException(ExceptionEnum.INNER_ERROR.getMsg());
+            throw e;
         }
     }
 
@@ -347,7 +353,7 @@ public class AuthServiceImpl implements AuthService {
             checkForRegister(username, email,"teacher");
             eventProducerUtils(username, email, "register");
         } catch (Exception e) {
-            throw new AuthException(ExceptionEnum.INNER_ERROR.getMsg());
+            throw e;
         }
     }
 
@@ -397,11 +403,9 @@ public class AuthServiceImpl implements AuthService {
                             .setExts("email", email)
                             .setExts("status", "updatePwd"));
                     break;
-
                 default:
                     throw new AuthException(ExceptionEnum.INNER_ERROR.getMsg());
             }
-
         } catch (Exception e) {
             throw new AuthException(ExceptionEnum.INNER_ERROR.getMsg());
         }
@@ -416,7 +420,7 @@ public class AuthServiceImpl implements AuthService {
             checkForFindPwd(studentinfo, email, Tmail);
             eventProducerUtils(username, email, "findPwd");
         } catch (Exception e) {
-            throw new AuthException(ExceptionEnum.INNER_ERROR.getMsg());
+            throw e;
         }
     }
 
