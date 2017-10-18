@@ -83,8 +83,7 @@ public class StudentServiceImpl implements StudentService {
         }
     }
 
-    @Override
-    public int addPersonal(StudentDetail studentDetail, String username) throws StudentException {
+    public void getStudentSkillRate(StudentDetail studentDetail) {
         int rate = studentDetail.getSkills().toArray().length;
         if (rate == 2 || rate == 0 ||rate ==1) {
             studentDetail.setLevel("D");
@@ -98,16 +97,21 @@ public class StudentServiceImpl implements StudentService {
         if (rate > 5) {
             studentDetail.setLevel("A");
         }
+    }
+
+    @Override
+    public int addPersonal(StudentDetail studentDetail, String username) throws StudentException {
+             getStudentSkillRate(studentDetail);
         try {
             if (studentDao.queryForStudentPhone(username) != null) {
                 throw new StudentException(UserEnum.REPEATE_ADD.getMsg());
             }
             studentDetail.setUsername(username);
             int num = studentDao.studentAddPersonal(studentDetail);
-            if (num == 1) {
-                return 1;
+            if (num != 1) {
+                throw new StudentException(UserEnum.ADD_PERSONAL_FAILD.getMsg());
             }
-            throw new StudentException(UserEnum.ADD_PERSONAL_FAILD.getMsg());
+            return 1;
         } catch (StudentException e) {
             throw  e;
         }
@@ -115,7 +119,7 @@ public class StudentServiceImpl implements StudentService {
 
     //重新抽离出一个方法
     @Override
-    public List<ProjectRecommend> queryForReCommod(List<String> skills, String username) throws StudentException {
+    public List<ProjectRecommend> queryForReCommend(List<String> skills, String username) throws StudentException {
         try {
             List<ProjectRecommend> projectRecommends = reduceRepeat.reduceStudentRepeat(skills, username);
             if (projectRecommends.isEmpty()) {

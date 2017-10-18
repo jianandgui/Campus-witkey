@@ -170,12 +170,16 @@ public class ProjectServiceImpl implements ProjectService {
 
     @Override
     public int deleteProByProName(String projectName, HttpServletRequest request) {
-        String username = getUsrName.AllProjects(request);
-        int count = projectDao.deletePro(projectName, username);
-        if (count != 1) {
-            throw new ProjectException(ExceptionEnum.INNER_ERROR.getMsg());
+        try {
+            String username = getUsrName.AllProjects(request);
+            int count = projectDao.deletePro(projectName, username);
+            if (count != 1) {
+                throw new ProjectException(ExceptionEnum.INNER_ERROR.getMsg());
+            }
+            return 1;
+        } catch (Exception e) {
+            throw e;
         }
-        return 1;
     }
 
     @Override
@@ -189,10 +193,10 @@ public class ProjectServiceImpl implements ProjectService {
             if (modCount != 1) {
                 throw new ProjectException(ExceptionEnum.INNER_ERROR.getMsg());
             }
+            return 1;
         } catch (Exception e) {
             throw new ProjectException(ExceptionEnum.INNER_ERROR.getMsg());
         }
-        return 1;
     }
 
     @Override

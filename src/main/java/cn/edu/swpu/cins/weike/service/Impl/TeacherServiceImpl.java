@@ -46,10 +46,10 @@ public class TeacherServiceImpl implements TeacherService {
             }
             teacherDetail.setUsername(username);
             int num = teacherDao.teacherAddPersonal(teacherDetail);
-            if (num == 1) {
-                return 1;
+            if (num != 1) {
+                throw new TeacherException(UserEnum.ADD_PERSONAL_FAILD.getMsg());
             }
-            throw new TeacherException(UserEnum.ADD_PERSONAL_FAILD.getMsg());
+            return 1;
         } catch (Exception e) {
             throw e;
         }

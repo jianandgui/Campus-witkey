@@ -254,7 +254,6 @@ public class MessageServiceImpl implements MessageService {
         try {
             TeacherInfo teacherInfo = teacherDao.queryByName(username);
             StudentInfo studentInfo = studentDao.selectStudent(username);
-
             if (studentInfo != null) {
                 response = getStudentInfo(username, studentInfo);
                 return response;

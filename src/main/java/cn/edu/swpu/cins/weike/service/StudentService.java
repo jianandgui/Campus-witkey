@@ -20,7 +20,7 @@ public interface StudentService {
 
     int addPersonal(StudentDetail studentDetail,String username) throws StudentException;
 
-    List<ProjectRecommend> queryForReCommod(List<String> skills,String username) throws StudentException;
+    List<ProjectRecommend> queryForReCommend(List<String> skills,String username) throws StudentException;
 
     int updateInfo(StudentDetail studentDetail, String username) throws StudentException;
 
