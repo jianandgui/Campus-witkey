@@ -14491,3 +14491,5 @@ SUVORK5CYII=)
 2017-10-18 19:58:45.437  INFO 10999 --- [main] o.s.j.e.a.AnnotationMBeanExporter        : Registering beans for JMX exposure on startup
 2017-10-18 19:58:45.472  INFO 10999 --- [main] s.b.c.e.t.TomcatEmbeddedServletContainer : Tomcat started on port(s): 8080 (http)
 2017-10-18 19:58:45.475  INFO 10999 --- [main] cn.edu.swpu.cins.weike.WeikeApplication  : Started WeikeApplication in 5.601 seconds (JVM running for 6.15)
+2017-10-18 20:00:47.720  INFO 10999 --- [Thread-6] ationConfigEmbeddedWebApplicationContext : Closing org.springframework.boot.context.embedded.AnnotationConfigEmbeddedWebApplicationContext@55b7a4e0: startup date [Wed Oct 18 19:58:40 CST 2017]; root of context hierarchy
+2017-10-18 20:00:47.727  INFO 10999 --- [Thread-6] o.s.j.e.a.AnnotationMBeanExporter        : Unregistering JMX-exposed beans on shutdown

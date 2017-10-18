@@ -107,6 +107,7 @@ public class StudentServiceImpl implements StudentService {
     public int addPersonal(StudentDetail studentDetail, String username) throws StudentException {
              getStudentSkillRate(studentDetail);
         try {
+            checkStudentInfo(studentDetail);
             if (studentDao.queryForStudentPhone(username) != null) {
                 throw new StudentException(UserEnum.REPEATE_ADD.getMsg());
             }
@@ -118,6 +119,15 @@ public class StudentServiceImpl implements StudentService {
             return 1;
         } catch (StudentException e) {
             throw  e;
+        }
+    }
+
+
+    public void checkStudentInfo(StudentDetail studentDetail) {
+        long entryDate = studentDetail.getEntryUniversity();
+        long leaveDate = studentDetail.getLeaveUniversity();
+        if (entryDate > leaveDate) {
+            throw new StudentException(ExceptionEnum.DATE_ERROR.getMsg());
         }
     }
 
