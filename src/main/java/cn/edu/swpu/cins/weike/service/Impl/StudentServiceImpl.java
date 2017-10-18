@@ -66,17 +66,17 @@ public class StudentServiceImpl implements StudentService {
             projectInfo.setProjectName(sensitiveWordsFilter.Filter(projectInfo.getProjectName()));
             StudentInfo studentinfo = studentDao.selectStudent(username);
             StudentDetail studentDetail = studentDao.queryForStudentPhone(username);
-            if (projectDao.queryProjectDetail(projectInfo.getProjectName()) == null) {
-                projectInfo.setProjectConnector(username);
-                projectInfo.setEmail(studentinfo.getEmail());
-                projectInfo.setQq(studentDetail.getQq());
-                int num = projectDao.addProject(projectInfo);
-                if (num != 1) {
-                    throw new StudentException(ProjectEnum.PUBLISH_PROJECT_FAILD.getMsg());
-                }
-                return 1;
+            if (projectDao.queryProjectDetail(projectInfo.getProjectName()) != null) {
+                throw new StudentException(ProjectEnum.REPEATE_PROJECT.getMsg());
             }
-            throw new StudentException(ProjectEnum.REPEATE_PROJECT.getMsg());
+            projectInfo.setProjectConnector(username);
+            projectInfo.setEmail(studentinfo.getEmail());
+            projectInfo.setQq(studentDetail.getQq());
+            int num = projectDao.addProject(projectInfo);
+            if (num != 1) {
+                throw new StudentException(ProjectEnum.PUBLISH_PROJECT_FAILD.getMsg());
+            }
+            return 1;
 
         } catch (Exception e) {
             throw new StudentException("数据库学生添加异常");
@@ -99,15 +99,15 @@ public class StudentServiceImpl implements StudentService {
             studentDetail.setLevel("A");
         }
         try {
-            if (studentDao.queryForStudentPhone(username) == null) {
-                studentDetail.setUsername(username);
-                int num = studentDao.studentAddPersonal(studentDetail);
-                if (num == 1) {
-                    return 1;
-                }
-                throw new StudentException(UserEnum.ADD_PERSONAL_FAILD.getMsg());
-            } else
+            if (studentDao.queryForStudentPhone(username) != null) {
                 throw new StudentException(UserEnum.REPEATE_ADD.getMsg());
+            }
+            studentDetail.setUsername(username);
+            int num = studentDao.studentAddPersonal(studentDetail);
+            if (num == 1) {
+                return 1;
+            }
+            throw new StudentException(UserEnum.ADD_PERSONAL_FAILD.getMsg());
         } catch (StudentException e) {
             throw  e;
         }

@@ -41,17 +41,17 @@ public class TeacherServiceImpl implements TeacherService {
     @Override
     public int teacherAddPersonal(TeacherDetail teacherDetail, String username) throws TeacherException {
         try {
-            if (teacherDao.queryForPhone(username) == null) {
-                teacherDetail.setUsername(username);
-                int num = teacherDao.teacherAddPersonal(teacherDetail);
-                if (num == 1) {
-                    return 1;
-                }
-                throw new TeacherException(UserEnum.ADD_PERSONAL_FAILD.getMsg());
+            if (teacherDao.queryForPhone(username) != null) {
+                throw new TeacherException(UserEnum.REPEATE_ADD.getMsg());
             }
-            throw new TeacherException(UserEnum.REPEATE_ADD.getMsg());
+            teacherDetail.setUsername(username);
+            int num = teacherDao.teacherAddPersonal(teacherDetail);
+            if (num == 1) {
+                return 1;
+            }
+            throw new TeacherException(UserEnum.ADD_PERSONAL_FAILD.getMsg());
         } catch (Exception e) {
-            throw new TeacherException(ExceptionEnum.INNER_ERROR.getMsg());
+            throw e;
         }
     }
 
@@ -61,18 +61,18 @@ public class TeacherServiceImpl implements TeacherService {
         try {
             TeacherInfo teacherinfo = teacherDao.queryByName(username);
             TeacherDetail teacherDetail = teacherDao.queryForPhone(username);
-            if (projectDao.queryProjectDetail(projectInfo.getProjectName()) == null) {
-                projectInfo.setProjectConnector(username);
-                projectInfo.setEmail(teacherinfo.getEmail());
-                projectInfo.setQq(teacherDetail.getQq());
-                if (projectDao.addProject(projectInfo) != 1) {
-                    throw new TeacherException(ProjectEnum.PUBLISH_PROJECT_FAILD.getMsg());
-                }
-                return 1;
+            if (projectDao.queryProjectDetail(projectInfo.getProjectName()) != null) {
+                throw new TeacherException(ProjectEnum.REPEATE_PROJECT.getMsg());
             }
-            throw new TeacherException(ProjectEnum.REPEATE_PROJECT.getMsg());
+            projectInfo.setProjectConnector(username);
+            projectInfo.setEmail(teacherinfo.getEmail());
+            projectInfo.setQq(teacherDetail.getQq());
+            if (projectDao.addProject(projectInfo) != 1) {
+                throw new TeacherException(ProjectEnum.PUBLISH_PROJECT_FAILD.getMsg());
+            }
+            return 1;
         } catch (Exception e) {
-            throw new TeacherException(ExceptionEnum.INNER_ERROR.getMsg());
+            throw e;
         }
     }
 

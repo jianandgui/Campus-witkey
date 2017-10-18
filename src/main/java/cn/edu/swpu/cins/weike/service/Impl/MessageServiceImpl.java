@@ -190,7 +190,7 @@ public class MessageServiceImpl implements MessageService {
             jedisAdapter.sadd(followProKey, projectName);
             jedisAdapter.sadd(proFollower, username);
         } catch (Exception e) {
-            throw e;
+            throw new AuthException(ExceptionEnum.INNER_ERROR.getMsg());
         }
     }
 
@@ -214,7 +214,7 @@ public class MessageServiceImpl implements MessageService {
             jedisAdapter.srem(followProKey, projectName);
             jedisAdapter.srem(proFollower, username);
         } catch (Exception e) {
-            throw e;
+            throw new AuthException(ExceptionEnum.INNER_ERROR.getMsg());
         }
     }
 
@@ -224,7 +224,7 @@ public class MessageServiceImpl implements MessageService {
         try {
             return jedisAdapter.smenber(proFollowerKeys).stream().collect(Collectors.toList());
         } catch (Exception e) {
-            throw e;
+            throw new AuthException(ExceptionEnum.INNER_ERROR.getMsg());
         }
     }
 
