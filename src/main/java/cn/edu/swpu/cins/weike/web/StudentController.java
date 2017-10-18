@@ -4,6 +4,7 @@ import cn.edu.swpu.cins.weike.entity.view.*;
 import cn.edu.swpu.cins.weike.enums.ExceptionEnum;
 import cn.edu.swpu.cins.weike.enums.ProjectEnum;
 import cn.edu.swpu.cins.weike.enums.UserEnum;
+import cn.edu.swpu.cins.weike.exception.ProjectException;
 import cn.edu.swpu.cins.weike.service.MailService;
 import cn.edu.swpu.cins.weike.util.GetUsrName;
 import cn.edu.swpu.cins.weike.util.JedisAdapter;
@@ -77,6 +78,8 @@ public class StudentController {
             return new ResultData(false, e.getMessage());
         }
     }
+
+
 
 
     /**

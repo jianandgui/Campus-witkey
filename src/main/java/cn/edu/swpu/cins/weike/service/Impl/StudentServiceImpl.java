@@ -52,17 +52,21 @@ public class StudentServiceImpl implements StudentService {
     private ProjectServiceImpl projectService;
 
     @Autowired
+    private CheckProjectInfo checkProjectInfo;
+
+    @Autowired
     public StudentServiceImpl(StudentDao studentDao, ProjectDao projectDao, ReduceRepeat reduceRepeat) {
         this.studentDao = studentDao;
         this.projectDao = projectDao;
         this.reduceRepeat = reduceRepeat;
     }
 
+
     //学生发布项目
     @Override
     public int issueProject(ProjectInfo projectInfo, String username) throws StudentException {
-
         try {
+            checkProjectInfo.checkProjectInfo(projectInfo);
             projectInfo.setProjectName(sensitiveWordsFilter.Filter(projectInfo.getProjectName()));
             StudentInfo studentinfo = studentDao.selectStudent(username);
             StudentDetail studentDetail = studentDao.queryForStudentPhone(username);
@@ -79,7 +83,7 @@ public class StudentServiceImpl implements StudentService {
             return 1;
 
         } catch (Exception e) {
-            throw new StudentException("数据库学生添加异常");
+            throw new StudentException(e.getMessage());
         }
     }
 

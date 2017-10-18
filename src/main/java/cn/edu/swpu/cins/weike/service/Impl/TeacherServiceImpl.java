@@ -10,6 +10,8 @@ import cn.edu.swpu.cins.weike.enums.ExceptionEnum;
 import cn.edu.swpu.cins.weike.enums.ProjectEnum;
 import cn.edu.swpu.cins.weike.enums.UserEnum;
 import cn.edu.swpu.cins.weike.exception.TeacherException;
+import cn.edu.swpu.cins.weike.util.CheckProjectInfo;
+import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import cn.edu.swpu.cins.weike.dao.ProjectDao;
@@ -23,20 +25,16 @@ import java.util.List;
  * Created by muyi on 17-4-7.
  */
 @Service
+@AllArgsConstructor
 public class TeacherServiceImpl implements TeacherService {
 
     private TeacherDao teacherDao;
     private ProjectDao projectDao;
     private StudentDao studentDao;
     private ReduceRepeat reduceRepeat;
+    private CheckProjectInfo checkProjectInfo;
 
-    @Autowired
-    public TeacherServiceImpl(TeacherDao teacherDao, ProjectDao projectDao, StudentDao studentDao, ReduceRepeat reduceRepeat) {
-        this.teacherDao = teacherDao;
-        this.projectDao = projectDao;
-        this.studentDao = studentDao;
-        this.reduceRepeat = reduceRepeat;
-    }
+
 
     @Override
     public int teacherAddPersonal(TeacherDetail teacherDetail, String username) throws TeacherException {
@@ -59,6 +57,7 @@ public class TeacherServiceImpl implements TeacherService {
     @Override
     public int issueProject(ProjectInfo projectInfo, String username) throws TeacherException {
         try {
+            checkProjectInfo.checkProjectInfo(projectInfo);
             TeacherInfo teacherinfo = teacherDao.queryByName(username);
             TeacherDetail teacherDetail = teacherDao.queryForPhone(username);
             if (projectDao.queryProjectDetail(projectInfo.getProjectName()) != null) {
