@@ -7,10 +7,7 @@ import cn.edu.swpu.cins.weike.exception.ProjectException;
 import cn.edu.swpu.cins.weike.service.ProjectService;
 import cn.edu.swpu.cins.weike.service.StudentService;
 import cn.edu.swpu.cins.weike.service.TeacherService;
-import cn.edu.swpu.cins.weike.util.GetUsrName;
-import cn.edu.swpu.cins.weike.util.JedisAdapter;
-import cn.edu.swpu.cins.weike.util.RedisKey;
-import cn.edu.swpu.cins.weike.util.RedisToList;
+import cn.edu.swpu.cins.weike.util.*;
 import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -39,6 +36,8 @@ public class ProjectServiceImpl implements ProjectService {
     private GetUsrName getUsrName;
     @Autowired
     private RedisToList redisToList;
+    @Autowired
+    private CheckProjectInfo checkProjectInfo;
     @Autowired
     public ProjectServiceImpl(ProjectDao projectDao) {
         this.projectDao = projectDao;
@@ -185,6 +184,7 @@ public class ProjectServiceImpl implements ProjectService {
     @Override
     public int updateProByName(String projectName,ProjectInfo projectInfo, HttpServletRequest request) {
         try {
+            checkProjectInfo.checkProjectInfo(projectInfo);
             String username = getUsrName.AllProjects(request);
             if (projectDao.queryProjectDetail(projectInfo.getProjectName()) != null) {
                 throw new ProjectException(ExceptionEnum.REPEATE_PRO_NAME.getMsg());

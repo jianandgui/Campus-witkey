@@ -55,6 +55,9 @@ public class StudentServiceImpl implements StudentService {
     private CheckProjectInfo checkProjectInfo;
 
     @Autowired
+    private CheckStudentDate checkStudentDate;
+
+    @Autowired
     public StudentServiceImpl(StudentDao studentDao, ProjectDao projectDao, ReduceRepeat reduceRepeat) {
         this.studentDao = studentDao;
         this.projectDao = projectDao;
@@ -107,7 +110,7 @@ public class StudentServiceImpl implements StudentService {
     public int addPersonal(StudentDetail studentDetail, String username) throws StudentException {
              getStudentSkillRate(studentDetail);
         try {
-            checkStudentInfo(studentDetail);
+            checkStudentDate.checkStudentInfo(studentDetail);
             if (studentDao.queryForStudentPhone(username) != null) {
                 throw new StudentException(UserEnum.REPEATE_ADD.getMsg());
             }
@@ -123,13 +126,7 @@ public class StudentServiceImpl implements StudentService {
     }
 
 
-    public void checkStudentInfo(StudentDetail studentDetail) {
-        long entryDate = studentDetail.getEntryUniversity();
-        long leaveDate = studentDetail.getLeaveUniversity();
-        if (entryDate > leaveDate) {
-            throw new StudentException(ExceptionEnum.DATE_ERROR.getMsg());
-        }
-    }
+
 
     //重新抽离出一个方法
     @Override
@@ -149,6 +146,7 @@ public class StudentServiceImpl implements StudentService {
     public int updateInfo(StudentDetail studentDetail, String username) throws StudentException {
         studentDetail.setUsername(username);
         try {
+            checkStudentDate.checkStudentInfo(studentDetail);
             int num = studentDao.updateInfo(studentDetail);
             if (num != 1) {
                 throw new StudentException(UserEnum.UPDATE_FAILD.getMsg());
