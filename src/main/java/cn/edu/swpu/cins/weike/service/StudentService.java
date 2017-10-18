@@ -30,6 +30,7 @@ public interface StudentService {
 
     List<String> queryProFollower(String projectName) throws StudentException;
 
+    //学生手动获取推荐
     List<IndexVO> queryForRecommend(HttpServletRequest request);
 
 

@@ -138,7 +138,7 @@ public class StudentServiceImpl implements StudentService {
             }
             return projectRecommends;
         } catch (Exception e) {
-            throw new StudentException(ExceptionEnum.INNER_ERROR.getMsg());
+            throw e;
         }
     }
 
