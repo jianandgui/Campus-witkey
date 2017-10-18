@@ -71,7 +71,7 @@ public class StudentController {
         try {
             String username = getUsrName.AllProjects(request);
             studentService.issueProject(projectInfo, username);
-            List<ProjectRecommend> projectRecommends = studentService.queryForReCommod(projectInfo.getProjectNeed(), username);
+            List<ProjectRecommend> projectRecommends = studentService.queryForReCommend(projectInfo.getProjectNeed(), username);
             return new ResultData(true, projectRecommends);
         } catch (Exception e) {
             return new ResultData(false, e.getMessage());
