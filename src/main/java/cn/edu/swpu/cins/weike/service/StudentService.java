@@ -6,8 +6,10 @@ import cn.edu.swpu.cins.weike.entity.view.IndexVO;
 import cn.edu.swpu.cins.weike.entity.view.PersonData;
 import cn.edu.swpu.cins.weike.entity.view.ProjectRecommend;
 import cn.edu.swpu.cins.weike.exception.StudentException;
+import org.springframework.web.multipart.MultipartFile;
 
 import javax.servlet.http.HttpServletRequest;
+import java.io.IOException;
 import java.util.List;
 
 /**
@@ -32,6 +34,8 @@ public interface StudentService {
 
     //学生手动获取推荐
     List<IndexVO> queryForRecommend(HttpServletRequest request);
+
+    int updateStudentImage(HttpServletRequest request, MultipartFile image) throws IOException;
 
 
 }

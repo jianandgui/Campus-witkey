@@ -9,20 +9,25 @@ import cn.edu.swpu.cins.weike.entity.view.ProjectRecommend;
 import cn.edu.swpu.cins.weike.enums.ExceptionEnum;
 import cn.edu.swpu.cins.weike.enums.ProjectEnum;
 import cn.edu.swpu.cins.weike.enums.UserEnum;
+import cn.edu.swpu.cins.weike.exception.ProjectException;
 import cn.edu.swpu.cins.weike.exception.StudentException;
 import cn.edu.swpu.cins.weike.service.ProjectService;
 import cn.edu.swpu.cins.weike.util.*;
 import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import cn.edu.swpu.cins.weike.dao.ProjectDao;
 import cn.edu.swpu.cins.weike.dao.StudentDao;
 import cn.edu.swpu.cins.weike.entity.persistence.ProjectInfo;
 import cn.edu.swpu.cins.weike.service.StudentService;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.multipart.MultipartFile;
 
 import javax.servlet.http.HttpServletRequest;
+import java.io.File;
+import java.io.IOException;
 import java.sql.SQLException;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -108,6 +113,7 @@ public class StudentServiceImpl implements StudentService {
 
     @Override
     public int addPersonal(StudentDetail studentDetail, String username) throws StudentException {
+             //增加头像上传功能！
              getStudentSkillRate(studentDetail);
         try {
             checkStudentDate.checkStudentInfo(studentDetail);
@@ -124,7 +130,6 @@ public class StudentServiceImpl implements StudentService {
             throw  e;
         }
     }
-
 
 
 
@@ -210,6 +215,28 @@ public class StudentServiceImpl implements StudentService {
             throw new StudentException(ExceptionEnum.NO_SUITBLE_PRO.getMsg());
         }
         return indexVOList;
+    }
+
+    @Override
+    public int updateStudentImage(HttpServletRequest request, MultipartFile image) throws IOException {
+        String username = getUsrName.AllProjects(request);
+        String path=uploadImage(image, username);
+        studentDao.updateImage(username, path);
+        return 1;
+    }
+
+    public String uploadImage(MultipartFile image,String username) throws IOException {
+        String path = "/home/tangxudong/images";
+//        String path = "/home/yang/file";
+        int fileName = username.hashCode();
+        path += "/" + fileName;
+        File file = new File(path);
+        try {
+            image.transferTo(file);
+            return path;
+        } catch (IOException e) {
+            throw new ProjectException(ExceptionEnum.FILE_UPLOAD_FAILED.getMsg());
+        }
     }
 
 }

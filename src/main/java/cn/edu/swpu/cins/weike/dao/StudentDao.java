@@ -48,4 +48,6 @@ public interface StudentDao {
     //学生查询个人所有信息
     PersonData queryPerson(String username);
 
+    int updateImage(@Param("username") String username, @Param("imagePath") String imagePath);
+
 }
