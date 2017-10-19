@@ -15,6 +15,12 @@ spring:
          starttls:
           enable: true
           required: true
+  http:
+    multipart:
+      enabled: true
+      max-file-size: 5MB
+      resolve-lazily: true
+
 
 
 
@@ -44,6 +50,7 @@ logging:
 
 weike:
   images:
+#    location: /home/tangxudong/images
     location: /home/yang/file
 
 

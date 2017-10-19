@@ -2,7 +2,6 @@ package cn.edu.swpu.cins.weike.util;
 
 import cn.edu.swpu.cins.weike.enums.ExceptionEnum;
 import cn.edu.swpu.cins.weike.exception.ProjectException;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -12,10 +11,10 @@ import java.io.IOException;
 @Service
 public class UploadImage {
 
-    @Value("${weike.images.location}")
-    private String path;
+
 
     public String uploadImage(MultipartFile image, String username) throws IOException {
+        String path = "/home/tangxudong/images";
         String fileName =null;
         fileName = image.getOriginalFilename().substring(image.getOriginalFilename().lastIndexOf("."));
         path += "/" +username.hashCode()+fileName;
