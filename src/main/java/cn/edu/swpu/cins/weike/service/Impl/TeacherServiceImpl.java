@@ -133,13 +133,13 @@ public class TeacherServiceImpl implements TeacherService {
     }
 
     @Override
-    public int updateTeacherImage(HttpServletRequest request, MultipartFile image) throws IOException {
+    public String updateTeacherImage(HttpServletRequest request, MultipartFile image) throws IOException {
 
         try {
             String username = getUsrName.AllProjects(request);
             String path=uploadImage.uploadImage(image, username);
             teacherDao.updateImage(username, path);
-            return 1;
+            return path;
         } catch (Exception e) {
             throw e;
         }

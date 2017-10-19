@@ -30,5 +30,5 @@ public interface TeacherService {
 
     TeacherPersonData queryForData(String username) throws TeacherException;
 
-    int updateTeacherImage(HttpServletRequest request, MultipartFile image) throws IOException;
+    String updateTeacherImage(HttpServletRequest request, MultipartFile image) throws IOException;
 }

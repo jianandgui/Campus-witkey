@@ -11,10 +11,11 @@ import java.io.IOException;
 @Service
 public class UploadImage {
     public String uploadImage(MultipartFile image, String username) throws IOException {
-        String path = "/home/tangxudong/images";
 //        String path = "/home/yang/file";
-        int fileName = username.hashCode();
-        path += "/" + fileName;
+        String path = "/home/tangxudong/images";
+        String fileName =null;
+        fileName = image.getOriginalFilename().substring(image.getOriginalFilename().lastIndexOf("."));
+        path += "/" +username.hashCode()+fileName;
         File file = new File(path);
         try {
             image.transferTo(file);

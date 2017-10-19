@@ -199,8 +199,8 @@ public class StudentController {
     @PostMapping("uploadImage")
     public ResultData uploadImage(HttpServletRequest request, @RequestPart("image") MultipartFile image) throws IOException {
         try {
-            studentService.updateStudentImage(request, image);
-            return new ResultData(true, ExceptionEnum.UPLOAD_SUCCESS.getMsg());
+            String path=studentService.updateStudentImage(request, image);
+            return new ResultData(true, path);
         } catch (Exception e) {
             return new ResultData(false, e.getMessage());
         }

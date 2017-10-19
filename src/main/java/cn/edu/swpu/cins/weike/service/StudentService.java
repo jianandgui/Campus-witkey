@@ -35,7 +35,7 @@ public interface StudentService {
     //学生手动获取推荐
     List<IndexVO> queryForRecommend(HttpServletRequest request);
 
-    int updateStudentImage(HttpServletRequest request, MultipartFile image) throws IOException;
+    String updateStudentImage(HttpServletRequest request, MultipartFile image) throws IOException;
 
 
 }

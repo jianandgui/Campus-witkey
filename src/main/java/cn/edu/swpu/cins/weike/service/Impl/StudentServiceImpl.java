@@ -221,12 +221,12 @@ public class StudentServiceImpl implements StudentService {
     }
 
     @Override
-    public int updateStudentImage(HttpServletRequest request, MultipartFile image) throws IOException {
+    public String updateStudentImage(HttpServletRequest request, MultipartFile image) throws IOException {
         try {
             String username = getUsrName.AllProjects(request);
             String path=uploadImage.uploadImage(image, username);
             studentDao.updateImage(username, path);
-            return 1;
+            return path;
         } catch (Exception e) {
             throw e;
         }
