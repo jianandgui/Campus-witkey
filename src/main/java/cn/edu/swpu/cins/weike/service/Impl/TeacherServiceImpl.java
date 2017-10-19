@@ -11,6 +11,8 @@ import cn.edu.swpu.cins.weike.enums.ProjectEnum;
 import cn.edu.swpu.cins.weike.enums.UserEnum;
 import cn.edu.swpu.cins.weike.exception.TeacherException;
 import cn.edu.swpu.cins.weike.util.CheckProjectInfo;
+import cn.edu.swpu.cins.weike.util.GetUsrName;
+import cn.edu.swpu.cins.weike.util.UploadImage;
 import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -18,7 +20,10 @@ import cn.edu.swpu.cins.weike.dao.ProjectDao;
 import cn.edu.swpu.cins.weike.dao.TeacherDao;
 import cn.edu.swpu.cins.weike.service.TeacherService;
 import cn.edu.swpu.cins.weike.util.ReduceRepeat;
+import org.springframework.web.multipart.MultipartFile;
 
+import javax.servlet.http.HttpServletRequest;
+import java.io.IOException;
 import java.util.List;
 
 /**
@@ -33,6 +38,8 @@ public class TeacherServiceImpl implements TeacherService {
     private StudentDao studentDao;
     private ReduceRepeat reduceRepeat;
     private CheckProjectInfo checkProjectInfo;
+    private GetUsrName getUsrName;
+    private UploadImage uploadImage;
 
 
 
@@ -124,4 +131,18 @@ public class TeacherServiceImpl implements TeacherService {
             throw new TeacherException(ExceptionEnum.INNER_ERROR.getMsg());
         }
     }
+
+    @Override
+    public int updateTeacherImage(HttpServletRequest request, MultipartFile image) throws IOException {
+
+        try {
+            String username = getUsrName.AllProjects(request);
+            String path=uploadImage.uploadImage(image, username);
+            teacherDao.updateImage(username, path);
+            return 1;
+        } catch (Exception e) {
+            throw e;
+        }
+    }
+
 }

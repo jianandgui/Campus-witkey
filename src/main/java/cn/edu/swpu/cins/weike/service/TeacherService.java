@@ -6,7 +6,10 @@ import cn.edu.swpu.cins.weike.entity.persistence.TeacherDetail;
 import cn.edu.swpu.cins.weike.entity.view.ProjectRecommend;
 import cn.edu.swpu.cins.weike.entity.view.TeacherPersonData;
 import cn.edu.swpu.cins.weike.exception.TeacherException;
+import org.springframework.web.multipart.MultipartFile;
 
+import javax.servlet.http.HttpServletRequest;
+import java.io.IOException;
 import java.util.List;
 
 /**
@@ -27,5 +30,5 @@ public interface TeacherService {
 
     TeacherPersonData queryForData(String username) throws TeacherException;
 
-
+    int updateTeacherImage(HttpServletRequest request, MultipartFile image) throws IOException;
 }

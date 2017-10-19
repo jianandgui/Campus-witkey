@@ -17,8 +17,10 @@ import cn.edu.swpu.cins.weike.entity.persistence.ProjectInfo;
 import cn.edu.swpu.cins.weike.entity.persistence.TeacherInfo;
 import cn.edu.swpu.cins.weike.service.ProjectService;
 import cn.edu.swpu.cins.weike.service.TeacherService;
+import org.springframework.web.multipart.MultipartFile;
 
 import javax.servlet.http.HttpServletRequest;
+import java.io.IOException;
 import java.util.List;
 
 /**
@@ -153,5 +155,11 @@ public class TeacherController {
         } catch (Exception e) {
             return new ResultData(false, e.getMessage());
         }
+    }
+
+    @PostMapping("uploadImage")
+    public ResultData uploadImage(HttpServletRequest request, @RequestPart("image") MultipartFile image) throws IOException {
+        teacherService.updateTeacherImage(request, image);
+        return new ResultData(true);
     }
 }

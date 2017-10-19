@@ -63,6 +63,9 @@ public class StudentServiceImpl implements StudentService {
     private CheckStudentDate checkStudentDate;
 
     @Autowired
+    private UploadImage uploadImage;
+
+    @Autowired
     public StudentServiceImpl(StudentDao studentDao, ProjectDao projectDao, ReduceRepeat reduceRepeat) {
         this.studentDao = studentDao;
         this.projectDao = projectDao;
@@ -219,24 +222,13 @@ public class StudentServiceImpl implements StudentService {
 
     @Override
     public int updateStudentImage(HttpServletRequest request, MultipartFile image) throws IOException {
-        String username = getUsrName.AllProjects(request);
-        String path=uploadImage(image, username);
-        studentDao.updateImage(username, path);
-        return 1;
-    }
-
-    public String uploadImage(MultipartFile image,String username) throws IOException {
-        String path = "/home/tangxudong/images";
-//        String path = "/home/yang/file";
-        int fileName = username.hashCode();
-        path += "/" + fileName;
-        File file = new File(path);
         try {
-            image.transferTo(file);
-            return path;
-        } catch (IOException e) {
-            throw new ProjectException(ExceptionEnum.FILE_UPLOAD_FAILED.getMsg());
+            String username = getUsrName.AllProjects(request);
+            String path=uploadImage.uploadImage(image, username);
+            studentDao.updateImage(username, path);
+            return 1;
+        } catch (Exception e) {
+            throw e;
         }
     }
-
 }

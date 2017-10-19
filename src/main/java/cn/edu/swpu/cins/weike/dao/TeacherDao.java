@@ -48,6 +48,8 @@ public interface TeacherDao {
 
     TeacherPersonData queryForData(String username);
 
+    int updateImage(@Param("username") String username, @Param("imagePath") String imagePath);
+
 }
 
 
