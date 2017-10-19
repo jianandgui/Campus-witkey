@@ -9,6 +9,7 @@ public enum ExceptionEnum {
     REPEATE_PRO_NAME("请重新更换项目名字，不允许重复"),
     PRO_DATE_ERROR("项目日期不符合规范"),
     FILE_UPLOAD_FAILED("上传头像失败"),
+    UPLOAD_SUCCESS("头像上传成功"),
     DATE_ERROR("日期不符合规范"),
     INNER_ERROR("服务器内部异常");
     private String msg;

@@ -5,6 +5,7 @@ import cn.edu.swpu.cins.weike.entity.persistence.TeacherDetail;
 import cn.edu.swpu.cins.weike.entity.view.ProjectRecommend;
 import cn.edu.swpu.cins.weike.entity.view.ResultData;
 import cn.edu.swpu.cins.weike.entity.view.TeacherPersonData;
+import cn.edu.swpu.cins.weike.enums.ExceptionEnum;
 import cn.edu.swpu.cins.weike.enums.ProjectEnum;
 import cn.edu.swpu.cins.weike.enums.UserEnum;
 import cn.edu.swpu.cins.weike.util.GetUsrName;
@@ -159,7 +160,11 @@ public class TeacherController {
 
     @PostMapping("uploadImage")
     public ResultData uploadImage(HttpServletRequest request, @RequestPart("image") MultipartFile image) throws IOException {
-        teacherService.updateTeacherImage(request, image);
-        return new ResultData(true);
+        try {
+            teacherService.updateTeacherImage(request, image);
+            return new ResultData(true, ExceptionEnum.UPLOAD_SUCCESS.getMsg());
+        } catch (Exception e) {
+            return new ResultData(false, e.getMessage());
+        }
     }
 }
