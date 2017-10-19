@@ -42,10 +42,9 @@ jwt:
 logging:
   file: weike.log
 
-captcha:
- captchaExpires: 3 * 60
- captchaW: 200
- captchaH: 60
+weike:
+  images:
+    location: /home/tangxudong/images
 
 
 
