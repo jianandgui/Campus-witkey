@@ -17584,3 +17584,5 @@ Hu4eFhf4Dg+HBffA2fEsqArJ1j2za6046D00VSuWbzGIRqs5YB3pDPea4HA3YPH1IAXrP/K3TQ+H
 2017-10-19 22:44:51.604  INFO 21416 --- [http-nio-8080-exec-5] c.e.s.c.weike.Aspect.ServiceLogAspect    : 
 
 2017-10-19 22:44:51.604  INFO 21416 --- [http-nio-8080-exec-5] c.e.swpu.cins.weike.Aspect.WebLogAspect  : controller return ResultData(data=null, ifSuccess=true, msg=/file/844779.png)
+2017-10-19 22:49:08.725  INFO 21416 --- [Thread-6] ationConfigEmbeddedWebApplicationContext : Closing org.springframework.boot.context.embedded.AnnotationConfigEmbeddedWebApplicationContext@f5ac9e4: startup date [Thu Oct 19 22:43:44 CST 2017]; root of context hierarchy
+2017-10-19 22:49:08.730  INFO 21416 --- [Thread-6] o.s.j.e.a.AnnotationMBeanExporter        : Unregistering JMX-exposed beans on shutdown

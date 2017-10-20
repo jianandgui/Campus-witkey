@@ -212,7 +212,18 @@ public class StudentServiceImpl implements StudentService {
             throw new StudentException(ExceptionEnum.INNER_ERROR.getMsg());
         }
         List<ProjectInfo> projectInfoList = projectDao.selectRecommend(skills);
-        List<ProjectDetail> projectDetailList = projectInfoList.stream().map(ProjectDetail::new).collect(Collectors.toList());
+        //去除自己发布的项目
+        projectInfoList.stream().filter(projectInfo -> {
+            if (projectInfo.getProjectConnector().equals(username)) {
+                return false;
+            } else {
+                return true;
+            }
+        });
+        List<ProjectDetail> projectDetailList = projectInfoList
+                .stream()
+                .map(ProjectDetail::new)
+                .collect(Collectors.toList());
         List<IndexVO> indexVOList = projectService.getProjectDetail(projectDetailList);
         if (indexVOList.isEmpty()) {
             throw new StudentException(ExceptionEnum.NO_SUITBLE_PRO.getMsg());
