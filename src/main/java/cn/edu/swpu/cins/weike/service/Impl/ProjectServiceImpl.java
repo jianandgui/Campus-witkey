@@ -120,9 +120,18 @@ public class ProjectServiceImpl implements ProjectService {
      * @throws ProjectException
      */
     @Override
-    public List<IndexVO> queryForIndex(int offset) {
+    public List<IndexVO> queryForIndex(int offset,HttpServletRequest request) {
         try {
-            List<ProjectDetail> projectDetails=projectDao.queryForIndex((--offset) * pageCount, pageCount);
+            String username = getUsrName.AllProjects(request);
+            List<ProjectDetail> projectDetails=projectDao
+                    .queryForIndex((--offset) * pageCount, pageCount)
+                    .stream().filter(projectDetail -> {
+                        if (username.equals(projectDetail.getProjectConnector())) {
+                            return false;
+                        }else {
+                            return true;
+                        }
+                    }).collect(Collectors.toList());
             List<IndexVO> indexVOList = getProjectDetail(projectDetails);
             return indexVOList;
         }

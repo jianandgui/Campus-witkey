@@ -22,7 +22,7 @@ public interface ProjectService {
 
     List<IndexVO> queryByKeyWords(String keyWords) throws ProjectException;
 
-    List<IndexVO>  queryForIndex(int offset);
+    List<IndexVO>  queryForIndex(int offset,HttpServletRequest request);
 
     ProApplyInfo queryProApplyInfoByName(String projectName) throws ProjectException;
 
