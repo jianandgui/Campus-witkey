@@ -211,15 +211,15 @@ public class StudentServiceImpl implements StudentService {
         if (skills == null) {
             throw new StudentException(ExceptionEnum.INNER_ERROR.getMsg());
         }
-        List<ProjectInfo> projectInfoList = projectDao.selectRecommend(skills);
+        List<ProjectInfo> projectInfoList;
         //去除自己发布的项目
-        projectInfoList.stream().filter(projectInfo -> {
+        projectInfoList = projectDao.selectRecommend(skills).stream().filter(projectInfo -> {
             if (projectInfo.getProjectConnector().equals(username)) {
                 return false;
             } else {
                 return true;
             }
-        });
+        }).collect(Collectors.toList());
         List<ProjectDetail> projectDetailList = projectInfoList
                 .stream()
                 .map(ProjectDetail::new)

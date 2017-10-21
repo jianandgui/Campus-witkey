@@ -18,8 +18,10 @@ spring:
   http:
     multipart:
       enabled: true
-      max-file-size: 5MB
+      max-file-size: 10Mb
       resolve-lazily: true
+      max-request-size: 10Mb
+
 
 
 
