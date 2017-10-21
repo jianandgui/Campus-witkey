@@ -63,7 +63,8 @@ public class AuthServiceImpl implements AuthService {
             studentInfo.setPassword(encoder.encode(rawPassword));
             studentInfo.setLastPasswordResetDate(new Date().getTime());
             studentInfo.setRole("ROLE_STUDENT");
-            if (studentDao.studntRegister(studentInfo) != 1) {
+            int count=studentDao.studntRegister(studentInfo);
+            if (count != 1) {
                 throw new AuthException(RegisterEnum.FAIL_SAVE.getMessage());
             }
             return 1;

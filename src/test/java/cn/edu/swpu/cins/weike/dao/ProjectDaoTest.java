@@ -57,9 +57,10 @@ public class ProjectDaoTest {
         projectInfo.setProjectEnd(132131);
         projectInfo.setProjectKind("tset");
         projectInfo.setProjectStart(1231321);
-        projectInfo.setProjectProfile("asas");
+        projectInfo.setProjectProfile("撒啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊撒啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊撒啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊" +
+                "asssssassssssssssssssssasssssssssssssssssssssssssassssssssssssssssssssssssssssaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaasssssssssssssssssssssas");
         projectInfo.setProjectNeed(list);
-        Assert.assertEquals(1,projectDao.updatePro("TETETETETE","muyi",projectInfo));
+        Assert.assertEquals(1,projectDao.updatePro("木易线上测试平台","木易",projectInfo));
 
     }
 

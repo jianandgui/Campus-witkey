@@ -195,7 +195,7 @@ public class ProjectServiceImpl implements ProjectService {
             }
             return 1;
         } catch (Exception e) {
-            throw new ProjectException(ExceptionEnum.INNER_ERROR.getMsg());
+            throw e;
         }
     }
 
