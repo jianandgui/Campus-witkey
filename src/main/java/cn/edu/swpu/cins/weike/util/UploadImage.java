@@ -7,6 +7,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.UUID;
 
 @Service
 public class UploadImage {
@@ -16,8 +17,9 @@ public class UploadImage {
     public String uploadImage(MultipartFile image, String username) throws IOException {
         String path = "/home/tangxudong/images";
         String fileName =null;
+        String uuid = UUID.randomUUID().toString();
         fileName = image.getOriginalFilename().substring(image.getOriginalFilename().lastIndexOf("."));
-        path += "/" +username.hashCode()+fileName;
+        path += "/" +uuid+fileName;
         File file = new File(path);
         try {
             image.transferTo(file);
