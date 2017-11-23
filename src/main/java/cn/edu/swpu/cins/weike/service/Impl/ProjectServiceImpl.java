@@ -123,15 +123,17 @@ public class ProjectServiceImpl implements ProjectService {
     public List<IndexVO> queryForIndex(int offset,HttpServletRequest request) {
         try {
             String username = getUsrName.AllProjects(request);
-            List<ProjectDetail> projectDetails=projectDao
-                    .queryForIndex((--offset) * pageCount, pageCount)
-                    .stream().filter(projectDetail -> {
-                        if (username.equals(projectDetail.getProjectConnector())) {
-                            return false;
-                        }else {
-                            return true;
-                        }
-                    }).collect(Collectors.toList());
+            List<ProjectDetail> projectDetails = projectDao
+                    .queryForIndex((--offset) * pageCount, pageCount);
+//                    .stream()
+//                    .filter(projectDetail -> {
+//                        if (username.equals(projectDetail.getProjectConnector())) {
+//                            return true;
+//                        }else {
+//                            return true;
+//                        }
+//                    })
+//                    .collect(Collectors.toList());
             List<IndexVO> indexVOList = getProjectDetail(projectDetails);
             return indexVOList;
         }
